@@ -1,0 +1,32 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "==3.2.9"
+pylint = "*"
+pylint-django = "*"
+pycodestyle = "*"
+pep8 = "*"
+autopep8 = "*"
+pytz = "*"
+sqlparse = "*"
+python-dotenv = "*"
+django-allauth = "==0.41.0"
+gunicorn = "*"
+django-crispy-forms = "*"
+dj-database-url = "*"
+coverage = "*"
+psycopg2-binary = "*"
+pillow = "*"
+stripe = "*"
+django-countries = "*"
+boto3 = "*"
+django-storages = "*"
+django-csp = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
