@@ -22,6 +22,7 @@
     {% endblock %}
 
     {% block corejs %}
+        <script src="https://kit.fontawesome.com/93ceedf6fa.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
         <script src="{% static 'js/base.js' %}"></script>
@@ -35,48 +36,7 @@
 
 <body class="has-navbar-fixed-top">
     <header>
-        <!-- Navbar -->
-        <nav id="navbar" class="navbar is-size-3 is-fixed-top is-transparent">
-            <div class="container">
-                <div class="navbar-brand">
-                    <a class="navbar-item" href="">
-                        SciFi Zone
-                    </a>
-                    <span id="navbar-burger" class="navbar-burger burger" data-target="navbarMenu" tabindex="0">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </span>
-                </div>
-                <div id="navbarMenu" class="navbar-menu">
-                    <div class="navbar-start">
-                        <a class="navbar-item" href="">
-                            Guests
-                        </a>
-                        <a class="navbar-item" href="">
-                            Event Info
-                        </a>
-                        <a class="navbar-item" href="">
-                            Ticket Info
-                        </a>
-                        <a class="navbar-item" href="">
-                            Packages
-                        </a>
-                        <a class="navbar-item" href="">
-                            Timetable
-                        </a>
-                    </div>
-                    <div class="navbar-end">
-                        <a class="navbar-item" href="">
-                            Copyright
-                        </a>
-                        <a class="navbar-item" href="">
-                            Contact
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        {% include "includes/navbar.html" %}
     </header>
     {% if messages %}
         <div class="notification is-info is-light">
@@ -89,6 +49,8 @@
 
     {% block content %}
     {% endblock %}
+
+    {% include "includes/footer.html" %}
 
     {% block postloadjs %}
     {% endblock %}
