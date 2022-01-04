@@ -1,0 +1,26 @@
+[
+    {
+        "pk": 1,
+        "model": "tickets.category",
+        "fields": {
+            "name": "standard_ticket",
+            "friendly_name": "Standard Ticket"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "tickets.category",
+        "fields": {
+            "name": "autograph_ticket",
+            "friendly_name": "Autograph Ticket"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "tickets.category",
+        "fields": {
+            "name": "Photoshoot_ticket",
+            "friendly_name": "Photoshoot Ticket"
+        }
+    }
+]

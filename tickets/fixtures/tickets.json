@@ -1,0 +1,119 @@
+[
+    {
+        "pk": 1,
+        "model": "tickets.ticket",
+        "fields": {
+            "sku": "sfz-st-1d",
+            "name": "Standard 1 Day Ticket",
+            "description": "Standard 1 Day Ticket for entrance on either Saturday or Sunday. Includes entry to the closing ceremony if valid on Sunday.",
+            "price": 25,
+            "category": 1,
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 2,
+        "model": "tickets.ticket",
+        "fields": {
+            "sku": "sfz-st-we",
+            "name": "Standard Weekend Ticket",
+            "description": "Standard Weekend Ticket for entrance on both Saturday and Sunday. Includes entry to the closing ceremony on Sunday.",
+            "price": 49,
+            "category": 1,
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 3,
+        "model": "tickets.ticket",
+        "fields": {
+            "sku": "sfz-st-3d",
+            "name": "Standard 3 Day Ticket",
+            "description": "Standard Ticket for all 3 days. Includes entry to the opening ceremony on Friday and the closing ceremony on Sunday.",
+            "price": 59,
+            "category": 1,
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 4,
+        "model": "tickets.ticket",
+        "fields": {
+            "sku": "sfz-ag-pca",
+            "name": "Autograph Ticket Price Category A",
+            "description": "Ticket for one in-person autograph from price category A.",
+            "price": 79,
+            "category": 2,
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 5,
+        "model": "tickets.ticket",
+        "fields": {
+            "sku": "sfz-ag-pcb",
+            "name": "Autograph Ticket Price Category B",
+            "description": "Ticket for one in-person autograph from price category B.",
+            "price": 59,
+            "category": 2,
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 6,
+        "model": "tickets.ticket",
+        "fields": {
+            "sku": "sfz-ag-pcc",
+            "name": "Autograph Ticket Price Category C",
+            "description": "Ticket for one in-person autograph from price category C.",
+            "price": 39,
+            "category": 2,
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 7,
+        "model": "tickets.ticket",
+        "fields": {
+            "sku": "sfz-photo-pca",
+            "name": "Photoshoot Ticket Price Category A",
+            "description": "Ticket for one in-person photoshoot from price category A.",
+            "price": 89,
+            "category": 2,
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 8,
+        "model": "tickets.ticket",
+        "fields": {
+            "sku": "sfz-photo-pcb",
+            "name": "Photoshoot Ticket Price Category B",
+            "description": "Ticket for one in-person photoshoot from price category B.",
+            "price": 69,
+            "category": 2,
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 9,
+        "model": "tickets.ticket",
+        "fields": {
+            "sku": "sfz-photo-pcc",
+            "name": "Photoshoot Ticket Price Category C",
+            "description": "Ticket for one in-person photoshoot from price category C.",
+            "price": 49,
+            "category": 2,
+            "image_url": "",
+            "image": ""
+        }
+    }
+]
