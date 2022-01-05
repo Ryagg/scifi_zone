@@ -84,7 +84,7 @@ To be added
 ---
 
 I used Balsamiq to plan the site’s layout for different viewports (mobile and tablet). To better demonstrate the differences, I sort my wireframes by page and show both versions next to each other.
-All wireframes for this project can be found in the [wireframes sub-directory](https://github.com/Ryagg/scifi_zone/tree/main/wireframes).
+All wireframes for this project can be found in the [project's wiki wireframes sub-directory](https://github.com/Ryagg/scifi_zone/wiki/wireframes/).
 
 ### **Database Schema**
 
