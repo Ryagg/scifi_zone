@@ -1,0 +1,134 @@
+[
+    {
+        "pk": 1,
+        "model": "tickets.actor",
+        "fields": {
+            "star_name": "John de Lancie",
+            "star_autograph_category": "A",
+            "star_photoshoot_category": "A",
+            "star_image_url": "",
+            "star_image": ""
+        }
+    },
+    {
+        "pk": 2,
+        "model": "tickets.actor",
+        "fields": {
+            "star_name": "John Barrowman",
+            "star_autograph_category": "A",
+            "star_photoshoot_category": "A",
+            "star_image_url": "",
+            "star_image": ""
+        }
+    },
+    {
+        "pk": 3,
+        "model": "tickets.actor",
+        "fields": {
+            "star_name": "Jason Isaacs",
+            "star_autograph_category": "A",
+            "star_photoshoot_category": "A",
+            "star_image_url": "",
+            "star_image": ""
+        }
+    },
+    {
+        "pk": 4,
+        "model": "tickets.actor",
+        "fields": {
+            "star_name": "Anthony Rapp",
+            "star_autograph_category": "B",
+            "star_photoshoot_category": "B",
+            "star_image_url": "",
+            "star_image": ""
+        }
+    },
+    {
+        "pk": 5,
+        "model": "tickets.actor",
+        "fields": {
+            "star_name": "Wilson Cruz",
+            "star_autograph_category": "B",
+            "star_photoshoot_category": "B",
+            "star_image_url": "",
+            "star_image": ""
+        }
+    },
+    {
+        "pk": 6,
+        "model": "tickets.actor",
+        "fields": {
+            "star_name": "Michelle Yeoh",
+            "star_autograph_category": "B",
+            "star_photoshoot_category": "B",
+            "star_image_url": "",
+            "star_image": ""
+        }
+    },
+    {
+        "pk": 7,
+        "model": "tickets.actor",
+        "fields": {
+            "star_name": "Set MacFarlane",
+            "star_autograph_category": "B",
+            "star_photoshoot_category": "B",
+            "star_image_url": "",
+            "star_image": ""
+        }
+    },
+    {
+        "pk": 8,
+        "model": "tickets.actor",
+        "fields": {
+            "star_name": "Scott Grimes",
+            "star_autograph_category": "C",
+            "star_photoshoot_category": "C",
+            "star_image_url": "",
+            "star_image": ""
+        }
+    },
+    {
+        "pk": 9,
+        "model": "tickets.actor",
+        "fields": {
+            "star_name": "Elizabeth Olsen",
+            "star_autograph_category": "B",
+            "star_photoshoot_category": "B",
+            "star_image_url": "",
+            "star_image": ""
+        }
+    },
+    {
+        "pk": 10,
+        "model": "tickets.actor",
+        "fields": {
+            "star_name": "Robin Wright",
+            "star_autograph_category": "B",
+            "star_photoshoot_category": "B",
+            "star_image_url": "",
+            "star_image": ""
+        }
+    },
+    {
+        "pk": 11,
+        "model": "tickets.actor",
+        "fields": {
+            "star_name": "Simon Pegg",
+            "star_autograph_category": "B",
+            "star_photoshoot_category": "B",
+            "star_image_url": "",
+            "star_image": ""
+        }
+    },
+    {
+        "pk": 12,
+        "model": "tickets.actor",
+        "fields": {
+            "star_name": "Joseph Gordon-Levitt",
+            "star_autograph_category": "B",
+            "star_photoshoot_category": "B",
+            "star_image_url": "",
+            "star_image": ""
+        }
+    }
+]
