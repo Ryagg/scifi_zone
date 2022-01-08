@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+from tickets.models import Actor
+
+class ActorImage(models.Model):
+    actor = models.ForeignKey(Actor,
+    null=False, blank=False, on_delete=models.CASCADE)
