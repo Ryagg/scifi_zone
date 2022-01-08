@@ -16,7 +16,7 @@ Sci-Fi-Zone offers various tickets for a fictional science-fiction themed conven
 
 ## **Deployed project**
 
-The deployed project can be found [here](https://ADD LINK/).
+The deployed project can be found [here](https://ms4-scifi-zone.herokuapp.com/).
 
 ## **User Experience**
 
@@ -77,7 +77,7 @@ To be added
 
 #### **Imagery**
 
-To be added
+Actor images were obtained from [Wikimedia](https://commons.wikimedia.org/w/index.php?search=&title=Special:MediaSearch&type=image). A [SOURCE.md](https://docs.google.com/spreadsheets/d/1rQUjvQ1QUJXCy0xjzFvaGLI8nwJdJbU3G1KA6ERHgbY/edit#gid=0) was created containing information about the image author, license + attribution, an image description and the URLs both for the image file as well as the image page. The images were then uploaded to [Cloudinary](https://cloudinary.com/) and transformed. The transformation include changing the resolution, changing the format depending on the used browser, and adding image credit. For this purpose, several transformations had to be created to apply the correct image credit to each image.
 
 ### **Wireframes**
 
@@ -288,7 +288,7 @@ All actor images obtained from [Memory Alpha](https://memory-alpha.fandom.com/wi
 
 Actor images obtained from [Wikimedia](https://commons.wikimedia.org/wiki/Main_Page):
 
--   LIST EACH IMAGE AND LICENCE INFO
+-   Please refer to the separate [SOURCES.md](https://docs.google.com/spreadsheets/d/1rQUjvQ1QUJXCy0xjzFvaGLI8nwJdJbU3G1KA6ERHgbY/edit?usp=sharing) for sources, licenses and attribution for each image.
 
 ### **Content**
 
