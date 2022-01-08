@@ -1,6 +1,14 @@
 from django.shortcuts import render
 
+from tickets.models import Actor
+
 def index(request):
     """ A view to return the index page """
 
-    return render(request, 'home/index.html')
+    actors = Actor.objects.all()
+
+    context = {
+        'actors': actors,
+    }
+
+    return render(request, 'home/index.html', context)
