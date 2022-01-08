@@ -9,7 +9,8 @@
             "price": 25,
             "category": 1,
             "image_url": "",
-            "image": ""
+            "image": "",
+            "included": "SFZ Tote Bag, SFZ Lanyard, SFZ Programme"
         }
     },
     {
@@ -22,7 +23,8 @@
             "price": 49,
             "category": 1,
             "image_url": "",
-            "image": ""
+            "image": "",
+            "included": "SFZ Tote Bag, SFZ Lanyard, SFZ Programme"
         }
     },
     {
@@ -35,7 +37,8 @@
             "price": 59,
             "category": 1,
             "image_url": "",
-            "image": ""
+            "image": "",
+            "included": "SFZ Tote Bag, SFZ Lanyard, SFZ Programme"
         }
     },
     {
@@ -48,7 +51,10 @@
             "price": 79,
             "category": 2,
             "image_url": "",
-            "image": ""
+            "image": "",
+            "included": "One personalized autograph from the selected actor. You can either bring your own items to be signed or buy prints at the convention.",
+            "ticketholder_name": "",
+            "star": ""
         }
     },
     {
@@ -61,7 +67,10 @@
             "price": 59,
             "category": 2,
             "image_url": "",
-            "image": ""
+            "image": "",
+            "included": "One personalized autograph from the selected actor. You can either bring your own items to be signed or buy prints at the convention.",
+            "ticketholder_name": "",
+            "star": ""
         }
     },
     {
@@ -74,7 +83,10 @@
             "price": 39,
             "category": 2,
             "image_url": "",
-            "image": ""
+            "image": "",
+            "included": "One personalized autograph from the selected actor. You can either bring your own items to be signed or buy prints at the convention.",
+            "ticketholder_name": "",
+            "star": ""
         }
     },
     {
@@ -85,9 +97,12 @@
             "name": "Photoshoot Ticket Price Category A",
             "description": "Ticket for one in-person photoshoot from price category A.",
             "price": 89,
-            "category": 2,
+            "category": 3,
             "image_url": "",
-            "image": ""
+            "image": "",
+            "included": "One photo (6 x 9 inches) with you and the selected actor taken by a professional photographer and printed out directly after the photoshoot.",
+            "ticketholder_name": "",
+            "star": ""
         }
     },
     {
@@ -98,9 +113,12 @@
             "name": "Photoshoot Ticket Price Category B",
             "description": "Ticket for one in-person photoshoot from price category B.",
             "price": 69,
-            "category": 2,
+            "category": 3,
             "image_url": "",
-            "image": ""
+            "image": "",
+            "included": "One photo (6 x 9 inches) with you and the selected actor taken by a professional photographer and printed out directly after the photoshoot.",
+            "ticketholder_name": "",
+            "star": ""
         }
     },
     {
@@ -111,9 +129,12 @@
             "name": "Photoshoot Ticket Price Category C",
             "description": "Ticket for one in-person photoshoot from price category C.",
             "price": 49,
-            "category": 2,
+            "category": 3,
             "image_url": "",
-            "image": ""
+            "image": "",
+            "included": "One photo (6 x 9 inches) with you and the selected actor taken by a professional photographer and printed out directly after the photoshoot.",
+            "ticketholder_name": "",
+            "star": ""
         }
     }
 ]

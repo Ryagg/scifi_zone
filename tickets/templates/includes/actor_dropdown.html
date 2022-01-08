@@ -1,0 +1,16 @@
+<div class="column is-4-tablet">
+    <div class="block">
+        <div class="field">
+            <label for="star_autograph" class="is-size-4 has-text-weight-medium has-text-white">Star
+            </label>
+            <div class="control">
+                {% for actor in actors %}
+                <label class="radio">
+                    <input type="radio" name=chosen_actor>
+                    {{ actor.star_name }}
+                {% endfor %}
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

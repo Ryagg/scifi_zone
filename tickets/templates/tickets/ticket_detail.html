@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="hero is-link is-large">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title is-1 has-text-centered">{{ ticket.name }}</h1>
+            <div class="columns is-multiline is-centered">
+                    <div class="column is-6-tablet">
+                        <div class="block">
+                                <figure class="image is-128x128 mx-auto">
+                                    <img src="http://placekitten.com/g/128/128" alt="">
+                                </figure>
+                        </div>
+                        <div class="block">
+                            <h3 class="title is-3">Description</h3>
+                                        <p>{{ ticket.description }}</p>
+                        </div>
+                        <div class="block">
+                            <h3 class="title is-3">Included in this ticket</h3>
+                                    <ul>
+                                        {% for goodie in goodies %}
+                                            <li>{% if 'Standard' in ticket.name %} 1 x {% endif %}{{ goodie }}</li>
+                                        {% endfor %}
+                                    </ul>
+                        </div>
+                    </div> <!-- end of column -->
+                    <div class="column is-6-tablet">
+                        <div class="block">
+                            <h3 class="title is-3">€ {{ ticket.price }}.00</h3>
+                        </div>
+                        {% if "Standard" not in ticket.name %}
+                            {% include "includes/actor_dropdown.html" %}
+                        {% endif %}
+                        <div class="block">
+                            <div class="field">
+                                <label for="ticketholder" class="is-size-4 has-text-weight-medium has-text-white">Ticketholder
+                                </label>
+                                <div class="control has-icons-left">
+                                    <input id="ticketholder" name="ticketholder" class="input is-link" type="text" minlength="8"
+                                        maxlength="50" pattern="^[a-zA-Z0-9]{8,50}$" placeholder="Ticketholder Full name" value=""
+                                        aria-label="username" readonly>
+                                    <span class="icon is-left has-text-link">
+                                        <i class="fal fa-lg fa-user"></i>
+                                    </span>
+                                </div>
+                            </div> <!-- end of field -->
+                        </div> <!-- end of block -->
+                        <div class="block">
+                            <div class="control">
+                                <input class="button" type="submit" value="Add to bag">
+                                <input type="hidden" name="redirect_url" value="">
+                            </div>
+                        </div>
+
+                    </div> <!-- end of column -->
+
+            </div> <!-- end of columns -->
+            <div class="columns is-centered">
+                <div class="column">
+                    <div class="block hr1 py-5">
+                            <p>Buy (more) <a href="">Autographs</a> and/or <a href="">Photoshoot tickets</a></p>
+                        </div>
+                </div>
+            </div>
+        </div> <!-- end of container-->
+    </div> <!-- end of hero-body -->
+
+</section>
+
+{% endblock %}

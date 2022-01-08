@@ -19,7 +19,7 @@
         "pk": 3,
         "model": "tickets.category",
         "fields": {
-            "name": "Photoshoot_ticket",
+            "name": "photoshoot_ticket",
             "friendly_name": "Photoshoot Ticket"
         }
     }
