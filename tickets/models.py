@@ -29,6 +29,7 @@ class Ticket(models.Model):
     image = models.ImageField(null=True, blank=True)
     included = models.TextField(null=True, blank=True)
     ticketholder_name = models.CharField(max_length=60, null=True, blank=True)
+    star = models.CharField(max_length=60, null=True, blank=True)
 
     def __str__(self):
         return self.name
