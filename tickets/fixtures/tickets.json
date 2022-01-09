@@ -47,6 +47,7 @@
         "fields": {
             "sku": "sfz-ag-pca",
             "name": "Autograph Ticket Price Category A",
+            "price_category": "A",
             "description": "Ticket for one in-person autograph from price category A.",
             "price": 79,
             "category": 2,
@@ -63,6 +64,7 @@
         "fields": {
             "sku": "sfz-ag-pcb",
             "name": "Autograph Ticket Price Category B",
+            "price_category": "B",
             "description": "Ticket for one in-person autograph from price category B.",
             "price": 59,
             "category": 2,
@@ -79,6 +81,7 @@
         "fields": {
             "sku": "sfz-ag-pcc",
             "name": "Autograph Ticket Price Category C",
+            "price_category": "C",
             "description": "Ticket for one in-person autograph from price category C.",
             "price": 39,
             "category": 2,
@@ -95,6 +98,7 @@
         "fields": {
             "sku": "sfz-photo-pca",
             "name": "Photoshoot Ticket Price Category A",
+            "price_category": "A",
             "description": "Ticket for one in-person photoshoot from price category A.",
             "price": 89,
             "category": 3,
@@ -111,6 +115,7 @@
         "fields": {
             "sku": "sfz-photo-pcb",
             "name": "Photoshoot Ticket Price Category B",
+            "price_category": "B",
             "description": "Ticket for one in-person photoshoot from price category B.",
             "price": 69,
             "category": 3,
@@ -127,6 +132,7 @@
         "fields": {
             "sku": "sfz-photo-pcc",
             "name": "Photoshoot Ticket Price Category C",
+            "price_category": "C",
             "description": "Ticket for one in-person photoshoot from price category C.",
             "price": 49,
             "category": 3,

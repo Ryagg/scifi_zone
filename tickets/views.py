@@ -13,20 +13,24 @@ def all_tickets(request):
     return render(request, 'tickets/tickets.html', context)
 
 
-def ticket_detail(request, tickets_id, actors_id=3):
+def ticket_detail(request, tickets_id):
     """ A view to show detailed ticket information """
 
     ticket = get_object_or_404(Ticket, pk=tickets_id)
-
+    price_category = ticket.price_category
     goodies = ticket.included.split(',')
     actors = Actor.objects.all()
-    actor = get_object_or_404(Actor, pk=actors_id)
+    # actor = get_object_or_404(Actor)
+
+
 
     context = {
         'ticket': ticket,
+        'price_category': price_category,
         'goodies': goodies,
         'actors': actors,
-        'actor': actor,
+        # 'actor': actor,
     }
-
+    print(ticket.price_category)
+    print(price_category)
     return render(request, 'tickets/ticket_detail.html', context)

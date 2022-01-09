@@ -22,6 +22,7 @@ class Ticket(models.Model):
         'Category', null=True, blank=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=16, null=True, blank=True)
     name=models.CharField(max_length=60)
+    price_category = models.CharField(max_length=1, null=True,blank=True)
     description = models.TextField()
     price = models.DecimalField(
         max_digits=3, decimal_places=0)

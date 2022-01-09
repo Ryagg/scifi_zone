@@ -69,7 +69,7 @@
         "pk": 7,
         "model": "tickets.actor",
         "fields": {
-            "star_name": "Set MacFarlane",
+            "star_name": "Seth MacFarlane",
             "star_autograph_category": "B",
             "star_photoshoot_category": "B",
             "star_image_url": "https://res.cloudinary.com/psbgbp/image/upload/t_thumbnail/v1641669046/ms4/actors/seth_macfarlane.jpg",

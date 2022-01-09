@@ -5,9 +5,11 @@
             </label>
             <div class="control">
                 {% for actor in actors %}
-                <label class="radio">
-                    <input type="radio" name=chosen_actor>
-                    {{ actor.star_name }}
+                    {% if actor.star_autograph_category == price_category %}
+                        <label class="radio">
+                            <input type="radio" name=chosen_actor>
+                            {{ actor.star_name }}
+                    {% endif %}
                 {% endfor %}
                 </label>
             </div>
