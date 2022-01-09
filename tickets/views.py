@@ -20,7 +20,6 @@ def ticket_detail(request, tickets_id):
     price_category = ticket.price_category
     goodies = ticket.included.split(',')
     actors = Actor.objects.all()
-    # actor = get_object_or_404(Actor)
 
 
 
@@ -29,7 +28,7 @@ def ticket_detail(request, tickets_id):
         'price_category': price_category,
         'goodies': goodies,
         'actors': actors,
-        # 'actor': actor,
+
     }
     print(ticket.price_category)
     print(price_category)
