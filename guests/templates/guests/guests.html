@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="hero is-info is-medium actors">
+    <div class="hero-body">
+        <h2 class="title is-2 ">
+            Guests at SFZ 2022
+        </h2>
+        <div class="columns">
+            {% for actor in actors %}
+                <div class="column">
+                    <figure class="image is-3-by-5">
+                        <img src="{{ actor.star_image_url }}" alt="{{ actor.star_name }}">
+                    </figure>
+                    <p class="has-text-centered">{{ actor.star_name }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
