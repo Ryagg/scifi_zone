@@ -28,21 +28,31 @@
 </section>
 <section class="hero is-success is-small">
     <div class="hero-body">
-        <div class="columns is-centered">
-            <div class="column is-half is-offset-one-quarter">
-                <h2 class="title is-2">
+        <div class="columns is-multiline is-centered">
+            <div class="column is-6-tablet">
+                <h2 class="title is-2 has-text-centered">
                     Autograph
-
                 </h2>
-                <div class="control">
+                    {% for ticket in tickets %}
+                        {% if actor.star_autograph_category == ticket.price_category and "Autograph" in ticket.name %}
+                            <p  class="is-size-3 has-text-centered">€ {{ ticket.price }}</p>
+                        {% endif %}
+                    {% endfor %}
+                <div class="control has-text-centered">
                     <input class="button" type="submit" value="Buy now">
                     <input type="hidden" name="redirect_url" value="">
                 </div>
-                <h2 class="title is-2">
+            </div>
+            <div class="column is-6-tablet">
+                <h2 class="title is-2 has-text-centered">
                     Photoshoot
-
                 </h2>
-                <div class="control">
+                    {% for ticket in tickets %}
+                        {% if actor.star_photoshoot_category == ticket.price_category and "Photoshoot" in ticket.name %}
+                            <p  class="is-size-3 has-text-centered">€ {{ ticket.price }}</p>
+                        {% endif %}
+                    {% endfor %}
+                <div class="control has-text-centered">
                     <input class="button" type="submit" value="Buy now">
                     <input type="hidden" name="redirect_url" value="">
                 </div>

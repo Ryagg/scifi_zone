@@ -19,14 +19,14 @@ def guest_detail(request, actors_id):
     actors = Actor.objects.all()
     actor = get_object_or_404(Actor, pk=actors_id)
     tickets = Ticket.objects.all()
-    autograph_price_category = f'Autograph Ticket Price Category {actor.star_autograph_category}'
+    # autograph_price_category = f'Autograph Ticket Price Category {actor.star_autograph_category}'
 
     context = {
         'actors': actors,
         'actor': actor,
         'tickets': tickets,
-        'autograph_price_category': autograph_price_category,
+        # 'autograph_price_category': autograph_price_category,
     }
-    print(autograph_price_category)
+    print(actor.star_autograph_category)
     return render(
         request, 'guests/guest_detail.html', context)
