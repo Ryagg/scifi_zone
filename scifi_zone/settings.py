@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'home',
     'tickets',
     'guests',
+    'packages',
 
     # OTHER
     'crispy_forms',

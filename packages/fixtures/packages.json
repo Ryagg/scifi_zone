@@ -1,0 +1,38 @@
+[
+    {
+        "pk": 1,
+        "model": "packages.package",
+        "fields": {
+            "sku": "sfz-pkg-1",
+            "name": "Silver Package",
+            "included": "3 day entry to SFZ 2022, 4 x Paid Guest Panels, Priority seating in designated Silver sections for all panels and ceremonies, 1 x Photoshoot opportunity valid for price category B, 1 x Autograph opportunity valid for price category B, 1 x Silver Goody Bag including: 1 x SFZ Tote Bag + 1 x 16x12 inches SFZ event print + 1 x Souvenir Programme + 1 x SFZ Lanyard + a selection of SFZ memorabilia"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "packages.package",
+        "fields": {
+            "sku": "sfz-pkg-2",
+            "name": "Gold Package",
+            "included": "3 day entry to SFZ 2022, 6 x Paid Guest Panels, Priority seating in designated Gold sections for all panels and ceremonies, 2 x Photoshoot opportunity valid for price category B, 5 x Autograph opportunity valid for price category B, 1 x Gold Goody Bag including: 1 x SFZ Tote Bag + 1 x 16x12 inches SFZ event print + 1 x SFZ Baseball Cap + 1 x Souvenir Programme + 1 x SFZ Lanyard + a selection of SFZ memorabilia"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "packages.package",
+        "fields": {
+            "sku": "sfz-pkg-2",
+            "name": "Platinum Package",
+            "included": "3 day entry to SFZ 2022, an exclusive Platinum Package panel on Saturday and Sunday each, 8 x Paid Guest Panels, Priority seating in designated Platinum sections for all panels and ceremonies, 1 x Photoshoot opportunity valid for price category A, 2 x Photoshoot opportunity valid for price category B, 1 x Autograph opportunity valid for price category A, 5 x Autograph opportunity valid for price category B, 1 x Platinum Goody Bag including: 1 x SFZ Backpack + 1 x 16x12 inches SFZ event print + 1 x SFZ Baseball Cap + 1 x iron-on SFZ patch + 1 x Souvenir Programme + 1 x SFZ Lanyard + a selection of SFZ memorabilia"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "packages.package",
+        "fields": {
+            "sku": "sfz-pkg-2",
+            "name": "Diamond Package",
+            "included": "3 day entry to SFZ 2022, an exclusive Diamond Package  meet and greet with one actor on Saturday and Sunday each, all Paid Guest Panels, Priority seating in designated Diamond sections for all panels and ceremonies, an exclusive 16x12 inches event poster signed by all SFZ guests, 1 x Photoshoot opportunity with every guest, 1 x Autograph opportunity with every guest, 1 x Diamond Goody Bag including: 1 x SFZ Backpack + 1 x SFZ Hoodie + 1 x 16x12 inches SFZ event print + 1 x SFZ Baseball Cap + 1 x iron-on SFZ patch + 1 x Souvenir Programme + 1 x SFZ Lanyard + a selection of SFZ memorabilia"
+        }
+    }
+]

@@ -1,0 +1,46 @@
+[
+    {
+        "pk": 1,
+        "model": "packages.package_categories",
+        "fields": {
+            "name": "silver_ticket",
+            "friendly_name": "Silver Ticket",
+            "price": "€ 125",
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 2,
+        "model": "packages.package_categories",
+        "fields": {
+            "name": "gold_ticket",
+            "friendly_name": "Gold Ticket",
+            "price": "€ 249",
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 3,
+        "model": "packages.package_categories",
+        "fields": {
+            "name": "platinum_ticket",
+            "friendly_name": "Platinum Ticket",
+            "price": "€ 649",
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 4,
+        "model": "packages.package_categories",
+        "fields": {
+            "name": "diamond_ticket",
+            "friendly_name": "Diamond Ticket",
+            "price": "€ 2499",
+            "image_url": "",
+            "image": ""
+        }
+    }
+]
