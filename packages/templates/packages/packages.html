@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="hero is-link is-large">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title is-1 has-text-centered">Packages</h1>
+            <div class="columns is-multiline">
+                    {% for category in categories %}
+                    <div class="column is-6-tablet my-2">
+                        <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title is-centered">
+                                    <a href="">{{ category.friendly_name }}</a>
+                                </p>
+                            </header>
+                            <div class="card-image">
+                                <figure class="image is-128x128 mx-auto mt-5">
+                                    <img src="http://placekitten.com/g/128/128" alt="">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="content has-text-centered">
+                                    € {{ category.price }}.00
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- end of column -->
+                    {% endfor %}
+                    <hr>
+            </div> <!-- end of columns -->
+        </div> <!-- end of container-->
+    </div> <!-- end of hero-body -->
+
+</section>
+
+{% endblock %}
