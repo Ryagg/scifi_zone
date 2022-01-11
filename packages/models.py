@@ -1,6 +1,6 @@
 from django.db import models
 
-class PackageCategory(models.Model):
+class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
@@ -20,7 +20,7 @@ class PackageCategory(models.Model):
 
 class Package(models.Model):
     category = models.ForeignKey(
-        'PackageCategory', null=True, blank=True, on_delete=models.SET_NULL)
+        'Category', null=True, blank=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=16, null=True, blank=True)
     name=models.CharField(max_length=60)
     included = models.TextField(null=True, blank=True)
