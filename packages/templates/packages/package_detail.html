@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="hero is-link is-large">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-multiline is-centered">
+                <div class="column is-6-tablet">
+                    <h1 class="title is-1 has-text-centered">{{ package.name }}</h1>
+                    <h2 class="title is-2 has-text-centered">€{{ category.price }}</h2>
+                </div>
+            </div>
+            <div class="columns is-multiline is-centered">
+                <div class="column is-6-tablet">
+                    <div class="block">
+                    <p class="is-size-4 mb-3">Included in this package:</p>
+                        <ul class="is-size-5">
+                        {% for goodie in goodies %}
+                            <li>{{ goodie }}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="block">
+                        <div class="control has-text-centered">
+                            <input class="button" type="submit" value="Buy package">
+                            <input type="hidden" name="redirect_url" value="">
+                        </div>
+                    </div>
+                </div> <!-- end of column -->
+            </div> <!-- end of columns -->
+        </div> <!-- end of container -->
+    </div> <!-- end of body -->
+</section>
+{% endblock %}
