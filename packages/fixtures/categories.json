@@ -3,8 +3,8 @@
         "pk": 1,
         "model": "packages.category",
         "fields": {
-            "name": "silver_ticket",
-            "friendly_name": "Silver Ticket",
+            "name": "silver_package",
+            "friendly_name": "Silver Package",
             "price": 125,
             "image_url": "",
             "image": ""
@@ -14,8 +14,8 @@
         "pk": 2,
         "model": "packages.category",
         "fields": {
-            "name": "gold_ticket",
-            "friendly_name": "Gold Ticket",
+            "name": "gold_package",
+            "friendly_name": "Gold Package",
             "price": 249,
             "image_url": "",
             "image": ""
@@ -25,8 +25,8 @@
         "pk": 3,
         "model": "packages.category",
         "fields": {
-            "name": "platinum_ticket",
-            "friendly_name": "Platinum Ticket",
+            "name": "platinum_package",
+            "friendly_name": "Platinum Package",
             "price": 649,
             "image_url": "",
             "image": ""
@@ -36,8 +36,8 @@
         "pk": 4,
         "model": "packages.category",
         "fields": {
-            "name": "diamond_ticket",
-            "friendly_name": "Diamond Ticket",
+            "name": "diamond_package",
+            "friendly_name": "Diamond Package",
             "price": 2499,
             "image_url": "",
             "image": ""
