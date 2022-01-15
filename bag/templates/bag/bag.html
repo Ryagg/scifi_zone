@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="hero is-link is-large">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title is-1 has-text-centered">Your shopping bag</h1>
+            {#{% if bag_items %}#}
+            <!-- bag summary -->
+            <div class="columns is-mobile is-multiline is-centered has-background-dark">
+                <div class="column is-4-tablet has-background-info">
+                    <p>Items</p>
+                    <p>VAT</p>
+                </div> <!-- end of column -->
+                <div class="column is-4-tablet has-background-danger">
+                    <p>Total Items</p>
+                    <p>Total VAT</p>
+                </div> <!-- end of column -->
+            </div> <!-- end of columns -->
+            <div class="columns is-multiline is-centered has-background-success">
+                <div class="column is-6-tablet">
+                    <h2 class="title is-2 has-text-centered">Grand Total 156.44 €</h2>
+                    <div class="control has-text-centered">
+                        <a href="" class="button">Checkout</a>
+                    </div>
+                </div>
+            </div>
+            <!-- iterate through bag items -->
+            {#for item in bag_items#}
+                <div class="columns is-mobile is-multiline is-centered has-background-grey">
+                    <div class="column is-4-tablet">
+                        <p class="is-size-3">Ticket</p>
+                        <p class="is-size-3">Text</p>
+                        <field class="is-grouped has-addons">
+                        <p class="control">
+                            <a href="" class="button">Adjust</a>
+                            <a href="" class="button">Remove</a>
+                        </p>
+                        </field>
+                    </div>
+                    <div class="column is-4-tablet">
+                        <p class="is-size-3">Price per Ticket</p>
+                        <p class="is-size-3">Sum for all tickets</p>
+                    </div>
+                </div> <!-- end of columns -->
+            {#endfor#}
+                <div class="columns is-mobile">
+                    <div class="column is-6-tablet">
+                        <div class="field is-grouped has-addons">
+                            <p class="control">
+                                <a href="" class="button">Empty bag</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column is-6-tablet">
+                        <div class="field is-grouped has-addons is-pulled-right">
+                            <p  class="control">
+                                <a href="" class="button">Keep shopping</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {#{% else %}#}
+            <div class="columns is-multiline is-centered has-background-warning">
+                <div class="column">
+                    <p class="is-size-4 has-text-centered">You haven't added any tickets or packages to your bag.</p>
+                </div> <!-- end of column -->
+            </div> <!-- end of columns -->
+            {#{% endif %}#}
+        </div> <!-- end of container -->
+    </div> <!-- end of body -->
+</section>
+{% endblock %}
