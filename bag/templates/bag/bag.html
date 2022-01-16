@@ -6,7 +6,7 @@
     <div class="hero-body">
         <div class="container">
             <h1 class="title is-1 has-text-centered">Your shopping bag</h1>
-            {#{% if bag_items %}#}
+            {% if bag_items %}
             <!-- bag summary -->
             <div class="columns is-mobile is-multiline is-centered has-background-dark">
                 <div class="column is-4-tablet has-background-info">
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <!-- iterate through bag items -->
-            {#for item in bag_items#}
+            {% for item in bag_items %}
                 <div class="columns is-mobile is-multiline is-centered has-background-grey">
                     <div class="column is-4-tablet">
                         <p class="is-size-3">Ticket</p>
@@ -44,7 +44,7 @@
                         <p class="is-size-3">Sum for all tickets</p>
                     </div>
                 </div> <!-- end of columns -->
-            {#endfor#}
+            {% endfor %}
                 <div class="columns is-mobile">
                     <div class="column is-6-tablet">
                         <div class="field is-grouped has-addons">
@@ -61,13 +61,14 @@
                         </div>
                     </div>
                 </div>
-            {#{% else %}#}
+            {% else %}
             <div class="columns is-multiline is-centered has-background-warning">
                 <div class="column">
                     <p class="is-size-4 has-text-centered">You haven't added any tickets or packages to your bag.</p>
+                    <a href="{% url 'tickets' %}">Go to Tickets page</a>
                 </div> <!-- end of column -->
             </div> <!-- end of columns -->
-            {#{% endif %}#}
+            {% endif %}
         </div> <!-- end of container -->
     </div> <!-- end of body -->
 </section>
