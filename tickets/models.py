@@ -37,7 +37,7 @@ class Ticket(models.Model):
 
 
 class Actor(models.Model):
-    star_name = models.CharField(max_length=60, null=True, blank=True)
+    name = models.CharField(max_length=60, null=True, blank=True)
     star_autograph_category = models.CharField(
         max_length=1, null=True, blank=True)
     star_photoshoot_category = models.CharField(
