@@ -3,7 +3,7 @@
         "pk": 1,
         "model": "tickets.actor",
         "fields": {
-            "star_name": "John de Lancie",
+            "name": "John de Lancie",
             "star_autograph_category": "A",
             "star_photoshoot_category": "A",
             "star_image_url": "https://res.cloudinary.com/psbgbp/image/upload/t_thumbnail/v1641665629/ms4/actors/john_de_lancie.jpg",
@@ -14,7 +14,7 @@
         "pk": 2,
         "model": "tickets.actor",
         "fields": {
-            "star_name": "John Barrowman",
+            "name": "John Barrowman",
             "star_autograph_category": "A",
             "star_photoshoot_category": "A",
             "star_image_url": "https://res.cloudinary.com/psbgbp/image/upload/t_thumbnail/v1641666852/ms4/actors/john_barrowman.jpg",
@@ -25,7 +25,7 @@
         "pk": 3,
         "model": "tickets.actor",
         "fields": {
-            "star_name": "Jason Isaacs",
+            "name": "Jason Isaacs",
             "star_autograph_category": "A",
             "star_photoshoot_category": "A",
             "star_image_url": "https://res.cloudinary.com/psbgbp/image/upload/t_thumbnail/v1641667803/ms4/actors/jason_isaacs.jpg",
@@ -36,7 +36,7 @@
         "pk": 4,
         "model": "tickets.actor",
         "fields": {
-            "star_name": "Anthony Rapp",
+            "name": "Anthony Rapp",
             "star_autograph_category": "B",
             "star_photoshoot_category": "B",
             "star_image_url": "https://res.cloudinary.com/psbgbp/image/upload/t_thumbnail/v1641664329/ms4/actors/anthony_rapp.jpg",
@@ -47,7 +47,7 @@
         "pk": 5,
         "model": "tickets.actor",
         "fields": {
-            "star_name": "Wilson Cruz",
+            "name": "Wilson Cruz",
             "star_autograph_category": "B",
             "star_photoshoot_category": "B",
             "star_image_url": "https://res.cloudinary.com/psbgbp/image/upload/t_thumbnail/v1641667731/ms4/actors/wilson_cruz.jpg",
@@ -58,7 +58,7 @@
         "pk": 6,
         "model": "tickets.actor",
         "fields": {
-            "star_name": "Krysten Ritter",
+            "name": "Krysten Ritter",
             "star_autograph_category": "B",
             "star_photoshoot_category": "B",
             "star_image_url": "https://res.cloudinary.com/psbgbp/image/upload/t_thumbnail/v1641675200/ms4/actors/krysten_ritter.jpg",
@@ -69,7 +69,7 @@
         "pk": 7,
         "model": "tickets.actor",
         "fields": {
-            "star_name": "Seth MacFarlane",
+            "name": "Seth MacFarlane",
             "star_autograph_category": "B",
             "star_photoshoot_category": "B",
             "star_image_url": "https://res.cloudinary.com/psbgbp/image/upload/t_thumbnail/v1641669046/ms4/actors/seth_macfarlane.jpg",
@@ -80,7 +80,7 @@
         "pk": 8,
         "model": "tickets.actor",
         "fields": {
-            "star_name": "Scott Grimes",
+            "name": "Scott Grimes",
             "star_autograph_category": "C",
             "star_photoshoot_category": "C",
             "star_image_url": "https://res.cloudinary.com/psbgbp/image/upload/t_thumbnail/v1641669276/ms4/actors/scott_grimes.jpg",
@@ -91,7 +91,7 @@
         "pk": 9,
         "model": "tickets.actor",
         "fields": {
-            "star_name": "Elizabeth Olsen",
+            "name": "Elizabeth Olsen",
             "star_autograph_category": "B",
             "star_photoshoot_category": "B",
             "star_image_url": "https://res.cloudinary.com/psbgbp/image/upload/t_thumbnail/v1641669452/ms4/actors/elizabeth_olsen.jpg",
@@ -102,7 +102,7 @@
         "pk": 10,
         "model": "tickets.actor",
         "fields": {
-            "star_name": "Summer Glau",
+            "name": "Summer Glau",
             "star_autograph_category": "B",
             "star_photoshoot_category": "B",
             "star_image_url": "https://res.cloudinary.com/psbgbp/image/upload/t_thumbnailSG/v1641670533/ms4/actors/summer_glau.jpg",
@@ -113,7 +113,7 @@
         "pk": 11,
         "model": "tickets.actor",
         "fields": {
-            "star_name": "Dominique Tipper",
+            "name": "Dominique Tipper",
             "star_autograph_category": "B",
             "star_photoshoot_category": "B",
             "star_image_url": "https://res.cloudinary.com/psbgbp/image/upload/t_thumbnailDT/v1641671950/ms4/actors/dominique_tipper.jpg",
@@ -124,7 +124,7 @@
         "pk": 12,
         "model": "tickets.actor",
         "fields": {
-            "star_name": "Joseph Gordon-Levitt",
+            "name": "Joseph Gordon-Levitt",
             "star_autograph_category": "B",
             "star_photoshoot_category": "B",
             "star_image_url": "https://res.cloudinary.com/psbgbp/image/upload/t_thumbnailJGL/v1641671469/ms4/actors/joseph_gordon_levitt.jpg",
