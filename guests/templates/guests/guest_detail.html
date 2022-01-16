@@ -33,29 +33,34 @@
                 <h2 class="title is-2 has-text-centered">
                     Autograph
                 </h2>
-                    {% for ticket in tickets %}
-                        {% if actor.star_autograph_category == ticket.price_category and "Autograph" in ticket.name %}
-                            <p  class="is-size-3 has-text-centered">€ {{ ticket.price }}</p>
-                        {% endif %}
-                    {% endfor %}
-                <div class="control has-text-centered">
-                    <input class="button" type="submit" value="Buy now">
-                    <input type="hidden" name="redirect_url" value="">
-                </div>
+                    <form action="{% url 'add_to_bag' ticket.id %}" method="POST">
+                        {% for ticket in tickets %}
+                            {% if actor.star_autograph_category == ticket.price_category and "Autograph" in ticket.name %}
+                                <p  class="is-size-3 has-text-centered">€ {{ ticket.price }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="control has-text-centered">
+                            <input class="button" type="submit" value="Buy now">
+                            <input type="hidden" name="redirect_url" value="">
+                        </div>
+                    </form>
             </div>
             <div class="column is-6-tablet">
                 <h2 class="title is-2 has-text-centered">
                     Photoshoot
                 </h2>
-                    {% for ticket in tickets %}
-                        {% if actor.star_photoshoot_category == ticket.price_category and "Photoshoot" in ticket.name %}
-                            <p  class="is-size-3 has-text-centered">€ {{ ticket.price }}</p>
-                        {% endif %}
-                    {% endfor %}
-                <div class="control has-text-centered">
-                    <input class="button" type="submit" value="Buy now">
-                    <input type="hidden" name="redirect_url" value="">
-                </div>
+                    <form action="{% url 'add_to_bag' ticket.id %}" method="POST">
+                        {% csrf_token %}
+                            {% for ticket in tickets %}
+                                {% if actor.star_photoshoot_category == ticket.price_category and "Photoshoot" in ticket.name %}
+                                    <p  class="is-size-3 has-text-centered">€ {{ ticket.price }}</p>
+                                {% endif %}
+                            {% endfor %}
+                        <div class="control has-text-centered">
+                            <input class="button" type="submit" value="Buy now">
+                            <input type="hidden" name="redirect_url" value="">
+                        </div>
+                    </form>
             </div>
         </div>
         <div class="columns">
