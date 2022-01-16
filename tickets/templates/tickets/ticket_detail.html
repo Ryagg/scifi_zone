@@ -31,29 +31,33 @@
                         <div class="block">
                             <h3 class="title is-3">€ {{ ticket.price }}.00</h3>
                         </div>
-                        {% if "Standard" not in ticket.name %}
-                            {% include "includes/actor_dropdown.html" %}
-                        {% endif %}
-                        <div class="block">
-                            <div class="field">
-                                <label for="ticketholder" class="is-size-4 has-text-weight-medium has-text-white">Ticketholder
-                                </label>
-                                <div class="control has-icons-left">
-                                    <input id="ticketholder" name="ticketholder" class="input is-link" type="text" minlength="8"
-                                        maxlength="50" pattern="^[a-zA-Z0-9]{8,50}$" placeholder="Ticketholder Full name" value=""
-                                        aria-label="username" readonly>
-                                    <span class="icon is-left has-text-link">
-                                        <i class="fal fa-lg fa-user"></i>
-                                    </span>
-                                </div>
-                            </div> <!-- end of field -->
-                        </div> <!-- end of block -->
-                        <div class="block">
+
+                        <form action="{% url 'add_to_bag' ticket.id %}" method="POST">
+                            {% csrf_token %}
+                                {% if "Standard" not in ticket.name %}
+                                    {% include "includes/actor_dropdown.html" %}
+                                {% endif %}
+                                <div class="field">
+                                    <label for="ticketholder" class="is-size-4 has-text-weight-medium has-text-white">Ticketholder
+                                    </label>
+                                    <div class="control has-icons-left">
+                                        <input id="ticketholder" name="ticketholder" class="input is-link" type="text" minlength="8"
+                                            maxlength="50" pattern="^[a-zA-Z0-9]{8,50}$" placeholder="Ticketholder Full name" value=""
+                                            aria-label="username">
+                                        <span class="icon is-left has-text-link">
+                                            <i class="fal fa-lg fa-user"></i>
+                                        </span>
+
+                                    </div>
+                                </div> <!-- end of field -->
+
+                        <div class="field">
                             <div class="control">
                                 <input class="button" type="submit" value="Add to bag">
-                                <input type="hidden" name="redirect_url" value="">
+                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
                             </div>
                         </div>
+                        </form>
 
                     </div> <!-- end of column -->
 
