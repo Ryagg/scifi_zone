@@ -4,7 +4,10 @@
         "model": "tickets.category",
         "fields": {
             "name": "standard_ticket",
-            "friendly_name": "Standard Ticket"
+            "friendly_name": "Standard Ticket",
+            "price": null,
+            "image_url": "",
+            "image": ""
         }
     },
     {
@@ -12,7 +15,10 @@
         "model": "tickets.category",
         "fields": {
             "name": "autograph_ticket",
-            "friendly_name": "Autograph Ticket"
+            "friendly_name": "Autograph Ticket",
+            "price": null,
+            "image_url": "",
+            "image": ""
         }
     },
     {
@@ -20,7 +26,54 @@
         "model": "tickets.category",
         "fields": {
             "name": "photoshoot_ticket",
-            "friendly_name": "Photoshoot Ticket"
+            "friendly_name": "Photoshoot Ticket",
+            "price": null,
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 4,
+        "model": "tickets.category",
+        "fields": {
+            "name": "silver_package",
+            "friendly_name": "Silver Package",
+            "price": 125,
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 5,
+        "model": "tickets.category",
+        "fields": {
+            "name": "gold_package",
+            "friendly_name": "Gold Package",
+            "price": 249,
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 6,
+        "model": "tickets.category",
+        "fields": {
+            "name": "platinum_package",
+            "friendly_name": "Platinum Package",
+            "price": 649,
+            "image_url": "",
+            "image": ""
+        }
+    },
+    {
+        "pk": 7,
+        "model": "tickets.category",
+        "fields": {
+            "name": "diamond_package",
+            "friendly_name": "Diamond Package",
+            "price": 2499,
+            "image_url": "",
+            "image": ""
         }
     }
 ]
