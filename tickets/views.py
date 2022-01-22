@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Ticket, Package, Actor
 
+# pylint: disable=locally-disabled, no-member
+
 def all_tickets(request):
     """ A view to show all tickets """
 
@@ -17,6 +19,7 @@ def ticket_detail(request, tickets_id):
     """ A view to show detailed ticket information """
 
     ticket = get_object_or_404(Ticket, pk=tickets_id)
+    price_category = ticket.price_category
     goodies = ticket.included.split(',')
     actors = Actor.objects.all()
 
@@ -24,6 +27,7 @@ def ticket_detail(request, tickets_id):
 
     context = {
         'ticket': ticket,
+        'price_category': price_category,
         'goodies': goodies,
         'actors': actors,
 

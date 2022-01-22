@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from tickets.models import Actor, Ticket
 
+# pylint: disable=locally-disabled, no-member
+
 def view_all_guests(request):
     """A view to show all guests holding panels at the convention"""
 

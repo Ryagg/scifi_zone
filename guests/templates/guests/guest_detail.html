@@ -33,7 +33,7 @@
                 <h2 class="title is-2 has-text-centered">
                     Autograph
                 </h2>
-                    <form action="{% url 'add_to_bag' ticket.id %}" method="POST">
+                    <form action="" method="POST">
                         {% for ticket in tickets %}
                             {% if actor.star_autograph_category == ticket.price_category and "Autograph" in ticket.name %}
                                 <p  class="is-size-3 has-text-centered">€ {{ ticket.price }}</p>
@@ -49,7 +49,7 @@
                 <h2 class="title is-2 has-text-centered">
                     Photoshoot
                 </h2>
-                    <form action="{% url 'add_to_bag' ticket.id %}" method="POST">
+                    <form action="" method="POST">
                         {% csrf_token %}
                             {% for ticket in tickets %}
                                 {% if actor.star_photoshoot_category == ticket.price_category and "Photoshoot" in ticket.name %}
