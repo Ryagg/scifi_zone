@@ -38,29 +38,23 @@
                                     {% include "includes/actor_dropdown.html" %}
                                 {% endif %}
                                 <div class="field">
-                                    <label for="ticketholder" class="is-size-4 has-text-weight-medium has-text-white">Ticketholder
+                                    <label for="quantity" class="is-size-4 has-text-weight-medium has-text-white">Number of tickets
                                     </label>
-                                    <div class="control has-icons-left">
-                                        <input id="ticketholder" name="ticketholder" class="input is-link" type="text" minlength="8"
-                                            maxlength="50" pattern="^[a-zA-Z0-9]{8,50}$" placeholder="Ticketholder Full name" value=""
-                                            aria-label="username">
-                                        <span class="icon is-left has-text-link">
-                                            <i class="fal fa-lg fa-user"></i>
-                                        </span>
-
+                                    <div class="control">
+                                        <!-- type attribute number not supported by Bulma -->
+                                        <input id="quantity" name="quantity" class="input is-link" type="text" min="1"
+                                            maxlength="99" pattern="^[0-9]$" placeholder="" value="" data-item_id="{{ ticket.ticket_num }}"
+                                            id="id_qty_{{ ticket.ticket_num }}" aria-label="quantity">
                                     </div>
                                 </div> <!-- end of field -->
-
-                        <div class="field">
-                            <div class="control">
-                                <input class="button" type="submit" value="Add to bag">
-                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                            </div>
-                        </div>
+                                <div class="field">
+                                    <div class="control">
+                                        <input class="button" type="submit" value="Add to shopping bag">
+                                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                    </div>
+                                </div>
                         </form>
-
                     </div> <!-- end of column -->
-
             </div> <!-- end of columns -->
             <div class="columns is-centered">
                 <div class="column">
@@ -71,7 +65,5 @@
             </div>
         </div> <!-- end of container-->
     </div> <!-- end of hero-body -->
-
 </section>
-
 {% endblock %}
