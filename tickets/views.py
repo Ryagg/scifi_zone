@@ -42,3 +42,16 @@ def all_packages(request):
     }
 
     return render(request, 'tickets/packages.html', context)
+
+def package_detail(request, package_id, package_name):
+    """ A view to show detailed package information """
+
+    package = get_object_or_404(Package, pk=package_id, name=package_name)
+    goodies = package.included.split(',')
+
+    context = {
+        'package': package,
+        'goodies': goodies,
+    }
+
+    return render(request, 'tickets/package_detail.html', context)
