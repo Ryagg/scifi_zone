@@ -4,7 +4,7 @@ from .models import Ticket, Package, Actor
 def all_tickets(request):
     """ A view to show all tickets """
 
-    tickets = Ticket.objects.all()
+    tickets = Ticket.objects.filter(name__icontains='Ticket')
 
     context = {
     'tickets': tickets,
@@ -35,7 +35,7 @@ def ticket_detail(request, tickets_id):
 def all_packages(request):
     """ A view to show all packages """
 
-    packages = Package.objects.all()
+    packages = Ticket.objects.filter(name__icontains='Package')
 
     context = {
         'packages': packages,
@@ -46,7 +46,7 @@ def all_packages(request):
 def package_detail(request, package_id, package_name):
     """ A view to show detailed package information """
 
-    package = get_object_or_404(Package, pk=package_id, name=package_name)
+    package = get_object_or_404(Ticket, pk=package_id, name=package_name)
     goodies = package.included.split(',')
 
     context = {

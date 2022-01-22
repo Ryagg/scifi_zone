@@ -35,7 +35,7 @@ class Ticket(models.Model):
     price_category = models.CharField(max_length=1, null=True, blank=True)
     description = models.TextField()
     price = models.DecimalField(
-        max_digits=3, decimal_places=0)
+        max_digits=4, decimal_places=0)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     included = models.TextField(null=True, blank=True)

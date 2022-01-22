@@ -5,7 +5,7 @@
         "fields": {
             "name": "standard_ticket",
             "friendly_name": "Standard Ticket",
-            "price": null,
+            "price": 0,
             "image_url": "",
             "image": ""
         }
@@ -16,7 +16,7 @@
         "fields": {
             "name": "autograph_ticket",
             "friendly_name": "Autograph Ticket",
-            "price": null,
+            "price": 0,
             "image_url": "",
             "image": ""
         }
@@ -27,7 +27,7 @@
         "fields": {
             "name": "photoshoot_ticket",
             "friendly_name": "Photoshoot Ticket",
-            "price": null,
+            "price": 0,
             "image_url": "",
             "image": ""
         }
