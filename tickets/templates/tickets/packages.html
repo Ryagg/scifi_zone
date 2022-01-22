@@ -19,7 +19,7 @@
                         <div class="card">
                             <header class="card-header">
                                 <p class="card-header-title is-centered">
-                                    <a href="">{{ package.name }}</a>
+                                    <a href="{% url 'package_detail' package.id package.name %} ">{{ package.name }}</a>
                                 </p>
                             </header>
                             <div class="card-image">
