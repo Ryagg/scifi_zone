@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bag_tools %}
+
+{% block content %}
+<!-- Order summary -->
+<section class="hero is-link is-small">
+    <div class="hero-body">
+            <h1 class="title is-1 has-text-centered">Checkout</h1>
+            <h2 class="subtitle is-3">Order Summary ({{ item_count }} items)</h2>
+            {% for item in bag_items %}
+                <div class="columns is-multiline is-centered has-background-grey">
+                    <div class="column">
+                        <div class="level is-mobile">
+                            <div class="is-pulled-left">
+                                <p class="is-size-6">Item</p>
+                                <p class="is-size-5">{{ item.ticket.name }}</p>
+                                <p class="is-size-6">Quantity: {{ item.quantity }}</p>
+                            </div>
+                            <div class="is-pulled-right">
+                                    <p class="is-size-6">Subtotal</p>
+                                    <p class="is-size-5">€{{ item.ticket.price | calc_subtotal:item.quantity }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end of columns -->
+            {% endfor %}
+            <div class="columns is-multiline is-centered has-background-success">
+                <div class="column is-5-tablet">
+                    <h2 class="title is-2 has-text-centered">Grand Total €{{grand_total}}</h2>
+                </div>
+            </div>
+    </div> <!-- end of body -->
+</section>
+
+<!-- Billing address -->
+<section class="hero is-primary is-small">
+    <div class="hero-body">
+        <div class="columns is-mobile is-multiline">
+            <div class="column is-5-tablet">
+                <form action="">
+                            {% csrf_token %}
+                            <h2 class="title is-2">Billing address</h2>
+                            <div class="field">
+                                {{ order_form.full_name | as_crispy_field }}
+                                {{ order_form.email | as_crispy_field }}
+                                {{ order_form.street_address1 | as_crispy_field }}
+                                {{ order_form.street_address2 | as_crispy_field }}
+                                {{ order_form.city | as_crispy_field }}
+                                {{ order_form.state | as_crispy_field }}
+                                {{ order_form.postcode | as_crispy_field }}
+                                {{ order_form.country | as_crispy_field }}
+                            </div>
+
+                        </form>
+            </div>
+        </div> <!-- end of columns -->
+    </div> <!-- end of body -->
+</section>
+<section class="hero">
+    <div class="hero-body">
+
+    </div> <!-- end of body -->
+</section>
+<section class="hero">
+    <div class="hero-body">
+
+    </div> <!-- end of body -->
+</section>
+
+{% endblock %}
