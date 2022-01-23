@@ -64,8 +64,24 @@
 </section>
 <section class="hero">
     <div class="hero-body">
-
+        <form id="payment-form">
+            <div id="payment-element">
+                <!-- Elements will create form elements here -->
+            </div>
+            <button id="submit">Submit</button>
+            <div id="error-message">
+                <!-- Display error message to your customers here -->
+            </div>
+        </form>
     </div> <!-- end of body -->
 </section>
 
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {# json_script needed to access template variables in external js file #}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
