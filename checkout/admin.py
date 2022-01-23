@@ -29,10 +29,15 @@ class OrderAdmin(admin.ModelAdmin):
     )
 
     # restrict columns that show up in the order list
-    list_display = ("order_number", "date", "full_name", "email", "grand_total")
+    list_display = (
+        "order_number",
+        "date",
+        "full_name",
+        "email",
+        "grand_total")
 
     # use reverse chronological order
-    ordering = "-date"
+    ordering = ('-date',)
 
 
 admin.site.register(Order, OrderAdmin)
