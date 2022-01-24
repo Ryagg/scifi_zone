@@ -41,11 +41,15 @@ const form = document.getElementById("payment-form");
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    // disable card element and submit button to prevent multiple submissions
+    paymentElement.update({ disabled: true });
+    $("#submit-button").attr("disabled", true);
+
     const { error } = await stripe.confirmPayment({
         //`Elements` instance that was used to create the Payment Element
         elements,
         confirmParams: {
-            return_url: "",
+            return_url: "https://ms4-scifi-zone.herokuapp.com/checkout/",
         },
     });
 
@@ -55,9 +59,15 @@ form.addEventListener("submit", async (event) => {
         // details incomplete)
         const messageContainer = document.querySelector("#error-message");
         messageContainer.textContent = error.message;
+        paymentElement.update({ disabled: false });
+        $("#submit-button").attr("disabled", false);
     } else {
         // Your customer will be redirected to your `return_url`. For some payment
         // methods like iDEAL, your customer will be redirected to an intermediate
         // site first to authorize the payment, then redirected to the `return_url`.
+        // submit form
+        if (result.paymentIntent.status === "succeeded") {
+            form.submit();
+        }
     }
 });
