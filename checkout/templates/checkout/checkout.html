@@ -38,7 +38,7 @@
     <div class="hero-body">
         <div class="columns is-mobile is-multiline">
             <div class="column is-5-tablet">
-                <form action="">
+                <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                             {% csrf_token %}
                             <h2 class="title is-2">Billing address</h2>
                             <div class="field">

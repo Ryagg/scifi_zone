@@ -3,7 +3,7 @@ const clientSecret = $("#id_client_secret").text().slice(1, -1);
 const stripe = Stripe(stripePublicKey);
 
 const options = {
-    clientSecret: "{{CLIENT_SECRET}}",
+    clientSecret: clientSecret,
     // Fully customizable with appearance API.
     appearance: {
         theme: "night",
@@ -30,7 +30,7 @@ const options = {
 };
 
 // Set up Stripe.js and Elements to use in checkout form, passing the client secret obtained in step 2
-const elements = stripe.elements(clientSecret, appearance);
+const elements = stripe.elements(options);
 
 // Create and mount the Payment Element
 const paymentElement = elements.create("payment");
