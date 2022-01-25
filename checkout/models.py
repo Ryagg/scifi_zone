@@ -34,7 +34,7 @@ class Order(models.Model):
         """Update grand total with each newly added item"""
         self.grand_total = self.lineitems.aggregate(Sum("lineitem_total"))[
             "lineitem_total_sum"
-        ]
+        ] or 0
         self.save()
 
     def save(self, *args, **kwargs):

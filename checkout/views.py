@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse,get_object_or_404
 from django.contrib import messages
 from django.conf import settings
 
@@ -87,3 +87,22 @@ def checkout(request):
         }
 
         return render(request, template, context)
+
+
+def checkout_success(request, order_number):
+    """Handle successfull checkouts"""
+    save_info = request.get('save_info')
+    order = get_object_or_404(Order, order_number=order_number)
+    messages.success(request, f'Your order {order_number} has been \
+        successfully processed. We will send a confirmation email to \
+            {order.email} shortly.')
+
+    if 'bag' in request.session:
+        del request.sesion['bag']
+
+    template = 'checkout/checkout_success.html'
+    context = {
+        'order': order,
+    }
+
+    return render(request, template, context)
