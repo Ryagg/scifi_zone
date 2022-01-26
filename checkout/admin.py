@@ -11,7 +11,8 @@ class OrderAdmin(admin.ModelAdmin):
 
     inlines = (OrderLineItemAdminInline,)
 
-    readonly_fields = ("order_number", "date", "grand_total")
+    readonly_fields = ("order_number", "date", "grand_total", "original_bag",
+    "stripe_pid")
 
     fields = (
         "order_number",
@@ -26,6 +27,8 @@ class OrderAdmin(admin.ModelAdmin):
         "state",
         "postcode",
         "country",
+        "original_bag",
+        "stripe_pid"
     )
 
     # restrict columns that show up in the order list

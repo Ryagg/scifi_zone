@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect, reverse,get_object_or_404
+from django.shortcuts import render, redirect, reverse,get_object_or_404, HttpResponse
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
 
 import stripe
+import json
 
 from bag.contexts import bag_contents
 from .forms import OrderForm
@@ -11,6 +13,25 @@ from .models import Order, OrderLineItem
 from tickets.models import Ticket
 
 # pylint: disable=locally-disabled, no-member
+
+@require_POST
+def cache_checkout_data(request):
+    try:
+        # get payment intent id
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        # set up stripe
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        # tell stripe what we want to modify
+        stripe.PaymentIntent.modify(pid, metadata={
+            'bag': json.dumps(request.session.get('bag', {})),
+            'save_info': request.POST.get('save_info'),
+            'username': request.user,
+        })
+        return HttpResponse(status=200)
+    except Exception as error:
+        messages.error(request, 'Sorry, your payment cannot be processed \
+            right now. Please try again later.')
+        return HttpResponse(content=error, status=400)
 
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
@@ -31,6 +52,11 @@ def checkout(request):
         }
         order_form = OrderForm(form_data)
         if order_form.is_valid:
+            # prevent multiple save events
+            order = order_form.save(commit=False)
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.stripe_pid = pid
+            order.original_bag = json.dumps(bag)
             order = order_form.save()
             for item_id, item_data in bag.items():
                 try:
@@ -76,6 +102,9 @@ def checkout(request):
         intent = stripe.PaymentIntent.create(
             amount = stripe_total,
             currency = settings.STRIPE_CURRENCY,
+            automatic_payment_methods={
+                'enabled': True,
+            },
         )
 
         template = "checkout/checkout.html"
@@ -83,6 +112,7 @@ def checkout(request):
             "order_form": order_form,
             'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
             'client_secret': intent.client_secret,
+
 
         }
 
@@ -104,5 +134,5 @@ def checkout_success(request, order_number):
     context = {
         'order': order,
     }
-
+    print('Order received and processed')
     return render(request, template, context)
