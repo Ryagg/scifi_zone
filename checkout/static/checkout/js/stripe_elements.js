@@ -14,7 +14,7 @@ const options = {
             colorBackground: "#0A2540",
             colorPrimary: "#EFC078",
             colorPrimaryText: "#1A1B25",
-            colorText: "white",
+            colorText: "black",
             colorTextSecondary: "white",
             colorTextPlaceholder: "#727F96",
             colorIconTab: "white",
@@ -49,7 +49,7 @@ form.addEventListener("submit", async (event) => {
         //`Elements` instance that was used to create the Payment Element
         elements,
         confirmParams: {
-            return_url: "https://ms4-scifi-zone.herokuapp.com/checkout/",
+            return_url: "https://www.google.com",
         },
     });
 
@@ -70,4 +70,63 @@ form.addEventListener("submit", async (event) => {
             form.submit();
         }
     }
+
+    // the view updates the paymentIntent
+    $.post(url, postData)
+        .done(function () {
+            stripe
+                // call confirmCardPayment method from Stripe
+                .confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        paymentElement: paymentElement,
+                        billing_details: {
+                            name: $.trim(form.full_name.value),
+                            email: $.trim(form.email.value),
+                            address: {
+                                line1: $.trim(form.street_address1.value),
+                                line2: $.trim(form.street_address2.value),
+                                city: $.trim(form.city.value),
+                                state: $.trim(form.county.value),
+                                country: $.trim(form.country.value),
+                            },
+                        },
+                    },
+                    shipping: {
+                        name: $.trim(form.full_name.value),
+                        address: {
+                            line1: $.trim(form.street_address1.value),
+                            line2: $.trim(form.street_address2.value),
+                            city: $.trim(form.town_or_city.value),
+                            post_code: $.trim(form.postcode.value),
+                            state: $.trim(form.county.value),
+                            country: $.trim(form.country.value),
+                        },
+                    },
+                })
+                .then(function (result) {
+                    if (result.error) {
+                        var errorDiv = document.getElementById("card-errors");
+                        var html = `
+                    <span class="icon" role="alert">
+                    <i class="fas fa-times"></i>
+                    </span>
+                    <span>${result.error.message}</span>`;
+                        $(errorDiv).html(html);
+                        $("#payment-form").fadeToggle(100);
+                        $("#loading-overlay").fadeToggle(100);
+                        // re-enable card element + button to allow fixes
+                        paymentElement.update({ disabled: false });
+                        $("#submit-button").attr("disabled", false);
+                    } else {
+                        // submit form
+                        if (result.paymentIntent.status === "succeeded") {
+                            form.submit();
+                        }
+                    }
+                });
+        })
+        .fail(function () {
+            // just reload the page, the error will be in django messages
+            location.reload();
+        });
 });
