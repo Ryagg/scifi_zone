@@ -1,16 +1,15 @@
+import json
 from django.shortcuts import render, redirect, reverse,get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
-
 import stripe
-import json
-
 from bag.contexts import bag_contents
+from tickets.models import Ticket
 from .forms import OrderForm
 from .models import Order, OrderLineItem
 
-from tickets.models import Ticket
+
 
 # pylint: disable=locally-disabled, no-member
 
@@ -24,9 +23,10 @@ def cache_checkout_data(request):
         # tell stripe what we want to modify
         stripe.PaymentIntent.modify(pid, metadata={
             'bag': json.dumps(request.session.get('bag', {})),
-            'save_info': request.POST.get('save_info'),
+            # 'save_info': request.POST.get('save_info'),
             'username': request.user,
         })
+        print('cache_checkout_data')
         return HttpResponse(status=200)
     except Exception as error:
         messages.error(request, 'Sorry, your payment cannot be processed \
@@ -57,7 +57,8 @@ def checkout(request):
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
-            order = order_form.save()
+            order.save()
+            print(order)
             for item_id, item_data in bag.items():
                 try:
                     ticket = Ticket.objects.get(id=item_id)
@@ -73,10 +74,12 @@ def checkout(request):
                             found in our database. Please contact us!")
                             )
                     order.delete()
+                    print('order deleted')
                     return redirect(reverse('view_bag'))
 
             # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
+            print('checkout success!')
             return redirect(
                 reverse(
                     'checkout_success',
@@ -84,16 +87,18 @@ def checkout(request):
                         order.order_number]))
 
         else:
+            print('form error')
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
 
     else:
         bag = request.session.get("bag", {})
         if not bag:
+            print('bag empty')
             messages.error(request, "Your bag is empty.")
             return redirect(reverse("tickets"))
 
-        order_form = OrderForm()
+
 
         current_bag = bag_contents(request)
         total = current_bag['grand_total']
@@ -102,27 +107,27 @@ def checkout(request):
         intent = stripe.PaymentIntent.create(
             amount = stripe_total,
             currency = settings.STRIPE_CURRENCY,
-            automatic_payment_methods={
-                'enabled': True,
-            },
         )
 
+        order_form = OrderForm()
         template = "checkout/checkout.html"
         context = {
             "order_form": order_form,
-            'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+            'stripe_public_key': stripe_public_key,
             'client_secret': intent.client_secret,
 
 
         }
 
+        print('reached end of checkout')
         return render(request, template, context)
 
 
 def checkout_success(request, order_number):
     """Handle successfull checkouts"""
-    save_info = request.get('save_info')
+    # save_info = request.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+    print('order processed')
     messages.success(request, f'Your order {order_number} has been \
         successfully processed. We will send a confirmation email to \
             {order.email} shortly.')

@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 ms4.code-workspace
 .vscode/
+compare.py
