@@ -1,75 +1,64 @@
 const stripePublicKey = $("#id_stripe_public_key").text().slice(1, -1);
 const clientSecret = $("#id_client_secret").text().slice(1, -1);
 const stripe = Stripe(stripePublicKey);
+var elements = stripe.elements();
 
-const options = {
-    clientSecret: clientSecret,
-    // Fully customizable with appearance API.
-    appearance: {
-        theme: "night",
-        variables: {
-            fontFamily: "Sohne, system-ui, sans-serif",
-            fontWeightNormal: "500",
-            borderRadius: "8px",
-            colorBackground: "#0A2540",
-            colorPrimary: "#EFC078",
-            colorPrimaryText: "#1A1B25",
-            colorText: "black",
-            colorTextSecondary: "white",
-            colorTextPlaceholder: "#727F96",
-            colorIconTab: "white",
-            colorLogo: "dark",
-        },
-        rules: {
-            ".Input, .Block": {
-                backgroundColor: "transparent",
-                border: "1.5px solid var(--colorPrimary)",
-            },
+var style = {
+    base: {
+        color: "#000",
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: "antialiased",
+        fontSize: "16px",
+        "::placeholder": {
+            color: "#aab7c4",
         },
     },
+    invalid: {
+        color: "#dc3545",
+        iconColor: "#dc3545",
+    },
 };
+var card = elements.create("card", { style: style });
+/* mount the card element */
+card.mount("#card-element");
 
-// Set up Stripe.js and Elements to use in checkout form, passing the client secret obtained in step 2
-const elements = stripe.elements(options);
-
-// Create and mount the Payment Element
-const paymentElement = elements.create("payment");
-paymentElement.mount("#payment-element");
-
-const form = document.getElementById("payment-form");
-
-form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    // disable card element and submit button to prevent multiple submissions
-    paymentElement.update({ disabled: true });
-    $("#submit-button").attr("disabled", true);
-
-    const { error } = await stripe.confirmPayment({
-        //`Elements` instance that was used to create the Payment Element
-        elements,
-        confirmParams: {
-            return_url: "https://www.google.com",
-        },
-    });
-
-    if (error) {
-        // This point will only be reached if there is an immediate error when
-        // confirming the payment. Show error to your customer (for example, payment
-        // details incomplete)
-        const messageContainer = document.querySelector("#error-message");
-        messageContainer.textContent = error.message;
-        paymentElement.update({ disabled: false });
-        $("#submit-button").attr("disabled", false);
+// Handle realtime validation errors on the card element //
+card.addEventListener("change", function (event) {
+    var errorDiv = document.getElementById("card-errors");
+    if (event.error) {
+        var html = `
+        <span class="icon" role="alert">
+            <i class="fas fa-times"></i>
+        </span>
+        <span>${event.error.message}</span>
+        `;
+        $(errorDiv).html(html);
     } else {
-        // Your customer will be redirected to your `return_url`. For some payment
-        // methods like iDEAL, your customer will be redirected to an intermediate
-        // site first to authorize the payment, then redirected to the `return_url`.
-        // submit form
-        if (result.paymentIntent.status === "succeeded") {
-            form.submit();
-        }
+        errorDiv.textContent = "";
     }
+});
+
+// Handle form submit
+var form = document.getElementById("payment-form");
+
+form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    // disable card element and submit button to prevent multiple submissions
+    card.update({ disabled: true });
+    $("#submit-button").attr("disabled", true);
+    $("#payment-form").fadeToggle(100);
+    $("#loading-overlay").fadeToggle(100);
+
+    // capture form data we can't put in the paymentIntent and post it to the cache_checkout_data view
+    var saveInfo = Boolean($("#id-save-info").attr("checked"));
+    // From using {% csrf_token %} in the form
+    var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+    var postData = {
+        csrfmiddlewaretoken: csrfToken,
+        client_secret: clientSecret,
+        save_info: saveInfo,
+    };
+    var url = "/checkout/cache_checkout_data/";
 
     // the view updates the paymentIntent
     $.post(url, postData)
@@ -86,7 +75,7 @@ form.addEventListener("submit", async (event) => {
                                 line1: $.trim(form.street_address1.value),
                                 line2: $.trim(form.street_address2.value),
                                 city: $.trim(form.city.value),
-                                state: $.trim(form.county.value),
+                                state: $.trim(form.state.value),
                                 country: $.trim(form.country.value),
                             },
                         },
@@ -98,7 +87,7 @@ form.addEventListener("submit", async (event) => {
                             line2: $.trim(form.street_address2.value),
                             city: $.trim(form.town_or_city.value),
                             post_code: $.trim(form.postcode.value),
-                            state: $.trim(form.county.value),
+                            state: $.trim(form.state.value),
                             country: $.trim(form.country.value),
                         },
                     },
@@ -115,7 +104,7 @@ form.addEventListener("submit", async (event) => {
                         $("#payment-form").fadeToggle(100);
                         $("#loading-overlay").fadeToggle(100);
                         // re-enable card element + button to allow fixes
-                        paymentElement.update({ disabled: false });
+                        card.update({ disabled: false });
                         $("#submit-button").attr("disabled", false);
                     } else {
                         // submit form
