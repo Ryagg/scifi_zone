@@ -36,10 +36,10 @@
 <!-- Billing address -->
 <section class="hero is-primary is-small">
     <div class="hero-body">
-        <div class="columns is-multiline">
-            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
-                <div class="column  has-background-danger">
-                    {% csrf_token %}
+        <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+            {% csrf_token %}
+                <div class="columns is-multiline">
+                    <div class="column  has-background-danger">
                         <h2 class="title is-2">Billing address</h2>
                             <div class="field">
                                 {{ order_form.full_name | as_crispy_field }}
@@ -51,35 +51,31 @@
                                 {{ order_form.postcode | as_crispy_field }}
                                 {{ order_form.country | as_crispy_field }}
                             </div>
-                </div>
-                <div class="column has-background-warning">
-                    {% if user.is_authenticated %}
-						<label for="id-save-info">Save this delivery information to my profile</label>
-                        <input type="checkbox" id="id-save-info" name="save-info" checked>
-					{% else %}
-						<label for="id-save-info">
-                            <a href="{% url 'account_signup' %}">Create an account</a> or
-                            <a href="{% url 'account_login' %}">login</a> to save this information
-                        </label>
-					{% endif %}
-                </div>
-            </form>
-        </div> <!-- end of columns -->
-    </div> <!-- end of body -->
-</section>
+                    </div>
+                    <div class="column has-background-warning">
+                        {% if user.is_authenticated %}
+                            <label for="id-save-info">Save this delivery information to my profile</label>
+                            <input type="checkbox" id="id-save-info" name="save-info" checked>
+                        {% else %}
+                            <label for="id-save-info">
+                                <a class="is-size-4" href="{% url 'account_signup' %}">Create an account</a> or
+                                <a class="is-size-4" href="{% url 'account_login' %}">login</a> to save this information
+                            </label>
+                        {% endif %}
+                    </div>
+                </div> <!-- end of columns -->
 
-<section class="hero">
-    <div class="hero-body">
-        <form id="payment-form">
+                <div class="field  has-background-info">
             <!-- Pass the client secret to the view so we can get the payment intent id -->
-            <input type="hidden" value="{{ client_secret }}" name="client_secret">
-            <div id="payment-element">
-                <!-- Elements will create form elements here -->
-            </div>
-            <button id="submit">Submit</button>
-            <div id="error-message">
-                <!-- Display error message to your customers here -->
-            </div>
+                    <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                    <div id="card-element">
+                    <!-- Elements will create form elements here -->
+                    </div>
+                    <button id="submit">Submit</button>
+                    <div id="card-errors">
+                    <!-- Display error message to your customers here -->
+                    </div>
+                </div>
         </form>
     </div> <!-- end of body -->
 </section>
