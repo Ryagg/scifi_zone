@@ -1,3 +1,96 @@
+/*----- GENERAL STYLES -----*/
+body {
+    font-family: "Saira", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Orbitron", sans-serif;
+}
+
+/*----- FOCUS, ACTIVE & HOVER EFFECTS -----*/
+.navbar-item:hover,
+.navbar-link:hover,
+.navbar-burger:hover {
+    font-weight: bold;
+}
+
+/*----- TEXT EFFECTS -----*/
+.heading__text--shadow {
+    /* code from https://css-tricks.com/almanac/properties/t/text-shadow/ */
+    color: #ccddff;
+    text-shadow: 1px 0px 1px #882211, 0px 1px 1px #0a0a0a, 2px 1px 1px #882211, 1px 2px 1px #0a0a0a,
+        3px 2px 1px #882211, 2px 3px 1px #0a0a0a, 4px 3px 1px #882211, 3px 4px 1px #0a0a0a,
+        5px 4px 1px #882211, 4px 5px 1px #0a0a0a, 6px 5px 1px #882211, 5px 6px 1px #0a0a0a,
+        7px 6px 1px #882211;
+}
+
+.heading__text--shadow-blue {
+    /* code from https://css-tricks.com/almanac/properties/t/text-shadow/ */
+    color: #ccddff;
+    text-shadow: 0 1px 0 #4169e1, 0 2px 0 #0000ff, 0 3px 0 #0000cd, 0 4px 0 #00008b, 0 5px 0 #191970,
+        0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3),
+        0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+        0 20px 20px rgba(0, 0, 0, 0.15);
+}
+
+.text__shadow--light {
+    text-shadow: 1px 1px 2px #c0c0c0;
+}
+
+.text__shadow--dark {
+    text-shadow: 1px 1px 3px #292929;
+}
+
+/*----- TEXT AND BACKGROUND COLORS (taken from https://tailwindcss.com/docs/customizing-colors)  -----*/
+.text__color-sky-100 {
+    color: #e0f2fe;
+}
+
+.bg--sky-700 {
+    background-color: #0369a1;
+}
+
+.bg--sky-900 {
+    background-color: #0c4a6e;
+}
+
+.text__color-blue-50 {
+    color: #eff6ff;
+}
+
+.bg--blue-300 {
+    background-color: #93c5fd;
+}
+
+.bg--blue-700 {
+    background-color: #1d4ed8;
+}
+
+.bg--blue-900 {
+    background-color: #1e3a8a;
+}
+
+.text__color-indigo-100 {
+    color: #e0e7ff;
+}
+
+.bg--indigo-900 {
+    background-color: #312e81;
+}
+/*----- BORDERS & HR -----*/
+.hr-top {
+    border-top: 3px solid white;
+}
+
+.hr-top-bottom {
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+}
 /*----- FOOTER -----*/
 .footer_padding--less {
     padding: 2rem 1rem 2rem;
