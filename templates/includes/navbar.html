@@ -1,8 +1,8 @@
     <!-- Navbar -->
-    <nav id="navbar" class="navbar is-size-3 is-fixed-top is-transparent">
+    <nav id="navbar" class="navbar is-size-4 is-fixed-top is-transparent">
         <div class="container">
             <div class="navbar-brand">
-                <a class="navbar-item" href="">
+                <a class="navbar-item" href="{% url 'home' %}">
                     SciFi Zone
                 </a>
                 <span id="navbar-burger" class="navbar-burger burger" data-target="navbarMenu" tabindex="0">
@@ -19,17 +19,18 @@
                     <a class="navbar-item" href="">
                         Event Info
                     </a>
-                    <a class="navbar-item" href="{% url 'tickets' %}">
-                        Ticket Info
-                    </a>
-                    <a class="navbar-item" href="{% url 'packages' %} ">
-                        Packages
-                    </a>
+                    <div class="navbar-item has-dropdown is-hoverable" tabindex="0">
+                        <a class="navbar-link">Ticket Info</a>
+                        <div class="navbar-dropdown is-boxed">
+                            <a href="{% url 'tickets' %}" class="navbar-item is-size-4">Tickets</a>
+                            <a href="{% url 'packages' %}" class="navbar-item is-size-4">Packages</a>
+                        </div>
+                    </div>
                     <a class="navbar-item" href="">
                         Timetable
                     </a>
                     <a class="navbar-item" href="{% url 'view_bag' %} ">
-                        Bag
+                        <span class="mr-2"><i class="fal fa-bags-shopping"></i></span> Bag
                     </a>
                 </div>
                 <div class="navbar-end">
