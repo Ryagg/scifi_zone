@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block content %}
-<section class="hero is-link is-large">
+<section class="hero is-medium bg--sky-900 text__color-sky-100">
     <div class="hero-body">
         <div class="container">
             <div class="columns is-multiline is-centered">
                 <div class="column is-6-tablet">
-                    <h1 class="title is-1 has-text-centered">{{ package.name }}</h1>
-                    <h2 class="title is-2 has-text-centered">€{{ package.price }}</h2>
+                    <h1 class="title is-1 has-text-centered text__color-sky-100">{{ package.name }}</h1>
+                    <h2 class="title is-2 has-text-centered text__color-sky-100">€{{ package.price }}</h2>
                 </div>
             </div>
             <div class="columns is-multiline is-centered">
@@ -24,7 +24,7 @@
                     <form action="{% url 'add_to_bag' package.id %}" method="POST">
                         {% csrf_token %}
                             <div class="field">
-                                <label for="quantity" class="is-size-4 has-text-weight-medium has-text-white">Number of packages
+                                <label for="quantity" class="is-size-4 has-text-weight-medium">Number of packages
                                 </label>
                                 <div class="control">
                                     <!-- type attribute number not supported by Bulma -->

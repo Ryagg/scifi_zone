@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block content %}
-<section class="hero is-link is-large">
+<section class="hero is-medium bg--sky-900 text__color-sky-100">
     <div class="hero-body">
         <div class="container">
-            <h1 class="title is-1 has-text-centered">{{ ticket.name }}</h1>
+            <h1 class="title is-1 has-text-centered text__color-sky-100">{{ ticket.name }}</h1>
             <div class="columns is-multiline is-centered">
                     <div class="column is-6-tablet">
                         <div class="block">
@@ -14,12 +14,12 @@
                                 </figure>
                         </div>
                         <div class="block">
-                            <h3 class="title is-3">Description</h3>
-                                        <p>{{ ticket.description }}</p>
-                                        <p>Ticket only valid in combination with a standard ticket or package for the same day.</p>
+                            <h3 class="title is-3 text__color-sky-100">Description</h3>
+                                <p class="is-size-5">{{ ticket.description }}</p>
+
                         </div>
                         <div class="block">
-                            <h3 class="title is-3">Included in this ticket</h3>
+                            <h3 class="title is-3 text__color-sky-100">Included in this ticket:</h3>
                                     <ul>
                                         {% for goodie in goodies %}
                                             <li>{% if 'Standard' in ticket.name %} 1 x {% endif %}{{ goodie }}</li>
@@ -29,16 +29,17 @@
                     </div> <!-- end of column -->
                     <div class="column is-6-tablet">
                         <div class="block">
-                            <h3 class="title is-3">€ {{ ticket.price }}.00</h3>
+                            <h3 class="title is-3 text__color-sky-100">€ {{ ticket.price }}.00</h3>
                         </div>
 
                         <form action="{% url 'add_to_bag' ticket.id %}" method="POST">
                             {% csrf_token %}
                                 {% if "Standard" not in ticket.name %}
                                     {% include "includes/actor_dropdown.html" %}
+                                    <p class="is-size-5 has-text-danger mb-2 hr-top-bottom">Ticket only valid in combination with a standard ticket or package for the same day.</p>
                                 {% endif %}
                                 <div class="field">
-                                    <label for="quantity" class="is-size-4 has-text-weight-medium has-text-white">Number of tickets
+                                    <label for="quantity" class="is-size-4 has-text-weight-medium">Number of tickets
                                     </label>
                                     <div class="control">
                                         <!-- type attribute number not supported by Bulma -->
@@ -58,8 +59,8 @@
             </div> <!-- end of columns -->
             <div class="columns is-centered">
                 <div class="column">
-                    <div class="block hr1 py-5">
-                            <p>Buy (more) <a href="">Autographs</a> and/or <a href="">Photoshoot tickets</a></p>
+                    <div class="block py-5 hr-top">
+                            <p class="is-size-4">Buy (more) <a class="has-text-weight-semibold text__color-sky-100" href="{% url 'tickets' %}">Autographs and/or Photoshoot tickets</a>
                         </div>
                 </div>
             </div>

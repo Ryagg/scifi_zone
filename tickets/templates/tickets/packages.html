@@ -2,14 +2,14 @@
 {% load static %}
 
 {% block content %}
-<section class="hero is-link is-large">
+<section class="hero is-small bg--sky-900 text__color-sky-100">
     <div class="hero-body">
         <div class="container">
-            <h1 class="title is-1 has-text-centered">Packages</h1>
+            <h1 class="title is-1 has-text-centered text__color-sky-100">Packages</h1>
             <div class="columns is-multiline is-centered">
                 <div class="column  my-2">
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <p class="is-size-5">
+                    Packages offer a combination of entrance to Scifi Zone 2022 on all three days and varying number of Paid Guest Panels, Photoshoot + Autograph Opportunities and Goody Bags depending on the selected package. For more details, please see the page for each package.
                     </p>
                 </div>
             </div>
@@ -37,6 +37,12 @@
                 {% endfor %}
                     <hr>
             </div> <!-- end of columns -->
+            <div class="columns is-multiline">
+                <div class="column has-text-centered mt-5 mb-2 hr-top">
+                    <p class="is-size-4">Prefer to create your own package?</p>
+                    <p class="is-size-4">Take a look at our <a class="has-text-weight-semibold text__color-sky-100" href="{% url 'tickets' %}">Standard, Autograph and Photoshoot Tickets!</a></p>
+                </div>
+            </div>
         </div> <!-- end of container-->
     </div> <!-- end of hero-body -->
 </section>
