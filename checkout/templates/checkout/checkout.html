@@ -4,12 +4,12 @@
 
 {% block content %}
 <!-- Order summary -->
-<section class="hero is-link is-small">
+<section class="hero is-medium bg--sky-900 text__color-sky-100">
     <div class="hero-body">
-            <h1 class="title is-1 has-text-centered">Checkout</h1>
-            <h2 class="subtitle is-3">Order Summary ({{ item_count }} items)</h2>
+            <h1 class="title is-1 has-text-centered text__color-sky-100">Checkout</h1>
+            <h2 class="subtitle is-3 text__color-sky-100">Order Summary ({{ item_count }} items)</h2>
             {% for item in bag_items %}
-                <div class="columns is-multiline is-centered has-background-grey">
+                <div class="columns is-multiline is-centered">
                     <div class="column">
                         <div class="level is-mobile">
                             <div class="is-pulled-left">
@@ -25,22 +25,22 @@
                     </div>
                 </div> <!-- end of columns -->
             {% endfor %}
-            <div class="columns is-multiline is-centered has-background-success">
+            <div class="columns is-multiline is-centered">
                 <div class="column is-5-tablet">
-                    <h2 class="title is-2 has-text-centered">Grand Total €{{grand_total}}</h2>
+                    <h2 class="title is-2 has-text-centered text__color-sky-100">Grand Total €{{grand_total}}</h2>
                 </div>
             </div>
     </div> <!-- end of body -->
 </section>
 
 <!-- Billing address -->
-<section class="hero is-primary is-small">
+<section class="hero is-small bg--sky-900 text__color-sky-100">
     <div class="hero-body">
-        <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+        <form action="{% url 'checkout' %}" method="POST" id="payment-form" data-secret="{{ client_secret }}">
             {% csrf_token %}
                 <div class="columns is-multiline">
-                    <div class="column  has-background-danger">
-                        <h2 class="title is-2">Billing address</h2>
+                    <div class="column">
+                        <h2 class="title is-2 text__color-sky-100">Billing address</h2>
                             <div class="field">
                                 {{ order_form.full_name | as_crispy_field }}
                                 {{ order_form.email | as_crispy_field }}
@@ -52,27 +52,25 @@
                                 {{ order_form.country | as_crispy_field }}
                             </div>
                     </div>
-                    <div class="column has-background-warning">
+                    <div class="column is-size-4">
                         {% if user.is_authenticated %}
                             <label for="id-save-info">Save this delivery information to my profile</label>
                             <input type="checkbox" id="id-save-info" name="save-info" checked>
                         {% else %}
                             <label for="id-save-info">
-                                <a class="is-size-4" href="{% url 'account_signup' %}">Create an account</a> or
-                                <a class="is-size-4" href="{% url 'account_login' %}">login</a> to save this information
+                                <a class="has-text-weight-semibold text__color-sky-100" href="{% url 'account_signup' %}">Create an account</a> or
+                                <a class="has-text-weight-semibold text__color-sky-100" href="{% url 'account_login' %}">login</a> to save this information
                             </label>
                         {% endif %}
                     </div>
                 </div> <!-- end of columns -->
 
-                <div class="field  has-background-info">
-            <!-- Pass the client secret to the view so we can get the payment intent id -->
-                    <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                    <div id="card-element">
-                    <!-- Elements will create form elements here -->
+                <div class="field">
+                    <div id="payment-element">
+                        <!-- Elements will create form elements here -->
                     </div>
                     <button id="submit">Submit</button>
-                    <div id="card-errors">
+                    <div id="error-message">
                     <!-- Display error message to your customers here -->
                     </div>
                 </div>
