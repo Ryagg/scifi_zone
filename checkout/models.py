@@ -2,7 +2,9 @@ import uuid
 
 from django.db import models
 from django.db.models import Sum
+from django_countries.fields import CountryField
 from tickets.models import Ticket
+from profiles.models import UserProfile
 
 # pylint: disable=locally-disabled, no-member
 
@@ -11,13 +13,16 @@ class Order(models.Model):
 
     order_number = models.CharField(max_length=32, null=False, editable=False)
     date = models.DateTimeField(auto_now_add=True)
+    user_profile = models.ForeignKey(
+        UserProfile, on_delete=models.SET_NULL, null=True, blank=True,
+        related_name='orders')
     full_name = models.CharField(max_length=50, null=False, blank=False)
     street_address1 = models.CharField(max_length=60, null=False, blank=False)
     street_address2 = models.CharField(max_length=60, null=True, blank=True)
     city = models.CharField(max_length=50, null=False, blank=False)
     state = models.CharField(max_length=60, null=True, blank=True)
     postcode = models.CharField(max_length=16, null=False, blank=False)
-    country = models.CharField(max_length=60, null=False, blank=False)
+    country = CountryField(blank_label='Country *', null=False, blank=False)
     email = models.EmailField(max_length=160, null=False, blank=False)
     sub_total = models.DecimalField(
         max_digits=6, decimal_places=0, null=False, default=0
