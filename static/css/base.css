@@ -87,6 +87,10 @@ h6 {
     border-top: 3px solid white;
 }
 
+.hr-bottom {
+    border-bottom: 3px solid white;
+}
+
 .hr-top-bottom {
     border-top: 3px solid white;
     border-bottom: 3px solid white;

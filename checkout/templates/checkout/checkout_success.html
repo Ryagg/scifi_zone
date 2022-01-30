@@ -46,6 +46,13 @@
                     <p>Grand Total: €{{ order.grand_total }} </p>
                 </div>
             </div>
+            {% if from_profile %}
+                <div class="columns is-multiline is-centered">
+                    <div class="column">
+                        <a class="button mt-2" href="{% url 'profile' %}">Back to Profile</a>
+                    </div>
+                </div>
+            {% endif %}
     </div> <!-- end of body -->
 </section>
 {% endblock %}

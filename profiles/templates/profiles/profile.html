@@ -1,11 +1,48 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bag_tools %}
 
 {% block content %}
 <section class="hero is-medium bg--sky-900 text__color-sky-100">
     <div class="hero-body">
         <h1 class="title is-1 has-text-centered text__color-sky-100">My profile</h1>
+        <div class="columns is-multiline">
+            <div class="column is-6-tablet">
+                <h3 class="title is-3 text__color-sky-100">Billing Address</h3>
+                <form action="{% url 'profile' %}" method="POST" id="profile-update-form">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button>Update Information</button>
+                </form>
+            </div>
+        </div> <!-- end of columns -->
 
-    </div>
+        <h3 class="title is-3 text__color-sky-100">Order History</h3>
+        {% for order in orders %}
+            <div class="columns is-multiline">
+                <div class="column is-6-tablet">
+                    <p class="is-size-5">
+                        <span class="is-pulled-left">Order number: {{ order.order_number|truncatechars:8 }}</span>
+                        <span class="is-pulled-right">Date: {{ order.date }}</span>
+                    </p>
+                    {% for item in order.lineitems.all() %}
+                        <p class="is-size-4">{{ ticket.name }}</p>
+                        <p class="is-size-5 hr-bottom">
+                            <span class="is-pulled-left">Price: €{{ ticket.price }}</span><span class="ml-2">Quantity: {{ item.quantity }}</span>
+                            <span class="is-pulled-right">Subtotal: €{{ {{ item.ticket.price | calc_subtotal:item.quantity }} }}</span>
+                        </p>
+                    {% endfor %}
+                    <p class="is-size-5">
+                        <span class="is-pulled-left">Payment status: </span><span class="ml-2">VAT: </span>
+                        <span class="is-pulled-right">€{{ vat }}</span>
+                    </p>
+                    <p class="is-size-5">
+                        <span class="is-pulled-left">Order status: </span><span class="ml-2">Grand total: </span>
+                        <span class="is-pulled-right">€{{ grand_total }},00</span>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div> <!-- end of body -->
 </section>
 {% endblock %}
