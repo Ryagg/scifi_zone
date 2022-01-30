@@ -75,6 +75,21 @@ h6 {
     background-color: #1e3a8a;
 }
 
+.text__color-green-50 {
+    color: #f0fdf4;
+}
+
+.bg--green-900 {
+    background-color: #14532d;
+}
+
+.bg--orange-700 {
+    background-color: #c2410c;
+}
+
+.bg--red-900 {
+    background-color: #7f1d1d;
+}
 .text__color-indigo-100 {
     color: #e0e7ff;
 }
