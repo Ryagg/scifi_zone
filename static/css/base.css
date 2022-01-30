@@ -91,6 +91,64 @@ h6 {
     border-top: 3px solid white;
     border-bottom: 3px solid white;
 }
+
+/* Allauth form formatting (taken from Boutique Ado walktrough and adapted to my project) */
+
+.allauth-form-inner-content p {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.allauth-form-inner-content input {
+    border-color: #93c5fd;
+    margin-bottom: 0.5rem;
+}
+
+.allauth-form-inner-content label:not([for="id_remember"]) {
+    display: none;
+}
+
+.allauth-form-inner-content input::placeholder {
+    color: #aab7c4;
+}
+
+.allauth-form-inner-content a.button {
+    background-color: #e0f2fe;
+    color: #1d4ed8;
+    font-weight: 600;
+}
+
+.allauth-form-inner-content button,
+.allauth-form-inner-content input[type="submit"] {
+    /* btn */
+    display: inline-block;
+    font-family: "Saira", sans-serif;
+    font-weight: 600;
+    color: #1e3a8a;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #93c5fd;
+    border: 1px solid #1e3a8a;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.allauth-form-inner-content button:hover,
+.allauth-form-inner-content input[type="submit"]:hover {
+    color: #e0f2fe;
+    background-color: #1e3a8a;
+    border-color: #e0f2fe;
+}
+
+.allauth-form-inner-content a {
+    color: #93c5fd;
+}
+
 /*----- FOOTER -----*/
 .footer_padding--less {
     padding: 2rem 1rem 2rem;

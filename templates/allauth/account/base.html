@@ -1,1 +1,16 @@
 {% extends "base.html" %}
+
+{% block content %}
+<section class="hero is-medium bg--sky-900 text__color-sky-100">
+    <div class="hero-body">
+        <div class="columns is-multiline">
+            <div class="column">
+                <div class="allauth-form-inner-content">
+                    {% block inner_content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

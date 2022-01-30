@@ -5,3 +5,5 @@ __pycache__/
 ms4.code-workspace
 .vscode/
 compare.py
+bugs.txt
+questions_for_call.txt
