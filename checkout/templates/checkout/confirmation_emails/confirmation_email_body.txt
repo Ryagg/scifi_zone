@@ -1,0 +1,18 @@
+Hello {{ order.full_name }}!
+
+This is a confirmation of your order at SciFi Zone. Your order information is below:
+
+Order Number: {{ order.order_number }}
+Order Date: {{ order.date }}
+
+Grand Total: ${{ order.grand_total }}
+
+Your personalized tickets will be mailed to {{ order.email }}.
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your order!
+
+Sincerely,
+
+The team from SciFi Zone
