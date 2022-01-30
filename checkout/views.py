@@ -6,6 +6,8 @@ from django.conf import settings
 import stripe
 from bag.contexts import bag_contents
 from tickets.models import Ticket
+from profiles.models import UserProfile
+from profiles.forms import UserProfileForm
 from .forms import OrderForm
 from .models import Order, OrderLineItem
 
@@ -23,7 +25,7 @@ def cache_checkout_data(request):
         # tell stripe what we want to modify
         stripe.PaymentIntent.modify(pid, metadata={
             'bag': json.dumps(request.session.get('bag', {})),
-            # 'save_info': request.POST.get('save_info'),
+            'save_info': request.POST.get('save_info'),
             'username': request.user,
         })
         print('cache_checkout_data')
@@ -98,8 +100,6 @@ def checkout(request):
             messages.error(request, "Your bag is empty.")
             return redirect(reverse("tickets"))
 
-
-
         current_bag = bag_contents(request)
         total = current_bag['grand_total']
         stripe_total = round(total * 100)
@@ -112,7 +112,26 @@ def checkout(request):
             },
         )
 
-        order_form = OrderForm()
+        # Attempt to prefill the from with info from the user's profile
+        if request.user.is_authenticated:
+            try:
+                profile = UserProfile.objects.get(user=request.user)
+                order_form = OrderForm(initial={
+                    'full_name': profile.user.get_full_name(),
+                    'email': profile.user.email,
+                    'street_address1': profile.default_street_address1,
+                    'street_address2': profile.default_street_address2,
+                    'city': profile.default_city,
+                    'postcode': profile.default_postcode,
+                    'state': profile.default_state,
+                    'country': profile.default_country,
+                })
+            except UserProfile.DoesNotExist:
+                order_form = OrderForm()
+        else:
+            order_form = OrderForm
+
+
         template = "checkout/checkout.html"
         context = {
             "order_form": order_form,
@@ -129,9 +148,31 @@ def checkout(request):
 
 def checkout_success(request, order_number):
     """Handle successfull checkouts"""
-    # save_info = request.get('save_info')
+    save_info = request.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
     print('order processed')
+
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        # Attach the user's profile to the order
+        order.user_profile = profile
+        order.save()
+
+        # Save the user's info
+        if save_info:
+            profile_data = {
+                'default_email': order.email,
+                'default_street_address1': order.street_address1,
+                'default_street_address2': order.street_address2,
+                'default_city': order.city,
+                'default_postcode': order.postcode,
+                'default_state': order.state,
+                'default_country': order.country,
+            }
+            user_profile_form = UserProfileForm(profile_data, instance=profile)
+            if user_profile_form.is_valid():
+                user_profile_form.save()
+
     messages.success(request, f'Your order {order_number} has been \
         successfully processed. We will send a confirmation email to \
             {order.email} shortly.')

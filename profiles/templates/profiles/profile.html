@@ -25,11 +25,11 @@
                         <span class="is-pulled-left">Order number: {{ order.order_number|truncatechars:8 }}</span>
                         <span class="is-pulled-right">Date: {{ order.date }}</span>
                     </p>
-                    {% for item in order.lineitems.all() %}
+                    {% for item in order.lineitems.all %}
                         <p class="is-size-4">{{ ticket.name }}</p>
                         <p class="is-size-5 hr-bottom">
                             <span class="is-pulled-left">Price: €{{ ticket.price }}</span><span class="ml-2">Quantity: {{ item.quantity }}</span>
-                            <span class="is-pulled-right">Subtotal: €{{ {{ item.ticket.price | calc_subtotal:item.quantity }} }}</span>
+                            <span class="is-pulled-right">Subtotal: €{{ item.ticket.price | calc_subtotal:item.quantity }}</span>
                         </p>
                     {% endfor %}
                     <p class="is-size-5">
