@@ -2,9 +2,10 @@ import json
 import time
 
 from django.http import HttpResponse
-
-from .models import Order, OrderLineItem
 from tickets.models import Ticket
+from profiles.models import UserProfile
+from .models import Order, OrderLineItem
+
 
 # pylint: disable=locally-disabled, no-member
 
@@ -37,6 +38,21 @@ class StripeWebhookHandler:
         for field, value in shipping_details.address.items():
             if value == "":
                 shipping_details.address[field] = None
+
+        # Update profile information if save_info was checked
+        profile = None # allow anonymous users to checkout
+        username = intent.metadata.username
+        if username != 'AnonymousUser':
+            profile = UserProfile.objects.get(user__username=username)
+            if save_info:
+                profile.default_street_address1 = shipping_details.address.line1
+                profile.default_street_address2 = shipping_details.address.line2
+                profile.default_postcode = shipping_details.address.post_code
+                profile.default_city = shipping_details.address.city
+                profile.default_state = shipping_details.address.state
+                profile.default_country = shipping_details.address.country
+                profile.save()
+
 
         order_exists = False
         attempt = 1
@@ -71,6 +87,7 @@ class StripeWebhookHandler:
             try:
                 order = Order.objects.create(
                     full_name=shipping_details.name,
+                    user_profile=profile,
                     email=billing_details.email,
                     street_address1=shipping_details.address.line1,
                     street_address2=shipping_details.address.line2,
