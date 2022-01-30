@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from tickets.models import Ticket
 
 def view_bag(request):
@@ -17,8 +18,12 @@ def add_to_bag(request, item_id):
 
     if item_id in bag:
         bag[item_id] += quantity # replaces quantity instead of adding it
+        messages.success(request, f'Updated {ticket.name} quantity to \
+            {quantity}.')
     else:
         bag[item_id] = quantity # works as intended
+        messages.success(request, f'Added {ticket.name} x {quantity} \
+            to your bag.')
 
     request.session['bag'] = bag
     print(request.session['bag'])
