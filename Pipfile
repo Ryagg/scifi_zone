@@ -25,6 +25,7 @@ django-countries = "*"
 boto3 = "*"
 django-storages = "*"
 django-csp = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
