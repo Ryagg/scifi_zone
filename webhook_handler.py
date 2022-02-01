@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from tickets.models import Ticket
 from profiles.models import UserProfile
-from .models import Order, OrderLineItem
+from .checkout.models import Order, OrderLineItem
 
 
 # pylint: disable=locally-disabled, no-member
