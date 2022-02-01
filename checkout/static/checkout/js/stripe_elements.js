@@ -9,9 +9,7 @@ const options = {
             fontFamily: "Sohne, system-ui, sans-serif",
             fontWeightNormal: "500",
             borderRadius: "8px",
-            colorBackground: "#0A2540",
             colorPrimary: "#EFC078",
-            colorPrimaryText: "#1A1B25",
             colorText: "white",
             colorTextSecondary: "white",
             colorTextPlaceholder: "#727F96",
@@ -20,7 +18,7 @@ const options = {
         },
         rules: {
             ".Input, .Block": {
-                backgroundColor: "transparent",
+                backgroundColor: "#0A2540",
                 border: "1.5px solid var(--colorPrimary)",
             },
         },
@@ -28,7 +26,14 @@ const options = {
 };
 const elements = stripe.elements(options);
 
-const paymentElement = elements.create("payment");
+const paymentElement = elements.create("payment", {
+    fields: {
+        billingDetails: {
+            name: "auto",
+            email: "auto",
+        },
+    },
+});
 /* mount the card element */
 paymentElement.mount("#payment-element");
 
@@ -41,7 +46,20 @@ form.addEventListener("submit", async (event) => {
         //`Elements` instance that was used to create the Payment Element
         elements,
         confirmParams: {
-            return_url: "",
+            return_url: "http://127.0.0.1:8000/checkout/",
+
+            paymentElement: paymentElement,
+            billing_details: {
+                name: $.trim(form.full_name.value),
+                email: $.trim(form.email.value),
+                address: {
+                    line1: $.trim(form.street_address1.value),
+                    line2: $.trim(form.street_address2.value),
+                    city: $.trim(form.city.value),
+                    state: $.trim(form.state.value),
+                    country: $.trim(form.country.value),
+                },
+            },
         },
     });
 
@@ -94,8 +112,9 @@ stripe.retrievePaymentIntent(appendedClientSecret).then(({ paymentIntent }) => {
     }
 });
 
-// the view updates the paymentIntent
 /*
+// the view updates the paymentIntent
+
 $.post(url, postData)
     .done(function () {
         stripe
