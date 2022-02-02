@@ -1,30 +1,31 @@
 const stripePublicKey = $("#id_stripe_public_key").text().slice(1, -1);
 const clientSecret = $("#id_client_secret").text().slice(1, -1);
 const stripe = Stripe(stripePublicKey);
-const options = {
-    clientSecret: clientSecret,
-    appearance: {
-        theme: "night",
-        variables: {
-            fontFamily: "Sohne, system-ui, sans-serif",
-            fontWeightNormal: "500",
-            borderRadius: "8px",
-            colorPrimary: "#EFC078",
-            colorText: "white",
-            colorTextSecondary: "white",
-            colorTextPlaceholder: "#727F96",
-            colorIconTab: "white",
-            colorLogo: "dark",
-        },
-        rules: {
-            ".Input, .Block": {
-                backgroundColor: "#0A2540",
-                border: "1.5px solid var(--colorPrimary)",
-            },
+const appearance = {
+    theme: "night",
+    variables: {
+        fontFamily: "Sohne, system-ui, sans-serif",
+        fontWeightNormal: "500",
+        borderRadius: "8px",
+        colorPrimary: "#EFC078",
+        colorText: "white",
+        colorTextSecondary: "white",
+        colorTextPlaceholder: "#727F96",
+        colorIconTab: "white",
+        colorLogo: "dark",
+    },
+    rules: {
+        ".Input, .Block": {
+            backgroundColor: "#0A2540",
+            border: "1.5px solid var(--colorPrimary)",
         },
     },
 };
-const elements = stripe.elements(options);
+
+const elements = stripe.elements({
+    clientSecret,
+    appearance,
+});
 
 const paymentElement = elements.create("payment", {
     fields: {
@@ -49,17 +50,6 @@ form.addEventListener("submit", async (event) => {
             return_url: "http://127.0.0.1:8000/checkout/",
 
             paymentElement: paymentElement,
-            billing_details: {
-                name: $.trim(form.full_name.value),
-                email: $.trim(form.email.value),
-                address: {
-                    line1: $.trim(form.street_address1.value),
-                    line2: $.trim(form.street_address2.value),
-                    city: $.trim(form.city.value),
-                    state: $.trim(form.state.value),
-                    country: $.trim(form.country.value),
-                },
-            },
         },
     });
 
@@ -75,13 +65,13 @@ form.addEventListener("submit", async (event) => {
         // site first to authorize the payment, then redirected to the `return_url`.
     }
 });
-
-const appendedClientSecret = new URLSearchParams(window.location.search).get(
-    "payment_intent_client_secret"
-);
+//not using search anymore --> not finding anything
+// const appendedClientSecret = new URLSearchParams(window.location.search).get(
+//     "payment_intent_client_secret"
+// );
 
 // Retrieve the PaymentIntent
-stripe.retrievePaymentIntent(appendedClientSecret).then(({ paymentIntent }) => {
+stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
     const message = document.querySelector("#message");
 
     // Inspect the PaymentIntent `status` to indicate the status of the payment

@@ -39,6 +39,7 @@ def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
+
     if request.method == 'POST':
         bag = request.session.get('bag', {})
 
@@ -107,9 +108,7 @@ def checkout(request):
         intent = stripe.PaymentIntent.create(
             amount = stripe_total,
             currency = settings.STRIPE_CURRENCY,
-            automatic_payment_methods={
-                'enabled': True,
-            },
+            payment_method_types = ['card']
         )
 
         # Attempt to prefill the from with info from the user's profile
