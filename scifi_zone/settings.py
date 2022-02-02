@@ -32,6 +32,8 @@ DEBUG = os.environ.get("DEVELOPMENT")
 
 ALLOWED_HOSTS = ['ms4-scifi-zone.herokuapp.com','localhost', '127.0.0.1']
 
+# causes hundreds of console errors if not set
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
