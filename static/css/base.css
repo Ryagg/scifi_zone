@@ -128,7 +128,9 @@ h6 {
     margin-bottom: 0.5rem;
 }
 
-.allauth-form-inner-content input {
+.allauth-form-inner-content input,
+.custom-form input,
+.custom-form select {
     border-color: #93c5fd;
     margin-bottom: 0.5rem;
 }
@@ -137,7 +139,8 @@ h6 {
     display: none;
 }
 
-.allauth-form-inner-content input::placeholder {
+.allauth-form-inner-content input::placeholder,
+.custom-form input::placeholder {
     color: #aab7c4;
 }
 
@@ -148,6 +151,7 @@ h6 {
 }
 
 .allauth-form-inner-content button,
+.custom-form button,
 .allauth-form-inner-content input[type="submit"] {
     /* btn */
     display: inline-block;
@@ -168,6 +172,7 @@ h6 {
 }
 
 .allauth-form-inner-content button:hover,
+.custom-form button:hover,
 .allauth-form-inner-content input[type="submit"]:hover {
     color: #e0f2fe;
     background-color: #1e3a8a;
