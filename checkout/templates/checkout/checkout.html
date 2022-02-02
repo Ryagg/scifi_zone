@@ -61,7 +61,7 @@
                 <div class="columns is-multiline">
                     <div class="column">
                         <h2 class="title is-2 text__color-sky-100">Billing address</h2>
-                            <div class="field">
+                            <div class="field custom-form">
                                 {{ order_form.full_name | as_crispy_field }}
                                 {{ order_form.email | as_crispy_field }}
                                 {{ order_form.street_address1 | as_crispy_field }}
@@ -89,7 +89,7 @@
                     <div id="payment-element">
                         <!-- Elements will create form elements here -->
                     </div>
-                    <button id="submit">Submit</button>
+                    <button id="submit" class="custom-form">Submit</button>
                     <div id="error-message">
                     <!-- Display error message to your customers here -->
                     </div>
