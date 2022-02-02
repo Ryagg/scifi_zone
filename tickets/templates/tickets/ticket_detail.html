@@ -43,9 +43,9 @@
                                     </label>
                                     <div class="control">
                                         <!-- type attribute number not supported by Bulma -->
-                                        <input id="quantity" name="quantity" class="input is-link" type="text" min="1"
-                                            maxlength="99" pattern="^[0-9]$" placeholder="" value="" data-item_id="{{ ticket.id }}"
-                                            id="id_qty_{{ ticket.id }}" aria-label="quantity">
+                                        <input name="quantity" class="input is-link" type="text"
+                                            pattern="^[1-9][0-9]?$" placeholder="" value="" data-item_id="{{ ticket.id }}"
+                                            id="id_qty_{{ ticket.id }}" aria-label="quantity" required>
                                     </div>
                                 </div> <!-- end of field -->
                                 <div class="field">
