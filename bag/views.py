@@ -11,7 +11,7 @@ def view_bag(request):
 def add_to_bag(request, item_id):
     """ Add the selected ticket to the shopping bag """
 
-    ticket = get_object_or_404(Ticket, pk=item_id)
+    ticket = get_object_or_404(Ticket, pk=int(item_id))
     quantity = int(request.POST.get('quantity'))
     redirect_url = request.POST.get('redirect_url')
     bag = request.session.get('bag', {})
@@ -19,7 +19,7 @@ def add_to_bag(request, item_id):
     if item_id in bag:
         bag[item_id] += quantity # replaces quantity instead of adding it
         messages.success(request, f'Updated {ticket.name} quantity to \
-            {quantity}.')
+            {bag[item_id]}.')
     else:
         bag[item_id] = quantity # works as intended
         messages.success(request, f'Added {ticket.name} x {quantity} \
