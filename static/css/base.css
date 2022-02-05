@@ -195,7 +195,8 @@ h6 {
     color: #e0f2fe;
 }
 
-.bag-item a.button.remove {
+.bag-item a.button.remove,
+a.button.remove {
     background-color: #7f1d1d;
 }
 
