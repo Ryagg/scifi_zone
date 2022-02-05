@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse, HttpResponse
 from django.contrib import messages
 from tickets.models import Ticket
 
@@ -29,3 +29,45 @@ def add_to_bag(request, item_id):
     print(request.session['bag'])
 
     return redirect(redirect_url)
+
+def update_bag(request, item_id):
+    """ Update quantity of selected bag item to user's choice """
+
+    quantity = int(request.POST.get('quantity'))
+    bag = request.session.get('bag', {})
+
+    if quantity > 0:
+        bag[item_id] = quantity
+    else:
+        del bag[item_id]
+
+    request.session['bag'] = bag
+    return redirect(reverse('view_bag'))
+
+def remove_from_bag(request, item_id):
+    """ Remove item from bag """
+    try:
+        ticket = get_object_or_404(Ticket, pk=int(item_id))
+        bag = request.session.get('bag', {})
+
+        del bag[item_id]
+        messages.success(request, f'Removed {ticket.name} from your bag.')
+
+        request.session['bag'] = bag
+        print(request.session['bag'])
+        return redirect(reverse('view_bag'))
+
+    except Exception as error:
+        return HttpResponse(status=500,content=error)
+
+def empty_bag(request):
+    """ Remove all items from bag """
+
+    bag = request.session.get('bag', {})
+
+    bag.clear()
+    messages.success(request, 'Removed all items from your bag.')
+
+    request.session['bag'] = bag
+    print(request.session['bag'])
+    return redirect(reverse('view_bag'))

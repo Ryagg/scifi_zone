@@ -183,21 +183,35 @@ h6 {
     color: #93c5fd;
 }
 
-/*----- FOOTER -----*/
-.footer_padding--less {
-    padding: 2rem 1rem 2rem;
-}
-
+/*----- BUTTONS + INPUTS -----*/
 .bag-item {
     color: #0c4a6e;
     background-color: #e0f2fe;
 }
 
-.bag-item a.button {
+.bag-item a.button,
+.bag-item input.update-bag {
     background-color: #0c4a6e;
     color: #e0f2fe;
 }
 
-.bag-item a.button.remove {
+.bag-item a.button.remove,
+a.button.remove {
     background-color: #7f1d1d;
+}
+
+.quantity-input {
+    max-width: 50%;
+}
+
+/*----- FOOTER -----*/
+.footer_padding--less {
+    padding: 2rem 1rem 2rem;
+}
+
+/*----- MEDIA QUERIES -----*/
+@media screen and (max-width: 768px) {
+    .quantity-input {
+        max-width: 100%;
+    }
 }
