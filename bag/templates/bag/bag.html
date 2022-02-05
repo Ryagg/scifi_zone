@@ -29,17 +29,18 @@
             </div>
             <!-- iterate through bag items -->
             {% for item in bag_items %}
+
                 <div class="columns is-mobile is-multiline is-centered bag-item card__box-shadow">
                     <div class="column is-5-tablet">
                         <p class="is-size-3">{{ item.ticket.name }} </p>
                         <p class="is-size-5">Number of tickets: {{ item.quantity }}</p>
-                        <field class="is-grouped has-addons">
-                        <p class="control">
-                            <!-- mb-1 needed for mobile devices, my-1 used to make it look even -->
-                            <a href="" class="button my-1">Adjust</a>
-                            <a href="" class="button my-1 remove">Remove</a>
-                        </p>
-                        </field>
+                            <field class="is-grouped has-addons">
+                                <p class="control">
+                                    <!-- mb-1 needed for mobile devices, my-1 used to make it look even -->
+                                    <a href="" id="adjust-item" class="button my-1">Adjust</a>
+                                    <a href="{% url 'remove_from_bag' item.item_id %} " id="remove-item" class="button my-1 remove">Remove</a>
+                                </p>
+                            </field>
                     </div>
                     <div class="column is-5-tablet">
                         <p class="is-size-3">€{{ item.ticket.price }} per ticket</p>
@@ -71,8 +72,8 @@
             {% else %}
             <div class="columns is-multiline is-centered">
                 <div class="column">
-                    <p class="is-size-4 has-text-centered">You haven't added any tickets or packages to your bag.</p>
-                    <a href="{% url 'tickets' %}">Go to Tickets page</a>
+                    <p class="is-size-4 has-text-centered">Your bag is empty.</p>
+                    <a class="is-size-4 has-text-weight-semibold text__color-sky-100" href="{% url 'tickets' %}">Go to Tickets page</a>
                 </div> <!-- end of column -->
             </div> <!-- end of columns -->
             {% endif %}
