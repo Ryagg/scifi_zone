@@ -30,6 +30,19 @@ def add_to_bag(request, item_id):
 
     return redirect(redirect_url)
 
+def update_bag(request, item_id):
+    """ Update quantity of selected bag item to user's choice """
+
+    quantity = int(request.POST.get('quantity'))
+    bag = request.session.get('bag', {})
+
+    if quantity > 0:
+        bag[item_id] = quantity
+    else:
+        del bag[item_id]
+
+    request.session['bag'] = bag
+    return redirect(reverse('view_bag'))
 
 def remove_from_bag(request, item_id):
     """ Remove item from bag """
