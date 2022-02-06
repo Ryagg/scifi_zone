@@ -93,7 +93,9 @@
                     <!-- Display error message to customers here -->
                     </div>
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                    <button id="submit" class="custom-form">Submit Payment</button>
+                    <!-- id must not be 'submit' or form.submit() changes from method call to field reference! -->
+                    <!-- found at https://stackoverflow.com/questions/54144436/uncaught-typeerror-form-submit-is-not-a-function-in-form-validate-function -->
+                    <button id="submitPayment" class="custom-form">Submit Payment</button>
                 </div>
         </form>
     </div> <!-- end of body -->
