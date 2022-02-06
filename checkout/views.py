@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import (
     render, redirect, reverse, get_object_or_404, HttpResponse)
-# from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
@@ -16,28 +16,28 @@ from .models import Order, OrderLineItem
 # pylint: disable=locally-disabled, no-member, using-constant-test
 
 
-# @require_POST
-# def cache_checkout_data(request):
-#     try:
-#         # get payment intent id
-#         pid = request.POST.get('client_secret').split('_secret')[0]
-#         # set up stripe
-#         stripe.api_key = settings.STRIPE_SECRET_KEY
-#         # tell stripe what we want to modify
-#         stripe.PaymentIntent.modify(pid, metadata={
-#             'bag': json.dumps(request.session.get('bag', {})),
-#             'save_info': request.POST.get('save_info'),
-#             'username': request.user,
-#         })
-#         print('cache_checkout_data')
-#         return HttpResponse(status=200)
-#     except Exception as error:
-#         messages.error(request, 'Sorry, your payment cannot be processed \
-#             right now. Please try again later.')
-#         return HttpResponse(content=error, status=400)
+@require_POST
+def cache_checkout_data(request):
+    try:
+        # get payment intent id
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        # set up stripe
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        # tell stripe what we want to modify
+        stripe.PaymentIntent.modify(pid, metadata={
+            'bag': json.dumps(request.session.get('bag', {})),
+            'save_info': request.POST.get('save_info'),
+            'username': request.user,
+        })
+        print('cache_checkout_data')
+        return HttpResponse(status=200)
+    except Exception as error:
+        messages.error(request, 'Sorry, your payment cannot be processed \
+            right now. Please try again later.')
+        return HttpResponse(content=error, status=400)
 
 
-@login_required
+
 def checkout(request):
     """Get infos from the order form and create an order in the database"""
 
@@ -111,7 +111,8 @@ def checkout(request):
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
-            payment_method_types=['card']
+            payment_method_types=["card"],
+
         )
 
         # Attempt to prefill the from with info from the user's profile
