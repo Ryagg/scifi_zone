@@ -3,6 +3,8 @@ from .models import UserProfile
 
 
 class UserProfileForm(forms.ModelForm):
+    """Receive users default address"""
+
     class Meta:
         model = UserProfile
         exclude = ('user',)
