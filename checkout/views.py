@@ -151,7 +151,7 @@ def checkout(request):
 @login_required
 def checkout_success(request, order_number):
     """Handle successfull checkouts"""
-    save_info = request.get('save_info')
+    save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
     profile = UserProfile.objects.get(user=request.user)
     order.user_profile = profile
@@ -178,7 +178,7 @@ def checkout_success(request, order_number):
             {order.email} shortly.')
 
     if 'bag' in request.session:
-        del request.sesion['bag']
+        del request.session['bag']
 
     template = 'checkout/checkout_success.html'
     context = {
