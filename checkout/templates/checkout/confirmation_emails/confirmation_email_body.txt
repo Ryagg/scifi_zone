@@ -7,7 +7,7 @@ Order Date: {{ order.date }}
 
 Grand Total: ${{ order.grand_total }}
 
-Your personalized tickets will be mailed to {{ order.email }}.
+Your personalized tickets will be mailed to {{ order.email }} within 14 days.
 
 If you have any questions, feel free to contact us at {{ contact_email }}.
 

@@ -1,8 +1,9 @@
 import json
 from django.shortcuts import (
     render, redirect, reverse, get_object_or_404, HttpResponse)
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
 import stripe
@@ -14,6 +15,25 @@ from .forms import OrderForm
 from .models import Order, OrderLineItem
 
 # pylint: disable=locally-disabled, no-member, using-constant-test
+
+
+def _send_confirmation_email(order):
+    """Send the user a confirmation email"""
+    cust_email = order.email
+    # remove newlines to prevent BadHeaderError
+    subject = render_to_string(
+        'checkout/confirmation_emails/confirmation_email_subject.txt',
+        {'order': order}).replace('\n', '')
+    body = render_to_string(
+        'checkout/confirmation_emails/confirmation_email_body.txt',
+        {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+
+    send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [cust_email]
+    )
 
 
 @require_POST
@@ -35,7 +55,6 @@ def cache_checkout_data(request):
         messages.error(request, 'Sorry, your payment cannot be processed \
             right now. Please try again later.')
         return HttpResponse(content=error, status=400)
-
 
 
 def checkout(request):
@@ -112,7 +131,6 @@ def checkout(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
             payment_method_types=["card"],
-
         )
 
         # Attempt to prefill the from with info from the user's profile
@@ -140,15 +158,12 @@ def checkout(request):
             'stripe_public_key': stripe_public_key,
             'client_secret': intent.client_secret,
             # 'redirect': redirect,
-
-
         }
 
         print('reached end of checkout')
         return render(request, template, context)
 
 
-@login_required
 def checkout_success(request, order_number):
     """Handle successfull checkouts"""
     save_info = request.session.get('save_info')
@@ -176,6 +191,7 @@ def checkout_success(request, order_number):
     messages.success(request, f'Your order {order_number} has been \
         successfully processed. We will send a confirmation email to \
             {order.email} shortly.')
+    _send_confirmation_email(order)
 
     if 'bag' in request.session:
         del request.session['bag']
