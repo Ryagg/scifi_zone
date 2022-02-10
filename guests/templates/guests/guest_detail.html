@@ -8,8 +8,8 @@
             {{ actor.name }}
         </h1>
         <div class="columns is-centered">
-            <div class="column is-4-tablet">
-                <figure class="image is-3by4">
+            <div class="column is-2-tablet">
+                <figure class="image is-3by5">
                     <img src="{{ actor.star_image_url }}" alt="{{ actor.name }}">
                 </figure>
             </div>
@@ -36,7 +36,7 @@
                     <form action="" method="POST">
                         {% for ticket in tickets %}
                             {% if actor.star_autograph_category == ticket.price_category and "Autograph" in ticket.name %}
-                                <p  class="is-size-3 has-text-centered">€ {{ ticket.price }}</p>
+                                <p  class="is-size-3 has-text-centered">€{{ ticket.price }}</p>
                             {% endif %}
                         {% endfor %}
                         <div class="control has-text-centered">
@@ -53,7 +53,7 @@
                         {% csrf_token %}
                             {% for ticket in tickets %}
                                 {% if actor.star_photoshoot_category == ticket.price_category and "Photoshoot" in ticket.name %}
-                                    <p  class="is-size-3 has-text-centered">€ {{ ticket.price }}</p>
+                                    <p  class="is-size-3 has-text-centered">€{{ ticket.price }}</p>
                                 {% endif %}
                             {% endfor %}
                         <div class="control has-text-centered">
@@ -65,8 +65,8 @@
         </div>
         <div class="columns">
             <div class="column">
-                <div class="content is-small">
-                    <h3 class="has-text-white">Disclaimer</h3>
+                <div class="disclaimer__border--red">
+                    <h3 class="title is-4 text__color-sky-100">Disclaimer</h3>
                     <p class="is-size-6">
                     Ticket only valid in combination with a standard ticket or package for the same day. Guest appearance subject to work commitments outside the control of SFZ. In case of cancellation by the guest, a credit refund voucher for the same price category will be issued and can be used within two years.
                     </p>

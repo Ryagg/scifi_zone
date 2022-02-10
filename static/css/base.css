@@ -106,9 +106,22 @@ h6 {
     background-color: #c2410c;
 }
 
+.bg--red-600 {
+    background-color: #dc2626;
+}
+
+.text__color-red-600 {
+    color: #dc2626;
+}
+
 .bg--red-900 {
     background-color: #7f1d1d;
 }
+
+.text__color-red-900 {
+    color: #7f1d1d;
+}
+
 .text__color-indigo-100 {
     color: #e0e7ff;
 }
@@ -136,6 +149,11 @@ h6 {
 
 .order-item__border--groove {
     border: 4px groove #bbaa55;
+}
+
+.disclaimer__border--red {
+    border: 3px ridge #dc2626;
+    padding: 10px;
 }
 
 /* Allauth form formatting (taken from Boutique Ado walktrough and adapted to my project) */
