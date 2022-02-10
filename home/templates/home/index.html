@@ -31,7 +31,7 @@
         </h2>
         <div class="columns">
             {% for actor in actors %}
-                {% if actor.id <= 6 %}
+                {% if actor.id <= midway %}
                     <div class="column has-text-centered">
                         <figure class="image is-3-by-5 mb-2 portrait__border card__box-shadow">
                             <img src="{{ actor.star_image_url }}" alt="{{ actor.name }} ">
@@ -43,7 +43,7 @@
         </div>
         <div class="columns">
             {% for actor in actors %}
-                {% if actor.id > 6 %}
+                {% if actor.id > midway %}
                     <div class="column has-text-centered">
                         <figure class="image is-3-by-5 mb-2 portrait__border card__box-shadow">
                             <img src="{{ actor.star_image_url }}" alt="{{ actor.name }} ">
