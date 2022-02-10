@@ -9,7 +9,7 @@
         </h1>
         <div class="columns is-centered">
             <div class="column is-2-tablet">
-                <figure class="image is-3by5">
+                <figure class="image is-3by5 mb-2 portrait__border card__box-shadow">
                     <img src="{{ actor.star_image_url }}" alt="{{ actor.name }}">
                 </figure>
             </div>
@@ -40,7 +40,7 @@
                             {% endif %}
                         {% endfor %}
                         <div class="control has-text-centered">
-                            <input class="button" type="submit" value="Buy now">
+                            <input class="button is-size-4 has-text-weight-medium bg--indigo-900 shadow text__color-sky-100" type="submit" value="Buy now">
                             <input type="hidden" name="redirect_url" value="">
                         </div>
                     </form>
@@ -57,7 +57,7 @@
                                 {% endif %}
                             {% endfor %}
                         <div class="control has-text-centered">
-                            <input class="button" type="submit" value="Buy now">
+                            <input class="button is-size-4 has-text-weight-medium bg--indigo-900 shadow text__color-sky-100" type="submit" value="Buy now">
                             <input type="hidden" name="redirect_url" value="">
                         </div>
                     </form>

@@ -29,7 +29,8 @@ h6 {
 .navbar-item:hover,
 .navbar-link:hover,
 .navbar-burger:hover {
-    font-weight: bold;
+    text-decoration-line: underline;
+    text-decoration-thickness: 5px;
 }
 
 /*----- TEXT EFFECTS -----*/
@@ -225,7 +226,8 @@ button,
 }
 
 /* created at https://neumorphism.io/#ffef0a */
-a.button.shadow:hover {
+a.button.shadow:hover,
+input.button.shadow:hover {
     color: #ffef0a;
     border-radius: 0px;
     background: -o-linear-gradient(135deg, #00007a, #000092);
