@@ -117,6 +117,10 @@ h6 {
     background-color: #312e81;
 }
 /*----- BORDERS & HR -----*/
+.portrait__border {
+    border: 3px #e0f2fe ridge;
+}
+
 .hr-top {
     border-top: 3px solid white;
 }
@@ -197,6 +201,28 @@ h6 {
 }
 
 /*----- BUTTONS + INPUTS -----*/
+button,
+.button {
+    transition: all 0.3s ease-in-out;
+}
+
+/* created at https://neumorphism.io/#ffef0a */
+a.button.shadow:hover {
+    color: #ffef0a;
+    border-radius: 0px;
+    background: -o-linear-gradient(135deg, #00007a, #000092);
+    background: linear-gradient(315deg, #00007a, #000092);
+    -webkit-box-shadow: -7px -7px 14px #00003f, 7px 7px 14px #0000d1;
+    box-shadow: -7px -7px 14px #00003f, 7px 7px 14px #0000d1;
+}
+
+.button.shadow-dark:hover {
+    border-radius: 0px;
+    -webkit-box-shadow: -7px -7px 14px #212020, 7px 7px 14px #3b3a3a;
+    box-shadow: -7px -7px 14px #212020, 7px 7px 14px #3b3a3a;
+    font-weight: bold;
+}
+
 .bag-item {
     color: #0c4a6e;
     background-color: #e0f2fe;
