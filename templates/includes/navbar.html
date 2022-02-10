@@ -1,5 +1,5 @@
     <!-- Navbar -->
-    <nav id="navbar" class="navbar is-size-4 is-fixed-top is-transparent">
+    <nav id="navbar" class="navbar is-size-5 is-size-4-fullhd is-fixed-top is-transparent">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" href="{% url 'home' %}">
@@ -13,12 +13,14 @@
             </div>
             <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item" href="{% url 'guests' %}">
-                        Guests
-                    </a>
-                    <a class="navbar-item" href="">
-                        Event Info
-                    </a>
+                    <div class="navbar-item has-dropdown is-hoverable" tabindex="0">
+                        <a class="navbar-link">Event Info</a>
+                            <div class="navbar-dropdown is-boxed">
+                                <a class="navbar-item is-size-4" href="{% url 'guests' %}">Guests</a>
+                                <a href="" class="navbar-item is-size-4">General Info</a>
+                                <a href="" class="navbar-item is-size-4">Timetable</a>
+                            </div>
+                    </div>
                     <div class="navbar-item has-dropdown is-hoverable" tabindex="0">
                         <a class="navbar-link">Ticket Info</a>
                         <div class="navbar-dropdown is-boxed">
@@ -26,9 +28,7 @@
                             <a href="{% url 'packages' %}" class="navbar-item is-size-4">Packages</a>
                         </div>
                     </div>
-                    <a class="navbar-item" href="">
-                        Timetable
-                    </a>
+
                     <a class="navbar-item" href="{% url 'view_bag' %} ">
                         <span class="mr-2"><i class="fal fa-bags-shopping"></i></span> Bag
                     </a>
