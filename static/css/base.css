@@ -263,6 +263,15 @@ a.button.remove {
     max-width: 50%;
 }
 
+.radio + .radio {
+    /* override Bulma setting */
+    margin-left: 0;
+}
+
+label.radio:hover {
+    color: #ffef0a;
+    font-size: 110%;
+}
 /*----- FOOTER -----*/
 .footer_padding--less {
     padding: 2rem 1rem 2rem;
