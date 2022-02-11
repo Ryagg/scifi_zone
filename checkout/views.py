@@ -87,12 +87,23 @@ def checkout(request):
             for item_id, item_data in bag.items():
                 try:
                     ticket = Ticket.objects.get(id=item_id)
-                    order_line_item = OrderLineItem(
-                        order=order,
-                        ticket=ticket,
-                        quantity=item_data,
-                    )
-                    order_line_item.save()
+                    if isinstance(item_data, int):
+                        order_line_item = OrderLineItem(
+                            order=order,
+                            ticket=ticket,
+                            quantity=item_data,
+                        )
+                        order_line_item.save()
+                    else:
+                        for selection, quantity in item_data[
+                            'items_by_selected'].items():
+                            order_line_item = OrderLineItem(
+                            order=order,
+                            ticket=ticket,
+                            quantity=quantity,
+                            selection=selection,
+                        )
+                        order_line_item.save()
                 except Ticket.DoesNotExist:
                     messages.error(request, (
                         "One or more of the tickets in your bag couldn't be \
