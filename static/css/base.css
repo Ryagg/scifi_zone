@@ -109,6 +109,9 @@ a.text__shadow--light:hover {
     background-color: #1e3a8a;
 }
 
+.bg--slate-800 {
+    background-color: #1e293b;
+}
 .text__color-green-50 {
     color: #f0fdf4;
 }
@@ -273,7 +276,8 @@ a.button.remove {
     background-color: #7f1d1d;
 }
 
-.quantity-input {
+.quantity-input,
+.cc-element {
     max-width: 50%;
 }
 
