@@ -56,6 +56,12 @@ h6 {
     text-shadow: 1px 1px 2px #eff6ff;
 }
 
+a.text__shadow--light:hover {
+    color: #bcd9fc;
+    text-decoration-line: underline;
+    text-decoration-thickness: 3px;
+}
+
 .text__shadow--dark {
     text-shadow: 1px 1px 3px #151616;
 }

@@ -6,8 +6,8 @@
 <!-- Order summary -->
 <section class="hero is-small bg--sky-900 text__color-sky-100">
     <div class="hero-body">
-            <h1 class="title is-1 has-text-centered text__color-sky-100">Checkout</h1>
-            <h2 class="subtitle is-3 has-text-centered text__color-sky-100">Order Summary ({{ item_count }} items)</h2>
+            <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Checkout</h1>
+            <h2 class="subtitle is-3 has-text-centered text__color-sky-100 text__shadow--dark">Order Summary ({{ item_count }} items)</h2>
             {% for item in bag_items %}
                 <div class="columns is-multiline is-centered bag-item card__box-shadow">
                     <div class="column is-6-tablet">
@@ -47,7 +47,7 @@
             {% endfor %}
             <div class="columns is-multiline is-centered">
                 <div class="column is-5-tablet">
-                    <h2 class="title is-2 has-text-centered mt-3 text__color-sky-100">Grand Total €{{grand_total}}</h2>
+                    <h2 class="title is-2 has-text-centered mt-3 text__color-sky-100 text__shadow--dark">Grand Total €{{grand_total}}</h2>
                 </div>
             </div>
     </div> <!-- end of body -->
@@ -60,7 +60,7 @@
             {% csrf_token %}
                 <div class="columns is-multiline">
                     <div class="column">
-                        <h2 class="title is-2 text__color-sky-100">Billing address</h2>
+                        <h2 class="title is-2 text__color-sky-100 text__shadow--dark">Billing address</h2>
                             <div class="field custom-form">
                                 {{ order_form.full_name | as_crispy_field }}
                                 {{ order_form.email | as_crispy_field }}
