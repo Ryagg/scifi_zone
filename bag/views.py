@@ -14,16 +14,35 @@ def add_to_bag(request, item_id):
     ticket = get_object_or_404(Ticket, pk=int(item_id))
     quantity = int(request.POST.get('quantity'))
     redirect_url = request.POST.get('redirect_url')
+    selected = None
+    if "chosen_actor" in request.POST:
+        selected = request.POST['chosen_actor']
     bag = request.session.get('bag', {})
 
-    if item_id in bag:
-        bag[item_id] += quantity # replaces quantity instead of adding it
-        messages.success(request, f'Updated {ticket.name} quantity to \
-            {bag[item_id]}.')
+    if selected:
+        if item_id in bag:
+            if selected in bag[item_id]['items_by_selected'].keys():
+                bag[item_id]['items_by_selected'][selected] += quantity
+                messages.success(request, f'Updated {ticket.name} quantity '
+                    f'for {selected} to '
+                    f'{bag[item_id]["items_by_selected"][selected]}')
+            else:
+                bag[item_id]['items_by_selected'][selected] = quantity
+                messages.success(request, f'Added {ticket.name} x {quantity} '
+                f' for {selected} to your bag.')
+        else:
+            bag[item_id] = {'items_by_selected': {selected: quantity}}
+            messages.success(request, f'Added {ticket.name} x {quantity} '
+                f' for {selected} to your bag!')
     else:
-        bag[item_id] = quantity # works as intended
-        messages.success(request, f'Added {ticket.name} x {quantity} \
-            to your bag.')
+        if item_id in bag:
+            bag[item_id] += quantity
+            messages.success(request, f'Updated {ticket.name} quantity to \
+                {bag[item_id]}.')
+        else:
+            bag[item_id] = quantity
+            messages.success(request, f'Added {ticket.name} x {quantity} \
+                to your bag.')
 
     request.session['bag'] = bag
     print(request.session['bag'])

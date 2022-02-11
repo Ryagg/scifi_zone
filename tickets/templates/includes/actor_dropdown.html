@@ -7,7 +7,7 @@
                 {% for actor in actors %}
                     {% if actor.star_autograph_category == price_category %}
                         <label class="radio">
-                            <input type="radio" name="chosen_actor">
+                            <input type="radio" name="chosen_actor" value="{{ actor.name }}">
                             {{ actor.name }}
                         </label>
                     {% endif %}
