@@ -25,6 +25,14 @@ h6 {
     min-height: 30vh;
     max-height: 70vh;
 }
+
+/*----- CONTAINERS -----*/
+
+.hero__bg--nebula {
+    background: url("/media/nasa_nebula_640px.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
 /*----- FOCUS, ACTIVE & HOVER EFFECTS -----*/
 .navbar-item:hover,
 .navbar-link:hover,
@@ -287,5 +295,40 @@ label.radio:hover {
 @media screen and (max-width: 768px) {
     .quantity-input {
         max-width: 100%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .hero__bg--nebula {
+        background: url("/media/nasa_nebula_768px.jpg") no-repeat center center fixed;
+        background-size: cover;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .hero__bg--nebula {
+        background: url("/media/nasa_nebula_1024px.jpg") no-repeat center center fixed;
+        background-size: cover;
+    }
+}
+
+@media screen and (min-width: 1366px) {
+    .hero__bg--nebula {
+        background: url("/media/nasa_nebula_1366px.jpg") no-repeat center center fixed;
+        background-size: cover;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .hero__bg--nebula {
+        background: url("/media/nasa_nebula_1600px.jpg") no-repeat center center fixed;
+        background-size: cover;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .hero__bg--nebula {
+        background: url("/media/nasa_nebula_1920px.jpg") no-repeat center center fixed;
+        background-size: cover;
     }
 }

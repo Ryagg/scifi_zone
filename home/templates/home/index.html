@@ -3,7 +3,7 @@
 
 {% block content %}
 <section class="hero is-small bg--sky-900 text__color-sky-100">
-    <div class="hero-body">
+    <div class="hero-body hero__bg--nebula">
         <h1 class="title is-1 has-text-centered mt-5 text__color-sky-100 heading__text--shadow-blue">
             SciFi Zone Cologne
         </h1>
@@ -11,7 +11,7 @@
         <div class="columns is-multiline is-centered">
             <div class="column">
                 <p class="is-size-4 has-text-centered text__color-sky-100">
-                    Join us for our inaugural convention at the LANXESS arena in Cologne, Germany to celebrate our love for SciFi!
+                    Join us for our inaugural convention at the LANXESS arena in Cologne, Germany, to celebrate our love for SciFi!
                 </p>
             </div>
         </div>
@@ -24,7 +24,7 @@
         </div>
     </div>
 </section>
-<section class="hero is-small bg--sky-900 text__color-sky-100 actors">
+<section class="hero is-small hero__bg--nebula text__color-sky-100 actors">
     <div class="hero-body">
         <h2 class="title is-2 has-text-centered text__color-sky-100 text__shadow--dark">
             Guests at SFZ 2022
@@ -33,7 +33,7 @@
             {% for actor in actors %}
                 {% if actor.id <= midway %}
                     <div class="column has-text-centered">
-                        <figure class="image is-3-by-5 mb-2 portrait__border card__box-shadow">
+                        <figure class="image is-4by5 mb-2 portrait__border card__box-shadow">
                             <img src="{{ actor.star_image_url }}" alt="{{ actor.name }} ">
                         </figure>
                         <a class="is-size-4 text__color-sky-100 text__shadow--light" href="{% url 'guest_detail' actor.id %}">{{ actor.name }}</a>
@@ -45,7 +45,7 @@
             {% for actor in actors %}
                 {% if actor.id > midway %}
                     <div class="column has-text-centered">
-                        <figure class="image is-3-by-5 mb-2 portrait__border card__box-shadow">
+                        <figure class="image is-4by5 mb-2 portrait__border card__box-shadow">
                             <img src="{{ actor.star_image_url }}" alt="{{ actor.name }} ">
                         </figure>
                         <a class="is-size-4 text__color-sky-100 text__shadow--light" href="{% url 'guest_detail' actor.id %}">{{ actor.name }}</a>
@@ -55,7 +55,7 @@
         </div>
     </div>
 </section>
-<section class="hero is-small bg--sky-900 text__color-sky-100 opening-times">
+<section class="hero is-small hero__bg--nebula text__color-sky-100 opening-times">
     <div class="hero-body has-text-centered">
         <h2 class="title is-2 text__color-sky-100 text__shadow--dark">
             SciFi Zone Opening Times
