@@ -37,6 +37,9 @@
                                     <div class="column is-10-tablet is-offset-1">
                                         {% for item in order.lineitems.all %}
                                             <p class="is-size-4 has-text-weight-semibold mt-3">{{ item.ticket.name }}</p>
+                                            {% if "Standard" not in item.ticket.name and "Package" not in item.ticket.name %}
+                                                <p class="is-size-5">Ticket(s) valid for: <span class="has-text-weight-semibold">{{ item.selection }}</span> </p>
+                                            {% endif %}
                                             <p class="is-size-5 mb-5">
                                                 <span class="is-pulled-left">Price: €{{ item.ticket.price }}</span><span class="ml-2">Quantity: {{ item.quantity }}</span>
                                                 <span class="is-pulled-right">Subtotal: €{{ item.ticket.price | calc_subtotal:item.quantity }}</span>

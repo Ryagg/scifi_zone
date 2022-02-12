@@ -42,6 +42,15 @@
                                 </div>
                             </div>
                         </div>
+                        {% if "Standard" not in item.ticket.name and "Package" not in item.ticket.name %}
+                            <div class="level is-mobile my-1">
+                                <div class="level-left">
+                                    <div class="level-item">
+                                        <p class="is-size-7 is-size-6-tablet">Ticket(s) valid for: <span class="has-text-weight-semibold">{{ item.selection }}</span> </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div> <!-- end of columns -->
             {% endfor %}
