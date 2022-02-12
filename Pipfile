@@ -25,6 +25,12 @@ django-countries = "*"
 boto3 = "*"
 django-storages = "*"
 django-csp = "*"
+pytest-django = "*"
+faker = "*"
+django-dynamic-fixture = "*"
+freezegun = "*"
+pytest-cov = "*"
+pytest-factoryboy = "*"
 
 [dev-packages]
 
