@@ -93,6 +93,10 @@ a.text__shadow--light:hover {
     background-color: #0c4a6e;
 }
 
+.text__color-sky-900 {
+    color: #0c4a6e;
+}
+
 .text__color-blue-50 {
     color: #eff6ff;
 }
