@@ -213,7 +213,8 @@ a.text__shadow--light:hover {
     color: #aab7c4;
 }
 
-.allauth-form-inner-content a.button {
+.allauth-form-inner-content a.button,
+.custom-form a.button {
     background-color: #e0f2fe;
     color: #1d4ed8;
     font-weight: 600;
