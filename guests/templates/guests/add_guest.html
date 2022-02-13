@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <section class="hero is-medium bg--sky-900 text__color-sky-100 body__footer--down">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Guest Management</h1>
+                <div class="columns is-multiline is-centered">
+                    <div class="column is-6-tablet has-text-centered">
+                        <h3 class="title is-3 has-text-centered text__color-sky-100 text__shadow--dark">Add a new guest</h3>
+                    </div>
+                </div>
+                <div class="columns is-multiline is-centered">
+                    <div class="column is-6-tablet has-text-centered">
+                        <form action="{% url 'add_guest' %}" method="POST" class="custom-form" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <div class="field">
+                                <div class="control">
+                                    <a href="{% url 'guests' %} " class="button mt-2">Cancel</a>
+                                    <button class="primaryAction button mt-2" type="submit">Add Guest</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
