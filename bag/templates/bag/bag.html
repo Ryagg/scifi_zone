@@ -34,7 +34,7 @@
                     <div class="column is-5-tablet">
                         <p class="is-size-4">{{ item.ticket.name }} </p>
                         <p class="is-size-5">Number of tickets: {{ item.quantity }}</p>
-                            {% if "Standard" not in item.ticket.name %}
+                            {% if "Standard" not in item.ticket.name and "Package" not in item.ticket.name %}
                                 <p class="is-size-5">Ticket(s) valid for: <span class="has-text-weight-semibold">{{ item.selection }}</span> </p>
                             {% endif %}
                             <field class="is-grouped has-addons">

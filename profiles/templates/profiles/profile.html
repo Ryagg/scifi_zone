@@ -8,7 +8,7 @@
         <div class="container">
             <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">My profile</h1>
             <div class="columns is-multiline">
-                <div class="column is-4-tablet has-text-centered">
+                <div class="column is-5-tablet has-text-centered">
                     <h3 class="title is-3 text__color-sky-100 text__shadow--dark">Billing Address</h3>
                     <!-- update form -->
                     <form action="{% url 'profile' %}" method="POST" id="profile-update-form" class="custom-form">
@@ -17,41 +17,48 @@
                         <button class="custom-form">Update Information</button>
                     </form>
                 </div> <!-- end of column -->
-                <div class="column is-8-tablet has-text-centered">
+                <div class="column is-7-tablet has-text-centered">
                     <!-- order history -->
                     <h3 class="title is-3 text__color-sky-100 text__shadow--dark">Order History</h3>
-                    <section>
+                    <section class="bag-item card__box-shadow order-history px-3 py-3">
                         {% if orders %}
                             {% for order in orders %}
                                 <div class="columns is-multiline is-centered">
-                                    <div class="column is-10-tablet">
-                                        <div class="is-pulled-left">
-                                            <p class="is-size-5">Order number: {{ order.order_number|truncatechars:8 }}</p>
-                                        </div>
-                                        <div class="is-pulled-right">
-                                            <p class="is-size-5">Date: {{ order.date }}</p>
-                                        </div>
+                                    <div class="column">
+                                        <p class="is-size-5">Order number: {{ order.order_number|truncatechars:8 }}</p>
+                                    </div>
+                                    <div class="column">
+                                            <p class="is-size-5">Date: {{ order.date|date:"d.m.Y" }}</p>
                                     </div>
                                 </div> <!-- end of columns -->
                                 <div class="columns is-multiline">
                                     <div class="column is-10-tablet is-offset-1">
                                         {% for item in order.lineitems.all %}
-                                            <p class="is-size-4 has-text-weight-semibold mt-3">{{ item.ticket.name }}</p>
-                                            <p class="is-size-5 mb-5">
-                                                <span class="is-pulled-left">Price: €{{ item.ticket.price }}</span><span class="ml-2">Quantity: {{ item.quantity }}</span>
+                                            <p class="is-size-6 is-size-4-tablet has-text-weight-semibold mt-3">{{ item.ticket.name }}</p>
+                                            {% if "Standard" not in item.ticket.name and "Package" not in item.ticket.name %}
+                                                <p class="is-size-6 is-size-5-tablet">Ticket(s) valid for: <span class="has-text-weight-semibold">{{ item.selection }}</span> </p>
+                                            {% endif %}
+                                            <p class="is-size-6 is-size-5-tablet">
+                                                <span class="is-pulled-left">Price: €{{ item.ticket.price }}</span><span class="ml-2">x {{ item.quantity }}</span>
                                                 <span class="is-pulled-right">Subtotal: €{{ item.ticket.price | calc_subtotal:item.quantity }}</span>
                                             </p>
                                         {% endfor %}
-                                        <p class="is-size-5 mt-3">
-                                            <span class="is-pulled-left">Grand total: </span>
-                                            <span class="is-pulled-right">€{{ grand_total }},00</span>
+                                    </div>
+                                </div> <!-- end of columns -->
+                                <div class="columns is-mobile is-multiline">
+                                    <div class="column">
+                                        <p class="is-size-6 is-size-4-tablet has-text-weight-semibold is-underlined">Grand total:</p>
+                                    </div>
+                                    <div class="column">
+                                        <p class="is-size-6 is-size-4-tablet has-text-weight-semibold is-underlined">
+                                            €{{ order.grand_total }},00
                                         </p>
                                     </div>
-                                </div>
+                                </div> <!-- end of columns -->
                                 <div class="columns is-multiline">
-                                    <div class="column is-10-tablet is-offset-1 pb-5 hr-bottom">
-                                        <p class="is-size-5 has-text-left">Payment status:</p>
-                                        <p class="is-size-5 has-text-left">Order status:</p>
+                                    <div class="column is-10-tablet is-offset-1 pb-5 hr-bottom--blue">
+                                        <p class="is-size-5 has-text-left">Payment status: </p>
+                                        <p class="is-size-5 has-text-left">Order status: </p>
                                     </div>
                                 </div>
                             {% endfor %}
