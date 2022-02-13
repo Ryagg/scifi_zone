@@ -1,10 +1,9 @@
 # pylint: disable=W, C, R, no-member
-import imp
 import pytest
 
 from django.contrib.auth.models import User
 from checkout.models import Order
-from tickets.models import Ticket
+from tickets.models import Ticket, Actor
 
 @pytest.fixture
 def user_data():
@@ -29,7 +28,7 @@ def authenticated_user(client, user_data):
 	return test_user
 
 @pytest.fixture
-def ticket_data():
+def create_ticket():
     ticket = Ticket.objects.create(
         id=1,
         name="Test ticket",
@@ -47,3 +46,18 @@ def order_data():
         grand_total=199
     )
     return order
+
+@pytest.fixture
+def actor_data():
+    actors = Actor.objects.all()
+    return actors
+
+@pytest.fixture
+def ticket_data():
+    tickets = Ticket.objects.filter(name__icontains='Ticket')
+    return tickets
+
+@pytest.fixture
+def package_data():
+    packages = Ticket.objects.filter(name__icontains='Package')
+    return packages

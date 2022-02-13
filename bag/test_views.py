@@ -1,5 +1,6 @@
+# pylint: disable=locally-disabled, no-member, redefined-outer-name
+"""This module contains all tests for views from the bag app."""
 
-# pylint: disable=locally-disabled, no-member
 import pytest
 from django import urls
 from tickets.models import Ticket
@@ -14,15 +15,16 @@ def test_bag_site(client):
     assert b'Your shopping bag' in resp.content
 
 @pytest.mark.django_db
-def test_add_to_bag(client, ticket_data):
+def test_add_to_bag(client, create_ticket):
     """Test that the add to bag view works as intended"""
     response = client.get('/bag/')
     quantity = 2
-    bag = response.get('bag', {ticket_data.id: quantity})
+    bag = response.get('bag', {create_ticket.id: quantity})
     assert bag == {1: 2}
-    assert ticket_data.description == "generic ticket"
-    assert ticket_data.price == 10
+    assert create_ticket.description == "generic ticket"
+    assert create_ticket.price == 10
 
+@pytest.mark.skip
 @pytest.mark.django_db
 def test_update_bag(client):
     """Test that the update bag view works as intended"""
