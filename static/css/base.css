@@ -33,6 +33,10 @@ h6 {
     background-size: cover;
 }
 
+.order-history {
+    max-height: 70vh; /* height of profile form + submit button */
+    overflow-y: auto;
+}
 /*----- FOCUS, ACTIVE & HOVER EFFECTS -----*/
 .navbar-item:hover,
 .navbar-link:hover,
@@ -113,6 +117,10 @@ a.text__shadow--light:hover {
     background-color: #1e3a8a;
 }
 
+.text__color-blue-900 {
+    color: #1e3a8a !important;
+}
+
 .bg--slate-800 {
     background-color: #1e293b;
 }
@@ -162,6 +170,10 @@ a.text__shadow--light:hover {
 
 .hr-bottom {
     border-bottom: 3px solid white;
+}
+
+.hr-bottom--blue {
+    border-bottom: 3px solid #0c4a6e;
 }
 
 .hr-top-bottom {
