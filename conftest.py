@@ -61,3 +61,12 @@ def ticket_data():
 def package_data():
     packages = Ticket.objects.filter(name__icontains='Package')
     return packages
+
+@pytest.fixture
+def create_guest():
+    new_guest = Actor.objects.create(
+        name = "Awesome Actor",
+        star_autograph_category = "A",
+        star_photoshoot_category = "A",
+    )
+    return new_guest
