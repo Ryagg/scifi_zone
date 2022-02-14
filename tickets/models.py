@@ -64,13 +64,13 @@ class Package(models.Model):
 class Actor(models.Model):
     """A class for all convention guests"""
 
-    name = models.CharField(max_length=60, null=True, blank=True)
+    name = models.CharField(max_length=60)
     star_autograph_category = models.CharField(
-        max_length=1, null=True, blank=True)
+        max_length=1)
     star_photoshoot_category = models.CharField(
-        max_length=1, null=True, blank=True)
+        max_length=1)
     star_image_url = models.URLField(max_length=1024, null=True, blank=True)
-    star_image = models.ImageField(null=True, blank=True)
+    star_image = models.ImageField(default='noimage.png')
 
     def __str__(self):
         return str(self.name)
