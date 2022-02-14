@@ -65,19 +65,27 @@ The deployed project can be found [here](https://ms4-scifi-zone.herokuapp.com/).
 
 #### **Colour Scheme**
 
-To be added
+The beneath colour palette was used to set the theme and also provide good contrast for accessibility.
+
+![Colour palette](documentation/readme/scifi-zone-colours.png)
 
 #### **Typography**
 
-To be added
+To match the science fiction theme of the site, [Orbitron](https://fonts.google.com/specimen/Orbitron?category=Serif,Sans+Serif,Display,Monospace#standard-styles) with its bold geometric forms was chosen for all headings.
+
+![orbitron](documentation/readme/orbitron-20px.png)
+
+For all other text, [Saira](https://fonts.google.com/specimen/Saira?category=Serif,Sans+Serif,Display,Monospace#standard-styles) was chosen to present a nice contrast while maintaining high readability.
+
+![Saira](documentation/readme/saira-20px.png)
 
 #### **Icons**
 
-To be added
+All icons on the pages are from [Font Awesome](https://fontawesome.com). Links that have been styled to look like buttons don't include icons, because Bulma currently doesn't provide the possibility to adjust the position of the icons. Therefore, icons have been used only sparingly on all pages.
 
 #### **Imagery**
 
-Actor images were obtained from [Wikimedia](https://commons.wikimedia.org/w/index.php?search=&title=Special:MediaSearch&type=image). A [SOURCE.md](https://docs.google.com/spreadsheets/d/1rQUjvQ1QUJXCy0xjzFvaGLI8nwJdJbU3G1KA6ERHgbY/edit#gid=0) was created containing information about the image author, license + attribution, an image description and the URLs both for the image file as well as the image page. The images were then uploaded to [Cloudinary](https://cloudinary.com/) and transformed. The transformation include changing the resolution, changing the format depending on the used browser, and adding image credit. For this purpose, several transformations had to be created to apply the correct image credit to each image.
+Actor images were obtained from [Wikimedia](https://commons.wikimedia.org/w/index.php?search=&title=Special:MediaSearch&type=image). A [SOURCE.md](https://docs.google.com/spreadsheets/d/1rQUjvQ1QUJXCy0xjzFvaGLI8nwJdJbU3G1KA6ERHgbY/edit#gid=0) was created containing information about the image author, license + attribution, an image description and the URLs both for the image file and the image page. The images were then uploaded to [Cloudinary](https://cloudinary.com/) and transformed. The transformation includes changing the resolution, changing the format depending on the used browser, and adding image credit. For this purpose, several transformations had to be created to apply the correct image credit to each image.
 
 ### **Wireframes**
 
@@ -100,7 +108,103 @@ To be added
 
 ### **Existing Features**
 
-To be added
+---
+
+#### **Features on all pages: navbar**
+
+The navigation menu is fixed to the top to allow the user quick and easy navigation through the site. To declutter the navbar, drop-down menus are used for event information not found on the homepage, ticket information, account actions, and admin actions.
+The available navigation menu items depend on whether a user is logged in, and for some options also on whether a user is an admin:
+
+| Nav Link           | Not logged in | Logged in as user | Logged in as admin |
+| :----------------- | :------------ | :---------------- | :----------------- |
+| Logo(back to home) | &#9989;       | &#9989;           | &#9989;            |
+| Event info         | &#9989;       | &#9989;           | &#9989;            |
+| Ticket info        | &#9989;       | &#9989;           | &#9989;            |
+| Bag                | &#9989;       | &#9989;           | &#9989;            |
+| My Account         | &#9989;       | &#9989;           | &#9989;            |
+| Register           | &#9989;       | &#10060;          | &#10060;           |
+| Log In             | &#9989;       | &#10060;          | &#10060;           |
+| My Profile         | &#10060;      | &#9989;           | &#9989;            |
+| Admin              | &#10060;      | &#10060;          | &#9989;            |
+| Add Guest          | &#10060;      | &#10060;          | &#9989;            |
+| Edit Guest         | &#10060;      | &#10060;          | &#9989;            |
+| Remove Guest       | &#10060;      | &#10060;          | &#9989;            |
+| Log Out            | &#10060;      | &#9989;           | &#9989;            |
+| Copyright          | &#9989;       | &#9989;           | &#9989;            |
+| Contact            | &#9989;       | &#9989;           | &#9989;            |
+
+#### **Features on all pages: footer**
+
+The footer is located at the bottom of each page and includes links to reach the website author on social media, the site notice, and the privacy policy. The links open in a new browser tab.
+
+#### **Home page: event info with CTA**
+
+The homepage consists of three sections informing the user about the site's aim, highlighting the guests at the event, and informing users about the event's opening times. It also includes a CTA in the form of a prominent link to the tickets page, and features a science fiction themed background image.
+
+#### **Guests page features**
+
+The guests page provides an overview of all guests attending the event, and informs the user that more information can be found on each guest's detail page.
+
+#### **Guests detail page features**
+
+The detail page for each guest contains a paragraph with general information about the guest, and links to the guest's pages on IMDB, Wikipedia, and the guest's own homepage (if there is one). A second paragraph provides the appearance info for the guest. Due to time constraints, and also as is usual for similar events, detailed information is not provided until about 6 weeks before the event.
+The page also informs the user how much an autograph from and a photoshoot with the actor will cost. Currently, the buttons only link to the corresponding ticket page, instead of directly adding the ticket to the shopping bag. At the bottom of the page, a disclaimer informs the user that these tickets are only valid in combination with a standard ticket or a package, and that guest appearance can't be guaranteed, and that a credit refund voucher will be provided if the guest does not appear at the event.
+
+#### **Tickets and packages page features**
+
+Both the tickets and packages page contain a short paragraph with general information about the products. All available products are listed with their price and a link to the product's detail page. At the bottom of the page, links to the opposite product are provided.
+
+#### **Tickets and packages detail page features**
+
+The detail pages for tickets and packages contain a description of the product, a list of included items, and give users the opportunity to add the product to their shopping bag. In case of autograph and photoshoot tickets, radio elements listing all guests in the selected price category let users choose the guest they want an autograph from or photoshoot with. A prominent paragraph again informs the user that these tickets are only valid in combination with standard tickets or packages. For addon-tickets, a link back to the tickets page is provided.
+
+#### **Bag page features**
+
+If the user hasn't added any tickets, he is informed the shopping bag is empty and a link to the tickets page is provided.
+
+If there are items in the bag, an overview with the number of items, price, included VAT and grand total is displayed. Users can follow a link to the checkout page. Additionally, users can update the quantity of each item in the back, remove selected items from the bag, or remove all items from the shopping bag. A link back to the tickets page is provided.
+
+#### **Checkout page features**
+
+The checkout page is only accessible if there are items in the shopping bag. Otherwise, users will be redirected to the tickets page, and an error message informs them that the shopping bag is empty. If users come from their shopping bag page, an order summary is presented and the grand total prominently displayed. To proceed, users must fill out a form with their billing address. Users can save this information to their profile. The form will then be prefilled with this information for future purchases. Payment is handled through a stripe card element on the page.
+
+#### **Checkout success page features**
+
+Order information with order number and order date, order details with product name, quantity, and price, as well as the billing information with the grand total are displayed.
+
+#### **Register page features**
+
+Users must provide and confirm their e-mail address and password. They also have to provide a username. The sign up button registers the user to the database. For users who are already registered, a sign-in link is provided.
+
+#### **Login page features**
+
+The login page contains fields for users to enter their username or email and password, and a "Sign in" button. Users can activate the "Remember Me" functionality. Links to the homepage and to the password reset page are displayed.
+
+#### **Profile page features**
+
+For a newly registered user who hasn't purchased anything yet, the profile page displays a form where the billing address can be provided. The order history will display a message that no tickets have been ordered yet, and display a link to the tickets page.
+
+For users who already purchased products, the form with the billing address will be prefilled. Users can to update this information. The order history displays detailed information for each order and each item in an order.
+
+#### **Admin-actions page features**
+
+Admins can add new guests to the event. A form with fields taken from the correspondent model is displayed. If the form is valid and submitted, the new guest will be added to the database, and the homepage, guests page and guest detail page are updated. The cancel-button takes the admin back to the guests page.
+
+ADD REMAINING OPTIONS!
+
+#### **Logout page features**
+
+The logout page features a confirmation dialogue before the user is logged out and the session cleared.
+
+#### **Copyright page features**
+
+NOT YET IMPLEMENTED
+
+#### **CONTACT page features**
+
+NOT YET IMPLEMENTED
+
+NOT YET IMPLEMENTED
 
 #### **General Data Protection Regulation compliance**
 
