@@ -44,7 +44,7 @@
                             {% endif %}
                         </div>
                     </div>
-                    {% if request.user.is_authenticated %}
+                    {% if request.user.is_superuser %}
                         <div class="navbar-item has-dropdown is-hoverable" tabindex="0">
                             <a class="navbar-link">Admin</a>
                                 <div class="navbar-dropdown is-boxed">
