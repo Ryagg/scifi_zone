@@ -20,9 +20,26 @@
 
                     <a class="is-size-4 text__color-sky-100 text__shadow--light" href="{% url 'guest_detail' actor.id %}">{{ actor.name }}</a>
                     <div class="columns">
-                        <div class="column">
+                        <div class="column mt-2">
                             {% if request.user.is_superuser %}
-                                <a class="is-size-5 text__color-sky-100 text__shadow--light" href="{% url 'edit_guest_info' actor.id %}">Edit info</a>
+                                <a class="is-size-5 text__color-sky-100 text__shadow--light" href="{% url 'edit_guest_info' actor.id %}">
+                                    <span class="icon-text">
+                                        <span class="icon">
+                                            <i class="fa-solid fa-user-pen"></i>
+                                        </span>
+                                        <span>Edit info</span>
+                                    </span>
+                                </a>
+                            <div class="column has-text-centered column--less-padding">
+                                <a class="is-size-5 text__color-sky-100 text__shadow--light" href="{% url 'remove_guest' actor.id %}">
+                                    <span class="icon-text">
+                                        <span class="icon has-text-danger">
+                                            <i class="fa-solid fa-user-xmark"></i>
+                                        </span>
+                                        <span>Remove</span>
+                                    </span>
+                                </a>
+                            </div>
                             {% endif %}
                         </div>
                     </div>

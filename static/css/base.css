@@ -26,6 +26,10 @@ h6 {
     max-height: 70vh;
 }
 
+.column--less-padding {
+    padding: 0;
+}
+
 /*----- CONTAINERS -----*/
 
 .hero__bg--nebula {
@@ -34,7 +38,7 @@ h6 {
 }
 
 .order-history {
-    max-height: 70vh; /* height of profile form + submit button */
+    max-height: 70vh;
     overflow-y: auto;
 }
 /*----- FOCUS, ACTIVE & HOVER EFFECTS -----*/
