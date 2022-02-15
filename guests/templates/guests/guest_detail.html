@@ -16,6 +16,13 @@
                         <img src="{{ MEDIA_URL }}noimage.png" alt="placeholder image for missing actor image">
                     {% endif %}
                 </figure>
+                <div class="columns mt-2">
+                        <div class="column">
+                            {% if request.user.is_superuser %}
+                                <a class="is-size-5 text__color-sky-100 text__shadow--light" href="{% url 'edit_guest_info' actor.id %}">Edit info</a>
+                            {% endif %}
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
