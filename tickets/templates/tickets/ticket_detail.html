@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block content %}
-<section class="hero is-medium bg--sky-900 text__color-sky-100">
+<section class="hero is-medium bg--sky-900 text__color-sky-100 body__footer--down">
     <div class="hero-body">
         <div class="container">
-            <h1 class="title is-1 has-text-centered text__color-sky-100">{{ ticket.name }}</h1>
+            <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">{{ ticket.name }}</h1>
             <div class="columns is-multiline is-centered">
                     <div class="column is-6-tablet">
                         <div class="block">
@@ -14,12 +14,12 @@
                                 </figure>
                         </div>
                         <div class="block">
-                            <h3 class="title is-3 text__color-sky-100">Description</h3>
+                            <h3 class="title is-3 text__color-sky-100 text__shadow--dark">Description</h3>
                                 <p class="is-size-5">{{ ticket.description }}</p>
 
                         </div>
                         <div class="block">
-                            <h3 class="title is-3 text__color-sky-100">Included in this ticket:</h3>
+                            <h3 class="title is-3 text__color-sky-100 text__shadow--dark">Included in this ticket:</h3>
                                     <ul>
                                         {% for goodie in goodies %}
                                             <li>{% if 'Standard' in ticket.name %} 1 x {% endif %}{{ goodie }}</li>
@@ -43,14 +43,14 @@
                                     </label>
                                     <div class="control">
                                         <!-- type attribute number not supported by Bulma -->
-                                        <input id="quantity" name="quantity" class="input is-link" type="text" min="1"
-                                            maxlength="99" pattern="^[0-9]$" placeholder="" value="" data-item_id="{{ ticket.id }}"
-                                            id="id_qty_{{ ticket.id }}" aria-label="quantity">
+                                        <input name="quantity" class="input is-link" type="text"
+                                            pattern="^[1-9][0-9]?$" placeholder="" value="" data-item_id="{{ ticket.id }}"
+                                            id="id_qty_{{ ticket.id }}" aria-label="quantity" required>
                                     </div>
                                 </div> <!-- end of field -->
                                 <div class="field">
                                     <div class="control">
-                                        <input class="button" type="submit" value="Add to shopping bag">
+                                        <input class="button input--light my-1" type="submit" value="Add to shopping bag">
                                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
             <div class="columns is-centered">
                 <div class="column">
                     <div class="block py-5 hr-top">
-                            <p class="is-size-4">Buy (more) <a class="has-text-weight-semibold text__color-sky-100" href="{% url 'tickets' %}">Autographs and/or Photoshoot tickets</a>
+                            <p class="is-size-4">Buy (more) <a class="has-text-weight-semibold text__color-sky-100 item-name--light" href="{% url 'tickets' %}">Autographs and/or Photoshoot tickets</a>
                         </div>
                 </div>
             </div>

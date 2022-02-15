@@ -4,44 +4,73 @@
 
 {% block content %}
 <!-- Order summary -->
-<section class="hero is-medium bg--sky-900 text__color-sky-100">
+<section class="hero is-small bg--sky-900 text__color-sky-100">
     <div class="hero-body">
-            <h1 class="title is-1 has-text-centered text__color-sky-100">Checkout</h1>
-            <h2 class="subtitle is-3 text__color-sky-100">Order Summary ({{ item_count }} items)</h2>
+            <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Checkout</h1>
+            <h2 class="subtitle is-3 has-text-centered text__color-sky-100 text__shadow--dark">Order Summary ({{ item_count }} items)</h2>
             {% for item in bag_items %}
-                <div class="columns is-multiline is-centered">
-                    <div class="column">
-                        <div class="level is-mobile">
-                            <div class="is-pulled-left">
-                                <p class="is-size-6">Item</p>
-                                <p class="is-size-5">{{ item.ticket.name }}</p>
-                                <p class="is-size-6">Quantity: {{ item.quantity }}</p>
+                <div class="columns is-multiline is-centered ">
+                    <div class="column is-8-tablet is-6-desktop px-5 bag-item card__box-shadow">
+                        <div class="level is-mobile my-1">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <p class="is-size-6 is-underlined">Item</p>
+                                </div>
                             </div>
-                            <div class="is-pulled-right">
-                                    <p class="is-size-6">Subtotal</p>
-                                    <p class="is-size-5">€{{ item.ticket.price | calc_subtotal:item.quantity }}</p>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <p class="is-size-6 is-underlined">Subtotal</p>
+                                </div>
                             </div>
                         </div>
+                        <div class="level is-mobile my-1">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <p class="is-size-7 is-size-5-tablet">{{ item.ticket.name }}</p>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <p class="is-size-6 is-size-5-tablet">€{{ item.ticket.price | calc_subtotal:item.quantity }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="level is-mobile my-1">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <p class="is-size-7 is-size-6-tablet">Quantity: {{ item.quantity }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% if "Standard" not in item.ticket.name and "Package" not in item.ticket.name %}
+                            <div class="level is-mobile my-1">
+                                <div class="level-left">
+                                    <div class="level-item">
+                                        <p class="is-size-7 is-size-6-tablet">Ticket(s) valid for: <span class="has-text-weight-semibold">{{ item.selection }}</span> </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div> <!-- end of columns -->
             {% endfor %}
             <div class="columns is-multiline is-centered">
                 <div class="column is-5-tablet">
-                    <h2 class="title is-2 has-text-centered text__color-sky-100">Grand Total €{{grand_total}}</h2>
+                    <h2 class="title is-2 has-text-centered mt-3 text__color-sky-100 text__shadow--dark">Grand Total €{{grand_total}}</h2>
                 </div>
             </div>
     </div> <!-- end of body -->
 </section>
 
 <!-- Billing address -->
-<section class="hero is-small bg--sky-900 text__color-sky-100">
+<section class="hero is-small bg--sky-900 text__color-sky-100 nth-section__footer--down">
     <div class="hero-body">
-        <form action="{% url 'checkout' %}" method="POST" id="payment-form" data-secret="{{ client_secret }}">
+        <form action="{% url 'checkout' %}" method="POST" id="payment-form">
             {% csrf_token %}
-                <div class="columns is-multiline">
-                    <div class="column">
-                        <h2 class="title is-2 text__color-sky-100">Billing address</h2>
-                            <div class="field">
+                <div class="columns is-multiline is-centered">
+                    <div class="column is-narrow-tablet px-5 bag-item card__box-shadow">
+                        <h2 class="title is-2 has-text-centered text__color-sky-900 text__shadow--dark">Billing address</h2>
+                            <div class="field custom-form">
                                 {{ order_form.full_name | as_crispy_field }}
                                 {{ order_form.email | as_crispy_field }}
                                 {{ order_form.street_address1 | as_crispy_field }}
@@ -52,7 +81,9 @@
                                 {{ order_form.country | as_crispy_field }}
                             </div>
                     </div>
-                    <div class="column is-size-4">
+                </div>
+                <div class="columns is-multiline is-centered">
+                    <div class="column is-6-tablet is-size-4">
                         {% if user.is_authenticated %}
                             <label for="id-save-info">Save this delivery information to my profile</label>
                             <input type="checkbox" id="id-save-info" name="save-info" checked>
@@ -64,19 +95,21 @@
                         {% endif %}
                     </div>
                 </div> <!-- end of columns -->
-
-                <div class="field">
-                    <div id="payment-element">
-                        <!-- Elements will create form elements here -->
-                    </div>
-                    <button id="submit" class="mt-3">Submit</button>
-                    <div id="error-message">
-                    <!-- Display error message to customers here -->
-                    </div>
-                    <div id="message">
-                        <!-- Display messages to customers here -->
+                <div class="columns is-multiline is-centered">
+                    <div class="column is-6-tablet">
+                        <div class="field my-3 card__box-shadow bg--slate-800 py-3 px-3 ">
+                            <div id="card-element">
+                                <!-- Elements will create form elements here -->
+                            </div>
+                            <div id="card-errors" role="alert">
+                            <!-- Display error message to customers here -->
+                            </div>
+                            <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                            <!-- id must not be 'submit' or form.submit() changes from method call to field reference! -->
+                            <!-- found at https://stackoverflow.com/questions/54144436/uncaught-typeerror-form-submit-is-not-a-function-in-form-validate-function -->
+                            <button id="submitPayment" class="custom-form my-3">Submit Payment</button>
                         </div>
-                </div>
+                    </div>
         </form>
     </div> <!-- end of body -->
 </section>

@@ -1,5 +1,8 @@
 import json
-from django.shortcuts import render, redirect, reverse,get_object_or_404, HttpResponse
+from django.shortcuts import (
+    render, redirect, reverse, get_object_or_404, HttpResponse)
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
@@ -11,9 +14,27 @@ from profiles.forms import UserProfileForm
 from .forms import OrderForm
 from .models import Order, OrderLineItem
 
+# pylint: disable=locally-disabled, no-member, using-constant-test
 
 
-# pylint: disable=locally-disabled, no-member
+def _send_confirmation_email(order):
+    """Send the user a confirmation email"""
+    cust_email = order.email
+    # remove newlines to prevent BadHeaderError
+    subject = render_to_string(
+        'checkout/confirmation_emails/confirmation_email_subject.txt',
+        {'order': order}).replace('\n', '')
+    body = render_to_string(
+        'checkout/confirmation_emails/confirmation_email_body.txt',
+        {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+
+    send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [cust_email]
+    )
+
 
 @require_POST
 def cache_checkout_data(request):
@@ -35,13 +56,15 @@ def cache_checkout_data(request):
             right now. Please try again later.')
         return HttpResponse(content=error, status=400)
 
+
 def checkout(request):
+    """Get infos from the order form and create an order in the database"""
+
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
         bag = request.session.get('bag', {})
-
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
@@ -64,17 +87,28 @@ def checkout(request):
             for item_id, item_data in bag.items():
                 try:
                     ticket = Ticket.objects.get(id=item_id)
-                    order_line_item = OrderLineItem(
-                        order = order,
-                        ticket = ticket,
-                        quantity = item_data,
-                    )
-                    order_line_item.save()
+                    if isinstance(item_data, int):
+                        order_line_item = OrderLineItem(
+                            order=order,
+                            ticket=ticket,
+                            quantity=item_data,
+                        )
+                        order_line_item.save()
+                    else:
+                        for selection, quantity in item_data[
+                            'items_by_selected'].items():
+                            order_line_item = OrderLineItem(
+                            order=order,
+                            ticket=ticket,
+                            quantity=quantity,
+                            selection=selection,
+                        )
+                        order_line_item.save()
                 except Ticket.DoesNotExist:
                     messages.error(request, (
                         "One or more of the tickets in your bag couldn't be \
                             found in our database. Please contact us!")
-                            )
+                    )
                     order.delete()
                     print('order deleted')
                     return redirect(reverse('view_bag'))
@@ -105,11 +139,9 @@ def checkout(request):
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
-            amount = stripe_total,
-            currency = settings.STRIPE_CURRENCY,
-            automatic_payment_methods={
-                'enabled': True,
-            },
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+            payment_method_types=["card"],
         )
 
         # Attempt to prefill the from with info from the user's profile
@@ -131,15 +163,12 @@ def checkout(request):
         else:
             order_form = OrderForm
 
-
         template = "checkout/checkout.html"
         context = {
             "order_form": order_form,
             'stripe_public_key': stripe_public_key,
             'client_secret': intent.client_secret,
-            'redirect': redirect,
-
-
+            # 'redirect': redirect,
         }
 
         print('reached end of checkout')
@@ -148,37 +177,35 @@ def checkout(request):
 
 def checkout_success(request, order_number):
     """Handle successfull checkouts"""
-    save_info = request.get('save_info')
+    save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+    profile = UserProfile.objects.get(user=request.user)
+    order.user_profile = profile
+    order.save()
     print('order processed')
 
-    if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
-        # Attach the user's profile to the order
-        order.user_profile = profile
-        order.save()
-
-        # Save the user's info
-        if save_info:
-            profile_data = {
-                'default_email': order.email,
-                'default_street_address1': order.street_address1,
-                'default_street_address2': order.street_address2,
-                'default_city': order.city,
-                'default_postcode': order.postcode,
-                'default_state': order.state,
-                'default_country': order.country,
-            }
-            user_profile_form = UserProfileForm(profile_data, instance=profile)
-            if user_profile_form.is_valid():
-                user_profile_form.save()
+    # Save the user's info
+    if save_info:
+        profile_data = {
+            'default_email': order.email,
+            'default_street_address1': order.street_address1,
+            'default_street_address2': order.street_address2,
+            'default_city': order.city,
+            'default_postcode': order.postcode,
+            'default_state': order.state,
+            'default_country': order.country,
+        }
+        user_profile_form = UserProfileForm(profile_data, instance=profile)
+        if user_profile_form.is_valid():
+            user_profile_form.save()
 
     messages.success(request, f'Your order {order_number} has been \
         successfully processed. We will send a confirmation email to \
             {order.email} shortly.')
+    _send_confirmation_email(order)
 
     if 'bag' in request.session:
-        del request.sesion['bag']
+        del request.session['bag']
 
     template = 'checkout/checkout_success.html'
     context = {

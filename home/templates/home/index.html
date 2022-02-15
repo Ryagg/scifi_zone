@@ -2,55 +2,80 @@
 {% load static %}
 
 {% block content %}
-<section class="hero is-primary is-large hero-image">
-    <div class="hero-body">
-        <h1 class="title is-1 ">
-            Background image and convention title here
+<section class="hero is-small bg--sky-900 text__color-sky-100">
+    <div class="hero-body hero__bg--nebula">
+        <h1 class="title is-1 has-text-centered mt-5 text__color-sky-100 heading__text--shadow-blue">
+            SciFi Zone Cologne
         </h1>
-        <h2 class="title is-2 has-text-centered">
-            Change colors later
-        </h2>
+        <p class="subtitle is-3 has-text-centered text__color-sky-100">26th August - 28th August 2022 - Cologne LANXESS arena</p>
+        <div class="columns is-multiline is-centered">
+            <div class="column">
+                <p class="is-size-4 has-text-centered text__color-sky-100">
+                    Join us for our inaugural convention at the LANXESS arena in Cologne, Germany, to celebrate our love for SciFi!
+                </p>
+            </div>
+        </div>
+        <div class="columns is-multiline is-centered">
+            <div class="column is-8-tablet">
+                <p class="is-size-4 has-text-centered text__color-sky-100">
+                    Taking place from the 26th of August - 28th of August, SciFi Zone will give you the opportunity to attend a multitude of guest talks, get autographs from and photo shoots with actors at the event, and party in the evenings with fellow fans and actors who choose to attend the parties.
+                </p>
+            </div>
+        </div>
     </div>
 </section>
-<section class="hero is-info is-medium actors">
+<section class="hero is-small hero__bg--nebula text__color-sky-100 actors">
     <div class="hero-body">
-        <h2 class="title is-2 has-text-centered">
+        <h2 class="title is-2 has-text-centered text__color-sky-100 text__shadow--dark">
             Guests at SFZ 2022
         </h2>
         <div class="columns">
             {% for actor in actors %}
-                {% if actor.id <= 6 %}
+                {% if actor.id <= midway %}
                     <div class="column has-text-centered">
-                        <figure class="image is-3-by-5">
-                            <img src="{{ actor.star_image_url }}" alt="{{ actor.name }} ">
-                        </figure>
-                        <a href="{% url 'guest_detail' actor.id %}">{{ actor.name }}</a>
+                        <figure class="image is-4by5 mb-2 portrait__border card__box-shadow text__color-sky-100">
+                            {% if actor.star_image %}
+                                <img src="{{ actor.star_image_url }}" alt="{{ actor.name }} ">
+                            {% else %}
+                                <img src="{{ MEDIA_URL }}noimage.png" alt="placeholder image for missing actor image">
+                            {% endif %}
+                            </figure>
+                        <a class="is-size-4 text__color-sky-100 text__shadow--light" href="{% url 'guest_detail' actor.id %}">{{ actor.name }}</a>
                     </div>
                 {% endif %}
             {% endfor %}
         </div>
         <div class="columns">
             {% for actor in actors %}
-                {% if actor.id > 6 %}
+                {% if actor.id > midway %}
                     <div class="column has-text-centered">
-                        <figure class="image is-3-by-5">
-                            <img src="{{ actor.star_image_url }}" alt="{{ actor.name }} ">
+                        <figure class="image is-4by5 mb-2 portrait__border card__box-shadow">
+                            {% if actor.star_image %}
+                                <img src="{{ actor.star_image_url }}" alt="{{ actor.name }}">
+                            {% else %}
+                                <img src="{{ MEDIA_URL }}noimage.png" alt="placeholder image for missing actor image">
+                            {% endif %}
                         </figure>
-                        <a href="{% url 'guest_detail' actor.id %}">{{ actor.name }}</a>
+                        <a class="is-size-4 text__color-sky-100 text__shadow--light" href="{% url 'guest_detail' actor.id %}">{{ actor.name }}</a>
                     </div>
                 {% endif %}
             {% endfor %}
         </div>
     </div>
 </section>
-<section class="hero is-success is-medium opening-times">
-    <div class="hero-body">
-        <h2 class="title is-2">
-            Opening times here
+<section class="hero is-small hero__bg--nebula text__color-sky-100 opening-times">
+    <div class="hero-body has-text-centered">
+        <h2 class="title is-2 text__color-sky-100 text__shadow--dark">
+            SciFi Zone Opening Times
         </h2>
-        <h2 class="title is-2 has-text-centered">
-            CTA here
-        </h2>
+        <p class="is-size-4 text__color-sky-100">Friday the 26th of August: 2pm to 8pm</p>
+        <p class="is-size-4 text__color-sky-100">Saturday the 27th of August: 9am to 5pm </p>
+        <p class="is-size-4 text__color-sky-100">Sunday the 27th of August: 9am to 5pm</p>
+        <div class="columns is-centered">
+            <div class="column has-text-centered mt-5">
+                <a href="{% url 'tickets' %}" class="button button-cta is-size-4 has-text-weight-bold bg--blue-300 shadow text__color-blue-900">Buy tickets</a>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}

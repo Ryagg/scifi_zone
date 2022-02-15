@@ -1,58 +1,63 @@
 {% extends "base.html" %}
 {% load static %}
 
-
 {% block content %}
 
-<section class="hero is-link is-small">
+<section class="hero is-small bg--sky-900 text__color-sky-100 body__footer--down">
     <div class="hero-body">
-            <h1 class="title is-1 has-text-centered">Thank you for your order</h1>
-            <p class="is-size-4">Your order information is below. We will send a confirmation email to
-                {{ order.email }} shortly.
-            </p>
-            <h2 class="title is-2">Order information:</h2>
-                <div class="columns is-multiline is-centered has-background-grey">
-                    <div class="column">
-                            <div class="is-pulled-left">
-                                <p class="is-size-5">Order Number: {{ order.order_number }}</p>
-                            </div>
-                            <div class="is-pulled-right">
-                                    <p class="is-size-5">Order Date: {{ order.date }}</p>
-                            </div>
-                    </div>
-                </div> <!-- end of columns -->
-            <div class="columns is-multiline is-centered has-background-success">
-                <div class="column">
-                    <h3 class="title is-3 has-text-centered">Order Details:</h3>
-                </div>
-            </div>
-            {% for item in order.lineitems.all %}
-                <div class="columns is-multiline">
-                    <div class="column is-4-tablet">
-                        {{ item.ticket.name }}
-                    </div>
-                    <div class="column is-8-tablet">
-                        {{ item.quantity }} x €{{ item.ticket.price }}
-                    </div>
-                </div>
-            {% endfor %}
-            <div class="columns is-multiline is-centered has-background-success">
-                <div class="column">
-                    <h3 class="title is-3 has-text-centered">Billing Information:</h3>
-                </div>
-            </div>
-            <div class="columns is-multiline is-centered">
-                <div class="column">
-                    <p>Grand Total: €{{ order.grand_total }} </p>
-                </div>
-            </div>
-            {% if from_profile %}
+            <div class="container">
+                <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Thank you for your order!</h1>
                 <div class="columns is-multiline is-centered">
+                    <div class="column is-10-tablet">
+                        <p class="is-size-4 my-5">Your order information is below. We will send a confirmation email to
+                        {{ order.email }} shortly.
+                        </p>
+                        <h2 class="title is-2 mt-3 text__color-sky-100 text__shadow--dark">Order information:</h2>
+                    <div class="columns is-multiline is-centered">
+                        <div class="column">
+                                <div class="is-pulled-left">
+                                    <p class="is-size-5 mb-5">Order Number: {{ order.order_number }}</p>
+                                </div>
+                                <div class="is-pulled-right">
+                                        <p class="is-size-5 mb-5">Order Date: {{ order.date }}</p>
+                                </div>
+                        </div>
+                    </div> <!-- end of columns -->
+                <div class="columns is-multiline is-centered hr-top">
                     <div class="column">
-                        <a class="button mt-2" href="{% url 'profile' %}">Back to Profile</a>
+                        <h3 class="title is-3 mt-5 mb-3 text__color-sky-100 text__shadow--dark">Order Details:</h3>
                     </div>
                 </div>
-            {% endif %}
+                {% for item in order.lineitems.all %}
+                    <div class="columns is-multiline bag-item card__box-shadow">
+                        <div class="column is-6-tablet">
+                            <p class="is-size-5">{{ item.ticket.name }}</p>
+                        </div>
+                        <div class="column is-6-tablet">
+                            <p class="is-size-5">{{ item.quantity }} x €{{ item.ticket.price }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="columns is-multiline is-centered mt-5">
+                    <div class="column">
+                        <h3 class="title is-3 mt-5 text__color-sky-100 text__shadow--dark">Billing Information:</h3>
+                    </div>
+                </div>
+                <div class="columns is-multiline is-centered hr-bottom">
+                    <div class="column">
+                        <p class="is-size-4 mb-5">Grand Total: €{{ order.grand_total }}</p>
+                    </div>
+                </div>
+                {% if from_profile %}
+                    <div class="columns is-multiline is-centered">
+                        <div class="column">
+                            <a class="button mt-2" href="{% url 'profile' %}">Back to Profile</a>
+                        </div>
+                    </div>
+                {% endif %}
+                    </div>
+                </div>
+            </div> <!-- end of container -->
     </div> <!-- end of body -->
 </section>
 {% endblock %}

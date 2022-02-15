@@ -10,7 +10,10 @@ from profiles.models import UserProfile
 
 
 class Order(models.Model):
-
+    """
+    The order model contains all fields and functions needed to complete an
+    order
+    """
     order_number = models.CharField(max_length=32, null=False, editable=False)
     date = models.DateTimeField(auto_now_add=True)
     user_profile = models.ForeignKey(
@@ -41,7 +44,7 @@ class Order(models.Model):
     def update_total(self):
         """Update grand total with each newly added item"""
         self.grand_total = self.lineitems.aggregate(Sum("lineitem_total"))[
-            "lineitem_total_sum"
+            "lineitem_total__sum"
         ] or 0
         self.save()
 
@@ -57,7 +60,10 @@ class Order(models.Model):
 
 
 class OrderLineItem(models.Model):
-
+    """
+    A model for each row of an order that stores the item, quantity, and
+    subtotal for the item
+    """
     order = models.ForeignKey(
         Order,
         null=False,
@@ -67,6 +73,11 @@ class OrderLineItem(models.Model):
     )
     ticket = models.ForeignKey(
         Ticket, null=False, blank=False, on_delete=models.CASCADE
+    )
+    selection = models.CharField(
+        max_length=80,
+        null=True,
+        blank=True
     )
     quantity = models.IntegerField(null=False, blank=False, default=0)
     lineitem_total = models.DecimalField(

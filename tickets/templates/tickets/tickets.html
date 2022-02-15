@@ -5,7 +5,7 @@
 <section class="hero is-small bg--sky-900 text__color-sky-100">
     <div class="hero-body">
         <div class="container">
-            <h1 class="title is-1 has-text-centered text__color-sky-100">Tickets</h1>
+            <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Tickets</h1>
             <div class="columns is-multiline is-centered">
                 <div class="column  my-2">
                     <p class="is-size-5">
@@ -17,9 +17,9 @@
                     {% for ticket in tickets %}
                     <div class="column is-6-tablet is-4-desktop my-2">
                         <div class="card">
-                            <header class="card-header">
+                            <header class="card-header has-text-centered">
                                 <p class="card-header-title is-centered">
-                                    <a href="{% url 'ticket_detail' ticket.id %}">{{ ticket.name }}</a>
+                                    <a class="is-size-5 item-name" href="{% url 'ticket_detail' ticket.id %}">{{ ticket.name }}</a>
                                 </p>
                             </header>
                             <div class="card-image">
@@ -29,7 +29,7 @@
                             </div>
                             <div class="card-content">
                                 <div class="content has-text-centered">
-                                    € {{ ticket.price }}.00
+                                    <p class="is-size-5">€{{ ticket.price }}.00</p>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
             <div class="columns is-multiline">
                 <div class="column has-text-centered mt-5 mb-2 hr-top">
                     <p class="is-size-4">Want to make even more out of your visit?</p>
-                    <p class="is-size-4">Take a look at our <a class="has-text-weight-semibold text__color-sky-100" href="{% url 'packages' %}">Packages!</a></p>
+                    <p class="is-size-4">Take a look at our <a class="has-text-weight-semibold text__color-sky-100 item-name--light" href="{% url 'packages' %}">Packages!</a></p>
                 </div>
             </div>
         </div> <!-- end of container-->

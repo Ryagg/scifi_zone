@@ -36,7 +36,6 @@ def _send_confirmation_email(order):
 def webhook(request):
     """Listen for webhooks from Stripe"""
     # Setup
-    wh_secret = settings.STRIPE_WH_SECRET
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
     # Get the webhook data and verify its signature
@@ -46,7 +45,7 @@ def webhook(request):
 
     try:
         event = stripe.Webhook.construct_event(
-            payload, sig_header, wh_secret
+            payload, sig_header, stripe.api_key
         )
     except ValueError as error:
         # Invalid payload
@@ -60,6 +59,7 @@ def webhook(request):
     # Handle the event
     if event.type == 'payment_intent.succeeded':
         payment_intent = event.data.object # contains a stripe.PaymentIntent
+        print('payment intent succeeded')
         handle_payment_intent_succeeded(payment_intent)
     # Then define and call a method to handle the successful payment intent.
     # handle_payment_intent_succeeded(payment_intent)
@@ -77,13 +77,8 @@ def handle_payment_intent_succeeded(payment_intent):
     print(payment_intent)
 
     billing_details = payment_intent.charges.data[0].billing_details
-    shipping_details = payment_intent.shipping
     grand_total = round(payment_intent.charges.data[0].amount / 100, 2)
 
-    # Clean data in the shipping details
-    for field, value in shipping_details.address.items():
-        if value == "":
-            shipping_details.address[field] = None
 
     # Update profile information if save_info was checked
     profile = None # allow anonymous users to checkout
@@ -91,12 +86,12 @@ def handle_payment_intent_succeeded(payment_intent):
     if username != 'AnonymousUser':
         profile = UserProfile.objects.get(user__username=username)
         if save_info:
-            profile.default_street_address1 = shipping_details.address.line1
-            profile.default_street_address2 = shipping_details.address.line2
-            profile.default_postcode = shipping_details.address.post_code
-            profile.default_city = shipping_details.address.city
-            profile.default_state = shipping_details.address.state
-            profile.default_country = shipping_details.address.country
+            profile.default_street_address1 = billing_details.address.line1
+            profile.default_street_address2 = billing_details.address.line2
+            profile.default_postcode = billing_details.address.post_code
+            profile.default_city = billing_details.address.city
+            profile.default_state = billing_details.address.state
+            profile.default_country = billing_details.address.country
             profile.save()
 
 
@@ -105,14 +100,14 @@ def handle_payment_intent_succeeded(payment_intent):
     while attempt <= 5:
         try:
             order = Order.objects.get(
-                full_name__iexact=shipping_details.name,
+                full_name__iexact=billing_details.name,
                 email__iexact=billing_details.email,
-                street_address1__iexact=shipping_details.address.line1,
-                street_address2__iexact=shipping_details.address.line2,
-                city__iexact=shipping_details.address.city,
-                postcode__iexact=shipping_details.address.postal_code,
-                state=shipping_details.address.state,
-                country__iexact=shipping_details.address.country,
+                street_address1__iexact=billing_details.address.line1,
+                street_address2__iexact=billing_details.address.line2,
+                city__iexact=billing_details.address.city,
+                postcode__iexact=billing_details.address.postal_code,
+                state=billing_details.address.state,
+                country__iexact=billing_details.address.country,
                 grand_total=grand_total,
                 original_bag=bag,
                 stripe_pid=pid,
@@ -132,15 +127,15 @@ def handle_payment_intent_succeeded(payment_intent):
         order = None
         try:
             order = Order.objects.create(
-                full_name=shipping_details.name,
+                full_name=billing_details.name,
                 user_profile=profile,
                 email=billing_details.email,
-                street_address1=shipping_details.address.line1,
-                street_address2=shipping_details.address.line2,
-                city=shipping_details.address.city,
-                postcode=shipping_details.address.postal_code,
-                state=shipping_details.address.state,
-                country=shipping_details.address.country,
+                street_address1=billing_details.address.line1,
+                street_address2=billing_details.address.line2,
+                city=billing_details.address.city,
+                postcode=billing_details.address.postal_code,
+                state=billing_details.address.state,
+                country=billing_details.address.country,
                 grand_total=grand_total,
                 original_bag=bag,
                 stripe_pid=pid,
@@ -154,12 +149,12 @@ def handle_payment_intent_succeeded(payment_intent):
                 )
                 order_line_item.save()
 
-        except Exception as e:
+        except Exception as error:
             if order:
                 order.delete()
             print('order deleted')
             return HttpResponse(
-                content=f'Webhook received | ERROR: {e}',
+                content=f'Webhook received | ERROR: {error}',
                 status=500)
 
     print('payment_intend succeeded')
