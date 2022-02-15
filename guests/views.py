@@ -45,9 +45,9 @@ def add_guest(request):
     if request.method == 'POST':
         form = ActorForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            actor = form.save()
             messages.success(request, 'New actor added!')
-            return redirect(reverse('add_guest'))
+            return redirect(reverse('guest_detail', args=[actor.id]))
         else:
             messages.error(request, 'Actor could not be added! \
                 Please check the form input.')
@@ -92,3 +92,15 @@ def edit_guest_info(request, actors_id):
     }
 
     return render(request, template, context)
+
+@login_required
+def remove_guest(request, actors_id):
+    """Remove the guest from the convention"""
+    if not request.user.is_superuser:
+        messages.error(request, "You don't have permission to remove \
+        guests from the event!")
+        return redirect(reverse('home'))
+    actor = get_object_or_404(Actor, pk=actors_id)
+    actor.delete()
+    messages.success(request, 'Guest removed!')
+    return redirect(reverse('guests'))
