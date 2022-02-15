@@ -19,7 +19,7 @@
                         <div class="card">
                             <header class="card-header">
                                 <p class="card-header-title is-centered">
-                                    <a class="is-size-5" href="{% url 'package_detail' package.id package.name %} ">{{ package.name }}</a>
+                                    <a class="is-size-5 item-name" href="{% url 'package_detail' package.id package.name %} ">{{ package.name }}</a>
                                 </p>
                             </header>
                             <div class="card-image">
@@ -40,7 +40,7 @@
             <div class="columns is-multiline">
                 <div class="column has-text-centered mt-5 mb-2 hr-top">
                     <p class="is-size-4">Prefer to create your own package?</p>
-                    <p class="is-size-4">Take a look at our <a class="has-text-weight-semibold text__color-sky-100" href="{% url 'tickets' %}">Standard, Autograph and Photoshoot Tickets!</a></p>
+                    <p class="is-size-4">Take a look at our <a class="has-text-weight-semibold text__color-sky-100 item-name--light" href="{% url 'tickets' %}">Standard, Autograph and Photoshoot Tickets!</a></p>
                 </div>
             </div>
         </div> <!-- end of container-->

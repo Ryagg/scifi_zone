@@ -45,6 +45,70 @@ h6 {
     text-decoration-thickness: 5px;
 }
 
+a.item-name:hover {
+    color: #1e3a8a;
+    text-decoration-line: underline;
+}
+
+a.item-name--light:hover {
+    color: #e0f2fe;
+    text-decoration-line: underline;
+}
+/* replace Bulma default values to improve contrast */
+a.button.bg--blue-300:active {
+    color: #eff6ff;
+    border-color: #eff6ff;
+}
+
+a.button.bg--blue-300:focus {
+    color: #eff6ff;
+    border-color: #1e3a8a;
+    text-decoration: underline;
+}
+
+.button:active,
+a.button:active {
+    -webkit-box-shadow: 0 5px #636363;
+    box-shadow: 0 5px #636363;
+    -webkit-transform: translateY(4px);
+    -ms-transform: translateY(4px);
+    transform: translateY(4px);
+}
+
+/* replace Bulma default values */
+.button-cta:hover {
+    border-color: #e0f2fe;
+}
+
+.button.shadow-dark:hover {
+    -webkit-box-shadow: -7px -7px 14px #212020, 7px 7px 14px #3b3a3a;
+    box-shadow: -7px -7px 14px #212020, 7px 7px 14px #3b3a3a;
+    font-weight: bold;
+}
+
+a.button.shadow:hover {
+    -webkit-box-shadow: -7px -7px 14px #0c4a6e, 7px 7px 14px #0369a1;
+    box-shadow: -7px -7px 14px #0c4a6e, 7px 7px 14px #0369a1;
+    font-weight: bold;
+}
+
+a.button.remove:hover {
+    -webkit-box-shadow: -3px -3px 6px #7f1d1d, 3px 3px 6px #dc2626;
+    box-shadow: -3px -3px 6px #7f1d1d, 3px 3px 6px #dc2626;
+    font-weight: bold;
+}
+
+input.update-bag:hover {
+    -webkit-box-shadow: -3px -3px 6px #1e3a8a, 3px 3px 6px #1d4ed8;
+    box-shadow: -3px -3px 6px #1e3a8a, 3px 3px 6px #1d4ed8;
+    font-weight: bold;
+}
+
+label.radio:hover {
+    color: #ffef0a;
+    font-size: 110%;
+}
+
 /*----- TEXT EFFECTS -----*/
 .heading__text--shadow {
     /* code from https://css-tricks.com/almanac/properties/t/text-shadow/ */
@@ -222,6 +286,7 @@ a.text__shadow--light:hover {
 
 .allauth-form-inner-content button,
 .custom-form button,
+input.input--light,
 .allauth-form-inner-content input[type="submit"] {
     /* btn */
     display: inline-block;
@@ -243,6 +308,7 @@ a.text__shadow--light:hover {
 
 .allauth-form-inner-content button:hover,
 .custom-form button:hover,
+input.input--light:hover,
 .allauth-form-inner-content input[type="submit"]:hover {
     color: #e0f2fe;
     background-color: #1e3a8a;
@@ -255,26 +321,13 @@ a.text__shadow--light:hover {
 
 /*----- BUTTONS + INPUTS -----*/
 button,
-.button {
+.button,
+input {
     transition: all 0.3s ease-in-out;
 }
 
-/* created at https://neumorphism.io/#ffef0a */
-a.button.shadow:hover,
-input.button.shadow:hover {
-    color: #ffef0a;
-    border-radius: 0px;
-    background: -o-linear-gradient(135deg, #00007a, #000092);
-    background: linear-gradient(315deg, #00007a, #000092);
-    -webkit-box-shadow: -7px -7px 14px #00003f, 7px 7px 14px #0000d1;
-    box-shadow: -7px -7px 14px #00003f, 7px 7px 14px #0000d1;
-}
-
-.button.shadow-dark:hover {
-    border-radius: 0px;
-    -webkit-box-shadow: -7px -7px 14px #212020, 7px 7px 14px #3b3a3a;
-    box-shadow: -7px -7px 14px #212020, 7px 7px 14px #3b3a3a;
-    font-weight: bold;
+.button-cta {
+    border: 0.5rem #e0f2fe ridge;
 }
 
 .bag-item {
@@ -303,10 +356,6 @@ a.button.remove {
     margin-left: 0;
 }
 
-label.radio:hover {
-    color: #ffef0a;
-    font-size: 110%;
-}
 /*----- FOOTER -----*/
 .footer_padding--less {
     padding: 2rem 1rem 2rem;
