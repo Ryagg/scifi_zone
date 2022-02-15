@@ -80,9 +80,9 @@
                 </div>
             {% else %}
             <div class="columns is-multiline is-centered">
-                <div class="column">
-                    <p class="is-size-4 has-text-centered">Your bag is empty.</p>
-                    <a class="is-size-4 has-text-weight-semibold text__color-sky-100" href="{% url 'tickets' %}">Go to Tickets page</a>
+                <div class="column has-text-centered">
+                    <p class="is-size-4 mb-5">Your bag is empty.</p>
+                    <a class="is-size-4 has-text-weight-semibold text__color-sky-100 mt-5 item-name--light" href="{% url 'tickets' %}">Go to Tickets page</a>
                 </div> <!-- end of column -->
             </div> <!-- end of columns -->
             {% endif %}

@@ -50,7 +50,8 @@ a.item-name:hover {
     text-decoration-line: underline;
 }
 
-a.item-name--light:hover {
+a.item-name--light:hover,
+a.link--light:hover {
     color: #e0f2fe;
     text-decoration-line: underline;
 }
@@ -98,9 +99,14 @@ a.button.remove:hover {
     font-weight: bold;
 }
 
+a.button.button-light:hover {
+    -webkit-box-shadow: -7px -7px 14px #1e293b, 7px 7px 146px #0369a1;
+    box-shadow: -7px -7px 14px #1e293b, 7px 7px 14px #0369a1;
+}
+
 input.update-bag:hover {
-    -webkit-box-shadow: -3px -3px 6px #1e3a8a, 3px 3px 6px #1d4ed8;
-    box-shadow: -3px -3px 6px #1e3a8a, 3px 3px 6px #1d4ed8;
+    -webkit-box-shadow: -7px -7px 14px #1e3a8a, 7px 7px 146px #1d4ed8;
+    box-shadow: -7px -7px 14px #1e3a8a, 7px 7px 14px #1d4ed8;
     font-weight: bold;
 }
 
