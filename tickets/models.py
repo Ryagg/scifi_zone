@@ -1,9 +1,9 @@
 from django.db import models
+from django.forms import CharField
 
 
 class Category(models.Model):
     """A class for the different ticket and package categories"""
-
 
     class Meta:
         """Set the correct plural form"""
@@ -71,6 +71,13 @@ class Actor(models.Model):
         max_length=1)
     star_image_url = models.URLField(max_length=1024, null=True, blank=True)
     star_image = models.ImageField(default='noimage.png')
+    star_info_1 = models.TextField(null=True)
+    star_info_2 = models.TextField(null=True)
+    star_imdb = models.URLField(max_length=1024, null=True, blank=True)
+    star_wiki = models.URLField(
+        max_length=1024,
+        default=f"https://en.wikipedia.org/wiki/{name}")
+    star_official = models.URLField(max_length=1024, null=True, blank=True)
 
     def __str__(self):
         return str(self.name)
