@@ -58,10 +58,10 @@
 
 
                 <div class="columns is-multiline is-mobile is-centered my-3">
-                    <div class="column has-text-centered "><a href="{{ actor.star_imdb }}" class="button is-size-5 button-light bg--blue-300 shadow text__color-blue-900">IMDb entry</a></div>
-                    <div class="column has-text-centered "><a href="{{ actor.star_wiki }}" class="button button-light bg--blue-300 shadow text__color-blue-900 is-size-5">Wikipedia entry</a></div>
+                    <div class="column has-text-centered "><a href="{{ actor.star_imdb }}" target="_blank" class="button is-size-5 button-light bg--blue-300 shadow text__color-blue-900">IMDb entry</a></div>
+                    <div class="column has-text-centered "><a href="{{ actor.star_wiki }}" target="_blank" class="button button-light bg--blue-300 shadow text__color-blue-900 is-size-5">Wikipedia entry</a></div>
                     {% if actor.star_official|length > 1 %}
-                    <div class="column has-text-centered "><a href="{{ actor.star_official }} " class="button button-light bg--blue-300 shadow text__color-blue-900 is-size-5">Official homepage</a></div>
+                    <div class="column has-text-centered "><a href="{{ actor.star_official }}" target="_blank" class="button button-light bg--blue-300 shadow text__color-blue-900 is-size-5">Official homepage</a></div>
                     {% endif %}
                 </div>
                 </div>
