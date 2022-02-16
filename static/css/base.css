@@ -167,6 +167,10 @@ a.text__shadow--light:hover {
     background-color: #0369a1;
 }
 
+.bg--sky-800 {
+    background-color: #075985;
+}
+
 .bg--sky-900 {
     background-color: #0c4a6e;
 }

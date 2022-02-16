@@ -46,18 +46,32 @@
 </section>
 <section class="hero is-small bg--sky-900 text__color-sky-100">
     <div class="hero-body">
-        <h2 class="title is-2 text__color-sky-100 text__shadow--dark">Info</h2>
-        <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sollicitudin aliquam ultrices sagittis orci. Vitae congue mauris rhoncus aenean vel. Nisl tincidunt eget nullam non nisi est sit amet facilisis. Massa tincidunt nunc pulvinar sapien et ligula. Vel pharetra vel turpis nunc. At volutpat diam ut venenatis tellus in metus vulputate. Curabitur gravida arcu ac tortor dignissim convallis aenean et. Vitae purus faucibus ornare suspendisse. Vel fringilla est ullamcorper eget nulla. Leo in vitae turpis massa sed elementum tempus egestas sed. Quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Et egestas quis ipsum suspendisse ultrices. Commodo viverra maecenas accumsan lacus vel. A lacus vestibulum sed arcu. Velit laoreet id donec ultrices tincidunt arcu non. Velit aliquet sagittis id consectetur purus.
-        </p>
-        <h2 class="title is-2 mt-3 text__color-sky-100 text__shadow--dark">Appearance info</h2>
-        <p>Add info to fixtures, create field in model, then add to view and context</p>
+            <div class="columns is-multiline is-centered">
+                <div class="column is-10 is-4-tablet mb-3 card__box-shadow bg--sky-800">
+                    <h2 class="title is-2 text__color-sky-100 text__shadow--dark pl-5">Info</h2>
+                    <p class="is-size-5 px-5">
+                        {{ actor.star_info_1 }}
+                    </p>
+                    <p class="is-size-5 px-5">
+                        {{ actor.star_info_2 }}
+                    </p>
+
+
+                <div class="columns is-multiline is-mobile is-centered my-3">
+                    <div class="column has-text-centered "><a href="{{ actor.star_imdb }}" class="button is-size-5 button-light bg--blue-300 shadow text__color-blue-900">IMDb entry</a></div>
+                    <div class="column has-text-centered "><a href="{{ actor.star_wiki }}" class="button button-light bg--blue-300 shadow text__color-blue-900 is-size-5">Wikipedia entry</a></div>
+                    {% if actor.star_official|length > 1 %}
+                    <div class="column has-text-centered "><a href="{{ actor.star_official }} " class="button button-light bg--blue-300 shadow text__color-blue-900 is-size-5">Official homepage</a></div>
+                    {% endif %}
+                </div>
+                </div>
+            </div>
     </div>
 </section>
 <section class="hero is-small bg--sky-900 text__color-sky-100">
     <div class="hero-body">
         <div class="columns is-multiline is-centered">
-            <div class="column is-6-tablet">
+            <div class="column is-4-tablet has-text-centered card__box-shadow bg--sky-800">
                 <h2 class="title is-2 has-text-centered text__color-sky-100 text__shadow--dark">
                     Autograph
                 </h2>
@@ -70,7 +84,9 @@
                         {% endif %}
                     {% endfor %}
             </div>
-            <div class="column is-6-tablet">
+            <!-- create space between columns without affecting display on mobile devices -->
+            <div class="column is-1"></div>
+            <div class="column is-4-tablet has-text-centered card__box-shadow bg--sky-800">
                 <h2 class="title is-2 has-text-centered text__color-sky-100 text__shadow--dark">
                     Photoshoot
                 </h2>
@@ -84,8 +100,8 @@
                     {% endfor %}
             </div>
         </div>
-        <div class="columns">
-            <div class="column">
+        <div class="columns is-centered mt-3">
+            <div class="column is-10 is-6-tablet">
                 <div class="disclaimer__border--red">
                     <h3 class="title is-4 text__color-sky-100">Disclaimer</h3>
                     <p class="is-size-6">
