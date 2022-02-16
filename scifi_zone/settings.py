@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
-import dj_database_url
 from pathlib import Path
+import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -30,13 +30,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY", '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEVELOPMENT")
 
-ALLOWED_HOSTS = ['ms4-scifi-zone.herokuapp.com','localhost', '127.0.0.1']
-
-# causes hundreds of console errors if not set
-CORS_ALLOW_ALL_ORIGINS = True
+ALLOWED_HOSTS = ['ms4-scifi-zone.herokuapp.com', 'localhost', '127.0.0.1']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -68,7 +64,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'csp.middleware.CSPMiddleware',
 ]
 
 CRISPY_TEMPLATE_PACK = 'uni_form'
@@ -89,6 +84,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
                 'bag.contexts.bag_contents',
             ],
             'builtins': [
@@ -126,7 +122,7 @@ WSGI_APPLICATION = 'scifi_zone.wsgi.application'
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL')),
-        }
+    }
 
 else:
     DATABASES = {
