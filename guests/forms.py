@@ -14,8 +14,8 @@ class ActorForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         placeholders = {
             "name": "Name",
-            "star_autograph_category": "Star Autograph Category",
-            "star_photoshoot_category": "Star Photoshoot Category",
+            "star_autograph_category": "Star Autograph Category (A-C case-sensitve)",
+            "star_photoshoot_category": "Star Photoshoot Category (A-C case-sensitve)",
             "star_image_url": "Star Image URL",
             "star_image": "Star Image",
             "star_info_1": "Short SciFi related summary",

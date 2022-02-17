@@ -1,7 +1,9 @@
 from django.db import models
+from django.core.validators import RegexValidator
 from django.forms import CharField
 
 
+ADDON_CATEGORY_REGEX = RegexValidator(r'^[A-C]$')
 class Category(models.Model):
     """A class for the different ticket and package categories"""
 
@@ -66,9 +68,9 @@ class Actor(models.Model):
 
     name = models.CharField(max_length=60)
     star_autograph_category = models.CharField(
-        max_length=1)
+        max_length=1, validators=[ADDON_CATEGORY_REGEX])
     star_photoshoot_category = models.CharField(
-        max_length=1)
+        max_length=1, validators=[ADDON_CATEGORY_REGEX])
     star_image_url = models.URLField(max_length=1024, null=True, blank=True)
     star_image = models.ImageField(default='noimage.png')
     star_info_1 = models.TextField(null=True)
@@ -76,8 +78,9 @@ class Actor(models.Model):
     star_imdb = models.URLField(max_length=1024, null=True, blank=True)
     star_wiki = models.URLField(
         max_length=1024,
-        default=f"https://en.wikipedia.org/wiki/{name}")
+        null=True, blank=True)
     star_official = models.URLField(max_length=1024, null=True, blank=True)
+
 
     def __str__(self):
         return str(self.name)
