@@ -9,7 +9,7 @@
         </h2>
         <div class="columns is-multiline">
             {% for actor in actors %}
-                <div class="column is-2-tablet has-text-centered">
+                <div class="column is-2-tablet has-text-centered custom-image--actor mx-auto">
                     <figure class="image is-3-by-5 mb-2 portrait__border card__box-shadow text__color-sky-100">
                         {% if actor.star_image %}
                             <img src="{{ MEDIA_URL }}{{actor.star_image}} " alt="{{ actor.name }}">

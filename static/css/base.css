@@ -389,6 +389,10 @@ a.button.remove {
     max-width: 50%;
 }
 
+/* separate class needed for media query */
+.custom-image--actor {
+    max-width: 50%;
+}
 .radio + .radio {
     /* override Bulma setting */
     margin-left: 0;
@@ -402,6 +406,9 @@ a.button.remove {
 /*----- MEDIA QUERIES -----*/
 @media screen and (max-width: 768px) {
     .quantity-input {
+        max-width: 100%;
+    }
+    .custom-image--actor {
         max-width: 100%;
     }
 }
