@@ -52,6 +52,21 @@
                                 </div>
                         </div>
                     {% endif %}
+                    <div class="navbar-item">
+                        <form method="GET" action="{% url 'tickets' %}">
+                            <div class="field has-addons">
+                                <div class="control">
+                                    <label for="search" hidden>Search bar</label>
+                                    <input class="input" type="text" name="q" id="search" placeholder="Search tickets">
+                                </div>
+                                <div class="control">
+                                    <button class="button" type="submit" aria-label="submit search">
+                                        <i class="fa-regular fa-magnifying-glass"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="navbar-end">
                     <a class="navbar-item" href="">

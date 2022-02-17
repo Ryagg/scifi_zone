@@ -1,5 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Ticket, Package, Actor
+from django.shortcuts import redirect, render, reverse, get_object_or_404
+from django.contrib import messages
+
+from django.db.models import Q
+from .models import Ticket, Actor
 
 # pylint: disable=locally-disabled, no-member
 
@@ -7,13 +10,28 @@ def all_tickets(request):
     """ A view to show all tickets """
 
     tickets = Ticket.objects.filter(name__icontains='Ticket')
+    query = None
+
+    if request.GET:
+        if "q" in request.GET:
+            query = request.GET["q"]
+
+            if not query:
+                messages.error(request, "You didn't enter any search criteria")
+                return redirect(reverse('tickets'))
+
+            # return results where the query is matched in name OR description
+            queries = Q(
+                name__icontains=query) | Q(
+                description__icontains=query)
+            tickets = tickets.filter(queries)
 
     context = {
     'tickets': tickets,
+    "search_term": query,
     }
 
     return render(request, 'tickets/tickets.html', context)
-
 
 def ticket_detail(request, tickets_id):
     """ A view to show detailed ticket information """
@@ -22,8 +40,6 @@ def ticket_detail(request, tickets_id):
     price_category = ticket.price_category
     goodies = ticket.included.split(',')
     actors = Actor.objects.all()
-
-
 
     context = {
         'ticket': ticket,
