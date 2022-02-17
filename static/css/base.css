@@ -55,7 +55,9 @@ a.item-name:hover {
 }
 
 a.item-name--light:hover,
-a.link--light:hover {
+a.link--light:hover,
+#div_id_remember :hover,
+input#id_remember.checkboxinput:hover {
     color: #e0f2fe;
     text-decoration-line: underline;
 }
@@ -298,10 +300,17 @@ a.text__shadow--light:hover {
     margin-bottom: 0.5rem;
 }
 
+select#id_default_country {
+    font-family: "Saira", sans-serif;
+    padding-bottom: 0.1rem;
+    padding-top: 0.1rem;
+}
+
 .allauth-form-inner-content input,
 .custom-form input,
+.custom-form textarea,
 .custom-form select {
-    border-color: #93c5fd;
+    border: 4px #93c5fd ridge;
     margin-bottom: 0.5rem;
 }
 
