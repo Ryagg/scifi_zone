@@ -26,6 +26,8 @@ The deployed project can be found [here](https://ms4-scifi-zone.herokuapp.com/).
 
 ### **User stories:**
 
+---
+
 #### **Viewing and Navigation**
 
 -   01: As a site user, I want to be able to view a list of tickets, so that I can see the price range.
@@ -87,6 +89,8 @@ All icons on the pages are from [Font Awesome](https://fontawesome.com). Links t
 
 Actor images were obtained from [Wikimedia](https://commons.wikimedia.org/w/index.php?search=&title=Special:MediaSearch&type=image). A [SOURCE.md](https://docs.google.com/spreadsheets/d/1rQUjvQ1QUJXCy0xjzFvaGLI8nwJdJbU3G1KA6ERHgbY/edit#gid=0) was created containing information about the image author, license + attribution, an image description and the URLs both for the image file and the image page. The images were then uploaded to [Cloudinary](https://cloudinary.com/) and transformed. The transformation includes changing the resolution, changing the format depending on the used browser, and adding image credit. For this purpose, several transformations had to be created to apply the correct image credit to each image.
 
+Images used on the tickets and packages pages were obtained from [Freepik](https://www.freepik.com/home). Credit for each image is given below in the media section.
+
 ### **Wireframes**
 
 ---
@@ -143,16 +147,16 @@ The homepage consists of three sections informing the user about the site's aim,
 
 #### **Guests page features**
 
-The guests page provides an overview of all guests attending the event, and informs the user that more information can be found on each guest's detail page.
+The guests page provides an overview of all guests attending the event, and informs the user that more information can be found on each guest's detail page. Admins can edit the guest info and remove the guest from the convention via buttons that are only displayed for admins.
 
 #### **Guests detail page features**
 
 The detail page for each guest contains a paragraph with general information about the guest, and links to the guest's pages on IMDB, Wikipedia, and the guest's own homepage (if there is one). A second paragraph provides the appearance info for the guest. Due to time constraints, and also as is usual for similar events, detailed information is not provided until about 6 weeks before the event.
-The page also informs the user how much an autograph from and a photoshoot with the actor will cost. Currently, the buttons only link to the corresponding ticket page, instead of directly adding the ticket to the shopping bag. At the bottom of the page, a disclaimer informs the user that these tickets are only valid in combination with a standard ticket or a package, and that guest appearance can't be guaranteed, and that a credit refund voucher will be provided if the guest does not appear at the event.
+The page also informs the user how much an autograph from and a photoshoot with the actor will cost. Currently, the buttons only link to the corresponding ticket page, instead of directly adding the ticket to the shopping bag. At the bottom of the page, a disclaimer informs the user that these tickets are only valid in combination with a standard ticket or a package, and that guest appearance can't be guaranteed, and that a credit refund voucher will be provided if the guest does not appear at the event. Admins can edit the guest info and remove the guest from the convention via buttons that are only displayed for admins.
 
 #### **Tickets and packages page features**
 
-Both the tickets and packages page contain a short paragraph with general information about the products. All available products are listed with their price and a link to the product's detail page. At the bottom of the page, links to the opposite product are provided.
+Both the tickets and packages page contain an image and a short paragraph with general information about the products. All available products are listed with their price and a link to the product's detail page. At the bottom of the page, links to the opposite product are provided.
 
 #### **Tickets and packages detail page features**
 
@@ -190,8 +194,6 @@ For users who already purchased products, the form with the billing address will
 
 Admins can add new guests to the event. A form with fields taken from the correspondent model is displayed. If the form is valid and submitted, the new guest will be added to the database, and the homepage, guests page and guest detail page are updated. The cancel-button takes the admin back to the guests page.
 
-ADD REMAINING OPTIONS!
-
 #### **Logout page features**
 
 The logout page features a confirmation dialogue before the user is logged out and the session cleared.
@@ -204,8 +206,6 @@ NOT YET IMPLEMENTED
 
 NOT YET IMPLEMENTED
 
-NOT YET IMPLEMENTED
-
 #### **General Data Protection Regulation compliance**
 
 The site features both a site notice and a privacy policy. Both pages can be reached through links in the footer. A paid subscription has been bought at [e-recht24.de](https://www.e-recht24.de/) to ensure compliance with all applicable regulations.
@@ -214,9 +214,17 @@ The site features both a site notice and a privacy policy. Both pages can be rea
 
 ---
 
-To be added
+-   A Frequently Asked Questions page
+
+### ** Removed Features / Features chosen not to be implemented**
+
+---
+
+-   Copyright page: Image credit is given in the readme, and for actor images also at the bottom of each image and the separate SOURCES.md. A separate copyright page is not needed.
 
 ## **Technologies Used**
+
+---
 
 ---
 
@@ -277,6 +285,10 @@ To be added
 
     used to render forms
 
+-   [Pytest-Django](https://github.com/pytest-dev/pytest-django)
+
+    Used for automated tests with [Pytest](https://docs.pytest.org/en/7.0.x/)
+
 -   [Google Chrome Developer Tools](https://developer.chrome.com/docs/devtools/)
 
     Used to check the styling, colour contrast and responsiveness of the site
@@ -319,14 +331,16 @@ Please refer to the separate [TESTING.md](TESTING.md) for all forms of testing a
 
 ### **Forking**
 
+---
+
 If you wish to use this repository as a starting point or to propose changes to this project, you can fork it. Follow the steps below.
 
 1. Navigate to the repository [Ryagg/scifi_zone](https://github.com/Ryagg/scifi_zone)
 2. Click 'Fork' in the top-right corner.
 
----
-
 ### **Cloning**
+
+---
 
 Cloning a repository creates a local copy on your computer. Follow the steps below.
 
@@ -342,9 +356,9 @@ Alternatively, if using Gitpod, you can click below to create your own workspace
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Ryagg/scifi_zone)
 
----
-
 ### **Deploy remotely**
+
+---
 
 To deploy the site remotely on [Heroku](https://www.heroku.com/) please follow the steps below.
 
@@ -352,11 +366,20 @@ To deploy the site remotely on [Heroku](https://www.heroku.com/) please follow t
 2. Create a **Procfile** with the content `web:gunicorn scifi_zone.wsgi:application`. Remove any blank lines at the end as they may cause errors.
 3. Register a free Heroku account, if you don't have one already, sign in and create the app.
 4. Select the **Deploy** tab and choose **Github** as **Deployment method**.
-5. Select the **Settings** tab and click on **Reveal Config Vars** in the section **Config Vars**. Enter your key-value-pairs from your **env.py** file without the quotes. The following variables should be added:
-    - !!!!ADD VARIABLES!!!!!
-    - DEBUG: False
+5. Select the **Settings** tab and click on **Reveal Config Vars** in the section **Config Vars**. Add the following variables:
+    - SECRET_KEY: `<your secret key>`
+    - DATABASE_URL: `<your Postgress db URL from Heroku>`
+    - USE_AWS: True
+    - AWS_ACCESS_KEY_ID: `<your AWS access key id, generated in the AWS console after user creation>`
+    - AWS_SECRET_ACCESS_KEY: `<your secret AWS access key, generated in the AWS console after user creation>`
+    - STRIPE_PUBLIC_KEY: `<your Stripe public key>`
+    - STRIPE_SECRET_KEY: `<your Stripe secret key>`
+    - STRIPE_WEBHOOK_KEY: `<your Stripe webhook key. Only necessary if using webhooks. This project currently does not use webhooks.>`
+    - EMAIL_HOST_PASS: `<your project email password>`
+    - EMAIL:HOST_USER: `<your project email address>`
+    - DEVELOPMENT: False
         - Set this value to 'True' when updating the code.
-        - **In any other case set it to 'False' to avoid remote code execution!**
+        - **In any other case set it to 'False' or remove it to avoid remote code execution!**
 6. Push the **Procfile** to your Github repo.
 7. Back under the **Deploy** tab in Heroku enable **Automatic deploys**.
 8. Select the **main branch** and click on **Deploy branch**.
@@ -372,33 +395,23 @@ To deploy the site remotely on [Heroku](https://www.heroku.com/) please follow t
 
 ---
 
-Photos used as background for all pages were obtained from [Unsplash](https://unsplash.com).
+The following photos were obtained from [Freepik](https://www.freepik.com/home).
 
--   ADD detailed credits for each image
+#### tickets templates
 
-All actor images obtained from [Memory Alpha](https://memory-alpha.fandom.com/wiki/Portal:Main) and are published here under the following terms:
+Stack of event tickets: Photo by [alfatwp](https://www.freepik.com/alfatwp) on [Freepik](https://www.freepik.com/premium-psd/event-ticket-mockup_5663633.htm#&position=3&from_view=undefined)
 
--   **License**
+Fountain pen signing signature: Photo by [BillionPhotos](https://www.freepik.com/billionphotos) on [Freepik](https://www.freepik.com/premium-photo/signing-signature-with-classic-fountain-pen_17060832.htm#&position=5&from_view=undefined)
 
-    Fair Use - the material is copyrighted but used here under [Fair Use](http://en.wikipedia.org/wiki/Fair_Use) guidelines.
+Women filming herself using a camera on a tripod: Photo by [frimufilms](https://www.freepik.com/frimufilms) on [Freepik](https://www.freepik.com/free-photo/young-content-creator-blonde-talking-gesturing-girl-filming-herself-using-camera-tripod_13843525.htm#&position=6&from_view=undefined)
 
--   **Owner/Creator**
+#### packages templates
 
-    Pocket Books and its corporate heir, Gallery Books, a subsidiary of Simon & Schuster.
-
--   **Source**
-
-    -   ADD SOURCE FOR EACH IMAGE
+4 falling down event tickets: Photo by [alfatwp](https://www.freepik.com/alfatwp) on [Freepik](https://www.freepik.com/premium-psd/event-ticket-mockup_5663630.htm#&position=0&from_view=undefined)
 
 Actor images obtained from [Wikimedia](https://commons.wikimedia.org/wiki/Main_Page):
 
 -   Please refer to the separate [SOURCES.md](https://docs.google.com/spreadsheets/d/1rQUjvQ1QUJXCy0xjzFvaGLI8nwJdJbU3G1KA6ERHgbY/edit?usp=sharing) for sources, licenses and attribution for each image.
-
-### **Content**
-
----
-
-Scifi-Zone uses content derived from [Memory Alpha](http://memory-alpha.wikia.com/), therefore it is safe to assume that most of SciFi-Zone's content is licensed under [CC-BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). For details on Memory Alpha licensing see this [link](https://memory-alpha.fandom.com/wiki/Memory_Alpha:Copyrights).
 
 ### **Code**
 
@@ -406,14 +419,17 @@ Scifi-Zone uses content derived from [Memory Alpha](http://memory-alpha.wikia.co
 
 All code not written by me has the source for the code added as comment above the relevant code. For longer pieces of code the credit is repeated beneath.
 
--   ADD INFO
+-   The Python/Django and Javascript code from Code Institute's [Boutique Ado walkthrough](https://github.com/Code-Institute-Solutions/boutique_ado_v1) was used as a groundwork for this project.
 
 ### **Websites and Documentation**
+
+---
 
 -   [Bulma docs](https://bulma.io/documentation/)
 -   [Django docs](https://docs.djangoproject.com/en/3.2/)
 -   [Django-CSP docs](https://django-csp.readthedocs.io/en/latest/index.html)
 -   [Django-crispy-forms docs](https://django-crispy-forms.readthedocs.io/en/latest/index.html)
+-   [Pytest-Dango docs](https://pytest-django.readthedocs.io/en/latest/)
 -   [Stackoverflow](https://stackoverflow.com/)
 -   [CSS-tricks](https://css-tricks.com/)
 
@@ -423,4 +439,6 @@ All code not written by me has the source for the code added as comment above th
 
 Many thanks to:
 
--   ADD LATER
+-   My mentor, Tim Nelson, for his truly outstanding support and advice.
+-   The tutors from Code Institute for their guidance. Special shout-out to Scott_ci: You rock!
+-   The always helpful and supportive CI slack community.
