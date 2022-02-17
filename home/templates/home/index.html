@@ -35,7 +35,9 @@
                     <div class="column has-text-centered">
                         <figure class="image is-4by5 mb-2 portrait__border card__box-shadow text__color-sky-100">
                             {% if actor.star_image %}
-                                <img src="{{ actor.star_image_url }}" alt="{{ actor.name }} ">
+                            <img src="{{ MEDIA_URL }}{{actor.star_image}} " alt="{{ actor.name }}">
+                            {% elif actor.star_image_url %}
+                                <img src="{{ MEDIA_URL }}{{actor.star_image_url}} " alt="{{ actor.name }}">
                             {% else %}
                                 <img src="{{ MEDIA_URL }}noimage.png" alt="placeholder image for missing actor image">
                             {% endif %}

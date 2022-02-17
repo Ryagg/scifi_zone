@@ -11,10 +11,12 @@
             <div class="column is-2-tablet">
                 <figure class="image is-3by5 mb-2 portrait__border card__box-shadow text__color-sky-100">
                     {% if actor.star_image %}
-                        <img src="{{ actor.star_image_url }}" alt="{{ actor.name }}">
-                    {% else %}
-                        <img src="{{ MEDIA_URL }}noimage.png" alt="placeholder image for missing actor image">
-                    {% endif %}
+                            <img src="{{ MEDIA_URL }}{{actor.star_image}} " alt="{{ actor.name }}">
+                        {% elif actor.star_image_url %}
+                            <img src="{{ MEDIA_URL }}{{actor.star_image_url}} " alt="{{ actor.name }}">
+                        {% else %}
+                            <img src="{{ MEDIA_URL }}noimage.png" alt="placeholder image for missing actor image">
+                        {% endif %}
                 </figure>
                 <div class="columns mt-2">
                         <div class="column has-text-centered">
@@ -55,15 +57,17 @@
                     <p class="is-size-5 px-5">
                         {{ actor.star_info_2 }}
                     </p>
-
-
-                <div class="columns is-multiline is-mobile is-centered my-3">
-                    <div class="column has-text-centered "><a href="{{ actor.star_imdb }}" target="_blank" class="button is-size-5 button-light bg--blue-300 shadow text__color-blue-900">IMDb entry</a></div>
-                    <div class="column has-text-centered "><a href="{{ actor.star_wiki }}" target="_blank" class="button button-light bg--blue-300 shadow text__color-blue-900 is-size-5">Wikipedia entry</a></div>
-                    {% if actor.star_official|length > 1 %}
-                    <div class="column has-text-centered "><a href="{{ actor.star_official }}" target="_blank" class="button button-light bg--blue-300 shadow text__color-blue-900 is-size-5">Official homepage</a></div>
-                    {% endif %}
-                </div>
+                    <div class="columns is-multiline is-mobile is-centered my-3">
+                        {% if actor.star_imdb|length > 1 %}
+                            <div class="column has-text-centered "><a href="{{ actor.star_imdb }}" target="_blank" class="button is-size-5 button-light bg--blue-300 shadow text__color-blue-900">IMDb entry</a></div>
+                        {% endif %}
+                        {% if actor.star_wiki|length > 1 %}
+                            <div class="column has-text-centered "><a href="{{ actor.star_wiki }}" target="_blank" class="button button-light bg--blue-300 shadow text__color-blue-900 is-size-5">Wikipedia entry</a></div>
+                        {% endif %}
+                        {% if actor.star_official|length > 1 %}
+                            <div class="column has-text-centered "><a href="{{ actor.star_official }}" target="_blank" class="button button-light bg--blue-300 shadow text__color-blue-900 is-size-5">Official homepage</a></div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
     </div>
