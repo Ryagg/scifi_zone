@@ -47,7 +47,7 @@
 <section class="hero is-small bg--sky-900 text__color-sky-100">
     <div class="hero-body">
             <div class="columns is-multiline is-centered">
-                <div class="column is-10 is-4-tablet mb-3 card__box-shadow bg--sky-800">
+                <div class="column is-10 is-4-tablet is-9-desktop mb-3 card__box-shadow bg--sky-800">
                     <h2 class="title is-2 text__color-sky-100 text__shadow--dark pl-5">Info</h2>
                     <p class="is-size-5 px-5">
                         {{ actor.star_info_1 }}
@@ -77,7 +77,7 @@
                 </h2>
                     {% for ticket in tickets %}
                         {% if actor.star_autograph_category == ticket.price_category and "Autograph" in ticket.name %}
-                            <p class="is-size-3 has-text-centered">€{{ ticket.price }}</p>
+                            <p class="is-size-4 has-text-centered">€{{ ticket.price }}</p>
                             <div class="control has-text-centered">
                                 <a href="{% url 'ticket_detail' ticket.id %} " class="button button-light my-4 is-size-4 has-text-weight-medium bg--blue-300 shadow text__color-blue-900">Buy Autograph</a>
                             </div>
@@ -101,10 +101,10 @@
             </div>
         </div>
         <div class="columns is-centered mt-3">
-            <div class="column is-10 is-6-tablet">
+            <div class="column column is-10 is-4-tablet is-9-desktop">
                 <div class="disclaimer__border--red">
                     <h3 class="title is-4 text__color-sky-100">Disclaimer</h3>
-                    <p class="is-size-6">
+                    <p class="subtitle is-size-6 text__color-sky-100">
                     Ticket only valid in combination with a standard ticket or package for the same day. Guest appearance subject to work commitments outside the control of SFZ. In case of cancellation by the guest, a credit refund voucher for the same price category will be issued and can be used within two years.
                     </p>
                 </div>
