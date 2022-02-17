@@ -19,12 +19,22 @@
                         <div class="card">
                             <header class="card-header">
                                 <p class="card-header-title is-centered">
-                                    <a class="is-size-5 item-name" href="{% url 'package_detail' package.id package.name %} ">{{ package.name }}</a>
+                                    <a class="is-size-5 item-name text__shadow--blue" href="{% url 'package_detail' package.id package.name %} ">{{ package.name }}</a>
                                 </p>
                             </header>
-                            <div class="card-image">
-                                <figure class="image is-128x128 mx-auto mt-5">
-                                    <img src="http://placekitten.com/g/128/128" alt="">
+                            <div class="card-image custom-image mx-auto">
+                                <figure class="image is-3by2 mx-auto mt-5">
+                                    {% if "Silver" in package.name %}
+                                        <img src="{{ MEDIA_URL }}package.jpg" class="image__border--silver" alt="4 event tickets">
+                                    {% elif "Gold" in package.name %}
+                                        <img src="{{ MEDIA_URL }}package.jpg" class="image__border--gold" alt="4 event tickets">
+                                    {% elif "Platinum" in package.name %}
+                                        <img src="{{ MEDIA_URL }}package.jpg" class="image__border--platinum" alt="4 event tickets">
+                                    {% elif "Diamond" in package.name %}
+                                        <img src="{{ MEDIA_URL }}package.jpg" class="image__border--diamond" alt="4 event tickets">
+                                    {% else %}
+                                        <img src="{{ MEDIA_URL }}package.jpg" alt="4 event tickets">
+                                    {% endif %}
                                 </figure>
                             </div>
                             <div class="card-content">

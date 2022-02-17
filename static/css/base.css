@@ -148,6 +148,10 @@ a.text__shadow--light:hover {
     text-decoration-thickness: 3px;
 }
 
+.text__shadow--blue {
+    text-shadow: 1px 1px 3px #075985;
+}
+
 .text__shadow--dark {
     text-shadow: 1px 1px 3px #151616;
 }
@@ -242,6 +246,25 @@ a.text__shadow--light:hover {
     border: 3px #e0f2fe ridge;
 }
 
+.image__border--silver {
+    border: 6px #c0c0c0 ridge;
+}
+
+.image__border--gold {
+    border: 6px #ffd700 ridge;
+}
+
+.image__border--platinum {
+    border: 6px #e5e4e2 ridge;
+}
+
+.image__border--diamond {
+    border: 6px #b9f2ff ridge;
+}
+
+.image__border--no-name {
+    border: 6px #0c4a6e ridge;
+}
 .hr-top {
     border-top: 3px solid white;
 }
@@ -361,7 +384,8 @@ a.button.remove {
 }
 
 .quantity-input,
-.cc-element {
+.cc-element,
+.custom-image {
     max-width: 50%;
 }
 

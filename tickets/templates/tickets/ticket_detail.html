@@ -8,9 +8,15 @@
             <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">{{ ticket.name }}</h1>
             <div class="columns is-multiline is-centered">
                     <div class="column is-6-tablet">
-                        <div class="block">
-                                <figure class="image is-128x128 mx-auto">
-                                    <img src="http://placekitten.com/g/128/128" alt="">
+                        <div class="block custom-image mx-auto">
+                                <figure class="image is-3by2 mx-auto">
+                                    {% if "Autograph" in ticket.name %}
+                                        <img src="{{ MEDIA_URL }}autograph.jpg" alt="signing a signature with a pen">
+                                    {% elif "Photoshoot" in ticket.name %}
+                                        <img src="{{ MEDIA_URL }}photoshoot.jpg" alt="blonde women filming herself using a camera on a tripod">
+                                    {% else %}
+                                        <img src="{{ MEDIA_URL }}ticket.jpg" alt="event ticket">
+                                    {% endif %}
                                 </figure>
                         </div>
                         <div class="block">

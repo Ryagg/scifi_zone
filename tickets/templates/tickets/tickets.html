@@ -15,19 +15,25 @@
             </div>
             <div class="columns is-multiline">
                     {% for ticket in tickets %}
-                    <div class="column is-6-tablet is-4-desktop my-2">
+                    <div class="column is-2-tablet is-4-desktop my-2">
                         <div class="card">
                             <header class="card-header has-text-centered">
                                 <p class="card-header-title is-centered">
-                                    <a class="is-size-5 item-name" href="{% url 'ticket_detail' ticket.id %}">{{ ticket.name }}</a>
+                                    <a class="is-size-5 item-name text__shadow--blue" href="{% url 'ticket_detail' ticket.id %}">{{ ticket.name }}</a>
                                 </p>
                             </header>
-                            <div class="card-image">
-                                <figure class="image is-128x128 mx-auto mt-5">
-                                    <img src="http://placekitten.com/g/128/128" alt="">
+                            <div class="card-image column--less-padding custom-image mx-auto">
+                                <figure class="image is-3by2 mt-5">
+                                    {% if "Autograph" in ticket.name %}
+                                        <img src="{{ MEDIA_URL }}autograph.jpg" alt="signing a signature with a pen">
+                                    {% elif "Photoshoot" in ticket.name %}
+                                        <img src="{{ MEDIA_URL }}photoshoot.jpg" alt="blonde women filming herself using a camera on a tripod">
+                                    {% else %}
+                                        <img src="{{ MEDIA_URL }}ticket.jpg" alt="event ticket">
+                                    {% endif %}
                                 </figure>
                             </div>
-                            <div class="card-content">
+                            <div class="card-content column--less-padding py-2">
                                 <div class="content has-text-centered">
                                     <p class="is-size-5">€{{ ticket.price }}.00</p>
                                 </div>
