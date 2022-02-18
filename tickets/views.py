@@ -51,10 +51,13 @@ def package_detail(request, package_id, package_name):
     """ A view to show detailed package information """
 
     package = get_object_or_404(Ticket, pk=package_id, name=package_name)
-    goodies = package.included.split(',')
+    included = package.included.split(',')
+    goodies = package.goodies.split("+")
+
 
     context = {
         'package': package,
+        'included': included,
         'goodies': goodies,
     }
 

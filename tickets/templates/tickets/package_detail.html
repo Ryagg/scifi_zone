@@ -31,9 +31,14 @@
                     <div class="block">
                         <h3 class="title is-3 text__color-sky-100 text__shadow--dark pt-3">Included in this package:</h3>
                         <ul class="subtitle is-size-5 text__color-sky-100">
-                            {% for goodie in goodies %}
-                            <li>{{ goodie }}</li>
+                            {% for item in included %}
+                                <li>{{ item }}</li>
                             {% endfor %}
+                            <ul class="subtitle is-size-5 ml-4 text__color-sky-100">
+                                {% for goodie in goodies %}
+                                    <li>{{ goodie }} </li>
+                                {% endfor %}
+                            </ul>
                         </ul>
                     </div>
                     <form action="{% url 'add_to_bag' package.id %}" method="POST">
