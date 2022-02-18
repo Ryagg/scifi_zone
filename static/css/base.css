@@ -1,11 +1,10 @@
 /*----- GENERAL STYLES -----*/
 body {
     font-family: "Saira", sans-serif;
-    height: 100%;
-}
-
-html {
-    height: 100%;
+    /* needed for sticky footer, found at https://gehrcke.de/2020/03/bulma-sticky-footer-flexbox-solution/  */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 h1,
@@ -17,20 +16,24 @@ h6 {
     font-family: "Orbitron", sans-serif;
 }
 
-.body__footer--down {
+/* .body__footer--down {
     min-height: 83vh;
 }
 
 .nth-section__footer--down {
     min-height: 30vh;
     max-height: 70vh;
-}
+} */
 
 .column--less-padding {
     padding: 0;
 }
 
 /*----- CONTAINERS -----*/
+/* needed for sticky footer, see credit in line 4 */
+#wrapper {
+    flex: 1;
+}
 
 .hero__bg--nebula {
     background: url("/media/nasa_nebula_640px.jpg") no-repeat center center fixed;

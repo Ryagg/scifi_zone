@@ -3,7 +3,7 @@
 {% load bag_tools %}
 
 {% block content %}
-<section class="hero is-medium bg--sky-900 text__color-sky-100 body__footer--down">
+<section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
     <div class="hero-body">
         <div class="container">
             <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Your shopping bag</h1>
@@ -43,7 +43,7 @@
                                     <p class="control">
                                         <div class="update-quantity">
                                         <!-- mb-1 needed for mobile devices, my-1 used to make it look even -->
-                                        <input name="quantity" class="input quantity-input my-1" type="number" placeholder="New quantity" value="" data-item_id="{{ item.item_id }}">
+                                        <input name="quantity" class="input quantity-input my-1" type="number" pattern="^[1-9]{1,2}$" placeholder="New quantity" value="" data-item_id="{{ item.item_id }}">
                                         <input class="button update-bag my-1" type="submit" value="Update bag">
                                         <a href="{% url 'remove_from_bag' item.item_id %} " id="remove-item" class="button remove my-1">Remove</a>
                                         </div>
