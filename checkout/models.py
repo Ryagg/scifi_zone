@@ -1,3 +1,4 @@
+from operator import mod
 import uuid
 
 from django.db import models
@@ -33,6 +34,8 @@ class Order(models.Model):
     grand_total = models.DecimalField(
         max_digits=6, decimal_places=0, null=False, default=0
     )
+    payment_status = models.CharField(max_length=30, null=True, blank=True)
+    order_status = models.CharField(max_length=30, null=True, blank=True)
     original_bag = models.TextField(null=False, blank=False, default='')
     stripe_pid = models.CharField(
         max_length=254, null=False, blank=False, default='')

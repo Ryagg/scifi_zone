@@ -74,6 +74,8 @@ def checkout(request):
             'postcode': request.POST['postcode'],
             'state': request.POST['state'],
             'country': request.POST['country'],
+            'order_status': '',
+            'payment_status': '',
         }
         order_form = OrderForm(form_data)
         if order_form.is_valid:
@@ -179,6 +181,9 @@ def checkout_success(request, order_number):
     """Handle successfull checkouts"""
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+    order.order_status = "accepted, processing"
+    order.payment_status = "accepted"
+    order.save()
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)

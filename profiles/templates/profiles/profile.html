@@ -57,15 +57,15 @@
                                 </div> <!-- end of columns -->
                                 <div class="columns is-multiline">
                                     <div class="column is-10-tablet is-offset-1 pb-5 hr-bottom--blue">
-                                        <p class="is-size-5 has-text-left">Payment status: </p>
-                                        <p class="is-size-5 has-text-left">Order status: </p>
+                                        <p class="is-size-5 has-text-left">Payment status: {{ order.payment_status }} </p>
+                                        <p class="is-size-5 has-text-left">Order status: {{ order.order_status }} </p>
                                     </div>
                                 </div>
                             {% endfor %}
                         {% else %}
                             <p class="is-size-3">You haven't ordered any tickets yet.</p>
                             <p class="is-size-4">
-                                Take a look at our <a class="has-text-weight-semibold text__color-sky-900" href="{% url 'tickets' %}">tickets</a>!
+                                Find your <a class="has-text-weight-semibold text__color-sky-900" href="{% url 'tickets' %}">ticket</a> or <a class="has-text-weight-semibold text__color-sky-900" href="{% url 'packages' %}">package</a>!
                             </p>
                         {% endif %}
                     </section>
