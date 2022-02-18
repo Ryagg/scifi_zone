@@ -11,7 +11,7 @@
                 <h2 class="subtitle is-3 has-text-centered text__color-sky-100 text__shadow--dark">Order Summary ({{ item_count }} items)</h2>
                 {% for item in bag_items %}
                     <div class="columns is-multiline is-centered ">
-                        <div class="column is-8-tablet is-6-desktop px-5 bag-item card__box-shadow">
+                        <div class="column checkout is-8-tablet is-6-desktop px-5 bag-item card__box-shadow">
                             <div class="level is-mobile my-1">
                                 <div class="level-left">
                                     <div class="level-item">
@@ -69,7 +69,7 @@
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
                     <div class="columns is-multiline is-centered">
-                        <div class="column is-narrow-tablet px-5 bag-item card__box-shadow">
+                        <div class="column is-8-tablet is-6-desktop checkout px-5 bag-item card__box-shadow">
                             <h2 class="title is-2 has-text-centered text__color-sky-900 text__shadow--dark">Billing address</h2>
                                 <div class="field custom-form">
                                     {{ order_form.full_name | as_crispy_field }}
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="columns is-multiline is-centered">
-                        <div class="column is-6-tablet is-size-4 has-text-centered mt-4">
+                        <div class="column is-6-tablet is-size-5 has-text-centered mt-4">
                             {% if user.is_authenticated %}
                                 <label for="id-save-info">Save this delivery information to my profile</label>
                                 <input type="checkbox" id="id-save-info" name="save-info" checked>
@@ -97,7 +97,8 @@
                         </div>
                     </div> <!-- end of columns -->
                     <div class="columns is-multiline is-centered">
-                        <div class="column is-6-tablet">
+                        <div class="column checkout is-6-tablet has-text-centered">
+                            <p class="is-size-5 has-text-weight-semibold disclaimer__border--red mb-5">By submitting your card will be charged €{{ grand_total }}!</p>
                             <div class="field my-3 card__box-shadow bg--slate-800 py-3 px-3 ">
                                 <div id="card-element">
                                     <!-- Elements will create form elements here -->
@@ -111,6 +112,7 @@
                                 <button id="submitPayment" class="custom-form my-3">Submit Payment</button>
                             </div>
                         </div>
+                    </div>
             </form>
         </div> <!-- end of body -->
     </section>

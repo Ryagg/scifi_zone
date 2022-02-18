@@ -421,7 +421,7 @@ a.button.remove {
         max-width: 100%;
     }
     .custom-image--actor {
-        max-width: 100%;
+        max-width: 80%;
     }
 }
 
@@ -429,6 +429,14 @@ a.button.remove {
     .hero__bg--nebula {
         background: url("/media/nasa_nebula_768px.jpg") no-repeat center center fixed;
         background-size: cover;
+    }
+    .custom-image--actor {
+        max-width: 40%;
+    }
+    .checkout {
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -443,6 +451,9 @@ a.button.remove {
     .hero__bg--nebula {
         background: url("/media/nasa_nebula_1366px.jpg") no-repeat center center fixed;
         background-size: cover;
+    }
+    .custom-image--actor {
+        max-width: 25%;
     }
 }
 
