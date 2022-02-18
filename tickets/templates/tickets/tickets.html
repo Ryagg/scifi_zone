@@ -8,12 +8,14 @@
             <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Tickets</h1>
             <div class="columns is-multiline is-centered">
                 <div class="column  my-2">
-                    <p class="is-size-5">
-                    Tickets allow you to customize your experience at SciFi Zone 2022. Mix as many tickets as you like. Please note that Autograph and Photoshoot tickets are valid only in combination with either any valid Standard Ticket or in addition to a valid Package.
-                    </p>
+                    {% if not search_term %}
+                        <p class="is-size-5">
+                            Tickets allow you to customize your experience at SciFi Zone 2022. Mix as many tickets as you like. Please note that Autograph and Photoshoot tickets are valid only in combination with either any valid Standard Ticket or in addition to a valid Package.
+                        </p>
+                    {% endif %}
                 </div>
             </div>
-            <div class="columns is-multiline">
+            <div class="columns is-multiline is-centered">
                     {% for ticket in tickets %}
                     <div class="column is-2-tablet is-4-desktop my-2">
                         <div class="card">
@@ -44,12 +46,17 @@
                     {% endfor %}
                     <hr>
             </div> <!-- end of columns -->
+
             <div class="columns is-multiline">
+
                 <div class="column has-text-centered mt-5 mb-2 hr-top">
+                {% if not search_term %}
                     <p class="is-size-4">Want to make even more out of your visit?</p>
                     <p class="is-size-4">Take a look at our <a class="has-text-weight-semibold text__color-sky-100 item-name--light" href="{% url 'packages' %}">Packages!</a></p>
                 </div>
+                {% endif %}
             </div>
+
         </div> <!-- end of container-->
     </div> <!-- end of hero-body -->
 

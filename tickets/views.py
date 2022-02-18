@@ -14,6 +14,7 @@ def all_tickets(request):
 
     if request.GET:
         if "q" in request.GET:
+            tickets = Ticket.objects.all()
             query = request.GET["q"]
 
             if not query:
