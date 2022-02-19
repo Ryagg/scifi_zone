@@ -188,7 +188,7 @@ The login page contains fields for users to enter their username or email and pa
 
 For a newly registered user who hasn't purchased anything yet, the profile page displays a form where the billing address can be provided. The order history will display a message that no tickets have been ordered yet, and display a link to the tickets page.
 
-For users who already purchased products, the form with the billing address will be prefilled. Users can to update this information. The order history displays detailed information for each order and each item in an order.
+For users who already purchased products, the form with the billing address will be prefilled. Users can update this information. The order history displays detailed information for each order and item in an order.
 
 #### **Admin-actions page features**
 
@@ -197,10 +197,6 @@ Admins can add new guests to the event. A form with fields taken from the corres
 #### **Logout page features**
 
 The logout page features a confirmation dialogue before the user is logged out and the session cleared.
-
-#### **Copyright page features**
-
-NOT YET IMPLEMENTED
 
 #### **CONTACT page features**
 
@@ -215,12 +211,14 @@ The site features both a site notice and a privacy policy. Both pages can be rea
 ---
 
 -   A Frequently Asked Questions page
+-   A contact page
 
 ### ** Removed Features / Features chosen not to be implemented**
 
 ---
 
 -   Copyright page: Image credit is given in the readme, and for actor images also at the bottom of each image and the separate SOURCES.md. A separate copyright page is not needed.
+-   Search function: a search function for tickets and packages was implemented, but due to the current structure of the project, it did not entirely work as intended. While the search generated the correct results, the detailed view for packages either used the wrong template or generated errors. Several attempts to fix this were unsuccessful, and it was decided to remove the feature instead of making changes to several apps to include it. With 9 tickets and 4 packages, the number of available products is small enough to be viewed on the correspondent page without losing track.
 
 ## **Technologies Used**
 
@@ -397,7 +395,7 @@ To deploy the site remotely on [Heroku](https://www.heroku.com/) please follow t
 
 The following photos were obtained from [Freepik](https://www.freepik.com/home).
 
-#### tickets templates
+#### **Tickets pages**
 
 Stack of event tickets: Photo by [alfatwp](https://www.freepik.com/alfatwp) on [Freepik](https://www.freepik.com/premium-psd/event-ticket-mockup_5663633.htm#&position=3&from_view=undefined)
 
@@ -405,13 +403,15 @@ Fountain pen signing signature: Photo by [BillionPhotos](https://www.freepik.com
 
 Women filming herself using a camera on a tripod: Photo by [frimufilms](https://www.freepik.com/frimufilms) on [Freepik](https://www.freepik.com/free-photo/young-content-creator-blonde-talking-gesturing-girl-filming-herself-using-camera-tripod_13843525.htm#&position=6&from_view=undefined)
 
-#### packages templates
+#### **Packages pages**
 
 4 falling down event tickets: Photo by [alfatwp](https://www.freepik.com/alfatwp) on [Freepik](https://www.freepik.com/premium-psd/event-ticket-mockup_5663630.htm#&position=0&from_view=undefined)
 
+#### **Homepage and guest pages**
+
 Actor images obtained from [Wikimedia](https://commons.wikimedia.org/wiki/Main_Page):
 
--   Please refer to the separate [SOURCES.md](https://docs.google.com/spreadsheets/d/1rQUjvQ1QUJXCy0xjzFvaGLI8nwJdJbU3G1KA6ERHgbY/edit?usp=sharing) for sources, licenses and attribution for each image.
+Please refer to the separate [SOURCES.md](https://docs.google.com/spreadsheets/d/1rQUjvQ1QUJXCy0xjzFvaGLI8nwJdJbU3G1KA6ERHgbY/edit?usp=sharing) for sources, licenses and attribution for each image.
 
 ### **Code**
 
@@ -420,6 +420,7 @@ Actor images obtained from [Wikimedia](https://commons.wikimedia.org/wiki/Main_P
 All code not written by me has the source for the code added as comment above the relevant code. For longer pieces of code the credit is repeated beneath.
 
 -   The Python/Django and Javascript code from Code Institute's [Boutique Ado walkthrough](https://github.com/Code-Institute-Solutions/boutique_ado_v1) was used as a groundwork for this project.
+-   Sticky footer for Bulma: https://gehrcke.de/2020/03/bulma-sticky-footer-flexbox-solution/
 
 ### **Websites and Documentation**
 
