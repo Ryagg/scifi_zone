@@ -17,5 +17,5 @@ urlpatterns = [
         'privacy_policy/',
         views.privacy_policy,
         name='privacy_policy'
-    )
+    ),
 ]

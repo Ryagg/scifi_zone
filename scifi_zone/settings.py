@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     # OTHER
     'crispy_forms',
     'storages',
+    'watson',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'watson.middleware.SearchContextMiddleware',
 ]
 
 CRISPY_TEMPLATE_PACK = 'uni_form'

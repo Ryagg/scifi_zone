@@ -54,9 +54,16 @@
                     {% endif %}
                 </div>
                 <div class="navbar-end">
-                    <a class="navbar-item" href="">
-                        Contact
-                    </a>
+                    <div class="navbar-item">
+                        <form action="{% url 'watson:search' %}">
+                            <div class="field has-addons">
+                                <div class="control">
+                                    <input name="q" value="{{request.GET.q}}">
+                                    <input type="submit" value="Go">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
