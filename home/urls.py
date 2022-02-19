@@ -5,9 +5,17 @@ urlpatterns = [
     path(
         '',
         views.index,
-        name='home'),
+        name='home'
+        ),
     path(
         'site_notice/',
         views.site_notice,
-        name='site_notice')
+        name='site_notice'
+        ),
+    path(
+
+        'privacy_policy/',
+        views.privacy_policy,
+        name='privacy_policy'
+    )
 ]
