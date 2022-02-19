@@ -5,8 +5,8 @@ class TicketsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'tickets'
     def ready(self):
-        category_model = self.get_model("Category")
-        watson.register(category_model)
+        # category_model = self.get_model("Category")
+        # watson.register(category_model)
         ticket_model = self.get_model("Ticket")
         watson.register(ticket_model)
         package_model = self.get_model("Package")

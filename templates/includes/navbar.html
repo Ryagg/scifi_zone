@@ -58,9 +58,13 @@
                         <form action="{% url 'watson:search' %}">
                             <div class="field has-addons">
                                 <div class="control">
-                                    <input name="q" value="{{request.GET.q}}">
-                                    <input type="submit" value="Go">
+                                    <label for="search" hidden>Search bar</label>
+                                    <input class="input" type="text" placeholder="Full text search" name="q" value="{{request.GET.q}}">
                                 </div>
+                                <div class="control">
+                                    <button class="button" type="submit" aria-label="submit search">
+                                        <i class="fa-regular fa-magnifying-glass"></i>
+                                    </button>
                             </div>
                         </form>
                     </div>
