@@ -19,3 +19,8 @@ def index(request):
     print(actor_count)
     print(midway)
     return render(request, 'home/index.html', context)
+
+def site_notice(request):
+    """ A view to return the site notice page """
+
+    return render(request, 'home/site_notice.html' )
