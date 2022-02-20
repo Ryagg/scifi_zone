@@ -40,14 +40,14 @@
                             <field class="is-grouped has-addons">
                                 <form action="{% url 'update_bag' item.item_id %}" method="POST">
                                 {% csrf_token %}
-                                    <p class="control">
+                                    <div class="control">
                                         <div class="update-quantity">
                                         <!-- mb-1 needed for mobile devices, my-1 used to make it look even -->
-                                        <input name="quantity" class="input quantity-input my-1" type="number" pattern="^[1-9]{1,2}$" placeholder="New quantity" value="" data-item_id="{{ item.item_id }}">
+                                        <input name="quantity" class="input quantity-input my-1" type="number" aria-label="Quantity update" placeholder="New quantity" value="" data-item_id="{{ item.item_id }}">
                                         <input class="button update-bag my-1" type="submit" value="Update bag">
                                         <a href="{% url 'remove_from_bag' item.item_id %} " id="remove-item" class="button remove my-1">Remove</a>
                                         </div>
-                                    </p>
+                                    </div>
                                 </form>
                             </field>
                     </div>

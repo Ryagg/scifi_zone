@@ -9,7 +9,7 @@
             <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">My profile</h1>
             <div class="columns is-multiline">
                 <div class="column is-5-tablet has-text-centered">
-                    <h3 class="title is-3 text__color-sky-100 text__shadow--dark">Billing Address</h3>
+                    <h2 class="title is-3 text__color-sky-100 text__shadow--dark">Billing Address</h2>
                     <!-- update form -->
                     <form action="{% url 'profile' %}" method="POST" id="profile-update-form" class="custom-form">
                         {% csrf_token %}
@@ -19,7 +19,7 @@
                 </div> <!-- end of column -->
                 <div class="column is-7-tablet has-text-centered">
                     <!-- order history -->
-                    <h3 class="title is-3 text__color-sky-100 text__shadow--dark">Order History</h3>
+                    <h2 class="title is-3 text__color-sky-100 text__shadow--dark">Order History</h2>
                     <section class="bag-item card__box-shadow order-history px-3 py-3">
                         {% if orders %}
                             {% for order in orders %}
@@ -47,10 +47,10 @@
                                 </div> <!-- end of columns -->
                                 <div class="columns is-mobile is-multiline">
                                     <div class="column">
-                                        <p class="is-size-6 is-size-4-tablet has-text-weight-semibold is-underlined">Grand total:</p>
+                                        <p class="is-size-6 is-size-4-tablet has-text-weight-semibold is-italic">Grand total:</p>
                                     </div>
                                     <div class="column">
-                                        <p class="is-size-6 is-size-4-tablet has-text-weight-semibold is-underlined">
+                                        <p class="is-size-6 is-size-4-tablet has-text-weight-semibold is-italic">
                                             €{{ order.grand_total }},00
                                         </p>
                                     </div>

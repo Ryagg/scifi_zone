@@ -1,19 +1,18 @@
 <div class="column is-4-tablet">
     <div class="block">
-        <div class="field">
-            <label for="star_autograph" class="is-size-4 has-text-weight-medium has-text-white">Star
-            </label>
+        <fieldset>
+            <legend for="star_autograph" class="is-size-4 has-text-weight-medium has-text-white">Star
+            </legend>
             <div class="control">
                 {% for actor in actors %}
                     {% if actor.star_autograph_category == price_category %}
                         <label class="radio">
-                            <input type="radio" name="chosen_actor" value="{{ actor.name }}" required>
-                            {{ actor.name }}
+                            <input id="chosen_actor" type="radio" name="chosen_actor" value="{{ actor.name }}" required>
+                                {{ actor.name }}
                         </label>
                     {% endif %}
                 {% endfor %}
-
             </div>
-        </div>
+        </fieldset>
     </div>
 </div>
