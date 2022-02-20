@@ -1,26 +1,11 @@
+/*
+    Core logic/payment flow for this comes from here:
+    https://stripe.com/docs/payments/accept-a-payment
+*/
+
 let stripePublicKey = $("#id_stripe_public_key").text().slice(1, -1);
 let clientSecret = $("#id_client_secret").text().slice(1, -1);
 let stripe = Stripe(stripePublicKey);
-// let appearance = {
-//     theme: "night",
-//     variables: {
-//         fontFamily: "Sohne, system-ui, sans-serif",
-//         fontWeightNormal: "500",
-//         borderRadius: "8px",
-//         colorPrimary: "#EFC078",
-//         colorText: "white",
-//         colorTextSecondary: "white",
-//         colorTextPlaceholder: "#727F96",
-//         colorIconTab: "white",
-//         colorLogo: "dark",
-//     },
-//     rules: {
-//         ".Input, .Block": {
-//             backgroundColor: "#0A2540",
-//             border: "1.5px solid var(--colorPrimary)",
-//         },
-//     },
-// };
 
 // Set up Stripe.js and Elements to use in checkout form
 let elements = stripe.elements();

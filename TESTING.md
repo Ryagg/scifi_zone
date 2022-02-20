@@ -149,7 +149,7 @@ Please note that for the following three expectations, an adjustment has been ma
 #### **Expectation 18: being able as a site owner to remove an actor from the convention**
 
 -   Requirement: access the corresponding object and remove it from the database
--   Implementation: Links to remove an actor were placed beneath the links to edit the actor's info. Superusers only can access the links. After the actor has been removed from the database, the admin is redirected to the [updated guests page](documentation/testing/usertests/user-expectation-18.jpg) and a confirmation message is displayed.
+-   Implementation: Links to remove an actor were placed beneath the links to edit the actor's info. Only Superusers can access the links. After the actor has been removed from the database, the admin is redirected to the [updated guests page](documentation/testing/usertests/user-expectation-18.jpg) and a confirmation message is displayed.
 
 ![user-expectation-18](documentation/testing/usertests/user-expectation-18.jpg)
 
@@ -175,7 +175,7 @@ Please note that for the following three expectations, an adjustment has been ma
 
 ---
 
-The [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) reported no errors when using 'Validate by direct input'. 34 warnings were reported due to vendor extensions. Using 'Validate by URI' leads to 9 errors. All of those errors are from the bulma.min.css file. 259 warnings are reported in total. 12 warnings are for vendor extensions from my css-file and the rest for vendor extensions from the bulma.min.css-file.
+The [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) reported no errors when using 'Validate by direct input'. 34 warnings were reported due to vendor extensions. Using 'Validate by URI' leads to 9 errors. All those errors are from the bulma.min.css file. 259 warnings are reported in total. 12 warnings are for vendor extensions from my css-file, and the rest for vendor extensions from the bulma.min.css-file.
 
 ![w3c-css](documentation/testing/w3c-results/w3c-css.jpg)
 
@@ -272,7 +272,7 @@ The [web accessibility evaluation tool](https://wave.webaim.org/) was used to ch
 
 -   **Profile page:**
 
-    Following the approach from the Boutique Ado walkthrough, the labels for all form inputs were removed and the content placed as placeholder text inside the input fields. This causes errors due to missing form labels on all pages including forms. For this page, 5 missing form labels and 1 missing select label are reported. Additionally, 3 alerts due to possible headings are reported.
+    Following the approach from the Boutique Ado walk-through, the labels for all form inputs were removed, and the content placed as placeholder text inside the input fields. This causes errors due to missing form labels on all pages including forms. For this page, 5 missing form labels and 1 missing select label are reported. Additionally, 3 alerts due to possible headings are reported.
 
     ![profile](documentation/testing/wave-results/profile.jpg)
     ![profile-detail](documentation/testing/wave-results/profile-detail.jpg)
@@ -319,6 +319,11 @@ The [web accessibility evaluation tool](https://wave.webaim.org/) was used to ch
 
 ---
 
+No errors were reported for base.js or stripe_elements.js using [JSHint](https://jshint.com/).
+
+![base](documentation/testing/jshint-results/base.jpg)
+![stripe_elements](documentation/testing/jshint-results/stripe_elements.jpg)
+
 ### **Python**
 
 ---
@@ -350,8 +355,8 @@ The [web accessibility evaluation tool](https://wave.webaim.org/) was used to ch
 -   Tickets can't be added to the shopping bag from the guest detail page.
 -   Images for guests are not displayed if an URL instead of a file is provided.
 -   Uploaded images don't match the size of the existing images due to the applied transformations before uploading the original images.
--   The input field to update the bag allows negative numbers even with an applied pattern, and negative numbers of any value remove the item from the bag.
+-   The input field to update the bag allows negative numbers, and negative numbers of any value remove the item from the bag.
 -   When logged in as an admin, the search bar input field causes overflow for some viewports.
--   For viewports greater than 320px the country select label on the checkout page is longer than the other input fields. Media query only works for 320px.
+-   For viewports greater than 320px, the country select label on the checkout page is longer than the other input fields. Media query only works for 320px.
 -   Hovering over the checkbox on the login page causes the text next to it to use the Bulma default for hover and become difficult to read due to poor contrast
--   The submit button on the password reset page uses border-radius 0 and doesn't match the other buttons throughout the page
+-   The submit button on the password reset page uses border-radius 0 and doesn't match the other buttons throughout the page.
