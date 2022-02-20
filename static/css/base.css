@@ -426,6 +426,12 @@ a.button.remove {
 }
 
 /*----- MEDIA QUERIES -----*/
+@media screen and (max-width: 320px) {
+    select#id_country {
+        max-width: 66%;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .quantity-input {
         max-width: 100%;
