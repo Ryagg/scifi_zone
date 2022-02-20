@@ -59,7 +59,7 @@
                         <form action="{% url 'watson:search' %}">
                             <div class="field has-addons">
                                 <div class="control">
-                                    <input class="input" type="text" name="search" aria-label="Search" placeholder="Full text search" name="q" value="{{request.GET.q}}">
+                                    <input class="input" type="text" id="search" aria-label="Search" placeholder="Full text search" name="q" value="{{request.GET.q}}">
                                 </div>
                                 <div class="control">
                                     <button class="button" type="submit" aria-label="submit search">
