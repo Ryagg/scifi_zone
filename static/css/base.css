@@ -412,6 +412,14 @@ a.button.remove {
     margin-left: 0;
 }
 
+/*----- LISTS -----*/
+.li__icon--panel {
+    list-style-type: disc;
+    list-style-position: inside;
+    list-style-image: none;
+    vertical-align: middle;
+}
+
 /*----- FOOTER -----*/
 .footer_padding--less {
     padding: 2rem 1rem 2rem;
