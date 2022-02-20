@@ -198,10 +198,6 @@ Admins can add new guests to the event. A form with fields taken from the corres
 
 The logout page features a confirmation dialogue before the user is logged out and the session cleared.
 
-#### **CONTACT page features**
-
-NOT YET IMPLEMENTED
-
 #### **General Data Protection Regulation compliance**
 
 The site features both a site notice and a privacy policy. Both pages can be reached through links in the footer. A paid subscription has been bought at [e-recht24.de](https://www.e-recht24.de/) to ensure compliance with all applicable regulations.
@@ -218,7 +214,6 @@ The site features both a site notice and a privacy policy. Both pages can be rea
 ---
 
 -   Copyright page: Image credit is given in the readme, and for actor images also at the bottom of each image and the separate SOURCES.md. A separate copyright page is not needed.
--   Search function: a search function for tickets and packages was implemented, but due to the current structure of the project, it did not entirely work as intended. While the search generated the correct results, the detailed view for packages either used the wrong template or generated errors. Several attempts to fix this were unsuccessful, and it was decided to remove the feature instead of making changes to several apps to include it. With 9 tickets and 4 packages, the number of available products is small enough to be viewed on the correspondent page without losing track.
 
 ## **Technologies Used**
 
@@ -281,7 +276,11 @@ The site features both a site notice and a privacy policy. Both pages can be rea
 
 -   [Django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/install.html#installing-django-crispy-forms)
 
-    used to render forms
+    Used to render forms
+
+-   [Django-Watson](https://github.com/etianen/django-watson)
+
+    Used to implement full-text search
 
 -   [Pytest-Django](https://github.com/pytest-dev/pytest-django)
 

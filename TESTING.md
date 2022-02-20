@@ -18,9 +18,9 @@ The following user requirements and expectations were developed based on the use
 #### **Expectation 2: being able to see a specific category of tickets**
 
 -   Requirement: allow users to filter for ticket categories
--   Implementation: an implemented search function for tickets has been removed. Please refer to the Removed Features / Features chosen not to be implemented section for details. Only tickets have categories, and all tickets within a category can be viewed at the [tickets page](documentation/testing/usertests/user-expectation-1-example-2.jpg).
+-   Implementation: Django-Watson was used to implement full-text search across all relevant models.
 
-![user-expectation-2](documentation/testing/usertests/user-expectation-1-example-2.jpg)
+FIX BUG AND ADD SCREENSHOTS
 
 #### **Expectation 3: being able to see details about the tickets**
 
@@ -69,11 +69,13 @@ The following user requirements and expectations were developed based on the use
 #### **Expectation 9: being able to search for a ticket by category or actor name to easily find autograph or photoshoot tickets with selected actors**
 
 -   Requirement: Implement a search function.
--   Implementation: as stated above for Expectation 2 and in the Removed Features / Features chosen not to be implemented section, the implemented search feature has been removed. Users can access an actor's detail page both from the [homepage](documentation/testing/usertests/user-expectation-9.jpg) and the guest page. On the [detail page](documentation/testing/usertests/user-expectation-9-example-2.jpg), links to buy photoshoot and autograph tickets are provided. Please note that the thin horizontal line between the actor image (with admin-only links) and the info box is not rendered on the real page, and only appears in the devtools view when resizing the page to 50%. Another way to find the autograph or photoshoot tickets with an actor is to view the [detail pages for the selected ticket category](). However, unless a user knows in which category the actor can be found, the user must view one, two, or all three categories before the actor is found.
+-   Implementation: Both tickets and actors can be found using the search function. Another way to find the autograph or photoshoot tickets with an actor is to view the [detail pages for the selected ticket category](). However, unless a user knows in which category the actor can be found, the user must view one, two, or all three categories before the actor is found.
 
 ![user-expectation-9](documentation/testing/usertests/user-expectation-9.jpg)
 ![user-expectation-9-example-2](documentation/testing/usertests/user-expectation-9-example-2.jpg)
 ![user-expectation-9-example-3](documentation/testing/usertests/user-expectation-9-example-3.jpg)
+
+ADD WATSON SEARCH SCREENSHOTS ONCE THE CUSTOM TEMPLATE WORKS
 
 #### **Expectation 10: being able to see detailed bag contents and total cost**
 
@@ -173,7 +175,139 @@ Please note that for the following three expectations, an adjustment has been ma
 
 ---
 
+The [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) reported no errors when using 'Validate by direct input'. 34 warnings were reported due to vendor extensions. Using 'Validate by URI' leads to 9 errors. All of those errors are from the bulma.min.css file. 259 warnings are reported in total. 12 warnings are for vendor extensions from my css-file and the rest for vendor extensions from the bulma.min.css-file.
+
+![w3c-css](documentation/testing/w3c-results/w3c-css.jpg)
+
 ### **WAVE Validator**
+
+---
+
+The [web accessibility evaluation tool](https://wave.webaim.org/) was used to check the site's accessibility features.
+
+-   **Homepage:**
+
+    All three alerts are caused by short paragraphs that to Wave appear to be headings.
+
+    ![homepage](documentation/testing/wave-results/homepage.jpg)
+    ![homepage-details](documentation/testing/wave-results/homepage-details.jpg)
+
+---
+
+-   **Guests page:**
+
+    No errors or alerts reported.
+
+    ![guests](documentation/testing/wave-results/guests.jpg)
+
+---
+
+-   **Guest detail page** (Jason Isaacs exemplary for all guest details pages):
+
+    Both alerts are caused by short paragraphs that to Wave appear to be headings.
+
+    ![guest-detail](documentation/testing/wave-results/guest-detail.jpg)
+    ![guest-detail_details](documentation/testing/wave-results/guest-detail_details.jpg)
+
+---
+
+-   **Timetable page:**
+
+    No errors or alerts reported.
+
+![timetable](documentation/testing/wave-results/timetable.jpg)
+
+---
+
+-   **Tickets page:**
+
+    Both alerts are caused by short paragraphs that to Wave appear to be headings.
+
+    ![tickets](documentation/testing/wave-results/tickets.jpg)
+    ![tickets_details](documentation/testing/wave-results/tickets_details.jpg)
+
+---
+
+-   **Ticket details page** (Autograph Ticket Price Category B including radio elements exemplary for all ticket details pages):
+
+    No errors or alerts reported.
+
+    ![autograph-ticket-detail](documentation/testing/wave-results/autograph-ticket-detail.jpg)
+
+---
+
+-   **Packages page:**
+
+    One caused by a short paragraph that to Wave appears to be a heading.
+
+    ![packages](documentation/testing/wave-results/packages.jpg)
+    ![packages_details](documentation/testing/wave-results/packages_details.jpg)
+
+---
+
+-   **Package details page** (Diamond package exemplary for all packages):
+
+    No errors or alerts reported.
+
+    ![package-details](documentation/testing/wave-results/packages_details.jpg)
+
+---
+
+-   **Registration page:**
+
+    One alert due to an redundant link.
+
+    ![registration](documentation/testing/wave-results/registration.jpg)
+
+---
+
+-   **Login page:**
+
+    No errors or alerts reported.
+
+    ![login](documentation/testing/wave-results/login.jpg)
+    ![registration-detail](documentation/testing/wave-results/registration-detail.jpg)
+
+---
+
+-   **Profile page:**
+
+    Following the approach from the Boutique Ado walkthrough, the labels for all form inputs were removed and the content placed as placeholder text inside the input fields. This causes errors due to missing form labels on all pages including forms. For this page, 5 missing form labels and 1 missing select label are reported. Additionally, 3 alerts due to possible headings are reported.
+
+    ![profile](documentation/testing/wave-results/profile.jpg)
+    ![profile-detail](documentation/testing/wave-results/profile-detail.jpg)
+
+---
+
+-   **Add guest page:**
+
+    Ten errors due to missing form labels are reported.
+
+    ![add-guest](documentation/testing/wave-results/add-guest.jpg)
+
+---
+
+-   **Logout page:**
+
+    No errors or alerts reported.
+
+    ![logout](documentation/testing/wave-results/logout.jpg)
+
+---
+
+-   **Site notice page:**
+
+    All alerts are caused by short paragraphs that to Wave appear to be a heading.
+
+    ![site-notice](documentation/testing/wave-results/site-notice.jpg)
+
+---
+
+-   **Privacy policy:**
+
+    No errors or alerts reported.
+
+    ![privacy-policy](documentation/testing/wave-results/privacy-policy.jpg)
 
 ---
 
@@ -212,3 +346,12 @@ Please note that for the following three expectations, an adjustment has been ma
 ---
 
 ---
+
+-   Tickets can't be added to the shopping bag from the guest detail page.
+-   Images for guests are not displayed if an URL instead of a file is provided.
+-   Uploaded images don't match the size of the existing images due to the applied transformations before uploading the original images.
+-   The input field to update the bag allows negative numbers even with an applied pattern, and negative numbers of any value remove the item from the bag.
+-   When logged in as an admin, the search bar input field causes overflow for some viewports.
+-   For viewports greater than 320px the country select label on the checkout page is longer than the other input fields. Media query only works for 320px.
+-   Hovering over the checkbox on the login page causes the text next to it to use the Bulma default for hover and become difficult to read due to poor contrast
+-   The submit button on the password reset page uses border-radius 0 and doesn't match the other buttons throughout the page
