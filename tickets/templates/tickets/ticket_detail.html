@@ -20,12 +20,12 @@
                                 </figure>
                         </div>
                         <div class="block">
-                            <h3 class="title is-3 text__color-sky-100 text__shadow--dark">Description</h3>
+                            <h2 class="title is-3 text__color-sky-100 text__shadow--dark">Description</h2>
                                 <p class="is-size-5">{{ ticket.description }}</p>
 
                         </div>
                         <div class="block">
-                            <h3 class="title is-3 text__color-sky-100 text__shadow--dark">Included in this ticket:</h3>
+                            <h2 class="title is-3 text__color-sky-100 text__shadow--dark">Included in this ticket:</h2>
                                     <ul>
                                         {% for goodie in goodies %}
                                             <li>{% if 'Standard' in ticket.name %} 1 x {% endif %}{{ goodie }}</li>
@@ -42,14 +42,14 @@
                             {% csrf_token %}
                                 {% if "Standard" not in ticket.name %}
                                     {% include "includes/actor_dropdown.html" %}
-                                    <p class="is-size-5 has-text-danger mb-2 hr-top-bottom">Ticket only valid in combination with a standard ticket or package for the same day.</p>
+                                    <p class="is-size-5 mb-2 disclaimer__border--red">Ticket only valid in combination with a standard ticket or package for the same day.</p>
                                 {% endif %}
                                 <div class="field">
                                     <label for="quantity" class="is-size-4 has-text-weight-medium">Number of tickets
                                     </label>
                                     <div class="control">
                                         <!-- type attribute number not supported by Bulma -->
-                                        <input name="quantity" class="input is-link" type="text"
+                                        <input id="quantity" name="quantity" class="input is-link" type="text"
                                             pattern="^[1-9][0-9]?$" placeholder="" value="" data-item_id="{{ ticket.id }}"
                                             id="id_qty_{{ ticket.id }}" aria-label="quantity" required>
                                     </div>

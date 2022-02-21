@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<section id="wrapper" class="hero fullheight-with-navbar hero__bg--nebula text__color-sky-100">
+<section id="wrapper" class="hero fullheight-with-navbar hero__bg--nebula has-text-white">
     <section>
         <div class="hero-body">
             <h1 class="title is-1 has-text-centered mt-5 text__color-sky-100 heading__text--shadow-blue">
@@ -34,7 +34,7 @@
                 {% for actor in actors %}
                     {% if actor.id <= midway %}
                         <div class="column has-text-centered custom-image--actor mx-auto">
-                            <figure class="image is-4by5 mb-2 portrait__border card__box-shadow text__color-sky-100">
+                            <figure class="image is-3by5 mb-2 portrait__border card__box-shadow text__color-sky-100">
                                 {% if actor.star_image %}
                                 <img src="{{ MEDIA_URL }}{{actor.star_image}} " alt="{{ actor.name }}">
                                 {% elif actor.star_image_url %}
@@ -52,7 +52,7 @@
                 {% for actor in actors %}
                     {% if actor.id > midway %}
                         <div class="column has-text-centered custom-image--actor mx-auto">
-                            <figure class="image is-4by5 mb-2 portrait__border card__box-shadow">
+                            <figure class="image is-3by5 mb-2 portrait__border card__box-shadow">
                                 {% if actor.star_image %}
                                 <img src="{{ MEDIA_URL }}{{actor.star_image}} " alt="{{ actor.name }}">
                                 {% elif actor.star_image_url %}

@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.3.6,
+* Autoprefixer: v10.3.1
+* Browsers: last 4 version
+*/
+
 /*----- GOOGLE FONTS -----*/
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Saira&display=swap");
 /*----- GENERAL STYLES -----*/
@@ -5,8 +12,15 @@ body {
     font-family: "Saira", sans-serif;
     /* needed for sticky footer, found at https://gehrcke.de/2020/03/bulma-sticky-footer-flexbox-solution/  */
     min-height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    /* as fallback to improve contrast if the background image isn't loaded */
+    background-color: #0c4a6e;
 }
 
 h1,
@@ -34,6 +48,8 @@ h6 {
 /*----- CONTAINERS -----*/
 /* needed for sticky footer, see credit in line 4 */
 #wrapper {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
     flex: 1;
 }
 
@@ -50,12 +66,14 @@ h6 {
 .navbar-item:hover,
 .navbar-link:hover,
 .navbar-burger:hover {
+    -webkit-text-decoration-line: underline;
     text-decoration-line: underline;
     text-decoration-thickness: 5px;
 }
 
 a.item-name:hover {
     color: #1e3a8a;
+    -webkit-text-decoration-line: underline;
     text-decoration-line: underline;
 }
 
@@ -64,6 +82,7 @@ a.link--light:hover,
 #div_id_remember :hover,
 input#id_remember.checkboxinput:hover {
     color: #e0f2fe;
+    -webkit-text-decoration-line: underline;
     text-decoration-line: underline;
 }
 /* replace Bulma default values to improve contrast */
@@ -151,6 +170,7 @@ label.radio:hover {
 
 a.text__shadow--light:hover {
     color: #bcd9fc;
+    -webkit-text-decoration-line: underline;
     text-decoration-line: underline;
     text-decoration-thickness: 3px;
 }
@@ -298,7 +318,7 @@ a.text__shadow--light:hover {
     padding: 10px;
 }
 
-/* Allauth form formatting (taken from Boutique Ado walktrough and adapted to my project) */
+/* Allauth form formatting (taken from Boutique Ado walkthrough and adapted to my project) */
 
 .allauth-form-inner-content p {
     margin-top: 1.5rem;
@@ -321,6 +341,26 @@ select#id_default_country {
 
 .allauth-form-inner-content label:not([for="id_remember"]) {
     display: none;
+}
+
+.allauth-form-inner-content input::-webkit-input-placeholder,
+.custom-form input::-webkit-input-placeholder {
+    color: #aab7c4;
+}
+
+.allauth-form-inner-content input::-moz-placeholder,
+.custom-form input::-moz-placeholder {
+    color: #aab7c4;
+}
+
+.allauth-form-inner-content input:-ms-input-placeholder,
+.custom-form input:-ms-input-placeholder {
+    color: #aab7c4;
+}
+
+.allauth-form-inner-content input::-ms-input-placeholder,
+.custom-form input::-ms-input-placeholder {
+    color: #aab7c4;
 }
 
 .allauth-form-inner-content input::placeholder,
@@ -374,6 +414,8 @@ input.input--light:hover,
 button,
 .button,
 input {
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
 
@@ -426,6 +468,12 @@ a.button.remove {
 }
 
 /*----- MEDIA QUERIES -----*/
+@media screen and (max-width: 320px) {
+    select#id_country {
+        max-width: 66%;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .quantity-input {
         max-width: 100%;
