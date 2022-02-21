@@ -2,24 +2,30 @@
 {% load static %}
 
 {% block content %}
-<section class="hero is-medium bg--sky-900 text__color-sky-100 body__footer--down">
+<section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
     <div class="hero-body">
         <div class="container">
             <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">{{ ticket.name }}</h1>
             <div class="columns is-multiline is-centered">
                     <div class="column is-6-tablet">
-                        <div class="block">
-                                <figure class="image is-128x128 mx-auto">
-                                    <img src="http://placekitten.com/g/128/128" alt="">
+                        <div class="block custom-image mx-auto">
+                                <figure class="image is-3by2 mx-auto">
+                                    {% if "Autograph" in ticket.name %}
+                                        <img src="{{ MEDIA_URL }}autograph.jpg" alt="signing a signature with a pen">
+                                    {% elif "Photoshoot" in ticket.name %}
+                                        <img src="{{ MEDIA_URL }}photoshoot.jpg" alt="blonde women filming herself using a camera on a tripod">
+                                    {% else %}
+                                        <img src="{{ MEDIA_URL }}ticket.jpg" alt="event ticket">
+                                    {% endif %}
                                 </figure>
                         </div>
                         <div class="block">
-                            <h3 class="title is-3 text__color-sky-100 text__shadow--dark">Description</h3>
+                            <h2 class="title is-3 text__color-sky-100 text__shadow--dark">Description</h2>
                                 <p class="is-size-5">{{ ticket.description }}</p>
 
                         </div>
                         <div class="block">
-                            <h3 class="title is-3 text__color-sky-100 text__shadow--dark">Included in this ticket:</h3>
+                            <h2 class="title is-3 text__color-sky-100 text__shadow--dark">Included in this ticket:</h2>
                                     <ul>
                                         {% for goodie in goodies %}
                                             <li>{% if 'Standard' in ticket.name %} 1 x {% endif %}{{ goodie }}</li>
@@ -36,14 +42,14 @@
                             {% csrf_token %}
                                 {% if "Standard" not in ticket.name %}
                                     {% include "includes/actor_dropdown.html" %}
-                                    <p class="is-size-5 has-text-danger mb-2 hr-top-bottom">Ticket only valid in combination with a standard ticket or package for the same day.</p>
+                                    <p class="is-size-5 mb-2 disclaimer__border--red">Ticket only valid in combination with a standard ticket or package for the same day.</p>
                                 {% endif %}
                                 <div class="field">
                                     <label for="quantity" class="is-size-4 has-text-weight-medium">Number of tickets
                                     </label>
                                     <div class="control">
                                         <!-- type attribute number not supported by Bulma -->
-                                        <input name="quantity" class="input is-link" type="text"
+                                        <input id="quantity" name="quantity" class="input is-link" type="text"
                                             pattern="^[1-9][0-9]?$" placeholder="" value="" data-item_id="{{ ticket.id }}"
                                             id="id_qty_{{ ticket.id }}" aria-label="quantity" required>
                                     </div>

@@ -74,6 +74,8 @@ def checkout(request):
             'postcode': request.POST['postcode'],
             'state': request.POST['state'],
             'country': request.POST['country'],
+            'order_status': '',
+            'payment_status': '',
         }
         order_form = OrderForm(form_data)
         if order_form.is_valid:
@@ -163,41 +165,46 @@ def checkout(request):
         else:
             order_form = OrderForm
 
-        template = "checkout/checkout.html"
-        context = {
-            "order_form": order_form,
-            'stripe_public_key': stripe_public_key,
-            'client_secret': intent.client_secret,
-            # 'redirect': redirect,
-        }
+    template = "checkout/checkout.html"
+    context = {
+        "order_form": order_form,
+        'stripe_public_key': stripe_public_key,
+        'client_secret': intent.client_secret,
+        # 'redirect': redirect,
+    }
 
-        print('reached end of checkout')
-        return render(request, template, context)
+    print('reached end of checkout')
+    return render(request, template, context)
 
 
 def checkout_success(request, order_number):
     """Handle successfull checkouts"""
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
-    profile = UserProfile.objects.get(user=request.user)
-    order.user_profile = profile
+    order.order_status = "accepted, processing"
+    order.payment_status = "accepted"
     order.save()
-    print('order processed')
 
-    # Save the user's info
-    if save_info:
-        profile_data = {
-            'default_email': order.email,
-            'default_street_address1': order.street_address1,
-            'default_street_address2': order.street_address2,
-            'default_city': order.city,
-            'default_postcode': order.postcode,
-            'default_state': order.state,
-            'default_country': order.country,
-        }
-        user_profile_form = UserProfileForm(profile_data, instance=profile)
-        if user_profile_form.is_valid():
-            user_profile_form.save()
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        order.user_profile = profile
+        order.save()
+        print('order processed')
+
+        # Save the user's info
+        if save_info:
+            profile_data = {
+                'default_email': order.email,
+                'default_street_address1': order.street_address1,
+                'default_street_address2': order.street_address2,
+                'default_city': order.city,
+                'default_postcode': order.postcode,
+                'default_state': order.state,
+                'default_country': order.country,
+            }
+            user_profile_form = UserProfileForm(profile_data, instance=profile)
+            if user_profile_form.is_valid():
+                user_profile_form.save()
 
     messages.success(request, f'Your order {order_number} has been \
         successfully processed. We will send a confirmation email to \

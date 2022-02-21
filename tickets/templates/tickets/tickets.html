@@ -2,32 +2,40 @@
 {% load static %}
 
 {% block content %}
-<section class="hero is-small bg--sky-900 text__color-sky-100">
+<section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
     <div class="hero-body">
         <div class="container">
             <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Tickets</h1>
             <div class="columns is-multiline is-centered">
                 <div class="column  my-2">
-                    <p class="is-size-5">
-                    Tickets allow you to customize your experience at SciFi Zone 2022. Mix as many tickets as you like. Please note that Autograph and Photoshoot tickets are valid only in combination with either any valid Standard Ticket or in addition to a valid Package.
-                    </p>
+                    {% if not search_term %}
+                        <p class="is-size-5">
+                            Tickets allow you to customize your experience at SciFi Zone 2022. Mix as many tickets as you like. Please note that Autograph and Photoshoot tickets are valid only in combination with either any valid Standard Ticket or in addition to a valid Package.
+                        </p>
+                    {% endif %}
                 </div>
             </div>
-            <div class="columns is-multiline">
+            <div class="columns is-multiline is-centered">
                     {% for ticket in tickets %}
-                    <div class="column is-6-tablet is-4-desktop my-2">
+                    <div class="column is-2-tablet is-4-desktop my-2">
                         <div class="card">
                             <header class="card-header has-text-centered">
                                 <p class="card-header-title is-centered">
-                                    <a class="is-size-5 item-name" href="{% url 'ticket_detail' ticket.id %}">{{ ticket.name }}</a>
+                                    <a class="is-size-5 item-name text__shadow--blue" href="{% url 'ticket_detail' ticket.id %}">{{ ticket.name }}</a>
                                 </p>
                             </header>
-                            <div class="card-image">
-                                <figure class="image is-128x128 mx-auto mt-5">
-                                    <img src="http://placekitten.com/g/128/128" alt="">
+                            <div class="card-image column--less-padding custom-image mx-auto">
+                                <figure class="image is-3by2 mt-5">
+                                    {% if "Autograph" in ticket.name %}
+                                        <img src="{{ MEDIA_URL }}autograph.jpg" alt="signing a signature with a pen">
+                                    {% elif "Photoshoot" in ticket.name %}
+                                        <img src="{{ MEDIA_URL }}photoshoot.jpg" alt="blonde women filming herself using a camera on a tripod">
+                                    {% else %}
+                                        <img src="{{ MEDIA_URL }}ticket.jpg" alt="event ticket">
+                                    {% endif %}
                                 </figure>
                             </div>
-                            <div class="card-content">
+                            <div class="card-content column--less-padding py-2">
                                 <div class="content has-text-centered">
                                     <p class="is-size-5">€{{ ticket.price }}.00</p>
                                 </div>
@@ -38,12 +46,17 @@
                     {% endfor %}
                     <hr>
             </div> <!-- end of columns -->
+
             <div class="columns is-multiline">
+
                 <div class="column has-text-centered mt-5 mb-2 hr-top">
+                {% if not search_term %}
                     <p class="is-size-4">Want to make even more out of your visit?</p>
                     <p class="is-size-4">Take a look at our <a class="has-text-weight-semibold text__color-sky-100 item-name--light" href="{% url 'packages' %}">Packages!</a></p>
                 </div>
+                {% endif %}
             </div>
+
         </div> <!-- end of container-->
     </div> <!-- end of hero-body -->
 

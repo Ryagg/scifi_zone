@@ -7,8 +7,8 @@
 
 {% block inner_content %}
 
-<section class="body__footer--down">
-  <h2 class="title is-2 text__color-sky-100">{% trans "Sign In" %}</h2>
+<section class="body__footer--down has-text-centered">
+  <h1 class="title is-2 text__color-sky-100 text__shadow--dark">{% trans "Sign In" %}</h1>
 
   {% get_providers as socialaccount_providers %}
 
@@ -30,7 +30,7 @@
   {% include "socialaccount/snippets/login_extra.html" %}
 
   {% else %}
-  <p>{% blocktrans %}If you have not created an account yet, then please
+  <p class="is-size-5">{% blocktrans %}If you have not created an account yet, then please
   <a class="text__color-sky-100 has-text-weight-semibold" href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
   {% endif %}
 

@@ -1,0 +1,65 @@
+{
+    "name": "scifi-zone",
+    "description": "Create an app for a fictional convention",
+    "env": {
+        "SECRET_KEY": {
+            "description": "Django SECRET_KEY setting",
+            "generator": "secret"
+        },
+        "DATABASE_URL": {
+            "description": "Postgress db URL from Heroku",
+            "generator": "secret"
+        },
+        "USE_AWS": {
+            "description": "AWS usage setting",
+            "value": true
+        },
+        "AWS_ACCESS_KEY_ID": {
+            "description": "Generated in AWS console after user creation",
+            "generator": "secret"
+        },
+        "AWS_SECRET_ACCESS_KEY": {
+            "description": "Generated in AWS console after user creation",
+            "generator": "secret"
+        },
+        "STRIPE_PUBLIC_KEY": {
+            "description": "From Stripe dashboard.",
+            "generator": "secret"
+        },
+        "STRIPE_SECRET_KEY": {
+            "description": "From Stripe dashboard.",
+            "generator": "secret"
+        },
+        "STRIPE_WEBHOOK_KEY": {
+            "description": "Generated in Stripe CLI. Only necessary if using webhooks. This project currently does not use webhooks.",
+            "generator": "secret"
+        },
+        "EMAIL_HOST_PASS": {
+            "description": "Generated in Gmail account settings. Needed to be able to send emails from EMAIL_HOST_USER",
+            "generator": "secret"
+        },
+        "EMAIL_HOST_USER": {
+            "description": "E-mail address for outgoing e-mails",
+            "value": "your-project-email@gmail.com"
+        }
+    },
+    "formation": {
+        "web": {
+            "quantity": 1,
+            "size": "free"
+        }
+    },
+    "addons": [
+        {
+            "plan": "heroku-postgresql:hobby-dev",
+            "options": {
+                "version": "13.6"
+            }
+        }
+    ],
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ]
+}

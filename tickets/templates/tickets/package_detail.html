@@ -2,23 +2,43 @@
 {% load static %}
 
 {% block content %}
-<section class="hero is-medium bg--sky-900 text__color-sky-100 body__footer--down">
+<section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
     <div class="hero-body">
         <div class="container">
             <div class="columns is-multiline is-centered">
                 <div class="column is-6-tablet">
                     <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">{{ package.name }}</h1>
-                    <h2 class="title is-2 has-text-centered text__color-sky-100">€{{ package.price }}</h2>
+                    <h2 class="subtitle is-2 has-text-centered text__color-sky-100">€{{ package.price }}</h2>
                 </div>
             </div>
             <div class="columns is-multiline is-centered">
-                <div class="column is-6-tablet">
+                <div class="column is-6-tablet column--less-padding">
+                    <div class="block custom-image mx-auto my-5">
+                        <figure class="image is-3by2 mx-auto ">
+                                    {% if "Silver" in package.name %}
+                                        <img src="{{ MEDIA_URL }}package.jpg" class="image__border--silver" alt="4 event tickets">
+                                    {% elif "Gold" in package.name %}
+                                        <img src="{{ MEDIA_URL }}package.jpg" class="image__border--gold" alt="4 event tickets">
+                                    {% elif "Platinum" in package.name %}
+                                        <img src="{{ MEDIA_URL }}package.jpg" class="image__border--platinum" alt="4 event tickets">
+                                    {% elif "Diamond" in package.name %}
+                                        <img src="{{ MEDIA_URL }}package.jpg" class="image__border--diamond" alt="4 event tickets">
+                                    {% else %}
+                                        <img src="{{ MEDIA_URL }}package.jpg" alt="4 event tickets">
+                                    {% endif %}
+                                </figure>
+                    </div>
                     <div class="block">
-                        <h3 class="title is-3 text__color-sky-100 text__shadow--dark">Included in this package:</h3>
-                        <ul class="is-size-5">
-                            {% for goodie in goodies %}
-                            <li>{{ goodie }}</li>
+                        <h3 class="title is-3 text__color-sky-100 text__shadow--dark pt-3">Included in this package:</h3>
+                        <ul class="subtitle is-size-5 text__color-sky-100">
+                            {% for item in included %}
+                                <li>{{ item }}</li>
                             {% endfor %}
+                            <ul class="subtitle is-size-5 ml-4 text__color-sky-100">
+                                {% for goodie in goodies %}
+                                    <li>{{ goodie }} </li>
+                                {% endfor %}
+                            </ul>
                         </ul>
                     </div>
                     <form action="{% url 'add_to_bag' package.id %}" method="POST">
@@ -27,7 +47,6 @@
                                 <label for="quantity" class="is-size-4 has-text-weight-medium">Number of packages
                                 </label>
                                 <div class="control">
-                                    <!-- type attribute number not supported by Bulma -->
                                     <input id="quantity" name="quantity" class="input is-link" type="text" min="1"
                                         maxlength="99" pattern="^[0-9]$" placeholder="" value="" data-item_id="{{ ticket.id }}"
                                         id="id_qty_{{ ticket.id }}" aria-label="quantity">

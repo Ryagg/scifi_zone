@@ -2,74 +2,120 @@
 {% load static %}
 
 {% block content %}
-<section class="hero is-small bg--sky-900">
-    <div class="hero-body">
-        <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">
-            {{ actor.name }}
-        </h1>
-        <div class="columns is-centered">
-            <div class="column is-2-tablet">
-                <figure class="image is-3by5 mb-2 portrait__border card__box-shadow text__color-sky-100">
-                    {% if actor.star_image %}
-                        <img src="{{ actor.star_image_url }}" alt="{{ actor.name }}">
-                    {% else %}
-                        <img src="{{ MEDIA_URL }}noimage.png" alt="placeholder image for missing actor image">
-                    {% endif %}
-                </figure>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="hero is-small bg--sky-900 text__color-sky-100">
-    <div class="hero-body">
-        <h2 class="title is-2 text__color-sky-100 text__shadow--dark">Info</h2>
-        <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sollicitudin aliquam ultrices sagittis orci. Vitae congue mauris rhoncus aenean vel. Nisl tincidunt eget nullam non nisi est sit amet facilisis. Massa tincidunt nunc pulvinar sapien et ligula. Vel pharetra vel turpis nunc. At volutpat diam ut venenatis tellus in metus vulputate. Curabitur gravida arcu ac tortor dignissim convallis aenean et. Vitae purus faucibus ornare suspendisse. Vel fringilla est ullamcorper eget nulla. Leo in vitae turpis massa sed elementum tempus egestas sed. Quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Et egestas quis ipsum suspendisse ultrices. Commodo viverra maecenas accumsan lacus vel. A lacus vestibulum sed arcu. Velit laoreet id donec ultrices tincidunt arcu non. Velit aliquet sagittis id consectetur purus.
-        </p>
-        <h2 class="title is-2 mt-3 text__color-sky-100 text__shadow--dark">Appearance info</h2>
-        <p>Add info to fixtures, create field in model, then add to view and context</p>
-    </div>
-</section>
-<section class="hero is-small bg--sky-900 text__color-sky-100">
-    <div class="hero-body">
-        <div class="columns is-multiline is-centered">
-            <div class="column is-6-tablet">
-                <h2 class="title is-2 has-text-centered text__color-sky-100 text__shadow--dark">
-                    Autograph
-                </h2>
-                    {% for ticket in tickets %}
-                        {% if actor.star_autograph_category == ticket.price_category and "Autograph" in ticket.name %}
-                            <p class="is-size-3 has-text-centered">€{{ ticket.price }}</p>
-                            <div class="control has-text-centered">
-                                <a href="{% url 'ticket_detail' ticket.id %} " class="button my-4 is-size-4 has-text-weight-medium bg--indigo-900 shadow text__color-sky-100">Buy Autograph</a>
+<section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
+    <section>
+        <div class="hero-body">
+            <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">
+                {{ actor.name }}
+            </h1>
+            <div class="columns is-centered">
+                <div class="column is-4-tablet custom-image--actor mx-auto">
+                    <figure class="image is-3by5 mb-2 portrait__border card__box-shadow text__color-sky-100">
+                        {% if actor.star_image %}
+                                <img src="{{ MEDIA_URL }}{{actor.star_image}} " alt="{{ actor.name }}">
+                            {% elif actor.star_image_url %}
+                                <img src="{{ MEDIA_URL }}{{actor.star_image_url}} " alt="{{ actor.name }}">
+                            {% else %}
+                                <img src="{{ MEDIA_URL }}noimage.png" alt="placeholder image for missing actor image">
+                            {% endif %}
+                    </figure>
+                    <div class="columns mt-2">
+                            <div class="column has-text-centered">
+                                {% if request.user.is_superuser %}
+                                    <a class="is-size-5 text__color-sky-100 text__shadow--light" href="{% url 'edit_guest_info' actor.id %}">
+                                        <span class="icon-text">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-user-pen"></i>
+                                            </span>
+                                            <span>Edit info</span>
+                                        </span>
+                                    </a>
+                                <div class="column has-text-centered column--less-padding">
+                                    <a class="is-size-5 text__color-sky-100 text__shadow--light" href="{% url 'remove_guest' actor.id %}">
+                                        <span class="icon-text">
+                                            <span class="icon has-text-danger">
+                                                <i class="fa-solid fa-user-xmark"></i>
+                                            </span>
+                                            <span>Remove</span>
+                                        </span>
+                                    </a>
+                                </div>
+                                {% endif %}
                             </div>
-                        {% endif %}
-                    {% endfor %}
-            </div>
-            <div class="column is-6-tablet">
-                <h2 class="title is-2 has-text-centered text__color-sky-100 text__shadow--dark">
-                    Photoshoot
-                </h2>
-                    {% for ticket in tickets %}
-                        {% if actor.star_photoshoot_category == ticket.price_category and "Photoshoot" in ticket.name %}
-                            <p class="is-size-3 has-text-centered">€{{ ticket.price }}</p>
-                            <div class="control has-text-centered">
-                                <a href="{% url 'ticket_detail' ticket.id %} " class="button my-4 is-size-4 has-text-weight-medium bg--indigo-900 shadow text__color-sky-100">Buy Photoshoot</a>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column">
-                <div class="disclaimer__border--red">
-                    <h3 class="title is-4 text__color-sky-100">Disclaimer</h3>
-                    <p class="is-size-6">
-                    Ticket only valid in combination with a standard ticket or package for the same day. Guest appearance subject to work commitments outside the control of SFZ. In case of cancellation by the guest, a credit refund voucher for the same price category will be issued and can be used within two years.
-                    </p>
+                        </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+    <section>
+        <div class="hero-body">
+                <div class="columns is-multiline is-centered">
+                    <div class="column is-10 is-4-tablet is-9-desktop mb-3 card__box-shadow bg--sky-800">
+                        <h2 class="title is-2 text__color-sky-100 text__shadow--dark pl-5">Info</h2>
+                        <p class="is-size-5 px-5">
+                            {{ actor.star_info_1 }}
+                        </p>
+                        <p class="is-size-5 px-5">
+                            {{ actor.star_info_2 }}
+                        </p>
+                        <div class="columns is-multiline is-mobile is-centered my-3">
+                            {% if actor.star_imdb|length > 1 %}
+                                <div class="column has-text-centered "><a href="{{ actor.star_imdb }}" target="_blank" class="button is-size-5 button-light bg--blue-300 shadow text__color-blue-900">IMDb entry</a></div>
+                            {% endif %}
+                            {% if actor.star_wiki|length > 1 %}
+                                <div class="column has-text-centered "><a href="{{ actor.star_wiki }}" target="_blank" class="button button-light bg--blue-300 shadow text__color-blue-900 is-size-5">Wikipedia entry</a></div>
+                            {% endif %}
+                            {% if actor.star_official|length > 1 %}
+                                <div class="column has-text-centered "><a href="{{ actor.star_official }}" target="_blank" class="button button-light bg--blue-300 shadow text__color-blue-900 is-size-5">Official homepage</a></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+    <section>
+        <div class="hero-body">
+            <div class="columns is-multiline is-centered">
+                <div class="column is-4-tablet has-text-centered card__box-shadow bg--sky-800">
+                    <h2 class="title is-2 has-text-centered text__color-sky-100 text__shadow--dark">
+                        Autograph
+                    </h2>
+                        {% for ticket in tickets %}
+                            {% if actor.star_autograph_category == ticket.price_category and "Autograph" in ticket.name %}
+                                <p class="is-size-4 has-text-centered">€{{ ticket.price }}</p>
+                                <div class="control has-text-centered">
+                                    <a href="{% url 'ticket_detail' ticket.id %} " class="button button-light my-4 is-size-4 has-text-weight-medium bg--blue-300 shadow text__color-blue-900">Buy Autograph</a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                </div>
+                <!-- create space between columns without affecting display on mobile devices -->
+                <div class="column is-1"></div>
+                <div class="column is-4-tablet has-text-centered card__box-shadow bg--sky-800">
+                    <h2 class="title is-2 has-text-centered text__color-sky-100 text__shadow--dark">
+                        Photoshoot
+                    </h2>
+                        {% for ticket in tickets %}
+                            {% if actor.star_photoshoot_category == ticket.price_category and "Photoshoot" in ticket.name %}
+                                <p class="is-size-3 has-text-centered">€{{ ticket.price }}</p>
+                                <div class="control has-text-centered">
+                                    <a href="{% url 'ticket_detail' ticket.id %} " class="button button-light my-4 is-size-4 has-text-weight-medium bg--blue-300 shadow text__color-blue-900">Buy Photoshoot</a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                </div>
+            </div>
+            <div class="columns is-centered mt-3">
+                <div class="column column is-10 is-4-tablet is-9-desktop">
+                    <div class="disclaimer__border--red">
+                        <h3 class="title is-4 text__color-sky-100">Disclaimer</h3>
+                        <p class="subtitle is-size-6 text__color-sky-100">
+                        Ticket only valid in combination with a standard ticket or package for the same day. Guest appearance subject to work commitments outside the control of SFZ. In case of cancellation by the guest, a credit refund voucher for the same price category will be issued and can be used within two years.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </section>
 {% endblock %}

@@ -31,6 +31,7 @@ django-dynamic-fixture = "*"
 freezegun = "*"
 pytest-cov = "*"
 pytest-factoryboy = "*"
+django-watson = "*"
 
 [dev-packages]
 

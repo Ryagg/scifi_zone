@@ -19,3 +19,18 @@ def index(request):
     print(actor_count)
     print(midway)
     return render(request, 'home/index.html', context)
+
+def timetable(request):
+    """ A view to return the time table page """
+
+    return render(request, 'home/timetable.html')
+
+def site_notice(request):
+    """ A view to return the site notice page """
+
+    return render(request, 'home/site_notice.html' )
+
+def privacy_policy(request):
+    """ A view to return the privacy policy page """
+
+    return render(request, 'home/privacy_policy.html')

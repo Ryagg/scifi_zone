@@ -1,11 +1,26 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.3.6,
+* Autoprefixer: v10.3.1
+* Browsers: last 4 version
+*/
+
+/*----- GOOGLE FONTS -----*/
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Saira&display=swap");
 /*----- GENERAL STYLES -----*/
 body {
     font-family: "Saira", sans-serif;
-    height: 100%;
-}
-
-html {
-    height: 100%;
+    /* needed for sticky footer, found at https://gehrcke.de/2020/03/bulma-sticky-footer-flexbox-solution/  */
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    /* as fallback to improve contrast if the background image isn't loaded */
+    background-color: #0c4a6e;
 }
 
 h1,
@@ -17,16 +32,26 @@ h6 {
     font-family: "Orbitron", sans-serif;
 }
 
-.body__footer--down {
+/* .body__footer--down {
     min-height: 83vh;
 }
 
 .nth-section__footer--down {
     min-height: 30vh;
     max-height: 70vh;
+} */
+
+.column--less-padding {
+    padding: 0;
 }
 
 /*----- CONTAINERS -----*/
+/* needed for sticky footer, see credit in line 4 */
+#wrapper {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
 
 .hero__bg--nebula {
     background: url("/media/nasa_nebula_640px.jpg") no-repeat center center fixed;
@@ -34,24 +59,30 @@ h6 {
 }
 
 .order-history {
-    max-height: 70vh; /* height of profile form + submit button */
+    max-height: 70vh;
     overflow-y: auto;
 }
 /*----- FOCUS, ACTIVE & HOVER EFFECTS -----*/
 .navbar-item:hover,
 .navbar-link:hover,
 .navbar-burger:hover {
+    -webkit-text-decoration-line: underline;
     text-decoration-line: underline;
     text-decoration-thickness: 5px;
 }
 
 a.item-name:hover {
     color: #1e3a8a;
+    -webkit-text-decoration-line: underline;
     text-decoration-line: underline;
 }
 
-a.item-name--light:hover {
+a.item-name--light:hover,
+a.link--light:hover,
+#div_id_remember :hover,
+input#id_remember.checkboxinput:hover {
     color: #e0f2fe;
+    -webkit-text-decoration-line: underline;
     text-decoration-line: underline;
 }
 /* replace Bulma default values to improve contrast */
@@ -98,9 +129,14 @@ a.button.remove:hover {
     font-weight: bold;
 }
 
+a.button.button-light:hover {
+    -webkit-box-shadow: -7px -7px 14px #1e293b, 7px 7px 146px #0369a1;
+    box-shadow: -7px -7px 14px #1e293b, 7px 7px 14px #0369a1;
+}
+
 input.update-bag:hover {
-    -webkit-box-shadow: -3px -3px 6px #1e3a8a, 3px 3px 6px #1d4ed8;
-    box-shadow: -3px -3px 6px #1e3a8a, 3px 3px 6px #1d4ed8;
+    -webkit-box-shadow: -7px -7px 14px #1e3a8a, 7px 7px 146px #1d4ed8;
+    box-shadow: -7px -7px 14px #1e3a8a, 7px 7px 14px #1d4ed8;
     font-weight: bold;
 }
 
@@ -134,8 +170,13 @@ label.radio:hover {
 
 a.text__shadow--light:hover {
     color: #bcd9fc;
+    -webkit-text-decoration-line: underline;
     text-decoration-line: underline;
     text-decoration-thickness: 3px;
+}
+
+.text__shadow--blue {
+    text-shadow: 1px 1px 3px #075985;
 }
 
 .text__shadow--dark {
@@ -155,6 +196,10 @@ a.text__shadow--light:hover {
 
 .bg--sky-700 {
     background-color: #0369a1;
+}
+
+.bg--sky-800 {
+    background-color: #075985;
 }
 
 .bg--sky-900 {
@@ -228,6 +273,25 @@ a.text__shadow--light:hover {
     border: 3px #e0f2fe ridge;
 }
 
+.image__border--silver {
+    border: 6px #c0c0c0 ridge;
+}
+
+.image__border--gold {
+    border: 6px #ffd700 ridge;
+}
+
+.image__border--platinum {
+    border: 6px #e5e4e2 ridge;
+}
+
+.image__border--diamond {
+    border: 6px #b9f2ff ridge;
+}
+
+.image__border--no-name {
+    border: 6px #0c4a6e ridge;
+}
 .hr-top {
     border-top: 3px solid white;
 }
@@ -254,22 +318,49 @@ a.text__shadow--light:hover {
     padding: 10px;
 }
 
-/* Allauth form formatting (taken from Boutique Ado walktrough and adapted to my project) */
+/* Allauth form formatting (taken from Boutique Ado walkthrough and adapted to my project) */
 
 .allauth-form-inner-content p {
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
 }
 
+select#id_default_country {
+    font-family: "Saira", sans-serif;
+    padding-bottom: 0.1rem;
+    padding-top: 0.1rem;
+}
+
 .allauth-form-inner-content input,
 .custom-form input,
+.custom-form textarea,
 .custom-form select {
-    border-color: #93c5fd;
+    border: 4px #93c5fd ridge;
     margin-bottom: 0.5rem;
 }
 
 .allauth-form-inner-content label:not([for="id_remember"]) {
     display: none;
+}
+
+.allauth-form-inner-content input::-webkit-input-placeholder,
+.custom-form input::-webkit-input-placeholder {
+    color: #aab7c4;
+}
+
+.allauth-form-inner-content input::-moz-placeholder,
+.custom-form input::-moz-placeholder {
+    color: #aab7c4;
+}
+
+.allauth-form-inner-content input:-ms-input-placeholder,
+.custom-form input:-ms-input-placeholder {
+    color: #aab7c4;
+}
+
+.allauth-form-inner-content input::-ms-input-placeholder,
+.custom-form input::-ms-input-placeholder {
+    color: #aab7c4;
 }
 
 .allauth-form-inner-content input::placeholder,
@@ -323,6 +414,8 @@ input.input--light:hover,
 button,
 .button,
 input {
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
 
@@ -347,13 +440,26 @@ a.button.remove {
 }
 
 .quantity-input,
-.cc-element {
+.cc-element,
+.custom-image {
     max-width: 50%;
 }
 
+/* separate class needed for media query */
+.custom-image--actor {
+    max-width: 50%;
+}
 .radio + .radio {
     /* override Bulma setting */
     margin-left: 0;
+}
+
+/*----- LISTS -----*/
+.li__icon--panel {
+    list-style-type: disc;
+    list-style-position: inside;
+    list-style-image: none;
+    vertical-align: middle;
 }
 
 /*----- FOOTER -----*/
@@ -362,9 +468,18 @@ a.button.remove {
 }
 
 /*----- MEDIA QUERIES -----*/
+@media screen and (max-width: 320px) {
+    select#id_country {
+        max-width: 66%;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .quantity-input {
         max-width: 100%;
+    }
+    .custom-image--actor {
+        max-width: 80%;
     }
 }
 
@@ -372,6 +487,14 @@ a.button.remove {
     .hero__bg--nebula {
         background: url("/media/nasa_nebula_768px.jpg") no-repeat center center fixed;
         background-size: cover;
+    }
+    .custom-image--actor {
+        max-width: 40%;
+    }
+    .checkout {
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -386,6 +509,9 @@ a.button.remove {
     .hero__bg--nebula {
         background: url("/media/nasa_nebula_1366px.jpg") no-repeat center center fixed;
         background-size: cover;
+    }
+    .custom-image--actor {
+        max-width: 25%;
     }
 }
 
