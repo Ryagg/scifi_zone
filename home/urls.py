@@ -18,4 +18,9 @@ urlpatterns = [
         views.privacy_policy,
         name='privacy_policy'
     ),
+    path(
+        'timetable/',
+        views.timetable,
+        name='timetable'
+    )
 ]

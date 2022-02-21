@@ -17,8 +17,7 @@
                         <a class="navbar-link">Event Info</a>
                             <div class="navbar-dropdown is-boxed">
                                 <a class="navbar-item is-size-4" href="{% url 'guests' %}">Guests</a>
-                                <a href="" class="navbar-item is-size-4">General Info</a>
-                                <a href="" class="navbar-item is-size-4">Timetable</a>
+                                <a href="{% url 'timetable' %}" class="navbar-item is-size-4">Timetable</a>
                             </div>
                     </div>
                     <div class="navbar-item has-dropdown is-hoverable" tabindex="0">
@@ -60,13 +59,13 @@
                         <form action="{% url 'watson:search' %}">
                             <div class="field has-addons">
                                 <div class="control">
-                                    <label for="search" hidden>Search bar</label>
-                                    <input class="input" type="text" placeholder="Full text search" name="q" value="{{request.GET.q}}">
+                                    <input class="input" type="text" id="search" aria-label="Search" placeholder="Full text search" name="q" value="{{request.GET.q}}">
                                 </div>
                                 <div class="control">
                                     <button class="button" type="submit" aria-label="submit search">
                                         <i class="fa-regular fa-magnifying-glass"></i>
                                     </button>
+                                </div>
                             </div>
                         </form>
                     </div>
