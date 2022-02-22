@@ -2,6 +2,10 @@
 {% load static %}
 {% load bag_tools %}
 
+{% block extra_js %}
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
 {% block content %}
 <section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
 <!-- Order summary -->
