@@ -27,5 +27,6 @@ urlpatterns = [
     path('bag/', include('bag.urls')),
     path('checkout/', include('checkout.urls')),
     path('profile/', include('profiles.urls')),
-    path('search/', include("watson.urls", namespace='watson')),
+    path('find/', include('find.urls')),
+    # path('search/', include("watson.urls", namespace='watson')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
