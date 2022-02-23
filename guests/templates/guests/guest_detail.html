@@ -83,9 +83,26 @@
                         {% for ticket in tickets %}
                             {% if actor.star_autograph_category == ticket.price_category and "Autograph" in ticket.name %}
                                 <p class="is-size-4 has-text-centered">€{{ ticket.price }}</p>
-                                <div class="control has-text-centered">
-                                    <a href="{% url 'ticket_detail' ticket.id %} " class="button button-light my-4 is-size-4 has-text-weight-medium bg--blue-300 shadow text__color-blue-900">Buy Autograph</a>
-                                </div>
+                                    <form action="{% url 'add_to_bag' ticket.id %}" method="POST">
+                                    {% csrf_token %}
+                                        <div class="field">
+                                            <label for="autograph-quantity" class="is-size-4 has-text-weight-medium">Number of tickets
+                                            </label>
+                                            <div class="control">
+                                                <!-- type attribute number not supported by Bulma -->
+                                                <input id="autograph-quantity" name="quantity" class="input is-link quantity-input" type="text"
+                                                    pattern="^[1-9][0-9]?$" placeholder="" value="" data-item_id="{{ ticket.id }}"
+                                                    aria-label="quantity" required>
+                                                <input type="hidden" name="chosen_actor" value="{{ actor.name }}">
+                                            </div>
+                                        </div> <!-- end of field -->
+                                        <div class="field">
+                                            <div class="control">
+                                                <input class="button input--light my-1" type="submit" value="Add to shopping bag">
+                                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                            </div>
+                                        </div>
+                                    </form>
                             {% endif %}
                         {% endfor %}
                 </div>
@@ -98,9 +115,26 @@
                         {% for ticket in tickets %}
                             {% if actor.star_photoshoot_category == ticket.price_category and "Photoshoot" in ticket.name %}
                                 <p class="is-size-3 has-text-centered">€{{ ticket.price }}</p>
-                                <div class="control has-text-centered">
-                                    <a href="{% url 'ticket_detail' ticket.id %} " class="button button-light my-4 is-size-4 has-text-weight-medium bg--blue-300 shadow text__color-blue-900">Buy Photoshoot</a>
-                                </div>
+                                <form action="{% url 'add_to_bag' ticket.id %}" method="POST">
+                                    {% csrf_token %}
+                                        <div class="field">
+                                            <label for="photoshoot-quantity" class="is-size-4 has-text-weight-medium">Number of tickets
+                                            </label>
+                                            <div class="control">
+                                                <!-- type attribute number not supported by Bulma -->
+                                                <input id="photoshoot-quantity" name="quantity" class="input is-link quantity-input" type="text"
+                                                    pattern="^[1-9][0-9]?$" placeholder="" value="" data-item_id="{{ ticket.id }}"
+                                                    aria-label="quantity" required>
+                                                <input type="hidden" name="chosen_actor" value="{{ actor.name }}">
+                                            </div>
+                                        </div> <!-- end of field -->
+                                        <div class="field">
+                                            <div class="control">
+                                                <input class="button input--light my-1" type="submit" value="Add to shopping bag">
+                                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                            </div>
+                                        </div>
+                                    </form>
                             {% endif %}
                         {% endfor %}
                 </div>

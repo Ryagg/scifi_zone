@@ -55,7 +55,9 @@ def update_bag(request, item_id):
     quantity = int(request.POST.get('quantity'))
     bag = request.session.get('bag', {})
 
-    if quantity > 0:
+    if quantity < 0:
+        messages.info(request, 'Please enter only positive numbers')
+    elif quantity > 0:
         bag[item_id] = quantity
     else:
         del bag[item_id]

@@ -33,12 +33,12 @@
             <div class="columns">
                 {% for actor in actors %}
                     {% if actor.id <= midway %}
-                        <div class="column has-text-centered custom-image--actor mx-auto">
+                        <div class="column is-2-tablet has-text-centered custom-image--actor mx-auto">
                             <figure class="image is-3by5 mb-2 portrait__border card__box-shadow text__color-sky-100">
                                 {% if actor.star_image %}
-                                <img src="{{ MEDIA_URL }}{{actor.star_image}} " alt="{{ actor.name }}">
+                                <img src="{{ MEDIA_URL }}{{ actor.star_image }}" loading="lazy" alt="{{ actor.name }}">
                                 {% elif actor.star_image_url %}
-                                    <img src="{{ MEDIA_URL }}{{actor.star_image_url}} " alt="{{ actor.name }}">
+                                    <img src="{{ MEDIA_URL }}{{ actor.star_image_url }} " alt="{{ actor.name }}">
                                 {% else %}
                                     <img src="{{ MEDIA_URL }}noimage.png" alt="placeholder image for missing actor image">
                                 {% endif %}
@@ -51,12 +51,12 @@
             <div class="columns">
                 {% for actor in actors %}
                     {% if actor.id > midway %}
-                        <div class="column has-text-centered custom-image--actor mx-auto">
+                        <div class="column is-2-tablet has-text-centered custom-image--actor mx-auto">
                             <figure class="image is-3by5 mb-2 portrait__border card__box-shadow">
                                 {% if actor.star_image %}
-                                <img src="{{ MEDIA_URL }}{{actor.star_image}} " alt="{{ actor.name }}">
+                                <img src="{{ MEDIA_URL }}{{ actor.star_image }}" loading="lazy" alt="{{ actor.name }}">
                                 {% elif actor.star_image_url %}
-                                    <img src="{{ MEDIA_URL }}{{actor.star_image_url}} " alt="{{ actor.name }}">
+                                    <img src="{{ MEDIA_URL }}{{ actor.star_image_url }} " alt="{{ actor.name }}">
                                 {% else %}
                                     <img src="{{ MEDIA_URL }}noimage.png" alt="placeholder image for missing actor image">
                                 {% endif %}
