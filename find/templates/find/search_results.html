@@ -17,11 +17,9 @@
                                 {% for result in search_results %}
                                     <li>
                                         <article>
-                                            {# watson_searchentry value for tickets #}
-                                            {% if result.content_type_id == 15%}
+                                            {% if "Ticket" or "Package" in result.title %}
                                                 <a href="{% url 'ticket_detail' result.object.id %}" class="is-size-4 is-size-3-tablet text__color-sky-100 link--light">{{ result.title }} </a>
-                                            {# watson_searchentry value for actors #}
-                                            {% elif result.content_type_id == 17 %}
+                                            {% else %}
                                                 <p class="is-size-4 is-size-3-tablet"></p>
                                                     <a href="{% url 'guest_detail' result.object.id %}" class="is-size-4 is-size-3-tablet text__color-sky-100 link--light">{{ result.title }} </a>
                                             {% endif %}
