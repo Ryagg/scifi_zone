@@ -315,6 +315,148 @@ The [web accessibility evaluation tool](https://wave.webaim.org/) was used to ch
 
 ---
 
+The results for both the mobile version and the desktop version are displayed. For the mobile version, the performance is lower than I'd prefer. The main factors are render-blocking resources (mainly bulma.min.css, jquery-3.6.0.min.js, base.css, and base.js) and are for the most part (external sources) outside of my control.
+
+Please note that I only checked pages created by me.
+
+-   **Homepage:**
+
+**homepage-mobile:**
+
+![homepage-mobile](documentation/testing/lighthouse-results/homepage-mobile.jpg)
+
+**homepage-desktop:**
+
+![homepage-desktop](documentation/testing/lighthouse-results/homepage-desktop.jpg)
+
+-   **Guests page:**
+
+OPTIMIZE IMAGES
+
+-   **Timetable page:**
+
+**timetable-mobile:**
+
+![timetable-mobile](documentation/testing/lighthouse-results/timetable-mobile.jpg)
+
+**timetable-desktop:**
+
+![timetable-desktop](documentation/testing/lighthouse-results/timetable-desktop.jpg)
+
+-   **Tickets page:**
+
+**tickets-mobile:**
+
+![tickets-mobile](documentation/testing/lighthouse-results/tickets-mobile.jpg)
+
+**tickets-desktop:**
+
+![tickets-desktop](documentation/testing/lighthouse-results/tickets-desktop.jpg)
+
+-   **Tickets detail page** (Autograph ticket price category B exemplary for all ticket details pages):
+
+**ticket_detail-mobile:**
+
+![ticket_detail-mobile](documentation/testing/lighthouse-results/ticket_detail-mobile.jpg)
+
+**ticket_detail-desktop:**
+
+![ticket_detail-desktop](documentation/testing/lighthouse-results/ticket_detail-desktop.jpg)
+
+-   **Packages page:**
+
+**packages-mobile:**
+
+![packages-mobile](documentation/testing/lighthouse-results/packages-mobile.jpg)
+
+**packages-desktop**:
+
+![packages-desktop](documentation/testing/lighthouse-results/packages-desktop.jpg)
+
+-   **Package detail page** (Diamond package exemplary for all package detail pages):
+
+**package_detail-mobile:**
+
+![package_detail-mobile](documentation/testing/lighthouse-results/package_detail-mobile.jpg)
+
+**package_detail-desktop:**
+
+![package_detail-desktop](documentation/testing/lighthouse-results/package_detail-desktop.jpg)
+
+-   **Bag page:**
+
+**bag-mobile:**
+
+![bag-mobile](documentation/testing/lighthouse-results/bag-mobile.jpg)
+
+**bag-desktop:**
+
+![bag-desktop](documentation/testing/lighthouse-results/bag-desktop.jpg)
+
+-   **Checkout page:**
+
+**checkout-mobile:**
+
+The performance for this page is very poor. Render-blocking resources cost 2.27 seconds, the total blocking time is 700ms, and both the first contentful paint with 3.7 seconds, and the largest contentful paint with 4.2 seconds take too long. I have no explanation for the huge discrepancy compared to the results for the desktop version below.
+
+![checkout-mobile](documentation/testing/lighthouse-results/checkout-mobile.jpg)
+![checkout-mobile_metrics](documentation/testing/lighthouse-results/checkout-mobile_metrics.jpg)
+![checkout-mobile_opportunities](documentation/testing/lighthouse-results/checkout-mobile_opportunities.jpg)
+
+**checkout-desktop:**
+
+![checkout-desktop](documentation/testing/lighthouse-results/checkout-desktop.jpg)
+
+-   **Checkout success page:**
+
+**checkout-success_mobile:**
+
+![checkout-success_mobile](documentation/testing/lighthouse-results/checkout-success_mobile.jpg)
+
+**checkout-success-desktop:**
+
+![checkout-success_mobile](documentation/testing/lighthouse-results/checkout-success_desktop.jpg)
+
+-   **Profile page:**
+
+**profile-mobile:**
+
+![profile-mobile](documentation/testing/lighthouse-results/profile-mobile.jpg)
+
+**profile-desktop:**
+
+![profile-desktop](documentation/testing/lighthouse-results/profile-desktop.jpg)
+
+-   **Add guest page:**
+
+**add-guest_mobile:**
+
+![add-guest_mobile](documentation/testing/lighthouse-results/add-guest_mobile.jpg)
+
+**add-guest_desktop:**
+
+![add-guest_desktop](documentation/testing/lighthouse-results/add-guest_desktop.jpg)
+
+-   **Site notice page:**
+
+**site-notice_mobile:**
+
+![site-notice_mobile](documentation/testing/lighthouse-results/site-notice_mobile.jpg)
+
+**site-notice_desktop:**
+
+![site-notice_desktop](documentation/testing/lighthouse-results/site-notice_desktop.jpg)
+
+-   **Privacy policy page:**
+
+**privacy-policy_mobile:**
+
+![privacy-policy_mobile](documentation/testing/lighthouse-results/privacy-policy_mobile.jpg)
+
+**privacy-policy_desktop:**
+
+![privacy-policy_desktop](documentation/testing/lighthouse-results/privacy-policy_desktop.jpg)
+
 ### **JShint**
 
 ---
@@ -352,11 +494,21 @@ No errors were reported for base.js or stripe_elements.js using [JSHint](https:/
 
 ---
 
--   Tickets can't be added to the shopping bag from the guest detail page.
 -   Images for guests are not displayed if an URL instead of a file is provided.
 -   Uploaded images don't match the size of the existing images due to the applied transformations before uploading the original images.
 -   The input field to update the bag allows negative numbers, and negative numbers of any value remove the item from the bag.
 -   When logged in as an admin, the search bar input field causes overflow for some viewports.
+
+![admin-searchbar](documentation/testing/bugs/admin-searchbar.jpg)
+![admin-searchbar-complete](documentation/testing/bugs/admin-searchbar-complete.jpg)
+
 -   For viewports greater than 320px, the country select label on the checkout page is longer than the other input fields. Media query only works for 320px.
+
+![county-select-label](documentation/testing/bugs/country-select-label.jpg)
+
+-   For viewports with 320px, the heading 'Billing address' doesn't fit.
+
+![checkout-heading-320px](documentation/testing/bugs/checkout-heading-320px.jpg)
+
 -   Hovering over the checkbox on the login page causes the text next to it to use the Bulma default for hover and become difficult to read due to poor contrast
 -   The submit button on the password reset page uses border-radius 0 and doesn't match the other buttons throughout the page.
