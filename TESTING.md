@@ -496,7 +496,6 @@ No errors were reported for base.js or stripe_elements.js using [JSHint](https:/
 
 -   Images for guests are not displayed if an URL instead of a file is provided.
 -   Uploaded images don't match the size of the existing images due to the applied transformations before uploading the original images.
--   The input field to update the bag allows negative numbers, and negative numbers of any value remove the item from the bag.
 -   When logged in as an admin, the search bar input field causes overflow for some viewports.
 
 ![admin-searchbar](documentation/testing/bugs/admin-searchbar.jpg)
