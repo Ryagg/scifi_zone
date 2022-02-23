@@ -1,8 +1,17 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-<link rel="stylesheet" href="/static/css/base.css" type="text/css">
+{% load static %}
 
-{% block content %}
-<section id="wrapper" class="hero is-fullheight-with-navbar bg--sky-900 text__color-sky-100">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    <section id="wrapper" class="hero is-fullheight-with-navbar bg--sky-900 text__color-sky-100">
     <div class="hero-body">
         <div class="container">
             <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">403</h1>
@@ -16,4 +25,10 @@
         </div> <!-- end of container -->
     </div> <!-- end of body -->
 </section>
-{% endblock %}
+</body>
+</html>
+
+
+
+
+
