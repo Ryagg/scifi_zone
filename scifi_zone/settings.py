@@ -87,6 +87,28 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
     "my-custom-header",
 ]
 
+# settings from "Django for Professionals" by William S. Vincent
+# prevent data sniffing
+SECURE_SSL_REDIRECT = os.environ.get(
+    "DJANGO_SECURE_SSL_REDIRECT", default=True)
+
+# add Strict-Transport-Security header:
+SECURE_HSTS_SECONDS = 300 # change to much greater value later
+
+# force subdomains to use SSL
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# SECURE_HSTS_PRELOAD = True # because SECURE_HSTS_SECONDS has non-zero value
+
+# force cookies over HTTPS
+SESSION_COOKIE_SECURE = os.environ.get(
+    "DJANGO_SESSION_COOKIE_SECURE", default=True)
+
+# send only cookies marked as secure with an HTTPS connection
+CSRF_COOKIE_SECURE = os.environ.get(
+    "DJANGO_CSRF_COOKIE_SECURE", default=True
+)
+
 CRISPY_TEMPLATE_PACK = 'uni_form'
 
 ROOT_URLCONF = 'scifi_zone.urls'
