@@ -1,5 +1,4 @@
 {% load static %}
-{% load watson %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,50 +56,6 @@
     {% endif %}
 
     {% block page_header %}
-    {% endblock %}
-
-    {% block search_results %}
-    {% if search_results %}
-        <section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
-            <div class="hero-body">
-                <div class="container">
-                    <div class="columns is-multiline is-centered">
-                        <div class="column is-8-tablet my-2 has-text-centered">
-                        {% if search_results %}
-                            <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Search results{% if query %} for &ldquo;{{query}}&rdquo;:{% endif %}</h1>
-                                <p class="is-size-4 is-size-3-tablet mb-5">
-                                    Click the links to go to the page with details about the result
-                                </p>
-                                    <ul>
-                                        {% for result in search_results %}
-                                            <li>
-                                                <article>
-                                                    {# watson_searchentry value for tickets #}
-                                                    {% if result.content_type_id == 15%}
-                                                        <a href="{% url 'ticket_detail' result.object.id %}" class="is-size-4 is-size-3-tablet text__color-sky-100 link--light">{{ result.title }} </a>
-                                                    {# watson_searchentry value for actors #}
-                                                    {% elif result.content_type_id == 17 %}
-                                                        <p class="is-size-4 is-size-3-tablet"></p>
-                                                            <a href="{% url 'guest_detail' result.object.id %}" class="is-size-4 is-size-3-tablet text__color-sky-100 link--light">{{ result.title }} </a>
-                                                    {% endif %}
-                                                </article>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                        {% else %}
-                            {% if query %}
-                                <p class="is-size-4 is-size-3-tablet"><em>There are no results to display.</em></p>
-                                <p class="is-size-4 is-size-3-tablet"><em>Try entering a less specific search term.</em></p>
-                            {% else %}
-                                <p class="is-size-4 is-size-3-tablet"><em>Please enter a query in the search form.</em></p>
-                            {% endif %}
-                        {% endif %}
-                        </div> <!-- end of column -->
-                    </div> <!-- end of columns -->
-                </div> <!-- end of container-->
-            </div> <!-- end of hero-body -->
-        </section>
-    {% endif %}
     {% endblock %}
 
     {% block content %}
