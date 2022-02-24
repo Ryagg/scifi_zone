@@ -6,7 +6,15 @@
 */
 
 /*----- GOOGLE FONTS -----*/
-@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Saira&display=swap");
+@font-face {
+    font-family: "Orbitron";
+    src: url("/static/fonts/orbitron/Orbitron-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "Saira";
+    src: url("/static/fonts/saira/Saira-VariableFont_wdth\,wght.ttf");
+}
 /*----- GENERAL STYLES -----*/
 body {
     font-family: "Saira", sans-serif;
@@ -134,7 +142,7 @@ input.update-bag:hover {
 
 label.radio:hover {
     color: #ffef0a;
-    font-size: 110%;
+    font-weight: bolder;
 }
 
 /*----- TEXT EFFECTS -----*/
