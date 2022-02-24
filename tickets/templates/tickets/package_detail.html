@@ -43,7 +43,7 @@
                         </div>
                         <form action="{% url 'add_to_bag' package.id %}" method="POST">
                             {% csrf_token %}
-                                <div class="field">
+                                <fieldset class="field">
                                     <label for="quantity" class="is-size-4 has-text-weight-medium">Number of packages
                                     </label>
                                     <div class="control">
@@ -51,13 +51,13 @@
                                             maxlength="99" pattern="^[0-9]$" placeholder="" value="" data-item_id="{{ ticket.id }}"
                                             aria-label="quantity">
                                     </div>
-                                </div> <!-- end of field -->
-                                <div class="field">
+                                </fieldset> <!-- end of field -->
+                                <fieldset class="field">
                                     <div class="control">
                                         <input class="button input--light my-1" type="submit" value="Add to shopping bag">
                                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                                     </div>
-                                </div>
+                                </fieldset>
                         </form>
                     </div> <!-- end of column -->
                 </div> <!-- end of columns -->

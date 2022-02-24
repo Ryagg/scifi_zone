@@ -36,7 +36,7 @@
                                 {% if "Standard" not in item.ticket.name and "Package" not in item.ticket.name %}
                                     <p class="is-size-5">Ticket(s) valid for: <span class="has-text-weight-semibold">{{ item.selection }}</span> </p>
                                 {% endif %}
-                                <field class="is-grouped has-addons">
+                                <fieldset class="is-grouped has-addons">
                                     <form action="{% url 'update_bag' item.item_id %}" method="POST">
                                     {% csrf_token %}
                                         <div class="control">
@@ -48,7 +48,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                </field>
+                                </fieldset>
                         </div>
                         <div class="column is-5-tablet is-3-desktop">
                             <p class="is-size-4">€{{ item.ticket.price }} per ticket</p>

@@ -28,7 +28,9 @@ class ActorForm(forms.ModelForm):
                 (A-C case-sensitve)",
             "star_photoshoot_category": "Star Photoshoot Category \
                 (A-C case-sensitve)",
-            "star_info_1": "Short SciFi related summary",
+                # (try to) avoid W3C markup validator error
+            "star_image": "",
+            "star_info_1": "SciFi related info",
             "star_info_2": "Info without SciFi reference",
             "star_imdb": "Link to IMDb entry for guest",
             "star_wiki": "Link to Wikipedia entry for guest",

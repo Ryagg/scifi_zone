@@ -44,7 +44,7 @@
                                         {% include "includes/actor_dropdown.html" %}
                                         <p class="is-size-5 mb-2 disclaimer__border--red">Ticket only valid in combination with a standard ticket or package for the same day.</p>
                                     {% endif %}
-                                    <div class="field">
+                                    <fieldset class="field">
                                         <label for="quantity" class="is-size-4 has-text-weight-medium">Number of tickets
                                         </label>
                                         <div class="control">
@@ -52,13 +52,13 @@
                                                 pattern="^[1-9][0-9]?$" placeholder="" value="" data-item_id="{{ ticket.id }}"
                                                 aria-label="quantity" required>
                                         </div>
-                                    </div> <!-- end of field -->
-                                    <div class="field">
+                                    </fieldset> <!-- end of field -->
+                                    <fieldset class="field">
                                         <div class="control">
                                             <input class="button input--light my-1" type="submit" value="Add to shopping bag">
                                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                                         </div>
-                                    </div>
+                                    </fieldset>
                             </form>
                         </div> <!-- end of column -->
                 </div> <!-- end of columns -->
