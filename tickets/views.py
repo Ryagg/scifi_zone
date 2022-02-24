@@ -3,13 +3,14 @@ from .models import Ticket, Package, Actor
 
 # pylint: disable=locally-disabled, no-member
 
+
 def all_tickets(request):
     """ A view to show all tickets """
 
     tickets = Ticket.objects.filter(name__icontains='Ticket')
 
     context = {
-    'tickets': tickets,
+        'tickets': tickets,
     }
 
     return render(request, 'tickets/tickets.html', context)
@@ -23,8 +24,6 @@ def ticket_detail(request, tickets_id):
     goodies = ticket.included.split(',')
     actors = Actor.objects.all()
 
-
-
     context = {
         'ticket': ticket,
         'price_category': price_category,
@@ -32,7 +31,6 @@ def ticket_detail(request, tickets_id):
         'actors': actors,
 
     }
-    print(ticket)
     return render(request, 'tickets/ticket_detail.html', context)
 
 
@@ -47,13 +45,13 @@ def all_packages(request):
 
     return render(request, 'tickets/packages.html', context)
 
+
 def package_detail(request, package_id, package_name):
     """ A view to show detailed package information """
 
     package = get_object_or_404(Ticket, pk=package_id, name=package_name)
     included = package.included.split(',')
     goodies = package.goodies.split("+")
-
 
     context = {
         'package': package,

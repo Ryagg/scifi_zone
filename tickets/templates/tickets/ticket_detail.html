@@ -2,75 +2,74 @@
 {% load static %}
 
 {% block content %}
-<section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
-    <div class="hero-body">
-        <div class="container">
-            <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">{{ ticket.name }}</h1>
-            <div class="columns is-multiline is-centered">
-                    <div class="column is-6-tablet">
-                        <div class="block custom-image mx-auto">
-                                <figure class="image is-3by2 mx-auto">
-                                    {% if "Autograph" in ticket.name %}
-                                        <img src="{{ MEDIA_URL }}autograph.jpg" alt="signing a signature with a pen">
-                                    {% elif "Photoshoot" in ticket.name %}
-                                        <img src="{{ MEDIA_URL }}photoshoot.jpg" alt="blonde women filming herself using a camera on a tripod">
-                                    {% else %}
-                                        <img src="{{ MEDIA_URL }}ticket.jpg" alt="event ticket">
+    <section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">{{ ticket.name }}</h1>
+                <div class="columns is-multiline is-centered">
+                        <div class="column is-6-tablet">
+                            <div class="block custom-image mx-auto">
+                                    <figure class="image is-3by2 mx-auto">
+                                        {% if "Autograph" in ticket.name %}
+                                            <img src="{{ MEDIA_URL }}autograph.jpg" alt="signing a signature with a pen">
+                                        {% elif "Photoshoot" in ticket.name %}
+                                            <img src="{{ MEDIA_URL }}photoshoot.jpg" alt="blonde women filming herself using a camera on a tripod">
+                                        {% else %}
+                                            <img src="{{ MEDIA_URL }}ticket.jpg" alt="event ticket">
+                                        {% endif %}
+                                    </figure>
+                            </div>
+                            <div class="block">
+                                <h2 class="title is-3 text__color-sky-100 text__shadow--dark">Description</h2>
+                                    <p class="is-size-5">{{ ticket.description }}</p>
+
+                            </div>
+                            <div class="block">
+                                <h2 class="title is-3 text__color-sky-100 text__shadow--dark">Included in this ticket:</h2>
+                                        <ul>
+                                            {% for goodie in goodies %}
+                                                <li>{% if 'Standard' in ticket.name %} 1 x {% endif %}{{ goodie }}</li>
+                                            {% endfor %}
+                                        </ul>
+                            </div>
+                        </div> <!-- end of column -->
+                        <div class="column is-6-tablet">
+                            <div class="block">
+                                <h3 class="title is-3 text__color-sky-100">€ {{ ticket.price }}.00</h3>
+                            </div>
+
+                            <form action="{% url 'add_to_bag' ticket.id %}" method="POST">
+                                {% csrf_token %}
+                                    {% if "Standard" not in ticket.name %}
+                                        {% include "includes/actor_dropdown.html" %}
+                                        <p class="is-size-5 mb-2 disclaimer__border--red">Ticket only valid in combination with a standard ticket or package for the same day.</p>
                                     {% endif %}
-                                </figure>
-                        </div>
-                        <div class="block">
-                            <h2 class="title is-3 text__color-sky-100 text__shadow--dark">Description</h2>
-                                <p class="is-size-5">{{ ticket.description }}</p>
-
-                        </div>
-                        <div class="block">
-                            <h2 class="title is-3 text__color-sky-100 text__shadow--dark">Included in this ticket:</h2>
-                                    <ul>
-                                        {% for goodie in goodies %}
-                                            <li>{% if 'Standard' in ticket.name %} 1 x {% endif %}{{ goodie }}</li>
-                                        {% endfor %}
-                                    </ul>
-                        </div>
-                    </div> <!-- end of column -->
-                    <div class="column is-6-tablet">
-                        <div class="block">
-                            <h3 class="title is-3 text__color-sky-100">€ {{ ticket.price }}.00</h3>
-                        </div>
-
-                        <form action="{% url 'add_to_bag' ticket.id %}" method="POST">
-                            {% csrf_token %}
-                                {% if "Standard" not in ticket.name %}
-                                    {% include "includes/actor_dropdown.html" %}
-                                    <p class="is-size-5 mb-2 disclaimer__border--red">Ticket only valid in combination with a standard ticket or package for the same day.</p>
-                                {% endif %}
-                                <div class="field">
-                                    <label for="quantity" class="is-size-4 has-text-weight-medium">Number of tickets
-                                    </label>
-                                    <div class="control">
-                                        <!-- type attribute number not supported by Bulma -->
-                                        <input id="quantity" name="quantity" class="input is-link" type="text"
-                                            pattern="^[1-9][0-9]?$" placeholder="" value="" data-item_id="{{ ticket.id }}"
-                                            id="id_qty_{{ ticket.id }}" aria-label="quantity" required>
+                                    <div class="field">
+                                        <label for="quantity" class="is-size-4 has-text-weight-medium">Number of tickets
+                                        </label>
+                                        <div class="control">
+                                            <input id="quantity" name="quantity" class="input is-link" type="text"
+                                                pattern="^[1-9][0-9]?$" placeholder="" value="" data-item_id="{{ ticket.id }}"
+                                                id="id_qty_{{ ticket.id }}" aria-label="quantity" required>
+                                        </div>
+                                    </div> <!-- end of field -->
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="button input--light my-1" type="submit" value="Add to shopping bag">
+                                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                        </div>
                                     </div>
-                                </div> <!-- end of field -->
-                                <div class="field">
-                                    <div class="control">
-                                        <input class="button input--light my-1" type="submit" value="Add to shopping bag">
-                                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                                    </div>
-                                </div>
-                        </form>
-                    </div> <!-- end of column -->
-            </div> <!-- end of columns -->
-            <div class="columns is-centered">
-                <div class="column">
-                    <div class="block py-5 hr-top">
-                            <p class="is-size-4">Buy (more) <a class="has-text-weight-semibold text__color-sky-100 item-name--light" href="{% url 'tickets' %}">Autographs and/or Photoshoot tickets</a>
-                        </div>
+                            </form>
+                        </div> <!-- end of column -->
+                </div> <!-- end of columns -->
+                <div class="columns is-centered">
+                    <div class="column">
+                        <div class="block py-5 hr-top">
+                                <p class="is-size-4">Buy (more) <a class="has-text-weight-semibold text__color-sky-100 item-name--light" href="{% url 'tickets' %}">Autographs and/or Photoshoot tickets</a>
+                            </div>
+                    </div>
                 </div>
-            </div>
-        </div> <!-- end of container-->
-    </div> <!-- end of hero-body -->
-</section>
+            </div> <!-- end of container-->
+        </div> <!-- end of hero-body -->
+    </section>
 {% endblock %}

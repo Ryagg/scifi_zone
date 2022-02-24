@@ -49,7 +49,6 @@ def cache_checkout_data(request):
             'save_info': request.POST.get('save_info'),
             'username': request.user,
         })
-        print('cache_checkout_data')
         return HttpResponse(status=200)
     except Exception as error:
         messages.error(request, 'Sorry, your payment cannot be processed \
@@ -85,7 +84,6 @@ def checkout(request):
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
             order.save()
-            print(order)
             for item_id, item_data in bag.items():
                 try:
                     ticket = Ticket.objects.get(id=item_id)
@@ -98,13 +96,13 @@ def checkout(request):
                         order_line_item.save()
                     else:
                         for selection, quantity in item_data[
-                            'items_by_selected'].items():
+                                'items_by_selected'].items():
                             order_line_item = OrderLineItem(
-                            order=order,
-                            ticket=ticket,
-                            quantity=quantity,
-                            selection=selection,
-                        )
+                                order=order,
+                                ticket=ticket,
+                                quantity=quantity,
+                                selection=selection,
+                            )
                         order_line_item.save()
                 except Ticket.DoesNotExist:
                     messages.error(request, (
@@ -112,12 +110,10 @@ def checkout(request):
                             found in our database. Please contact us!")
                     )
                     order.delete()
-                    print('order deleted')
                     return redirect(reverse('view_bag'))
 
             # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
-            print('checkout success!')
             return redirect(
                 reverse(
                     'checkout_success',
@@ -125,14 +121,12 @@ def checkout(request):
                         order.order_number]))
 
         else:
-            print('form error')
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
 
     else:
         bag = request.session.get("bag", {})
         if not bag:
-            print('bag empty')
             messages.error(request, "Your bag is empty.")
             return redirect(reverse("tickets"))
 
@@ -170,10 +164,8 @@ def checkout(request):
         "order_form": order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
-        # 'redirect': redirect,
     }
 
-    print('reached end of checkout')
     return render(request, template, context)
 
 
@@ -189,7 +181,6 @@ def checkout_success(request, order_number):
         profile = UserProfile.objects.get(user=request.user)
         order.user_profile = profile
         order.save()
-        print('order processed')
 
         # Save the user's info
         if save_info:
@@ -218,5 +209,4 @@ def checkout_success(request, order_number):
     context = {
         'order': order,
     }
-    print('Order received and processed')
     return render(request, template, context)

@@ -1,4 +1,5 @@
-import json, time
+import json
+import time
 from django.conf import settings
 from django.http import HttpResponse
 from django.core.mail import send_mail
@@ -13,6 +14,7 @@ from profiles.models import UserProfile
 from .models import Order, OrderLineItem
 
 # pylint: disable=locally-disabled, no-member
+
 
 def _send_confirmation_email(order):
     """Send the user a confirmation email"""
@@ -30,6 +32,7 @@ def _send_confirmation_email(order):
         settings.DEFAULT_FROM_EMAIL,
         [cust_email]
     )
+
 
 @require_POST
 @csrf_exempt
@@ -58,7 +61,7 @@ def webhook(request):
 
     # Handle the event
     if event.type == 'payment_intent.succeeded':
-        payment_intent = event.data.object # contains a stripe.PaymentIntent
+        payment_intent = event.data.object  # contains a stripe.PaymentIntent
         print('payment intent succeeded')
         handle_payment_intent_succeeded(payment_intent)
     # Then define and call a method to handle the successful payment intent.
@@ -68,6 +71,7 @@ def webhook(request):
         handle_payment_intent_failed(event)
 
     return HttpResponse(status=200)
+
 
 def handle_payment_intent_succeeded(payment_intent):
     """Handle the payment_intent.succeeded webhook from Stripe"""
@@ -79,9 +83,8 @@ def handle_payment_intent_succeeded(payment_intent):
     billing_details = payment_intent.charges.data[0].billing_details
     grand_total = round(payment_intent.charges.data[0].amount / 100, 2)
 
-
     # Update profile information if save_info was checked
-    profile = None # allow anonymous users to checkout
+    profile = None  # allow anonymous users to checkout
     username = payment_intent.metadata.username
     if username != 'AnonymousUser':
         profile = UserProfile.objects.get(user__username=username)
@@ -93,7 +96,6 @@ def handle_payment_intent_succeeded(payment_intent):
             profile.default_state = billing_details.address.state
             profile.default_country = billing_details.address.country
             profile.save()
-
 
     order_exists = False
     attempt = 1
@@ -121,7 +123,8 @@ def handle_payment_intent_succeeded(payment_intent):
         _send_confirmation_email(order)
         print('order already in database')
         return HttpResponse(
-            content='Webhook received: | SUCCESS: Verified order already in database',
+            content='Webhook received: | SUCCESS: Verified order already \
+                in database',
             status=200)
     else:
         order = None
@@ -161,10 +164,11 @@ def handle_payment_intent_succeeded(payment_intent):
     # self._send_confirmation_email(order)
     return HttpResponse(
         content='Webhook received | SUCCESS: Created order in webhook',
-    status=200)
+        status=200)
+
 
 def handle_payment_intent_failed(event):
     """Handle the payment_intent.payment_failed webhook from Stripe"""
     print(f'payment failed {event}')
     return HttpResponse(content='Webhook received',
-    status=200)
+                        status=200)

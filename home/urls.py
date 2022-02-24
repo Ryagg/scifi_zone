@@ -6,12 +6,12 @@ urlpatterns = [
         '',
         views.index,
         name='home'
-        ),
+    ),
     path(
         'site_notice/',
         views.site_notice,
         name='site_notice'
-        ),
+    ),
     path(
 
         'privacy_policy/',

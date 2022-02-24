@@ -6,6 +6,7 @@ from tickets.models import Actor, Ticket
 
 # pylint: disable=locally-disabled, no-member
 
+
 def view_all_guests(request):
     """A view to show all guests holding panels at the convention"""
 
@@ -17,23 +18,23 @@ def view_all_guests(request):
 
     return render(request, 'guests/guests.html', context)
 
+
 def guest_detail(request, actors_id):
     """ A view to show detailed actor information """
 
     actors = Actor.objects.all()
     actor = get_object_or_404(Actor, pk=actors_id)
     tickets = Ticket.objects.all()
-    # autograph_price_category = f'Autograph Ticket Price Category {actor.star_autograph_category}'
 
     context = {
         'actors': actors,
         'actor': actor,
         'tickets': tickets,
-        # 'autograph_price_category': autograph_price_category,
     }
     print(actor.star_autograph_category)
     return render(
         request, 'guests/guest_detail.html', context)
+
 
 @login_required
 def add_guest(request):
@@ -61,6 +62,7 @@ def add_guest(request):
     }
 
     return render(request, template, context)
+
 
 @login_required
 def edit_guest_info(request, actors_id):
@@ -92,6 +94,7 @@ def edit_guest_info(request, actors_id):
     }
 
     return render(request, template, context)
+
 
 @login_required
 def remove_guest(request, actors_id):

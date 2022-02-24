@@ -4,11 +4,10 @@ import pytest
 
 from django.shortcuts import reverse
 
+
 @pytest.mark.parametrize('templates', [
     ('checkout')
-
 ])
-
 @pytest.mark.new
 @pytest.mark.django_db
 def test_checkout_with_empty_bag(client, templates):
@@ -18,14 +17,3 @@ def test_checkout_with_empty_bag(client, templates):
     url = reverse(templates)
     response = client.get(url)
     assert response.status_code == 302
-
-# @pytest.mark.skip("items not added to bag")
-# @pytest.mark.django_db
-# def test_checkout_with_items_in_bag(client, create_ticket):
-#     """Verify that the page can be accessed with items in the bag"""
-#     response = reverse('view_bag')
-#     bag = client.post('add/'create_ticket.id)
-#     print(bag)
-#     url = reverse('checkout')
-#     response = client.get(url)
-#     assert response.status_code == 302
