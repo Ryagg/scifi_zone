@@ -52,8 +52,39 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
     'watson.middleware.SearchContextMiddleware',
 ]
+
+CSP_DEFAULT_SRC = (
+    "'self'",
+    "https://ms4-scifi-zone.s3.amazonaws.com",
+    "https://*.stripe.com",
+    "https://*.fontawesome.com",
+    "https://*herokuapp.com",
+    "https://*.jsdelivr.net",
+    "https://*.jquery.com"
+)
+
+CSP_SCRIPT_SRC = (
+    "'self'",
+    "https://*.stripe.com",
+    "https://*.fontawesome.com",
+    "https://*herokuapp.com",
+    "https://*.jsdelivr.net",
+    "https://*.jquery.com"
+)
+
+CSP_SCRIPT_SRC_ELEM = (
+    "'self'",
+    "https://*.stripe.com",
+    "https://*.fontawesome.com",
+    "https://*herokuapp.com",
+    "https://*.jsdelivr.net",
+    "https://*.jquery.com"
+)
+
+CSP_STYLE_SRC = ("'unsafe-inline'", "https:")
 
 CORS_ALLOWED_ORIGINS = [
     "https://herokuapp.com",
@@ -78,7 +109,7 @@ SECURE_SSL_REDIRECT = os.environ.get(
     "DJANGO_SECURE_SSL_REDIRECT", default=True)
 
 # add Strict-Transport-Security header:
-SECURE_HSTS_SECONDS = 300 # change to much greater value later
+SECURE_HSTS_SECONDS = 300  # change to much greater value later
 
 # force subdomains to use SSL
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -206,7 +237,7 @@ if 'USE_AWS' in os.environ:
     # Cache control
     AWS_S3_OBJECT_PARAMETERS = {
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
-        'Cache-Control': 'max-age=94608000',
+        'CacheControl': 'max-age=94608000',
     }
 
     # Bucket config
