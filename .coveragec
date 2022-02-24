@@ -1,0 +1,25 @@
+[run]
+# ignore files not written by me, tests, and conftest.py
+omit =
+bag\__init__.py
+bag\admin.py
+test_*.py
+conftest.py
+checkout\__init__.py
+checkout\tests.py
+find\__init__.py
+find\admin.py
+find\models.py
+find\tests.py
+guests\__init__.py
+guests\admin.py
+guests\models.py
+guests.test_forms.py
+guests\test_views.py
+home\__init__.py
+home\admin.py
+home\test_views.py
+profiles\__init__.py
+profiles\test_views.py
+tickets\__init__.py
+tickets\test_views.py
