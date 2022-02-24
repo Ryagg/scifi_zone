@@ -9,11 +9,13 @@
 @font-face {
     font-family: "Orbitron";
     src: url("/static/fonts/orbitron/Orbitron-VariableFont_wght.ttf");
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Saira";
     src: url("/static/fonts/saira/Saira-VariableFont_wdth\,wght.ttf");
+    font-display: swap;
 }
 /*----- GENERAL STYLES -----*/
 body {
