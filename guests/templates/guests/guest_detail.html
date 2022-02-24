@@ -114,7 +114,7 @@
                         </h2>
                             {% for ticket in tickets %}
                                 {% if actor.star_photoshoot_category == ticket.price_category and "Photoshoot" in ticket.name %}
-                                    <p class="is-size-3 has-text-centered">€{{ ticket.price }}</p>
+                                    <p class="is-size-4 has-text-centered">€{{ ticket.price }}</p>
                                     <form action="{% url 'add_to_bag' ticket.id %}" method="POST">
                                         {% csrf_token %}
                                             <div class="field">
@@ -138,7 +138,7 @@
                             {% endfor %}
                     </div>
                 </div>
-                <div class="columns is-centered mt-3">
+                <div class="columns is-centered mt-5">
                     <div class="column column is-10 is-4-tablet is-9-desktop">
                         <div class="disclaimer__border--red">
                             <h3 class="title is-4 text__color-sky-100">Disclaimer</h3>
