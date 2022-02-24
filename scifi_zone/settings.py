@@ -61,7 +61,7 @@ CSP_DEFAULT_SRC = (
     "https://ms4-scifi-zone.s3.amazonaws.com",
     "https://*.stripe.com",
     "https://*.fontawesome.com",
-    "https://*herokuapp.com",
+    "https://ms4-scifi-zone.herokuapp.com",
     "https://*.jsdelivr.net",
     "https://*.jquery.com"
 )
@@ -70,16 +70,17 @@ CSP_SCRIPT_SRC = (
     "'self'",
     "https://*.stripe.com",
     "https://*.fontawesome.com",
-    "https://*herokuapp.com",
+    "https://ms4-scif-zone.herokuapp.com",
     "https://*.jsdelivr.net",
     "https://*.jquery.com"
 )
 
 CSP_SCRIPT_SRC_ELEM = (
     "'self'",
+    "https://ms4-scifi-zone.s3.amazonaws.com",
     "https://*.stripe.com",
     "https://*.fontawesome.com",
-    "https://*herokuapp.com",
+    "https://ms4-scifi-zone.herokuapp.com",
     "https://*.jsdelivr.net",
     "https://*.jquery.com"
 )
@@ -114,7 +115,8 @@ SECURE_HSTS_SECONDS = 300  # change to much greater value later
 # force subdomains to use SSL
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
-# SECURE_HSTS_PRELOAD = True # because SECURE_HSTS_SECONDS has non-zero value
+# because SECURE_HSTS_SECONDS has non-zero value
+SECURE_HSTS_PRELOAD = True
 
 # force cookies over HTTPS
 SESSION_COOKIE_SECURE = os.environ.get(
