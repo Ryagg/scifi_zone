@@ -2,29 +2,29 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-</head>
-<body>
-    <section id="wrapper" class="hero is-fullheight-with-navbar bg--sky-900 text__color-sky-100">
-    <div class="hero-body">
-        <div class="container">
-            <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">500</h1>
-            <div class="columns is-multiline is-centered">
-                <p class="is-size-3 mb-5 has-text-centered has-text-weight-semibold">Houston, we have a problem!</p>
-                <div class="column is-10 is-6-tablet has-text-centered">
-                    <p class="is-size-3 mb-5">Click <a href="{% url 'home' %}" class="text__color-sky-100 link--light">here</a> to return to the homepage</p>
-                </div> <!-- end of column -->
-            </div> <!-- end of columns -->
-        </div> <!-- end of container -->
-    </div> <!-- end of body -->
-</section>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    </head>
+    <body>
+        <section id="wrapper" class="hero is-fullheight-with-navbar bg--sky-900 text__color-sky-100">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">500</h1>
+                        <div class="columns is-multiline is-centered">
+                            <p class="is-size-3 mb-5 has-text-centered has-text-weight-semibold">Houston, we have a problem!</p>
+                            <div class="column is-10 is-6-tablet has-text-centered">
+                                <p class="is-size-3 mb-5">Click <a href="{% url 'home' %}" class="text__color-sky-100 link--light"><span class="has-text-weight-semibold">here</span></a> to return to the homepage</p>
+                            </div> <!-- end of column -->
+                        </div> <!-- end of columns -->
+                </div> <!-- end of container -->
+            </div> <!-- end of body -->
+        </section>
+    </body>
 </html>
 
 

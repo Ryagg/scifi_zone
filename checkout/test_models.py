@@ -18,6 +18,7 @@ def order_data():
     )
     return order
 
+
 @pytest.mark.django_db
 @pytest.mark.custom_model
 def test_model_labels(order_data):

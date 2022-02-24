@@ -4,6 +4,7 @@ import pytest
 from django.shortcuts import reverse
 from pytest_django.asserts import assertTemplateUsed, assertContains
 
+
 @pytest.mark.new
 @pytest.mark.django_db
 def test_page_url_works(client, actor_data):
@@ -24,6 +25,7 @@ def test_page_url_with_parameter_works(client, actor_data):
         assert response.status_code == 200
         assertContains(response, actor.name)
 
+
 @pytest.mark.new
 @pytest.mark.django_db
 def test_uses_correct_template_to_render_a_view(client):
@@ -31,6 +33,7 @@ def test_uses_correct_template_to_render_a_view(client):
     url = reverse('guests')
     response = client.get(url)
     assertTemplateUsed(response, 'guests/guests.html')
+
 
 @pytest.mark.new
 @pytest.mark.django_db
@@ -41,15 +44,17 @@ def test_page_with_parameters_uses_correct_template(client, actor_data):
         assertTemplateUsed(response, 'guests/guest_detail.html')
         assertContains(response, actor.star_image_url)
 
+
 @pytest.mark.new
 @pytest.mark.django_db
 def test_add_guest_page_not_accessible_for_unauthenticated_users(
-    client, user_data):
+        client, user_data):
     """Verify that the page returns an error message for
     unauthenticated users"""
     url = reverse('add_guest')
     response = client.get(url)
     assert response.status_code == 302
+
 
 @pytest.mark.new
 @pytest.mark.django_db
@@ -62,6 +67,7 @@ def test_add_guest_page_not_accessible_for_non_superusers(
     response = client.get(url)
     assert response.status_code == 302
 
+
 @pytest.mark.new
 # django_db() mark not needed for admin_client fixture
 def test_add_guest_page_accessible_for_superusers(admin_client):
@@ -69,6 +75,7 @@ def test_add_guest_page_accessible_for_superusers(admin_client):
     url = reverse('add_guest')
     response = admin_client.get(url)
     assert response.status_code == 200
+
 
 def test_add_guest_works(admin_client):
     """Verify that added guests appear on the home and guests pages"""

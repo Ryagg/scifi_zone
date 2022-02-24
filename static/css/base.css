@@ -32,15 +32,6 @@ h6 {
     font-family: "Orbitron", sans-serif;
 }
 
-/* .body__footer--down {
-    min-height: 83vh;
-}
-
-.nth-section__footer--down {
-    min-height: 30vh;
-    max-height: 70vh;
-} */
-
 .column--less-padding {
     padding: 0;
 }
@@ -85,6 +76,7 @@ input#id_remember.checkboxinput:hover {
     -webkit-text-decoration-line: underline;
     text-decoration-line: underline;
 }
+
 /* replace Bulma default values to improve contrast */
 a.button.bg--blue-300:active {
     color: #eff6ff;
@@ -189,7 +181,7 @@ a.text__shadow--light:hover {
     box-shadow: 10px 12px 0.5rem rgba(0, 0, 0, 0.5);
 }
 
-/*----- TEXT AND BACKGROUND COLORS (taken from https://tailwindcss.com/docs/customizing-colors)  -----*/
+/*----- TEXT AND BACKGROUND COLORS (colors taken from https://tailwindcss.com/docs/customizing-colors)  -----*/
 .text__color-sky-100 {
     color: #e0f2fe;
 }
@@ -526,5 +518,11 @@ a.button.remove {
     .hero__bg--nebula {
         background: url("/media/nasa_nebula_1920px.jpg") no-repeat center center fixed;
         background-size: cover;
+    }
+}
+
+@media screen and (min-width: 2560px) {
+    html {
+        font-size: 130%;
     }
 }

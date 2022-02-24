@@ -4,6 +4,7 @@ import pytest
 
 from guests.forms import ActorForm
 
+
 @pytest.mark.django_db
 # marking test as expecting to fail
 @pytest.mark.xfail(reason='actor will not be created without required data')
@@ -15,6 +16,7 @@ def test_actor_form_is_not_valid_without_required_data():
     form = ActorForm(data=data)
     form.save()
     assert True is form.is_valid()
+
 
 @pytest.mark.django_db
 def test_actor_form_is_valid_with_data(create_guest):

@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect, get_object_or_404, reverse, HttpResponse
+from django.shortcuts import (
+    render, redirect, get_object_or_404, reverse, HttpResponse
+)
 from django.contrib import messages
 from tickets.models import Ticket
+
 
 def view_bag(request):
     """ A view that renders the bag contents page """
     return render(request, 'bag/bag.html')
-
 
 
 def add_to_bag(request, item_id):
@@ -23,17 +25,18 @@ def add_to_bag(request, item_id):
         if item_id in bag:
             if selected in bag[item_id]['items_by_selected'].keys():
                 bag[item_id]['items_by_selected'][selected] += quantity
-                messages.success(request, f'Updated {ticket.name} quantity '
+                messages.success(
+                    request, f'Updated {ticket.name} quantity '
                     f'for {selected} to '
                     f'{bag[item_id]["items_by_selected"][selected]}')
             else:
                 bag[item_id]['items_by_selected'][selected] = quantity
                 messages.success(request, f'Added {ticket.name} x {quantity} '
-                f' for {selected} to your bag.')
+                                 f' for {selected} to your bag.')
         else:
             bag[item_id] = {'items_by_selected': {selected: quantity}}
             messages.success(request, f'Added {ticket.name} x {quantity} '
-                f' for {selected} to your bag!')
+                             f' for {selected} to your bag!')
     else:
         if item_id in bag:
             bag[item_id] += quantity
@@ -45,9 +48,9 @@ def add_to_bag(request, item_id):
                 to your bag.')
 
     request.session['bag'] = bag
-    print(request.session['bag'])
 
     return redirect(redirect_url)
+
 
 def update_bag(request, item_id):
     """ Update quantity of selected bag item to user's choice """
@@ -65,6 +68,7 @@ def update_bag(request, item_id):
     request.session['bag'] = bag
     return redirect(reverse('view_bag'))
 
+
 def remove_from_bag(request, item_id):
     """ Remove item from bag """
     try:
@@ -75,11 +79,11 @@ def remove_from_bag(request, item_id):
         messages.success(request, f'Removed {ticket.name} from your bag.')
 
         request.session['bag'] = bag
-        print(request.session['bag'])
         return redirect(reverse('view_bag'))
 
     except Exception as error:
-        return HttpResponse(status=500,content=error)
+        return HttpResponse(status=500, content=error)
+
 
 def empty_bag(request):
     """ Remove all items from bag """
@@ -90,5 +94,4 @@ def empty_bag(request):
     messages.success(request, 'Removed all items from your bag.')
 
     request.session['bag'] = bag
-    print(request.session['bag'])
     return redirect(reverse('view_bag'))

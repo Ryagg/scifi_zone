@@ -2,52 +2,51 @@
 {% load static %}
 
 {% block content %}
-<section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
-    <div class="hero-body">
-        <h1 class="title is-2 has-text-centered text__color-sky-100 heading__text--shadow-blue">
-            Guests at SFZ 2022
-        </h1>
-        <div class="columns is-multiline">
-            {% for actor in actors %}
-                <div class="column is-2-tablet has-text-centered custom-image--actor mx-auto">
-                    <figure class="image is-3-by-5 mb-2 portrait__border card__box-shadow text__color-sky-100">
-                        {% if actor.star_image %}
-                            <img src="{{ MEDIA_URL }}{{ actor.star_image }}" loading="lazy" alt="{{ actor.name }}">
-                        {% elif actor.star_image_url %}
-                            <img src="{{ MEDIA_URL }}{{ actor.star_image_url }}" alt="{{ actor.name }}">
-                        {% else %}
-                            <img src="{{ MEDIA_URL }}noimage.png" loading="lazy" alt="placeholder image for missing actor image">
-                        {% endif %}
-                    </figure>
-
-                    <a class="is-size-4 text__color-sky-100 text__shadow--light" href="{% url 'guest_detail' actor.id %}">{{ actor.name }}</a>
-                    <div class="columns">
-                        <div class="column mt-2">
-                            {% if request.user.is_superuser %}
-                                <a class="is-size-5 text__color-sky-100 text__shadow--light" href="{% url 'edit_guest_info' actor.id %}">
-                                    <span class="icon-text">
-                                        <span class="icon">
-                                            <i class="fa-solid fa-user-pen"></i>
-                                        </span>
-                                        <span>Edit info</span>
-                                    </span>
-                                </a>
-                            <div class="column has-text-centered column--less-padding">
-                                <a class="is-size-5 text__color-sky-100 text__shadow--light" href="{% url 'remove_guest' actor.id %}">
-                                    <span class="icon-text">
-                                        <span class="icon has-text-danger">
-                                            <i class="fa-solid fa-user-xmark"></i>
-                                        </span>
-                                        <span>Remove</span>
-                                    </span>
-                                </a>
-                            </div>
+    <section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
+        <div class="hero-body">
+            <h1 class="title is-2 has-text-centered text__color-sky-100 heading__text--shadow-blue">
+                Guests at SFZ 2022
+            </h1>
+            <div class="columns is-multiline">
+                {% for actor in actors %}
+                    <div class="column is-2-tablet has-text-centered custom-image--actor mx-auto">
+                        <figure class="image is-3-by-5 mb-2 portrait__border card__box-shadow text__color-sky-100">
+                            {% if actor.star_image %}
+                                <img src="{{ MEDIA_URL }}{{ actor.star_image }}" loading="lazy" alt="{{ actor.name }}">
+                            {% elif actor.star_image_url %}
+                                <img src="{{ MEDIA_URL }}{{ actor.star_image_url }}" alt="{{ actor.name }}">
+                            {% else %}
+                                <img src="{{ MEDIA_URL }}noimage.png" loading="lazy" alt="placeholder image for missing actor image">
                             {% endif %}
+                        </figure>
+                        <a class="is-size-4 text__color-sky-100 text__shadow--light" href="{% url 'guest_detail' actor.id %}">{{ actor.name }}</a>
+                        <div class="columns">
+                            <div class="column mt-2">
+                                {% if request.user.is_superuser %}
+                                    <a class="is-size-5 text__color-sky-100 text__shadow--light" href="{% url 'edit_guest_info' actor.id %}">
+                                        <span class="icon-text">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-user-pen"></i>
+                                            </span>
+                                            <span>Edit info</span>
+                                        </span>
+                                    </a>
+                                <div class="column has-text-centered column--less-padding">
+                                    <a class="is-size-5 text__color-sky-100 text__shadow--light" href="{% url 'remove_guest' actor.id %}">
+                                        <span class="icon-text">
+                                            <span class="icon has-text-danger">
+                                                <i class="fa-solid fa-user-xmark"></i>
+                                            </span>
+                                            <span>Remove</span>
+                                        </span>
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}

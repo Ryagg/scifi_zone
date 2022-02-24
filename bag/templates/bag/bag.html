@@ -8,83 +8,82 @@
         <div class="container">
             <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Your shopping bag</h1>
             {% if bag_items %}
-            <!-- bag summary -->
-            <div class="columns is-mobile is-multiline is-centered">
-                <div class="column is-4-tablet has-text-centered">
-                    <p class="is-size-3 text__shadow--dark">Items: {{ item_count }}</p>
-                    <p class="is-size-4">{{VAT_PERCENTAGE}}%  VAT included</p>
-                </div> <!-- end of column -->
-                <div class="column is-4-tablet has-text-centered">
-                    <p class="is-size-4 has-text-weight-semibold text__shadow--dark">€{{ grand_total }} </p>
-                    <p class="is-size-5 has-text-weight-medium">€{{ vat }} </p>
-                </div> <!-- end of column -->
-            </div> <!-- end of columns -->
-            <div class="columns is-multiline is-centered">
-                <div class="column is-6-tablet">
-                    <h2 class="title is-2 has-text-centered text__color-sky-100 text__shadow--dark">Grand Total €{{grand_total}}</h2>
-                    <div class="control has-text-centered">
-                        <a href="{% url 'checkout' %}" class="button mb-4 is-size-6 has-text-weight-semibold bg--blue-300 text__color-blue-900">Checkout</a>
-                    </div>
-                </div>
-            </div>
-            <!-- iterate through bag items -->
-            {% for item in bag_items %}
-
-                <div class="columns is-mobile is-multiline is-centered bag-item card__box-shadow">
-                    <div class="column is-5-tablet">
-                        <p class="is-size-4">{{ item.ticket.name }} </p>
-                        <p class="is-size-5">Number of tickets: {{ item.quantity }}</p>
-                            {% if "Standard" not in item.ticket.name and "Package" not in item.ticket.name %}
-                                <p class="is-size-5">Ticket(s) valid for: <span class="has-text-weight-semibold">{{ item.selection }}</span> </p>
-                            {% endif %}
-                            <field class="is-grouped has-addons">
-                                <form action="{% url 'update_bag' item.item_id %}" method="POST">
-                                {% csrf_token %}
-                                    <div class="control">
-                                        <div class="update-quantity">
-                                        <!-- mb-1 needed for mobile devices, my-1 used to make it look even -->
-                                        <input name="quantity" class="input quantity-input my-1" type="number" aria-label="Quantity update" placeholder="New quantity" value="" data-item_id="{{ item.item_id }}">
-                                        <input class="button update-bag my-1" type="submit" value="Update bag">
-                                        <a href="{% url 'remove_from_bag' item.item_id %} " id="remove-item" class="button remove my-1">Remove</a>
-                                        </div>
-                                    </div>
-                                </form>
-                            </field>
-                    </div>
-                    <div class="column is-5-tablet is-3-desktop">
-                        <p class="is-size-4">€{{ item.ticket.price }} per ticket</p>
-                        <p class="is-size-4">Sub-total: €{{ item.ticket.price | calc_subtotal:item.quantity }} </p>
-                    </div>
+                <!-- bag summary -->
+                <div class="columns is-mobile is-multiline is-centered">
+                    <div class="column is-4-tablet has-text-centered">
+                        <p class="is-size-3 text__shadow--dark">Items: {{ item_count }}</p>
+                        <p class="is-size-4">{{VAT_PERCENTAGE}}%  VAT included</p>
+                    </div> <!-- end of column -->
+                    <div class="column is-4-tablet has-text-centered">
+                        <p class="is-size-4 has-text-weight-semibold text__shadow--dark">€{{ grand_total }} </p>
+                        <p class="is-size-5 has-text-weight-medium">€{{ vat }} </p>
+                    </div> <!-- end of column -->
                 </div> <!-- end of columns -->
-                <div class="columns is-mobile is-centered">
-                    <div class="column is-5-tablet">
-                        <!-- create space between order items -->
-                    </div>
-                </div>
-            {% endfor %}
-                <div class="columns is-mobile">
+                <div class="columns is-multiline is-centered">
                     <div class="column is-6-tablet">
-                        <div class="field is-grouped has-addons">
-                            <p class="control">
-                                <a href="{% url 'empty_bag' %} " class="button has-text-white has-text-weight-semibold is-uppercase remove">Empty bag</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="column is-6-tablet">
-                        <div class="field is-grouped has-addons is-pulled-right">
-                            <p  class="control">
-                                <a href="{% url 'tickets' %} " class="button is-size-6 has-text-weight-semibold bg--blue-300 text__color-blue-900">Keep shopping</a>
-                            </p>
+                        <h2 class="title is-2 has-text-centered text__color-sky-100 text__shadow--dark">Grand Total €{{grand_total}}</h2>
+                        <div class="control has-text-centered">
+                            <a href="{% url 'checkout' %}" class="button mb-4 is-size-6 has-text-weight-semibold bg--blue-300 text__color-blue-900">Checkout</a>
                         </div>
                     </div>
                 </div>
+                <!-- iterate through bag items -->
+                {% for item in bag_items %}
+                    <div class="columns is-mobile is-multiline is-centered bag-item card__box-shadow">
+                        <div class="column is-5-tablet">
+                            <p class="is-size-4">{{ item.ticket.name }} </p>
+                            <p class="is-size-5">Number of tickets: {{ item.quantity }}</p>
+                                {% if "Standard" not in item.ticket.name and "Package" not in item.ticket.name %}
+                                    <p class="is-size-5">Ticket(s) valid for: <span class="has-text-weight-semibold">{{ item.selection }}</span> </p>
+                                {% endif %}
+                                <field class="is-grouped has-addons">
+                                    <form action="{% url 'update_bag' item.item_id %}" method="POST">
+                                    {% csrf_token %}
+                                        <div class="control">
+                                            <div class="update-quantity">
+                                            <!-- mb-1 needed for mobile devices, my-1 used to make it look even -->
+                                            <input name="quantity" class="input quantity-input my-1" type="number" aria-label="Quantity update" placeholder="New quantity" value="" data-item_id="{{ item.item_id }}">
+                                            <input class="button update-bag my-1" type="submit" value="Update bag">
+                                            <a href="{% url 'remove_from_bag' item.item_id %} " id="remove-item" class="button remove my-1">Remove</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </field>
+                        </div>
+                        <div class="column is-5-tablet is-3-desktop">
+                            <p class="is-size-4">€{{ item.ticket.price }} per ticket</p>
+                            <p class="is-size-4">Sub-total: €{{ item.ticket.price | calc_subtotal:item.quantity }} </p>
+                        </div>
+                    </div> <!-- end of columns -->
+                    <div class="columns is-mobile is-centered">
+                        <div class="column is-5-tablet">
+                            <!-- create space between order items -->
+                        </div>
+                    </div>
+                {% endfor %}
+                    <div class="columns is-mobile">
+                        <div class="column is-6-tablet">
+                            <div class="field is-grouped has-addons">
+                                <p class="control">
+                                    <a href="{% url 'empty_bag' %} " class="button has-text-white has-text-weight-semibold is-uppercase remove">Empty bag</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="column is-6-tablet">
+                            <div class="field is-grouped has-addons is-pulled-right">
+                                <p  class="control">
+                                    <a href="{% url 'tickets' %} " class="button is-size-6 has-text-weight-semibold bg--blue-300 text__color-blue-900">Keep shopping</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
             {% else %}
-            <div class="columns is-multiline is-centered">
-                <div class="column has-text-centered">
-                    <p class="is-size-4 mb-5">Your bag is empty.</p>
-                    <a class="is-size-4 has-text-weight-semibold text__color-sky-100 mt-5 item-name--light" href="{% url 'tickets' %}">Go to Tickets page</a>
-                </div> <!-- end of column -->
-            </div> <!-- end of columns -->
+                <div class="columns is-multiline is-centered">
+                    <div class="column has-text-centered">
+                        <p class="is-size-4 mb-5">Your bag is empty.</p>
+                        <a class="is-size-4 has-text-weight-semibold text__color-sky-100 mt-5 item-name--light" href="{% url 'tickets' %}">Go to Tickets page</a>
+                    </div> <!-- end of column -->
+                </div> <!-- end of columns -->
             {% endif %}
         </div> <!-- end of container -->
     </div> <!-- end of body -->

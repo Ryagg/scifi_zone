@@ -2,58 +2,58 @@
 {% load static %}
 
 {% block content %}
-<section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
-    <div class="hero-body">
-        <div class="container">
-            <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Packages</h1>
-            <div class="columns is-multiline is-centered">
-                <div class="column  my-2">
-                    <p class="is-size-5">
-                    Packages offer a combination of entrance to Scifi Zone 2022 on all three days and varying number of Paid Guest Panels, Photoshoot + Autograph Opportunities and Goody Bags depending on the selected package. For more details, please see the page for each package.
-                    </p>
+    <section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Packages</h1>
+                <div class="columns is-multiline is-centered">
+                    <div class="column  my-2">
+                        <p class="is-size-5">
+                        Packages offer a combination of entrance to Scifi Zone 2022 on all three days and varying number of Paid Guest Panels, Photoshoot + Autograph Opportunities and Goody Bags depending on the selected package. For more details, please see the page for each package.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="columns is-multiline">
-                {% for package in packages %}
-                    <div class="column is-6-tablet my-2">
-                        <div class="card">
-                            <header class="card-header">
-                                <p class="card-header-title is-centered">
-                                    <a class="is-size-5 item-name text__shadow--blue" href="{% url 'package_detail' package.id %} ">{{ package.name }}</a>
-                                </p>
-                            </header>
-                            <div class="card-image custom-image mx-auto">
-                                <figure class="image is-3by2 mx-auto mt-5">
-                                    {% if "Silver" in package.name %}
-                                        <img src="{{ MEDIA_URL }}package.jpg" class="image__border--silver" alt="4 event tickets">
-                                    {% elif "Gold" in package.name %}
-                                        <img src="{{ MEDIA_URL }}package.jpg" class="image__border--gold" alt="4 event tickets">
-                                    {% elif "Platinum" in package.name %}
-                                        <img src="{{ MEDIA_URL }}package.jpg" class="image__border--platinum" alt="4 event tickets">
-                                    {% elif "Diamond" in package.name %}
-                                        <img src="{{ MEDIA_URL }}package.jpg" class="image__border--diamond" alt="4 event tickets">
-                                    {% else %}
-                                        <img src="{{ MEDIA_URL }}package.jpg" alt="4 event tickets">
-                                    {% endif %}
-                                </figure>
-                            </div>
-                            <div class="card-content">
-                                <div class="content has-text-centered">
-                                    <p class="is-size-5">€{{ package.category.price }}.00</p>
+                <div class="columns is-multiline">
+                    {% for package in packages %}
+                        <div class="column is-6-tablet my-2">
+                            <div class="card">
+                                <header class="card-header">
+                                    <p class="card-header-title is-centered">
+                                        <a class="is-size-5 item-name text__shadow--blue" href="{% url 'package_detail' package.id %} ">{{ package.name }}</a>
+                                    </p>
+                                </header>
+                                <div class="card-image custom-image mx-auto">
+                                    <figure class="image is-3by2 mx-auto mt-5">
+                                        {% if "Silver" in package.name %}
+                                            <img src="{{ MEDIA_URL }}package.jpg" class="image__border--silver" alt="4 event tickets">
+                                        {% elif "Gold" in package.name %}
+                                            <img src="{{ MEDIA_URL }}package.jpg" class="image__border--gold" alt="4 event tickets">
+                                        {% elif "Platinum" in package.name %}
+                                            <img src="{{ MEDIA_URL }}package.jpg" class="image__border--platinum" alt="4 event tickets">
+                                        {% elif "Diamond" in package.name %}
+                                            <img src="{{ MEDIA_URL }}package.jpg" class="image__border--diamond" alt="4 event tickets">
+                                        {% else %}
+                                            <img src="{{ MEDIA_URL }}package.jpg" alt="4 event tickets">
+                                        {% endif %}
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="content has-text-centered">
+                                        <p class="is-size-5">€{{ package.category.price }}.00</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div> <!-- end of column -->
-                {% endfor %}
-                    <hr>
-            </div> <!-- end of columns -->
-            <div class="columns is-multiline">
-                <div class="column has-text-centered mt-5 mb-2 hr-top">
-                    <p class="is-size-4">Prefer to create your own package?</p>
-                    <p class="is-size-4">Take a look at our <a class="has-text-weight-semibold text__color-sky-100 item-name--light" href="{% url 'tickets' %}">Standard, Autograph and Photoshoot Tickets!</a></p>
+                        </div> <!-- end of column -->
+                    {% endfor %}
+                        <hr>
+                </div> <!-- end of columns -->
+                <div class="columns is-multiline">
+                    <div class="column has-text-centered mt-5 mb-2 hr-top">
+                        <p class="is-size-4">Prefer to create your own package?</p>
+                        <p class="is-size-4">Take a look at our <a class="has-text-weight-semibold text__color-sky-100 item-name--light" href="{% url 'tickets' %}">Standard, Autograph and Photoshoot Tickets!</a></p>
+                    </div>
                 </div>
-            </div>
-        </div> <!-- end of container-->
-    </div> <!-- end of hero-body -->
-</section>
+            </div> <!-- end of container-->
+        </div> <!-- end of hero-body -->
+    </section>
 {% endblock %}

@@ -5,20 +5,20 @@
 {% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
 
 {% block inner_content %}
-<section class="body__footer--down has-text-centered">
-    <h2 class="title is-2 text__color-sky-100 text__shadow--dark">{% trans "Verify Your E-mail Address" %}</h2>
+    <section class="body__footer--down has-text-centered">
+        <h2 class="title is-2 text__color-sky-100 text__shadow--dark">{% trans "Verify Your E-mail Address" %}</h2>
 
-        {% url 'account_email' as email_url %}
+            {% url 'account_email' as email_url %}
 
-        <p class="is-size-5">{% blocktrans %}This part of the site requires us to verify that
-        you are who you claim to be. For this purpose, we require that you
-        verify ownership of your e-mail address. {% endblocktrans %}</p>
+                <p class="is-size-5 is-size-4-fullhd">{% blocktrans %}This part of the site requires us to verify that
+                you are who you claim to be. For this purpose, we require that you
+                verify ownership of your e-mail address. {% endblocktrans %}</p>
 
-        <p class="is-size-5">{% blocktrans %}We have sent an e-mail to you for
-        verification. Please click on the link inside this e-mail. Please
-        contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
+                <p class="is-size-5 is-size-4-fullhd">{% blocktrans %}We have sent an e-mail to you for
+                verification. Please click on the link inside this e-mail. Please
+                contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
 
-        <p>{% blocktrans %}<strong>Note:</strong> you can still <a href="{{ email_url }}">change your e-mail address</a>.{% endblocktrans %}</p>
-</section>
+                <p>{% blocktrans %}<strong>Note:</strong> you can still <a href="{{ email_url }}">change your e-mail address</a>.{% endblocktrans %}</p>
+    </section>
 
 {% endblock %}

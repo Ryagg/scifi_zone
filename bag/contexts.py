@@ -1,8 +1,8 @@
 from decimal import Decimal
-from django.conf import settings
 from django.shortcuts import get_object_or_404
 from scifi_zone.settings import VAT_PERCENTAGE
 from tickets.models import Ticket
+
 
 def bag_contents(request):
     """Updates bag and makes contents available"""
@@ -20,7 +20,7 @@ def bag_contents(request):
             ticket = get_object_or_404(Ticket, pk=item_id)
             grand_total += item_data * ticket.price
             item_count += item_data
-            vat = ((grand_total * VAT_PERCENTAGE)/100)
+            vat = ((grand_total * VAT_PERCENTAGE) / 100)
             bag_items.append({
                 'item_id': item_id,
                 'quantity': item_data,
@@ -32,14 +32,14 @@ def bag_contents(request):
             for selection, quantity in item_data['items_by_selected'].items():
                 grand_total += quantity * ticket.price
                 item_count += quantity
-                vat = ((grand_total * VAT_PERCENTAGE)/100)
+                vat = ((grand_total * VAT_PERCENTAGE) / 100)
                 bag_items.append({
-                'item_id': item_id,
-                'quantity': quantity,
-                'ticket': ticket,
-                'item_count': item_count,
-                'selection': selection,
-            })
+                    'item_id': item_id,
+                    'quantity': quantity,
+                    'ticket': ticket,
+                    'item_count': item_count,
+                    'selection': selection,
+                })
 
     context = {
         'bag_items': bag_items,

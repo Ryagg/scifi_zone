@@ -7,122 +7,122 @@
 {% endblock %}
 
 {% block content %}
-<section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
-<!-- Order summary -->
-    <section>
-        <div class="hero-body">
-                <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Checkout</h1>
-                <h2 class="subtitle is-3 has-text-centered text__color-sky-100 text__shadow--dark">Order Summary ({{ item_count }} items)</h2>
-                {% for item in bag_items %}
-                    <div class="columns is-multiline is-centered ">
-                        <div class="column checkout is-8-tablet is-6-desktop px-5 bag-item card__box-shadow">
-                            <div class="level is-mobile my-1">
-                                <div class="level-left">
-                                    <div class="level-item">
-                                        <p class="is-size-6 is-italic">Item</p>
-                                    </div>
-                                </div>
-                                <div class="level-right">
-                                    <div class="level-item">
-                                        <p class="is-size-6 is-italic">Subtotal</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="level is-mobile my-1">
-                                <div class="level-left">
-                                    <div class="level-item">
-                                        <p class="is-size-7 is-size-5-tablet">{{ item.ticket.name }}</p>
-                                    </div>
-                                </div>
-                                <div class="level-right">
-                                    <div class="level-item">
-                                        <p class="is-size-6 is-size-5-tablet">€{{ item.ticket.price | calc_subtotal:item.quantity }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="level is-mobile my-1">
-                                <div class="level-left">
-                                    <div class="level-item">
-                                        <p class="is-size-7 is-size-6-tablet">Quantity: {{ item.quantity }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            {% if "Standard" not in item.ticket.name and "Package" not in item.ticket.name %}
+    <section id="wrapper" class="hero fullheight-with-navbar bg--sky-900 text__color-sky-100">
+    <!-- Order summary -->
+        <section>
+            <div class="hero-body">
+                    <h1 class="title is-1 has-text-centered text__color-sky-100 heading__text--shadow-blue">Checkout</h1>
+                    <h2 class="subtitle is-3 has-text-centered text__color-sky-100 text__shadow--dark">Order Summary ({{ item_count }} items)</h2>
+                    {% for item in bag_items %}
+                        <div class="columns is-multiline is-centered ">
+                            <div class="column checkout is-8-tablet is-6-desktop px-5 bag-item card__box-shadow">
                                 <div class="level is-mobile my-1">
                                     <div class="level-left">
                                         <div class="level-item">
-                                            <p class="is-size-7 is-size-6-tablet">Ticket(s) valid for: <span class="has-text-weight-semibold">{{ item.selection }}</span> </p>
+                                            <p class="is-size-6 is-italic">Item</p>
+                                        </div>
+                                    </div>
+                                    <div class="level-right">
+                                        <div class="level-item">
+                                            <p class="is-size-6 is-italic">Subtotal</p>
                                         </div>
                                     </div>
                                 </div>
-                            {% endif %}
-                        </div>
-                    </div> <!-- end of columns -->
-                {% endfor %}
-                <div class="columns is-multiline is-centered">
-                    <div class="column is-5-tablet">
-                        <h2 class="title is-2 has-text-centered mt-3 text__color-sky-100 text__shadow--dark">Grand Total €{{grand_total}}</h2>
-                    </div>
-                </div>
-        </div> <!-- end of body -->
-    </section>
-
-<!-- Billing address -->
-    <section>
-        <div class="hero-body">
-            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
-                {% csrf_token %}
-                    <div class="columns is-multiline is-centered">
-                        <div class="column is-8-tablet is-6-desktop checkout px-5 bag-item card__box-shadow">
-                            <fieldset>
-                                <legend class="title is-2 has-text-centered text__color-sky-900 text__shadow--dark">Billing address</legend>
-                                    <div class="field custom-form">
-                                        {{ order_form.full_name | as_crispy_field }}
-                                        {{ order_form.email | as_crispy_field }}
-                                        {{ order_form.street_address1 | as_crispy_field }}
-                                        {{ order_form.street_address2 | as_crispy_field }}
-                                        {{ order_form.city | as_crispy_field }}
-                                        {{ order_form.state | as_crispy_field }}
-                                        {{ order_form.postcode | as_crispy_field }}
-                                        {{ order_form.country | as_crispy_field }}
+                                <div class="level is-mobile my-1">
+                                    <div class="level-left">
+                                        <div class="level-item">
+                                            <p class="is-size-7 is-size-5-tablet">{{ item.ticket.name }}</p>
+                                        </div>
                                     </div>
-                            </fieldset>
+                                    <div class="level-right">
+                                        <div class="level-item">
+                                            <p class="is-size-6 is-size-5-tablet">€{{ item.ticket.price | calc_subtotal:item.quantity }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="level is-mobile my-1">
+                                    <div class="level-left">
+                                        <div class="level-item">
+                                            <p class="is-size-7 is-size-6-tablet">Quantity: {{ item.quantity }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if "Standard" not in item.ticket.name and "Package" not in item.ticket.name %}
+                                    <div class="level is-mobile my-1">
+                                        <div class="level-left">
+                                            <div class="level-item">
+                                                <p class="is-size-7 is-size-6-tablet">Ticket(s) valid for: <span class="has-text-weight-semibold">{{ item.selection }}</span> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div> <!-- end of columns -->
+                    {% endfor %}
+                    <div class="columns is-multiline is-centered">
+                        <div class="column is-5-tablet">
+                            <h2 class="title is-2 has-text-centered mt-3 text__color-sky-100 text__shadow--dark">Grand Total €{{grand_total}}</h2>
                         </div>
                     </div>
-                    <div class="columns is-multiline is-centered">
-                        <div class="column is-6-tablet is-size-5 has-text-centered mt-4">
-                            {% if user.is_authenticated %}
-                                <label for="id-save-info">Save this delivery information to my profile</label>
-                                <input type="checkbox" id="id-save-info" name="save-info" checked>
-                            {% else %}
-                                <label for="id-save-info">
-                                    <a class="has-text-weight-semibold text__color-sky-100 link--light" href="{% url 'account_signup' %}">Create an account</a> or
-                                    <a class="has-text-weight-semibold text__color-sky-100 link--light" href="{% url 'account_login' %}">login</a> to save this information
-                                </label>
-                            {% endif %}
-                        </div>
-                    </div> <!-- end of columns -->
-                    <div class="columns is-multiline is-centered">
-                        <div class="column checkout is-6-tablet has-text-centered">
-                            <p class="is-size-5 has-text-weight-semibold disclaimer__border--red mb-5">By submitting your card will be charged €{{ grand_total }}!</p>
-                            <div class="field my-3 card__box-shadow bg--slate-800 py-3 px-3 ">
-                                <div id="card-element">
-                                    <!-- Elements will create form elements here -->
-                                </div>
-                                <div id="card-errors" role="alert">
-                                <!-- Display error message to customers here -->
-                                </div>
-                                <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                                <!-- id must not be 'submit' or form.submit() changes from method call to field reference! -->
-                                <!-- found at https://stackoverflow.com/questions/54144436/uncaught-typeerror-form-submit-is-not-a-function-in-form-validate-function -->
-                                <button id="submitPayment" class="custom-form my-3">Submit Payment</button>
+            </div> <!-- end of body -->
+        </section>
+
+    <!-- Billing address -->
+        <section>
+            <div class="hero-body">
+                <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                    {% csrf_token %}
+                        <div class="columns is-multiline is-centered">
+                            <div class="column is-8-tablet is-6-desktop checkout px-5 bag-item card__box-shadow">
+                                <fieldset>
+                                    <legend class="title is-2 has-text-centered text__color-sky-900 text__shadow--dark">Billing address</legend>
+                                        <div class="field custom-form">
+                                            {{ order_form.full_name | as_crispy_field }}
+                                            {{ order_form.email | as_crispy_field }}
+                                            {{ order_form.street_address1 | as_crispy_field }}
+                                            {{ order_form.street_address2 | as_crispy_field }}
+                                            {{ order_form.city | as_crispy_field }}
+                                            {{ order_form.state | as_crispy_field }}
+                                            {{ order_form.postcode | as_crispy_field }}
+                                            {{ order_form.country | as_crispy_field }}
+                                        </div>
+                                </fieldset>
                             </div>
                         </div>
-                    </div>
-            </form>
-        </div> <!-- end of body -->
+                        <div class="columns is-multiline is-centered">
+                            <div class="column is-6-tablet is-size-5 has-text-centered mt-4">
+                                {% if user.is_authenticated %}
+                                    <label for="id-save-info">Save this delivery information to my profile</label>
+                                    <input type="checkbox" id="id-save-info" name="save-info" checked>
+                                {% else %}
+                                    <label for="id-save-info">
+                                        <a class="has-text-weight-semibold text__color-sky-100 link--light" href="{% url 'account_signup' %}">Create an account</a> or
+                                        <a class="has-text-weight-semibold text__color-sky-100 link--light" href="{% url 'account_login' %}">login</a> to save this information
+                                    </label>
+                                {% endif %}
+                            </div>
+                        </div> <!-- end of columns -->
+                        <div class="columns is-multiline is-centered">
+                            <div class="column checkout is-6-tablet has-text-centered">
+                                <p class="is-size-5 has-text-weight-semibold disclaimer__border--red mb-5">By submitting your card will be charged €{{ grand_total }}!</p>
+                                <div class="field my-3 card__box-shadow bg--slate-800 py-3 px-3 ">
+                                    <div id="card-element">
+                                        <!-- Elements will create form elements here -->
+                                    </div>
+                                    <div id="card-errors" role="alert">
+                                    <!-- Display error message to customers here -->
+                                    </div>
+                                    <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                                    <!-- id must not be 'submit' or form.submit() changes from method call to field reference! -->
+                                    <!-- found at https://stackoverflow.com/questions/54144436/uncaught-typeerror-form-submit-is-not-a-function-in-form-validate-function -->
+                                    <button id="submitPayment" class="custom-form my-3">Submit Payment</button>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+            </div> <!-- end of body -->
+        </section>
     </section>
-</section>
 {% endblock %}
 
 {% block postloadjs %}

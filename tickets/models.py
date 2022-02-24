@@ -4,6 +4,8 @@ from django.forms import CharField
 
 
 ADDON_CATEGORY_REGEX = RegexValidator(r'^[A-C]$')
+
+
 class Category(models.Model):
     """A class for the different ticket and package categories"""
 
@@ -81,7 +83,6 @@ class Actor(models.Model):
         max_length=1024,
         null=True, blank=True)
     star_official = models.URLField(max_length=1024, null=True, blank=True)
-
 
     def __str__(self):
         return str(self.name)

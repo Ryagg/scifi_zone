@@ -3,6 +3,7 @@
 from django import forms
 from tickets.models import Actor
 
+
 class ActorForm(forms.ModelForm):
     """Form needed to add or edit guests"""
     class Meta:
