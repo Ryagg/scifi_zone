@@ -18,9 +18,9 @@ The following user requirements and expectations were developed based on the use
 #### **Expectation 2: being able to see a specific category of tickets**
 
 -   Requirement: allow users to filter for ticket categories
--   Implementation: Django-Watson was used to implement full-text search across all relevant models.
+-   Implementation: In addition to the navbar providing links to the tickets and packages pages and all tickets in each category being displayed there (see screenshots above), Django-Watson was used to implement full-text search across all relevant models.
 
-FIX BUG AND ADD SCREENSHOTS
+![user-expectation-2](documentation/testing/usertests/user-expectation-2.jpg)
 
 #### **Expectation 3: being able to see details about the tickets**
 
@@ -69,13 +69,11 @@ FIX BUG AND ADD SCREENSHOTS
 #### **Expectation 9: being able to search for a ticket by category or actor name to easily find autograph or photoshoot tickets with selected actors**
 
 -   Requirement: Implement a search function.
--   Implementation: Both tickets and actors can be found using the search function. Another way to find the autograph or photoshoot tickets with an actor is to view the [detail pages for the selected ticket category](). However, unless a user knows in which category the actor can be found, the user must view one, two, or all three categories before the actor is found.
+-   Implementation: Both tickets and actors can be found using the [search function](documentation/testing/usertests/user-expectation-9-example-4.jpg). The easiest way to find the autograph or photoshoot tickets with an actor is to view the detail pages for the [selected actor](documentation/testing/usertests/user-expectation-9-example-2.jpg). From there, autograph and photoshoot tickets can be added to the shopping bag. All actors in a price category can be viewed on the detail page for each [ticket category](documentation/testing/usertests/user-expectation-9-example-3.jpg).
 
-![user-expectation-9](documentation/testing/usertests/user-expectation-9.jpg)
+![user-expectation-9-example-4](documentation/testing/usertests/user-expectation-9-example-4.jpg)
 ![user-expectation-9-example-2](documentation/testing/usertests/user-expectation-9-example-2.jpg)
 ![user-expectation-9-example-3](documentation/testing/usertests/user-expectation-9-example-3.jpg)
-
-ADD WATSON SEARCH SCREENSHOTS ONCE THE CUSTOM TEMPLATE WORKS
 
 #### **Expectation 10: being able to see detailed bag contents and total cost**
 
@@ -103,7 +101,8 @@ ADD WATSON SEARCH SCREENSHOTS ONCE THE CUSTOM TEMPLATE WORKS
 -   Requirement: Using Django middleware and additional tools like Django-CSP and Django-CORS to make the site as secure as possible. Using Stripe to handle payments, so that the user's payment information never touches the application's server.
 -   Implementation: see requirement.
 
-ADD SETTINGS SCREENSHOT OR UPDATE REQUIREMENT INFO
+![user-expectation-13](documentation/testing/usertests/user-expectation-13.jpg)
+![user-expectation-13-example-2](documentation/testing/usertests/user-expectation-13-example-2.jpg)
 
 #### **Expectation 14: being able to view an order summary before checkout**
 
@@ -115,7 +114,7 @@ ADD SETTINGS SCREENSHOT OR UPDATE REQUIREMENT INFO
 #### **Expectation 15: receiving an email confirmation after checkout**
 
 -   Requirement: Collect the user's email address, attach it to the order, and send a confirmation email after a successful checkout.
--   Implementation: The checkout view handles the business logic and generates an [order confirmation on screen](documentation/testing/usertests/user-expectation-15.jpg) after a successful checkout. The built-in Django functionality is used to send a [confirmation email](documentation/testing/usertests/user-expectation-15-example-2.jpg) to the user. Please note that the confirmation email and the confirmation on screen in the images do not match each other and were chosen for convenience.
+-   Implementation: The checkout view handles the business logic and generates an [order confirmation on screen](documentation/testing/usertests/user-expectation-15.jpg) after a successful checkout. The built-in Django functionality is used to send a [confirmation email](documentation/testing/usertests/user-expectation-15-example-2.jpg) to the user.
 
 ![user-expectation-15](documentation/testing/usertests/user-expectation-15.jpg)
 
@@ -170,6 +169,64 @@ Please note that for the following three expectations, an adjustment has been ma
 ### **W3C Markup Validator**
 
 ---
+
+For validating my HTML code at first the source code from each page of the generated live site was copied and pasted into the validator on [W3C Markup Validation Service](https://validator.w3.org/). At first, several errors, e.g. regarding labels and missing closing tags, were reported. These errors have been fixed and the tests repeated. The last test runs were done using 'Check by address' for all pages except the bag, checkout, checkout success page, and add guest page. For these, the source code was used. The results are presented below:
+
+**Result for homepage:**
+
+-   No errors reported. Two warnings.
+
+**Result for guests page:**
+
+-   No errors or warnings reported.
+
+**Result for timetable page:**
+
+-   No errors or warnings reported.
+
+**Result for tickets page:**
+
+-   No errors or warnings reported.
+
+**Result for ticket details page** (Photoshoot category A exemplary for all ticket details pages)
+
+-   No errors or warnings reported after several fixes.
+
+**Result for packages page:**
+
+-   No errors or warnings reported.
+
+**Result for package details page** (diamond package exemplary for all packages):
+
+-   No errors or warnings reported after several fixes.
+
+**Result for bag page**
+
+-   No errors or warnings reported after several fixes.
+
+**Result for checkout page**
+
+-   No errors reported. Three warnings.
+
+**Result for checkout success page**
+
+-   No errors or warnings reported.
+
+**Result for profile page**
+
+-   No errors or warnings reported.
+
+**Result for add guest page**
+
+-   One error reported: "Attribute placeholder is only allowed when the input type is email, number, password, search, tel, text, or url"
+
+**Result for site notice page**
+
+-   No errors or warnings reported.
+
+**Result for privacy policy page**
+
+-   No errors or warnings reported.
 
 ### **W3C CSS Validator**
 
@@ -331,7 +388,15 @@ Please note that I only checked pages created by me.
 
 -   **Guests page:**
 
-OPTIMIZE IMAGES
+**guests-mobile:**
+
+![guests-mobile](documentation/testing/lighthouse-results/guests-mobile.jpg)
+
+![guests-mobile_opportunities](documentation/testing/lighthouse-results/guests-mobile_opportunities.jpg)
+
+**guests-desktop**:
+
+![guests-desktop](documentation/testing/lighthouse-results/guests-desktop.jpg)
 
 -   **Timetable page:**
 
@@ -470,11 +535,15 @@ No errors were reported for base.js or stripe_elements.js using [JSHint](https:/
 
 ---
 
+Each .py-file has been formatted using the autopep8-extension for VSCode with the parameters '--max-line-length 79 --in-place --aggressive --aggressive' to guarantee PEP8-compliance. No errors have been reported by pylint.
+
 ## **Usability Testing**
 
 ---
 
 ---
+
+Family, friends and colleagues were asked to test the site on their computers and/or mobile devices and their preferred browsers. The first page load can sometimes take very long. This happens when the app is 'asleep'. This is a limitation of the free Heroku account. No issues regarding the navigation of the site were reported. Feedback regarding the style of the CTA button on the homepage and the 'Add to shopping bag' buttons on the actor/ticket/package detail pages has been taken into account and the buttons now match the style of the buttons from the register and login pages. Feedback regarding the readability due to poor contrast has been taken into account as well and the text color for disclaimers has been adjusted to the default color and a red border has been added. No other issues were reported.
 
 ## **Compatibility Testing**
 
@@ -488,20 +557,22 @@ No errors were reported for base.js or stripe_elements.js using [JSHint](https:/
 
 ---
 
+To test responsiveness, I used Google Chrome Developer Tools and Sizzy. Several problems could be identified and corrected, e.g. https://github.com/Ryagg/scifi_zone/commit/2241f748c2b2963ba7e46a47f00a220ae7ef11ba. For the remaining bugs refer to the Bugs section below. Apart from that, the site content is displayed correctly on all viewports.
+
 ## **Bugs**
 
 ---
 
 ---
 
--   Images for guests are not displayed if an URL instead of a file is provided.
 -   Uploaded images don't match the size of the existing images due to the applied transformations before uploading the original images.
--   When logged in as an admin, the search bar input field causes overflow for some viewports.
+-   When logged in as an admin, the search bar input field causes overflow for some viewports and the navbar items are not centred for viewports from 1024px to 1215px.
 
 ![admin-searchbar](documentation/testing/bugs/admin-searchbar.jpg)
 ![admin-searchbar-complete](documentation/testing/bugs/admin-searchbar-complete.jpg)
+![admin-searchbar-centered](documentation/testing/bugs/admin-searchbar-centered.jpg)
 
--   For viewports greater than 320px, the country select label on the checkout page is longer than the other input fields. Media query only works for 320px.
+-   For all viewports the country select label on the checkout page is longer than the other input fields.
 
 ![county-select-label](documentation/testing/bugs/country-select-label.jpg)
 
@@ -510,4 +581,5 @@ No errors were reported for base.js or stripe_elements.js using [JSHint](https:/
 ![checkout-heading-320px](documentation/testing/bugs/checkout-heading-320px.jpg)
 
 -   Hovering over the checkbox on the login page causes the text next to it to use the Bulma default for hover and become difficult to read due to poor contrast
--   The submit button on the password reset page uses border-radius 0 and doesn't match the other buttons throughout the page.
+
+![login-checkbox](documentation/testing/bugs/login-checkbox.jpg)

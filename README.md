@@ -12,7 +12,7 @@ Sci-Fi-Zone offers various tickets for a fictional science-fiction themed conven
 ![GitHub Pipenv locked dependency version](https://img.shields.io/github/pipenv/locked/dependency-version/ryagg/scifi_zone/django?style=plastic)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ryagg/scifi_zone?style=plastic)
 
-![Mockup]ADD MOCKUP!!!
+![Mockup](documentation/readme/mockup.jpg)
 
 ## **Deployed project**
 
@@ -87,7 +87,7 @@ All icons on the pages are from [Font Awesome](https://fontawesome.com). Links t
 
 #### **Imagery**
 
-Actor images were obtained from [Wikimedia](https://commons.wikimedia.org/w/index.php?search=&title=Special:MediaSearch&type=image). A [SOURCE.md](https://docs.google.com/spreadsheets/d/1rQUjvQ1QUJXCy0xjzFvaGLI8nwJdJbU3G1KA6ERHgbY/edit#gid=0) was created containing information about the image author, license + attribution, an image description and the URLs both for the image file and the image page. The images were then uploaded to [Cloudinary](https://cloudinary.com/) and transformed. The transformation includes changing the resolution, changing the format depending on the used browser, and adding image credit. For this purpose, several transformations had to be created to apply the correct image credit to each image.
+Actor images were obtained from [Wikimedia](https://commons.wikimedia.org/w/index.php?search=&title=Special:MediaSearch&type=image). A [SOURCE.md](https://docs.google.com/spreadsheets/d/1rQUjvQ1QUJXCy0xjzFvaGLI8nwJdJbU3G1KA6ERHgbY/edit#gid=0) was created containing information about the image author, license + attribution, an image description and the URLs both for the image file and the image page. The images were compressed at [Tinyjpg](https://tinyjpg.com/), and then uploaded to [Cloudinary](https://cloudinary.com/) and transformed. The transformation includes changing the resolution, changing the format depending on the used browser, and adding image credit. For this purpose, several transformations had to be created to apply the correct image credit to each image.
 
 Images used on the tickets and packages pages were obtained from [Freepik](https://www.freepik.com/home). Credit for each image is given below in the media section.
 
@@ -121,10 +121,6 @@ SQLite was used as the database for development, and the data then migrated to H
 -   **Tickets_ticket**
 
     The site's purpose is to sell tickets and packages. This model, together with the following tickets_package and tickets_actor models, is the foundation. Name, image, and description give a brief overview and are used on the tickets/packages pages. Description and included inform the user on the tickets and packages detail page about what the product contains. For autograph and photoshoot tickets, users must choose one guest (star) for which the ticket will be valid. Packaged include additional goodies, which are also listed on the package detail page. The site currently does not use the stored sku data. The ticketholder_name is intended to be used for the creation of personalized tickets.
-
--   **Tickets_package**
-
-    CHECK WHETHER THIS MODEL IS STILL NEEDED. PROBABLY 'LEFTOVER' FROM EARLIER VERSION.
 
 -   **Tickets_actor**
 
@@ -304,13 +300,13 @@ The site features both a site notice and a privacy policy. Both pages can be rea
 
     Used to host static files
 
--   [Django-CSP](https://django-csp.readthedocs.io/en/latest/installation.html)
-
-    Used to add and configure a content-security-policy
-
 -   [Django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/install.html#installing-django-crispy-forms)
 
     Used to render forms
+
+-   [Django-CSP](https://django-csp.readthedocs.io/en/latest/installation.html)
+
+    Used to add and configure a content-security-policy
 
 -   [Django-Watson](https://github.com/etianen/django-watson)
 
@@ -352,6 +348,10 @@ The site features both a site notice and a privacy policy. Both pages can be rea
 
     Used to optimize images
 
+-   [DbDiagram](https://dbdiagram.io/home)
+
+    Used to draw ER diagrams for the database schema
+
 ## **Testing**
 
 ---
@@ -378,7 +378,7 @@ Cloning a repository creates a local copy on your computer. Follow the steps bel
 1. Navigate to the repository [Ryagg/scifi_zone](https://github.com/Ryagg/)
 2. Click 'Code' above the list of files.
 3. In the new window, cloning using HTTPS is the default option. Copy the provided link manually or by clicking on the clipboard symbol.
-4. Open Git Bash.
+4. Open your preferred terminal.
 5. Navigate to your desired directory for the cloned project.
 6. Type git `clone https://github.com/Ryagg/scifi_zone.git` or paste the copied address from step 3.
 7. Press **Enter** to create your local clone.
@@ -403,8 +403,8 @@ To deploy the site remotely on [Heroku](https://www.heroku.com/) please follow t
     - USE_AWS: True
     - AWS_ACCESS_KEY_ID: `<your AWS access key id, generated in the AWS console after user creation>`
     - AWS_SECRET_ACCESS_KEY: `<your secret AWS access key, generated in the AWS console after user creation>`
-    - STRIPE_PUBLIC_KEY: `<your Stripe public key>`
-    - STRIPE_SECRET_KEY: `<your Stripe secret key>`
+    - STRIPE_PUBLIC_KEY: `<your Stripe public key from the dashboard>`
+    - STRIPE_SECRET_KEY: `<your Stripe secret key from the dashboard>`
     - STRIPE_WEBHOOK_KEY: `<your Stripe webhook key. Only necessary if using webhooks. This project currently does not use webhooks.>`
     - EMAIL_HOST_PASS: `<your project email password>`
     - EMAIL:HOST_USER: `<your project email address>`
@@ -452,7 +452,7 @@ Please refer to the separate [SOURCES.md](https://docs.google.com/spreadsheets/d
 
 All code not written by me has the source for the code added as comment above the relevant code. For longer pieces of code the credit is repeated beneath.
 
--   The Python/Django and Javascript code from Code Institute's [Boutique Ado walkthrough](https://github.com/Code-Institute-Solutions/boutique_ado_v1) was used as a groundwork for this project.
+-   The Python/Django and JavaScript code from Code Institute's [Boutique Ado walkthrough](https://github.com/Code-Institute-Solutions/boutique_ado_v1) was used as a groundwork for this project.
 -   Sticky footer for Bulma: https://gehrcke.de/2020/03/bulma-sticky-footer-flexbox-solution/
 
 ### **Websites and Documentation**
@@ -461,9 +461,9 @@ All code not written by me has the source for the code added as comment above th
 
 -   [Bulma docs](https://bulma.io/documentation/)
 -   [Django docs](https://docs.djangoproject.com/en/3.2/)
--   [Django-CSP docs](https://django-csp.readthedocs.io/en/latest/index.html)
 -   [Django-crispy-forms docs](https://django-crispy-forms.readthedocs.io/en/latest/index.html)
--   [Pytest-Dango docs](https://pytest-django.readthedocs.io/en/latest/)
+-   [Django-Watson wiki](https://github.com/etianen/django-watson/wiki)
+-   [Pytest-Django docs](https://pytest-django.readthedocs.io/en/latest/)
 -   [Stackoverflow](https://stackoverflow.com/)
 -   [CSS-tricks](https://css-tricks.com/)
 
