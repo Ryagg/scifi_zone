@@ -9,15 +9,25 @@ class ActorForm(forms.ModelForm):
     class Meta:
         """Inherits all fields from the actor model"""
         model = Actor
-        fields = '__all__'
+        fields = (
+            'name',
+            'star_autograph_category',
+            'star_photoshoot_category',
+            'star_image',
+            'star_info_1',
+            'star_info_2',
+            'star_imdb',
+            'star_wiki',
+            'star_official')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         placeholders = {
             "name": "Name",
-            "star_autograph_category": "Star Autograph Category (A-C case-sensitve)",
-            "star_photoshoot_category": "Star Photoshoot Category (A-C case-sensitve)",
-            "star_image_url": "Star Image URL",
+            "star_autograph_category": "Star Autograph Category \
+                (A-C case-sensitve)",
+            "star_photoshoot_category": "Star Photoshoot Category \
+                (A-C case-sensitve)",
             "star_image": "Star Image",
             "star_info_1": "Short SciFi related summary",
             "star_info_2": "Info without SciFi reference",
