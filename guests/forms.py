@@ -36,14 +36,15 @@ class ActorForm(forms.ModelForm):
             "star_wiki": "Link to Wikipedia entry for guest",
             "star_official": "Link to official homepage for guest",
         }
-        del self.fields['star_image'].widget.attrs['placeholder']
 
         self.fields["name"].widget.attrs["autofocus"] = True
         for field in self.fields:
-            if self.fields[field].required:
-                placeholder = f"{placeholders[field]} *"
-            else:
-                placeholder = placeholders[field]
-            self.fields[field].widget.attrs["placeholder"] = placeholder
             self.fields[field].widget.attrs["class"] = 'custom-form input'
             self.fields[field].label = False
+            if self.fields[field] != "star_image":
+                if self.fields[field].required:
+                    placeholder = f"{placeholders[field]} *"
+                else:
+                    placeholder = placeholders[field]
+                    self.fields[field].widget.attrs[
+                        "placeholder"] = placeholder
