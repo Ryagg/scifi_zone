@@ -23,28 +23,34 @@ class ActorForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        placeholders = {
-            "name": "Name",
-            "star_autograph_category": "Star Autograph Category \
-                (A-C case-sensitve)",
-            "star_photoshoot_category": "Star Photoshoot Category \
-                (A-C case-sensitve)",
-            "star_image": "Image",
-            "star_info_1": "SciFi related info",
-            "star_info_2": "Info without SciFi reference",
-            "star_imdb": "Link to IMDb entry for guest",
-            "star_wiki": "Link to Wikipedia entry for guest",
-            "star_official": "Link to official homepage for guest",
-        }
+        # not very DRY, but the only way to prevent error for placeholder
+        # on file input field and have placeholders on all other fields
+        self.fields["name"].widget.attrs.update(
+            {"placeholder": "Name"},
+        )
+        self.fields["star_autograph_category"].widget.attrs.update(
+            {"placeholder": "Star Autograph Category (A-C, case-sensitve)"}
+        )
+        self.fields["star_photoshoot_category"].widget.attrs.update(
+            {"placeholder": "Star Photoshoot Category (A-C, case-sensitve)"}
+        )
+        self.fields["star_info_1"].widget.attrs.update(
+            {"placeholder": "SciFi related info"}
+        )
+        self.fields["star_info_2"].widget.attrs.update(
+            {"placeholder": "Info without SciFi reference"}
+        )
+        self.fields["star_imdb"].widget.attrs.update(
+            {"placeholder": "Link to IMDb entry for guest"}
+        )
+        self.fields["star_wiki"].widget.attrs.update(
+            {"placeholder": "Link to Wikipedia entry for gues"}
+        )
+        self.fields["star_official"].widget.attrs.update(
+            {"placeholder": "Link to official homepage for guest"}
+        )
 
         self.fields["name"].widget.attrs["autofocus"] = True
         for field in self.fields:
             self.fields[field].widget.attrs["class"] = 'custom-form input'
             self.fields[field].label = False
-            if self.fields[field] != "star_image":
-                if self.fields[field].required:
-                    placeholder = f"{placeholders[field]} *"
-                else:
-                    placeholder = placeholders[field]
-                self.fields[field].widget.attrs[
-                    "placeholder"] = placeholder
