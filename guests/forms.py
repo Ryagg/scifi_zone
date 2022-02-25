@@ -13,7 +13,6 @@ class ActorForm(forms.ModelForm):
             'name',
             'star_autograph_category',
             'star_photoshoot_category',
-            'star_image',
             'star_info_1',
             'star_info_2',
             'star_imdb',
@@ -30,7 +29,6 @@ class ActorForm(forms.ModelForm):
                 (A-C case-sensitve)",
             "star_photoshoot_category": "Star Photoshoot Category \
                 (A-C case-sensitve)",
-                # (try to) avoid W3C markup validator error
             "star_info_1": "SciFi related info",
             "star_info_2": "Info without SciFi reference",
             "star_imdb": "Link to IMDb entry for guest",
