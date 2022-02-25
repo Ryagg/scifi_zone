@@ -24,7 +24,13 @@ def test_actor_form_is_valid_with_data(create_guest):
     data = {
         'name': create_guest.name,
         'star_autograph_category': create_guest.star_autograph_category,
-        'star_photoshoot_category': create_guest.star_photoshoot_category
+        'star_photoshoot_category': create_guest.star_photoshoot_category,
+        'star_image': create_guest.star_image,
+        'star_info_1': create_guest.star_info_1,
+        'star_info_2': create_guest.star_info_2,
+        'star_imdb': create_guest.star_imdb,
+        'star_wiki': create_guest.star_wiki,
+        'star_official': create_guest.star_official
     }
 
     form = ActorForm(data=data)

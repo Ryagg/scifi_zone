@@ -84,7 +84,12 @@ def test_add_guest_works(admin_client):
         "star_autograph_category": "C",
         "star_photoshoot_category": "C",
         "star_image_url": "",
-        "star_image": ""
+        "star_image": "",
+        "star_info_1": "Info",
+        "star_info_2": "More info",
+        "star_imdb": "",
+        "star_wiki": "",
+        "star_offical": ""
     }
     url = reverse('add_guest')
     admin_client.post(url, data)
