@@ -1,0 +1,43 @@
+[run]
+include =
+    bag/views.py
+    checkout/views.py
+    guests/views.py
+    home/views.py
+    profiles/views.py
+    tickets/views.py
+    # bag/admin.py
+    # bag/apps.py
+    # bag/contexts.py
+    # bag/models.py
+    # bag/urls.py
+    # bag/views.py
+    # tickets/admin.py
+    # tickets/apps.py
+    # tickets/models.py
+    # tickets/urls.py
+    # tickets/views.py
+    # checkout/admin.py
+
+omit =
+    */migrations*/
+    */__init__.py
+
+[report]
+include =
+    bag/views.py
+    checkout/views.py
+    guests/views.py
+    home/views.py
+    profiles/views.py
+    tickets/views.py
+    # bag/admin.py
+    # bag/apps.py
+    # bag/contexts.py
+    # bag/models.py
+    # bag/urls.py
+    # bag/views.py
+
+    omit =
+    */migrations*/
+    */__init__.py

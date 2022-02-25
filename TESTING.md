@@ -158,7 +158,52 @@ Please note that for the following three expectations, an adjustment has been ma
 
 ---
 
-## TO BE ADDED / SEE AUTOMATED TESTS
+Pytest was used to create automated tests. To ensure DRY being followed, various fixtures were created in conftest.py and added as parameters to tests where appropriate. Additionally, parametrized testing was used when possible.
+
+**Examples for @pytest.fixture in conftest.py**
+
+![pytest-fixtures](documentation/testing/functionality-tests/pytest-fixtures.jpg)
+
+**Parametrized testing**
+![pytest-parametrized](documentation/testing/functionality-tests/pytest-parametrized.jpg)
+
+Tests for all views and some tests for forms and models were created and either passed or were expected to fail and did so. However, after [additional security measures](https://github.com/Ryagg/scifi_zone/blob/main/scifi_zone/settings.py#L59-L128) for the project were implemented, some tests failed. A new branch 'run-tests' without the additional security measures has been created, and when this branch is manually deployed, all tests pass again. With the hard deadline for submission approaching, I unfortunately could not research how to adjust the tests for these settings.
+
+The results for my apps can be found below:
+
+**Bag:**
+
+![pytests-bag](documentation/testing/functionality-tests/pytests-bag.jpg)
+
+**Checkout:**
+
+![pytests-checkout](documentation/testing/functionality-tests/pytests-checkout.jpg)
+
+**Find:**
+
+![pytests-find](documentation/testing/functionality-tests/pytests-find.jpg)
+
+**Guests:**
+
+![pytests-guests](documentation/testing/functionality-tests/pytests-guests.jpg)
+
+**Home:**
+
+![pytests-home](documentation/testing/functionality-tests/pytests-home.jpg)
+
+**Profiles:**
+
+![pytests-profiles](documentation/testing/functionality-tests/pytests-profile.jpg)
+
+**Tickets:**
+
+![pytests-tickets](documentation/testing/functionality-tests/pytests-tickets.jpg)
+
+I ran into another problem with pytest-cov and coverage. The reported numbers were either suspiciously high (80%, using coverage) or abysmally low (35%, using pytest-cov). Several attempts to exclude files like **init**.py and (almost) empty files (e.g. admin.py in the home app) both via the CLI and in the .coveragerc file were unsuccessful.
+
+**Coverage report:**
+
+![coverage-report](documentation/testing/functionality-tests/coverage-report.jpg)
 
 ## **Validators**
 
