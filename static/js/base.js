@@ -1,3 +1,4 @@
+/* jshint esversion: 8, jquery: true */
 // code copied from the bulma documentation
 $(document).ready(function () {
     // Check for click events on the navbar burger icon
