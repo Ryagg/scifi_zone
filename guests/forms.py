@@ -20,6 +20,7 @@ class ActorForm(forms.ModelForm):
             'star_wiki',
             'star_official')
 
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         placeholders = {
@@ -35,6 +36,7 @@ class ActorForm(forms.ModelForm):
             "star_wiki": "Link to Wikipedia entry for guest",
             "star_official": "Link to official homepage for guest",
         }
+        del self.fields['star_image'].widget.attrs['placeholder']
 
         self.fields["name"].widget.attrs["autofocus"] = True
         for field in self.fields:
