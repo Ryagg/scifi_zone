@@ -7,19 +7,18 @@ from tickets.models import Actor
 class ActorForm(forms.ModelForm):
     """Form needed to add or edit guests"""
     class Meta:
-        """Inherits all fields from the actor model except star_image_url"""
+        """Inherits all fields from the actor model"""
         model = Actor
         fields = (
             'name',
             'star_autograph_category',
             'star_photoshoot_category',
+            'star_image',
             'star_info_1',
             'star_info_2',
             'star_imdb',
             'star_wiki',
             'star_official')
-
-    star_image = forms.ImageField(label="Image", required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -29,6 +28,7 @@ class ActorForm(forms.ModelForm):
                 (A-C case-sensitve)",
             "star_photoshoot_category": "Star Photoshoot Category \
                 (A-C case-sensitve)",
+            "star_image": "",
             "star_info_1": "SciFi related info",
             "star_info_2": "Info without SciFi reference",
             "star_imdb": "Link to IMDb entry for guest",
