@@ -44,9 +44,7 @@ class ActorForm(forms.ModelForm):
             if self.fields[field] != "star_image":
                 if self.fields[field].required:
                     placeholder = f"{placeholders[field]} *"
-                    self.fields[field].widget.attrs[
-                        "placeholder"] = placeholder
                 else:
                     placeholder = placeholders[field]
-                    self.fields[field].widget.attrs[
-                        "placeholder"] = placeholder
+                self.fields[field].widget.attrs[
+                    "placeholder"] = placeholder
