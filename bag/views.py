@@ -29,14 +29,17 @@ def add_to_bag(request, item_id):
                     request, f'Updated {ticket.name} quantity '
                     f'for {selected} to '
                     f'{bag[item_id]["items_by_selected"][selected]}')
+                print(request.session['bag'])
             else:
                 bag[item_id]['items_by_selected'][selected] = quantity
                 messages.success(request, f'Added {ticket.name} x {quantity} '
                                  f' for {selected} to your bag.')
+                print(request.session['bag'])
         else:
             bag[item_id] = {'items_by_selected': {selected: quantity}}
             messages.success(request, f'Added {ticket.name} x {quantity} '
                              f' for {selected} to your bag!')
+            print(bag)
     else:
         if item_id in bag:
             bag[item_id] += quantity
@@ -55,15 +58,49 @@ def add_to_bag(request, item_id):
 def update_bag(request, item_id):
     """ Update quantity of selected bag item to user's choice """
 
+    ticket = get_object_or_404(Ticket, pk=int(item_id))
     quantity = int(request.POST.get('quantity'))
+    selected = None
+    if "chosen_actor" in request.POST:
+        selected = request.POST.get('chosen_actor')
     bag = request.session.get('bag', {})
 
-    if quantity < 0:
-        messages.info(request, 'Please enter only positive numbers')
-    elif quantity > 0:
-        bag[item_id] = quantity
+    if selected:
+        if quantity > 0:
+
+            bag[item_id]['items_by_selected'][selected] = quantity
+            messages.success(
+                request, f'Updated {ticket.name} quantity '
+                f'for {selected} to '
+                f'{bag[item_id]["items_by_selected"][selected]}')
+            print('updated bag')
+            print(bag)
+        elif quantity < 0:
+            messages.info(request, 'Please enter only positive numbers')
+        else:
+            del bag[item_id]['items_by_selected'][selected]
+            messages.success(
+                request, f'Removed {ticket.name} '
+                f'for {selected} from your bag '
+            )
+            print('removed')
+            print(bag)
     else:
-        del bag[item_id]
+        if quantity > 0:
+            bag[item_id] = quantity
+            messages.success(request, f'Updated {ticket.name} quantity to \
+                {bag[item_id]}.')
+            print('working update')
+            print(bag)
+        elif quantity < 0:
+            messages.info(request, 'Please enter only positive numbers')
+        else:
+            del bag[item_id]
+            messages.success(request, f'Removed {ticket.name} from your bag.')
+    # elif quantity < 0:
+    #     messages.info(request, 'Please enter only positive numbers')
+    # elif quantity > 0:
+    #     bag[item_id] = quantity
 
     request.session['bag'] = bag
     return redirect(reverse('view_bag'))
@@ -73,10 +110,18 @@ def remove_from_bag(request, item_id):
     """ Remove item from bag """
     try:
         ticket = get_object_or_404(Ticket, pk=int(item_id))
+        selected = None
+        if "chosen_actor" in request.POST:
+            selected = request.POST.get('chosen_actor')
         bag = request.session.get('bag', {})
 
-        del bag[item_id]
-        messages.success(request, f'Removed {ticket.name} from your bag.')
+        if selected:
+            del bag[item_id]['items_by_selected'][selected]
+            messages.success(request, f'Removed {ticket.name} '
+                             f' for {selected} from your bag!')
+        else:
+            del bag[item_id]
+            messages.success(request, f'Removed {ticket.name} from your bag.')
 
         request.session['bag'] = bag
         return redirect(reverse('view_bag'))
