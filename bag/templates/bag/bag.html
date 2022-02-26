@@ -47,8 +47,8 @@
                                         {% if item.selection %}
                                             <input type="hidden" name="chosen_actor" value="{{ item.selection }}">
                                             <input class="button update-bag my-1" type="submit" value="Update bag">
-                                            <a href="{% url 'remove_from_bag' item.item_id %}" id="remove-selection{{ item.item_id }}"
-                                            data-item_selection="{{ item.selection }}" data-item_id="{{ item.item_id }}{{ item.selection }}" class="button remove my-1">Remove</a>
+                                            <a id="remove_selection_{{ item.item_id }}"
+                                            data-item_selection="{{ item.selection }}" data-item_id="{{ item.item_id }}{{ item.selection }}" class="button remove remove-addon my-1">Remove</a>
                                             </div>
                                         {% else %}
                                             <input class="button update-bag my-1" type="submit" value="Update bag">
@@ -97,4 +97,28 @@
         </div> <!-- end of container -->
     </div> <!-- end of body -->
 </section>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+
+<script type="text/javascript">
+    // Remove addon-ticket on click
+    $('.remove-addon').click(function(e) {
+        let csrfToken = "{{ csrf_token }}";
+        let itemId = $(this).attr('id').split('remove_selection_')[1];
+        console.log(itemId)
+        let choice = $(this).data('chosen_actor');
+        let url = `/bag/remove/${itemId}/`;
+        let data = {
+            'csrfmiddlewaretoken': csrfToken,
+            'chosen_actor': choice
+        };
+
+        $.post(url, data)
+        .done(function() {
+            location.reload();
+        });
+    })
+</script>
 {% endblock %}
