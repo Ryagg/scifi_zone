@@ -18,8 +18,10 @@
                                         <li>
                                             <article>
                                                 {# watson_searchentry value in pg db for tickets #}
-                                                {% if result.content_type_id == 14 %}
+                                                {% if result.content_type_id == 14 and "Ticket" in result.title %}
                                                     <a href="{% url 'ticket_detail' result.object.id %}" class="is-size-4 is-size-3-tablet text__color-sky-100 link--light">{{ result.title }} </a>
+                                                {% elif result.content_type_id == 14 and "Package" in result.title %}
+                                                    <a href="{% url 'package_detail' result.object.id result.object.name %}" class="is-size-4 is-size-3-tablet text__color-sky-100 link--light">{{ result.title }} </a>
                                                 {# watson_searchentry value in pg db for actors #}
                                                 {% elif result.content_type_id == 16 %}
                                                     <p class="is-size-4 is-size-3-tablet"></p>
