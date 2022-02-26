@@ -17,9 +17,11 @@
                                     {% for result in search_results %}
                                         <li>
                                             <article>
-                                                {% if "Ticket" or "Package" in result.title %}
+                                                {# watson_searchentry value in pg db for tickets #}
+                                                {% if result.content_type_id == 14 %}
                                                     <a href="{% url 'ticket_detail' result.object.id %}" class="is-size-4 is-size-3-tablet text__color-sky-100 link--light">{{ result.title }} </a>
-                                                {% else %}
+                                                {# watson_searchentry value in pg db for actors #}
+                                                {% elif result.content_type_id == 16 %}
                                                     <p class="is-size-4 is-size-3-tablet"></p>
                                                         <a href="{% url 'guest_detail' result.object.id %}" class="is-size-4 is-size-3-tablet text__color-sky-100 link--light">{{ result.title }} </a>
                                                 {% endif %}
