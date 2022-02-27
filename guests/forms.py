@@ -26,19 +26,19 @@ class ActorForm(forms.ModelForm):
         # not very DRY, but the only way to prevent error for placeholder
         # on file input field and have placeholders on all other fields
         self.fields["name"].widget.attrs.update(
-            {"placeholder": "Name"},
+            {"placeholder": "Name *"},
         )
         self.fields["star_autograph_category"].widget.attrs.update(
-            {"placeholder": "Star Autograph Category (A-C, case-sensitve)"}
+            {"placeholder": "Star Autograph Category (A-C, case-sensitve) *"}
         )
         self.fields["star_photoshoot_category"].widget.attrs.update(
-            {"placeholder": "Star Photoshoot Category (A-C, case-sensitve)"}
+            {"placeholder": "Star Photoshoot Category (A-C, case-sensitve) *"}
         )
         self.fields["star_info_1"].widget.attrs.update(
-            {"placeholder": "SciFi related info"}
+            {"placeholder": "SciFi related info *"}
         )
         self.fields["star_info_2"].widget.attrs.update(
-            {"placeholder": "Info without SciFi reference"}
+            {"placeholder": "Info without SciFi reference *"}
         )
         self.fields["star_imdb"].widget.attrs.update(
             {"placeholder": "Link to IMDb entry for guest"}
