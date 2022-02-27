@@ -66,9 +66,15 @@ CSP_DEFAULT_SRC = (
     "https://*.jquery.com"
 )
 
+CSP_FONT_SRC = (
+    "'self'",
+    "https://ms4-scifi-zone.s3.amazonaws.com",
+)
+
 CSP_SCRIPT_SRC = (
     "'self'",
     "https://*.stripe.com",
+    "https://ms4-scifi-zone.s3.amazonaws.com"
     "https://*.fontawesome.com",
     "https://ms4-scif-zone.herokuapp.com",
     "https://*.jsdelivr.net",
