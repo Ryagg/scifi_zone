@@ -158,7 +158,9 @@ Please note that for the following three expectations, an adjustment has been ma
 
 ---
 
-Pytest was used to create automated tests. To ensure DRY being followed, various fixtures were created in conftest.py and added as parameters to tests where appropriate. Additionally, parametrized testing was used when possible.
+### **Automated tests**
+
+Pytest was used to create automated tests. To ensure DRY was being followed, various fixtures were created in conftest.py and added as parameters to tests where appropriate. Additionally, parametrized testing was used when possible. Please note that I kept the number of tests for checking that pages render as expected intentionally small. All my standard tests for views use the reverse function, check the status code, and ( non-parametrized) tests check that the page contains one defining element for that page. This single test should be more than enough to confirm that the page works as expected, while also ensuring that testing can be done quickly and efficiently, and calls to the database can be kept at a minimum.
 
 **Examples for @pytest.fixture in conftest.py**
 
@@ -167,9 +169,12 @@ Pytest was used to create automated tests. To ensure DRY being followed, various
 **Parametrized testing**
 ![pytest-parametrized](documentation/testing/functionality-tests/pytest-parametrized.jpg)
 
-Tests for all views and some tests for forms and models were created and either passed or were expected to fail and did so. However, after [additional security measures](https://github.com/Ryagg/scifi_zone/blob/main/scifi_zone/settings.py#L59-L128) for the project were implemented, some tests failed. A new branch 'run-tests' without the additional security measures has been created, and when this branch is manually deployed, all tests pass again. With the hard deadline for submission approaching, I unfortunately could not research how to adjust the tests for these settings.
+**Concise view test**
+![pytest-url-works](documentation/testing/functionality-tests/pytest-url-works.jpg)
 
-The results for my apps can be found below:
+Tests for all views and some tests for forms and models were created and either passed or were expected to fail and did so. **However, after [additional security measures](https://github.com/Ryagg/scifi_zone/blob/main/scifi_zone/settings.py#L59-L128) for the project were implemented, most tests failed. A new branch 'run-tests' without the additional security measures has been created, and when this branch is manually deployed, all tests pass again.** With the hard deadline for submission approaching, I unfortunately could not research how to adjust the tests for these additional security settings.
+
+The results for my apps can be found below. XFAIL means that the test is expected to fail and did indeed fail:
 
 **Bag:**
 
@@ -203,7 +208,362 @@ I ran into another problem with pytest-cov and coverage. The reported numbers we
 
 **Coverage report:**
 
-![coverage-report](documentation/testing/functionality-tests/coverage-report.jpg)
+## ![coverage-report](documentation/testing/functionality-tests/coverage-report.jpg)
+
+### **Manual tests**
+
+#### **Security and defensive design**
+
+**Plan**
+
+Provide as much security for my users and their data, as well as the site itself as possible. Measures taken include: a content security policy, the definition of CORS and CSRF allowed origins, forcing cookies over HTTPS, enabling secure SSL redirect, adding a strict-transport-security header, and - for completeness - forcing subdomains to use SSL. For defensive design, both session cookies and decorators are used to prevent unauthorized access.
+
+**Test**
+
+Try to access the profile page without being logged in. Try to access the checkout page while the bag is empty. Try to access the add guest page without admin privileges.
+
+**Result**
+
+Trying to access the profile page results in a redirect to the login page.
+
+![profile-redirect](documentation/testing/functionality-tests/profile-redirect.jpg)
+
+Trying to access the checkout page while the bag is empty results in a redirect to the tickets page and an error message that the bag is empty.
+
+![checkout-redirect](documentation/testing/functionality-tests/checkout-redirect.jpg)
+
+Trying to access the add guest page without admin privileges results in an error message informing the user that he/she doesn't have permission to add guests.
+
+![no-admin](documentation/testing/functionality-tests/no-admin.jpg)
+
+Trying to access the add guest page without being logged in results in a redirect to the login page.
+
+![add-guest_redirect](documentation/testing/functionality-tests/add-guest_redirect.jpg)
+
+While testing browser compatibility, I noticed that my CSP settings caused console errors on Edge, Firefox, and Opera. At first, I tried to update my settings. The number of errors went down, but there still remained errors. I therefore removed the CSP.
+
+**Verdict**
+
+&#9989; Working as intended.
+
+---
+
+#### **Navbar and footer**
+
+**Plan**
+
+Make the site easy to navigate by providing a fixed-top navbar and drop-down menus for grouped content. Display copyright info, social media links, and links to the site notice and privacy policy in the footer.
+
+**Test**
+
+Access all pages from each page on the navbar and footer.
+
+**Result**
+
+The navbar and footer are visible on all pages except the error pages. This is intentional. Drop-down menus appear when hovered over or activated through the Tab key. All links redirect to the expected page. The social media links open the correspondent pages in a new tab.
+
+**Verdict**
+
+&#9989; Working as intended.
+
+---
+
+#### **Search function**
+
+**Plan**
+
+Allow the user to perform full text search for data within the actor and tickets model (packages are included in the tickets model) and display links to the results. For convenience, the search bar is integrated into the navbar.
+
+**Test**
+
+I started searches for ticket categories, words from the guest detail page, and words that would not be found.
+
+**Result**
+
+All searches returned the expected result.
+
+![search-1](documentation/testing/functionality-tests/search-1.jpg)
+![search-2](documentation/testing/functionality-tests/search-2.jpg)
+![search-3](documentation/testing/functionality-tests/search-3.jpg)
+
+**Verdict**
+
+&#9989; Working as intended.
+
+---
+
+#### **Home page: event info with CTA**
+
+**Plan**
+
+The home page provides the user with relevant information about the convention. Convention guests are prominently featured to pique users' interest. A prominent link invites users to buy tickets.
+
+**Test**
+
+Each time I visited the page, I wished I could actually buy tickets for the event ;-)
+
+**Result**
+
+The page provides information to motivate users to find out more and/or buy tickets. The CTA button redirects to the tickets page.
+
+**Verdict**
+
+&#9989; Working as intended.
+
+---
+
+#### **Guests page**
+
+**Plan**
+
+Provide the user with an overview of all attending guests. Let users sort guests by categories like series, IP (e.g. Star Trek or Marvel), and films.
+
+**Test**
+
+Visit the page and test the links
+
+**Result**
+
+Currently, the page displays a short introductory paragraph, and photos for all attending guests, with links to the corresponding detail page for each guest. Due to data about series, IP, and movies not being present in the fixture, the sorting function has not yet been implemented.
+
+**Verdict**
+
+&#9989; Working as intended in its current form, but sorting feature not yet implemented.
+
+---
+
+#### **Guest detail page**
+
+**Plan**
+
+Provide information about the guest's scifi related roles and roles outside of scifi. Provide links to the IMDb and Wikipedia entries for the guest, and, if there is one, the official homepage. Let users know how much an autograph and a photoshoot ticket for the guest will cost, and let users add tickets to their shopping bag.
+
+**Test**
+
+Click the links for the IMDb and Wikipedia entries. Add first one autograph and one photoshoot ticket to the bag, then add two more tickets of each category to the bag.
+
+**Result**
+
+The links to external pages open in a new tab and link to the correct entry for the guest. Tickets can be added to the shopping bag, and a message informs the user that either a ticket has been added to the bag or that the number of tickets has been updated.
+
+![guest-detail-add-first](documentation/testing/functionality-tests/guest-detail-add-first.jpg)
+![guest-detail-add-more](documentation/testing/functionality-tests/guest-detail-add-more.jpg)
+
+**Verdict**
+
+&#9989; Working as intended.
+
+---
+
+#### **Tickets and packages pages**
+
+**Plan**
+
+Provide a short explanation about tickets or packages, respectively, and display the price for each type of ticket/package. Provide links to the detail page for each type of ticket/package. Provide links to the opposite category.
+
+**Test**
+
+Check prices for each product against its value in the fixture. Test links.
+
+**Result**
+
+Users are provided with the most relevant information about tickets vs. packages, and can see the price for each product and the price range in a category. A convenient link brings them to the opposite category (ticket vs. package).
+
+![tickets](documentation/testing/functionality-tests/tickets.jpg)
+![packages](documentation/testing/functionality-tests/packages.jpg)
+**Verdict**
+
+&#9989; Working as intended.
+
+---
+
+#### **Ticket and package detail pages**
+
+**Plan**
+
+Display detailed information about the ticket/package. For autograph and photoshoot tickets, let users choose for which actor the ticket will be valid, and inform them (again) that these tickets are only valid in combination with either any standard ticket or a package. Let users add tickets/packages to the shopping bag. Provide links back to the tickets and packages pages.
+
+**Test**
+
+Test links on the page. Add tickets to the shopping bag. For autograph and photoshoot tickets, try to add a ticket to the shopping bag without selecting a guest.
+
+**Result**
+
+All links work. Adding tickets to the shopping bags results in a confirmation message, and users stay on the page so they can either buy more tickets of the same category, but with another guest selected for add-on-tickets, or use the provide link to return to either the tickets or packages page. Trying to add an add-on-ticket without selecting a guest results in a popup message informing the user that a selection must be made.
+
+![add-package-to-bag](documentation/testing/functionality-tests/add-package-to-bag.jpg)
+![add-addon-to-bag](documentation/testing/functionality-tests/add-addon-to-bag.jpg)
+![add-addon-no-selection](documentation/testing/functionality-tests/add-addon-no-selection.jpg)
+
+**Verdict**
+
+&#9989; Working as intended.
+
+---
+
+#### **Bag page**
+
+**Plan**
+
+Provide users with a detailed overview of their shopping bag contents. Allow users to change the quantity for each item in the bag, remove each item separately, or remove all items from the bag at once. Provide links to either continue to checkout or keep shopping. If users access the bag page, while there are no items in the bag, display a message.
+
+**Test**
+
+Access the page while there are no items in the bag. Put items in the bag and access it again. Change the quantity for packages, standard, autograph and photoshoot tickets. Try to enter negative numbers. Remove items from the bag. Empty the bag. Put items back in and proceed to checkout.
+
+**Result**
+
+Accessing the bag while there are no items in the bag informs the user that the bag is empty and a link to the tickets page is provided.
+
+Changing the quantity for packages and standard tickets correctly updates the bag and displays a confirmation message.
+
+Changing the quantity for autographs or photoshoot tickets for an actor resulted in the number for the ticket category being updated to the new value. The display of the actor for whom the ticket is valid had been implemented after the bag functionality was tested, and I didn't think to test it again after adding the new feature. (Won't make that mistake again...) After updating the view and the template, updating these tickets works as expected.
+
+Trying to enter negative numbers for any type of ticket results in a notification to only enter positive numbers.
+
+Removing packages and tickets correctly removes the items and displays a confirmation message.
+
+Removing autograph or photoshoot tickets for an actor resulted in all tickets from that category being removed from the bag. Again, I didn't check this functionality after adding the display of the actor for whom the ticket is valid. I didn't succeed in updating the view or creating a new view to achieve the desired result, and had to use JavaScript to remove these tickets from the bag. I was unable to generate a confirmation message and therefore can't show a screenshot for this functionality.
+
+Update: While checking browser compatibility, I noticed that this feature once again didn't work. Furthermore, even in Chrome, clicking the button again removed all tickets from that category. I have no explanation for this. On the one hand, I can't imagine that I didn't notice that all items were removed when I tested my 'fix' the day before. On the other hand, I didn't touch the code afterwards. I therefore removed the 'Remove' button. While not optimal, users can still remove items separately by setting the quantity for that item to 0. Please note that I updated the bag screenshots for the Testing User Stories section, but left the screenshots here unchanged to show the difference. I've added an updated screenshot after I removed the 'Remove' button to show that it now works as intended, including a confirmation message for the user and tickets from price category B still in the bag after I removed one ticket for one actor from this price category.
+
+Emptying the bag works as expected and displays a confirmation message.
+
+Clicking on the checkout button redirects to the checkout page and displays the order summary.
+
+![bag-empty](documentation/testing/functionality-tests/bag-empty.jpg)
+![bag-update-package](documentation/testing/functionality-tests/bag-update-package.jpg)
+![bag-update-addon](documentation/testing/functionality-tests/bag-update-addon.jpg)
+![bag-negative-numbers](documentation/testing/functionality-tests/bag-negative-number.jpg)
+![bag-remove-ticket](documentation/testing/functionality-tests/bag-remove-ticket.jpg)
+![bag-emptied-by-user](documentation/testing/functionality-tests/bag-emptied-by-user.jpg)
+![bag-checkout](documentation/testing/functionality-tests/bag-checkout.jpg)
+![bag-remove-single-addon](documentation/testing/functionality-tests/bag-remove-single-addon.jpg)
+
+**Verdict**
+
+&#9989; Working as intended after some last-minute bug-fixes
+
+---
+
+#### **Checkout page**
+
+**Plan**
+
+Display the order summary, let users enter their billing address. Allow users to save this data for future purchases. Prefill the form if the address is already in the profile. Handle payment through Stripe.
+
+**Test**
+
+Try to access the site by manually entering the address. Go there from the bag page. Try to checkout without filling out the form. Fill out the form and enter the credit card number.
+
+**Result**
+
+Trying to access the page by manually entering the address results in an error message and redirects to the tickets page.
+
+Trying to submit the payment without filling out the form leads to a notification to fill out the first required input field without data.
+
+Trying to submit the payment with incomplete payment data results in an error message on the card element provided by Stripe.
+
+Submitting the payment with a valid form and valid payment data redirects to the checkout success page.
+
+![checkout-manual](documentation/testing/functionality-tests/checkout-manual.jpg)
+![checkout-submit-empty-form](documentation/testing/functionality-tests/checkout-submit-empty-form.jpg)
+![checkout-card-error](documentation/testing/functionality-tests/checkout-card-error.jpg)
+![checkout-complete](documentation/testing/functionality-tests/checkout-complete.jpg)
+
+**Verdict**
+
+&#9989; Working as intended.
+
+---
+
+#### **Checkout success page**
+
+**Plan**
+
+Display the order confirmation and order number to the user. Provide a brief order summary and display the grand_total. Inform the user that a confirmation email will be sent to the provided email address.
+
+**Test**
+
+Complete the checkout process.
+
+**Result**
+
+See screenshot above.
+
+**Verdict**
+
+&#9989; Working as intended.
+
+---
+
+#### **Profile page**
+
+**Plan**
+
+Let users enter or update their billing address. Display the order history or inform the user that no orders have been placed yet, and provide a link to the tickets page.
+
+**Test**
+
+Try to access the page while not logged in. Access the page while logged in. Update the billing address.
+
+**Result**
+
+Accessing the page while not logged in redirects to the login page.
+
+Accessing the page while logged in correctly displays the billing address form with data the user has already entered, or displays an empty form on the first visit.
+
+Updating the billing address shows the new info in the form and displays a confirmation message.
+
+For users who already ordered tickets, the order history for each order is displayed.
+
+![profile-no-session](documentation/testing/functionality-tests/profile-no-session.jpg)
+![profile-new-user](documentation/testing/functionality-tests/profile-new-user.jpg)
+![profile-update](documentation/testing/functionality-tests/profile-update.jpg)
+![profile-one-order](documentation/testing/functionality-tests/profile-one-order.jpg)
+
+**Verdict**
+
+&#9989; Working as intended.
+
+---
+
+#### **Admin action: add guest**
+
+**Plan**
+
+Allow admins to add new guests to the convention, and edit or delete existing entries.
+
+**Test**
+
+Try to access the page while not being logged in. Try to access the page without admin privileges. Access the site as admin. Try to submit an empty form. Try to submit an invalid form. Add a new guest, edit the entry, then delete the entry.
+
+**Result**
+
+Trying to access the page while not being logged in redirects to the login page.
+
+Trying to access the page without admin privileges results in an error message.
+
+Accessing the page as admin displays the form. Required fields have an asterisk at the end of the placeholder. For the autograph and photoshoot categories, the required format is shown as additional placeholder text.
+
+Trying to submit an empty form displays a notification to fill out the first required field without data.
+
+To ensure that the price for the autograph and photoshoot tickets will be displayed correctly, I added regex validation to the actor model. Not adhering to the required format results in an error message, and the offending entries are marked.
+
+The test results for adding a new guest, and for editing + deleting an existing entry can be found in the testing user stories 16 - 18 section [here](https://github.com/Ryagg/scifi_zone/blob/main/TESTING.md#expectation-16-being-able-as-a-site-owner-to-add-actors-to-the-event).
+
+![admin-no-session](documentation/testing/functionality-tests/admin-no-session.jpg)
+![admin-no-superuser](documentation/testing/functionality-tests/admin-no-superuser.jpg)
+![admin-form-info](documentation/testing/functionality-tests/admin-form-info.jpg)
+![admin-empty-form](documentation/testing/functionality-tests/admin-empty-form.jpg)
+![admin-regex](documentation/testing/functionality-tests/admin-regex.jpg)
+![admin-form-error](documentation/testing/functionality-tests/admin-form-error.jpg)
+
+**Verdict**
+
+&#9989; Working as intended.
+
+---
 
 ## **Validators**
 
@@ -215,7 +575,7 @@ I ran into another problem with pytest-cov and coverage. The reported numbers we
 
 ---
 
-For validating my HTML code at first the source code from each page of the generated live site was copied and pasted into the validator on [W3C Markup Validation Service](https://validator.w3.org/). At first, several errors, e.g. regarding labels and missing closing tags, were reported. These errors have been fixed and the tests repeated. The last test runs were done using 'Check by address' for all pages except the bag, checkout, checkout success page, and add guest page. For these, the source code was used. The results are presented below:
+For validating my HTML code, at first the source code from each page of the generated live site was first copied and pasted into the validator on [W3C Markup Validation Service](https://validator.w3.org/). At first, several errors, e.g. regarding labels and missing closing tags, were reported. These errors have been fixed and the tests repeated. The last test runs were done using 'Check by address' for all pages except the bag, checkout, checkout success page, and add guest page. For these, the source code was used. For the add guest page, I was logged in with admin-privileges. The results are presented below:
 
 **Result for homepage:**
 
@@ -263,7 +623,7 @@ For validating my HTML code at first the source code from each page of the gener
 
 **Result for add guest page**
 
--   One error reported: "Attribute placeholder is only allowed when the input type is email, number, password, search, tel, text, or url"
+-   No errors or warnings reported after loads of fixes and with the help of my mentor, Tim Nelson.
 
 **Result for site notice page**
 
@@ -571,10 +931,11 @@ The performance for this page is very poor. Render-blocking resources cost 2.27 
 
 ---
 
-No errors were reported for base.js or stripe_elements.js using [JSHint](https://jshint.com/).
+No errors were reported for base.js, stripe_elements.js or the script in bag.html using [JSHint](https://jshint.com/).
 
 ![base](documentation/testing/jshint-results/base.jpg)
 ![stripe_elements](documentation/testing/jshint-results/stripe_elements.jpg)
+![remove-addon-tickets](documentation/testing/jshint-results/remove-addon-tickets.jpg)
 
 ### **Python**
 
@@ -588,7 +949,7 @@ Each .py-file has been formatted using the autopep8-extension for VSCode with th
 
 ---
 
-Family, friends and colleagues were asked to test the site on their computers and/or mobile devices and their preferred browsers. The first page load can sometimes take very long. This happens when the app is 'asleep'. This is a limitation of the free Heroku account. No issues regarding the navigation of the site were reported. Feedback regarding the style of the CTA button on the homepage and the 'Add to shopping bag' buttons on the actor/ticket/package detail pages has been taken into account and the buttons now match the style of the buttons from the register and login pages. Feedback regarding the readability due to poor contrast has been taken into account as well and the text color for disclaimers has been adjusted to the default color and a red border has been added. No other issues were reported.
+Family, friends and colleagues were asked to test the site on their computers and/or mobile devices and their preferred browsers. The first page load can sometimes take very long. This happens when the app is 'asleep'. This is a limitation of the free Heroku account. No issues regarding the navigation of the site were reported. Feedback regarding the style of the CTA button on the homepage and the 'Add to shopping bag' buttons on the actor/ticket/package detail pages has been taken into account. The buttons now match the style of the buttons from the register and login pages. Feedback regarding readability due to poor contrast has also been taken into account as well, and the text colour for disclaimers has been adjusted to the default colour, and a red border has been added. No other issues were reported.
 
 ## **Compatibility Testing**
 
@@ -596,13 +957,53 @@ Family, friends and colleagues were asked to test the site on their computers an
 
 ---
 
+My CSP caused multiple console errors in Edge, Firefox, and Opera. Adjusting the CSP settings did not fully resolve this issue. Unfortunately, I had no other choice but to remove my CSP completely. But user experience and no console errors are more important than stroking my ego with the implementation of a feature.
+
+Opera and Edge do not load the specified fonts and use fall-back system fonts. I did not use the usual font import to comply with a German Court ruling regarding to embedding Google Fonts and GDPR. Instead, I host the fonts in my AWS S3 bucket. Interestingly, when I had my CSP still in place, I could see in the console that attempted font downloads from Google static were prevented. Currently, I see notifications in the console at all. While Opera and Edge users can't see the intended fonts, they profit from an improved critical rendering path due to the fonts not being downloaded. I don't know why Firefox picks up the fonts, and Edge and Opera don't.
+
+All screenshots so far have been created in Chrome. Therefore, only screenshots from Edge, Firefox, and Opera are included below.
+
+### **Microsoft Edge**
+
+-   In Edge, on the ticket detail page for autograph or photoshoot tickets, at one point the content shifted when hovering over the actors' names for some viewports. A few hours later, I couldn't reproduce this bug. In between, I removed the CSP and fixed a bug on the bag page, but didn't change the template or view for the ticket detail page.
+
+![edge-homepage](documentation/testing/compatibility/edge-homepage.jpg)
+![edge-tickets](documentation/testing/compatibility/edge-tickets.jpeg)
+![edge-ticket-detail](documentation/testing/compatibility/edge-ticket-detail.jpeg)
+![edge-bag](documentation/testing/compatibility/edge-bag.jpeg)
+![edge-checkout](documentation/testing/compatibility/edge-checkout.jpeg)
+**Please note that the card element on the actual page is rendered without the white highlighting!**
+
+![edge-profile](documentation/testing/compatibility/edge-profile.jpeg)
+
+### **Firefox**
+
+![firefox-homepage](documentation/testing/compatibility/firefox-homepage.jpg)
+![firefox-tickets](documentation/testing/compatibility/firefox-tickets.jpg)
+![firefox-ticket-detail](documentation/testing/compatibility/firefox-ticket-detail.jpg)
+![firefox-bag](documentation/testing/compatibility/firefox-bag.jpg)
+![firefox-checkout](documentation/testing/compatibility/firefox-checkout.jpg)
+![firefox-profile](documentation/testing/compatibility/firefox-profile.jpg)
+
+### **Opera**
+
+![opera-homepage](documentation/testing/compatibility/opera-homepage.jpg)
+**Please note that the area without the background image was out of view while the screenshot was taken!**
+![opera-tickets](documentation/testing/compatibility/opera-tickets.jpg)
+![opera-ticket-detail](documentation/testing/compatibility/opera-ticket-detail.jpg)
+![opera-bag](documentation/testing/compatibility/opera-bag.jpg)
+![opera-checkout](documentation/testing/compatibility/opera-checkout.jpg)
+**Please note that the card element is rendered correctly on the actual page!**
+
+![opera-profile](documentation/testing/compatibility/opera-profile.jpg)
+
 ## **Responsiveness**
 
 ---
 
 ---
 
-To test responsiveness, I used Google Chrome Developer Tools and Sizzy. Several problems could be identified and corrected, e.g. https://github.com/Ryagg/scifi_zone/commit/2241f748c2b2963ba7e46a47f00a220ae7ef11ba. For the remaining bugs refer to the Bugs section below. Apart from that, the site content is displayed correctly on all viewports.
+To test responsiveness, I used Google Chrome Developer Tools and Sizzy. Several problems could be identified and corrected, e.g. https://github.com/Ryagg/scifi_zone/commit/2241f748c2b2963ba7e46a47f00a220ae7ef11ba. For the remaining bugs, please refer to the Bugs section below. Apart from that, the site content is displayed correctly on all viewports.
 
 ## **Bugs**
 
@@ -610,8 +1011,64 @@ To test responsiveness, I used Google Chrome Developer Tools and Sizzy. Several 
 
 ---
 
--   Uploaded images don't match the size of the existing images due to the applied transformations before uploading the original images.
--   When logged in as an admin, the search bar input field causes overflow for some viewports and the navbar items are not centred for viewports from 1024px to 1215px.
+### **Fixed bugs**
+
+For 'normal' fixed bugs, please refer to commits with the prefix 'fix'. During development, I encountered several issues that caused me much trouble and took much trial and error, and many commits, before I could finally fix them. They are described in detail below.
+
+#### **Implementing the search function across multiple models**
+
+While I have integrated both tickets and packages into the tickets app, they use different models and templates. In my views, I therefore use filters to select only tickets or packages for the respective view, and each view has its own template.
+
+Changing a view to select all objects from the Ticket class for the search and only display tickets or packages in the template worked. But for the search result display, I had to include if-statements to check whether the result referred to a ticket or a package. I didn't like the approach. I felt it was overly complicated. Furthermore, this led to 'NoReverseMatch'-errors, because my detail pages for tickets use the request and the tickets_id as parameters, while my detail pages for packages need an additional parameter package_name.
+
+This led me to Django-Watson, which enabled me to register each model I want to be included for my search results. I had to heavily customize the search_results template. Obviously, it didn't match my site's styling. And, for some reason I don't understand, the result display links back to the search query.
+
+![watson-search-template](documentation/testing/bugs/watson-search-template.jpg)
+
+Using [SQLite](https://marketplace.visualstudio.com/items?itemName=alexcvzz.vscode-sqlite), I found that tickets and packages have the content_type_id 15 in the watson_searchentry table, and actors use the content_type_id 17. With this information, I could modify the template and let the search results for actors, tickets, and packages each link to the corresponding page using the correct template. I happily committed and pushed the code to my repo.
+
+To my utter dismay, my deployed site displayed an almost 'naked' site for the search results and the links linked back to the search query. I soon realized that I had styled and modified the search_results template inside my virtual environment, and that this file, of course, had not been part of my commit. So I had to find a way to make Watson use my customized template. Placing the file in my projects root directory, the project-level template directory, and inside the base template didn't work. Creating a custom context-processor to make it available didn't work, because I failed to access the watson search results. Trying to use the template in one of my existing views failed.
+
+I got the search function to work and use my customized template by creating a new app, importing Watson, and copying my template inside the app. And still, the problems didn't end... The search suddenly didn't find any results. I realized that the content_type_id values must differ in the PostgreSQL database. But I didn't know how to access these values. So I changed my logic to check result.title instead of content_type_id. This succeeded insofar as now search results were found again. But now results for tickets and packages linked to the ticket detail page, so that packages were displayed with the wrong template.
+
+I found a way to access the PostgreSQL database with [PostgreSQL](https://marketplace.visualstudio.com/items?itemName=ckolkman.vscode-postgres). This showed me that in this database tickets and packages have the content_type_id 14, and actors have the content_type_id 16. Now I was able to check both for the content_type_id and whether result.title included either "Ticket" or "Package" and use the correct template for each type of object.
+
+![watson-final](documentation/testing/bugs/watson-final.jpg)
+
+At long last, the search function works as intended!
+
+#### **Placeholder attribute on a file input field**
+
+The form to add a new guest to the convention includes a file input field. The functionality to add guests and images to the site always worked. When validating my code, the validator showed an error because I had put a placeholder on the file input field. I thought this would be an easy fix. How wrong I was...
+
+![placeholder-fixes](documentation/testing/bugs/placeholder-fixes.jpg)
+
+The reason for many commits for this bug is that I had by that time enabled additional security measures which didn't allow local testing due to enforced HTTPS. Disabling these settings temporarily in my settings.py didn't (seem to) work. I still could not test my potential fixes locally. So I had to 'fly blind' and commit my changes, and then test whether they worked... I managed to introduce more bugs. My stress levels kept rising. The hard deadline was approaching, and not being able to fix this error would cause an automatic failure.
+
+At one point, I managed to remove the HTML error. But then all placeholder text for the required fields was gone, too. It seemed like I could have either visible placeholders on the required fields, and the HTML error and the resulting automatic failure for my project. Or no HTML error, but also no placeholder text for the required fields, which perhaps would not have caused a failure, but a serious markdown.
+
+Having calmed down a bit, I found that I couldn't test my changes locally, even with the additional security settings commented out because I hadn't cleared my browsing data. So after clearing the browser data, I could test my potential fixes before committing them. And the suggestion from my mentor, Tim Nelson, to set the attributes for each field separately, finally did the trick!
+
+I have always been thorough in my manual testing procedures and code validation. I knew that to validate the code for this page, I couldn't use 'validate by URI', because then only the redirect for users not in session would have been tested. Only logging in as an admin and then using the source code for 'validate by direct input' allowed me to spot this error and, in the end, fix it. This episode has further strengthened my resolve to continue thoroughly testing my code for future projects. As an optimization, I will also integrate code validation before committing into my workflow.
+
+#### **Changing the quantity for autograph or photoshoot tickets for selected actors**
+
+When I implemented the bag functionality and the display of bag contents, it didn't include the actor for whom the ticket is valid. So, both 3 autograph tickets for one actor, and three autograph tickets for three different actors from the same price category were displayed as three autograph tickets for the price category <price_category>. At this point, both changing the quantity by inputting a number, and removing tickets by clicking the 'Remove' button worked flawlessly.
+
+I later decided that it would be nice to display the names of the actors for whom the tickets are valid. So I updated the template. Everything looked fine. And I didn't think to test whether this affected the bag functionality. Huge mistake.
+
+When I did the functionality tests for the bag page, I noticed that both changing the quantity of an autograph or photoshoot ticket for one actor, and removing an autograph or photoshoot ticket for one actor, affected all tickets from that category.
+
+Adjusting the view and template fixed the bug for changing the quantity by input. But clicking the 'Remove' button still affected all tickets from that category. To fix this, I had to use the JavaScript from the Boutique Ado walk-through to remove items from the bag. The functionality now works as intended, except for a missing confirmation message to the user. See the section remaining bugs below.
+
+While checking compatibility, the button again removed all tickets from the corresponding category... In the end, I removed the button completely. To remove an item from the bag, users now must enter 0 as new quantity. While not optimal, it sure beats users accidentally removing all items from a category when they only want to remove a single item from that category.
+
+Lesson learned: **always** check functionality after adding new features!
+
+### **Remaining bugs**
+
+-   When removing an autograph or photoshoot ticket from the bag, no confirmation message is displayed.
+-   When logged in as an admin, the search bar input field causes overflow for some viewports, and the navbar items are not centred for viewports from 1024px to 1215px.
 
 ![admin-searchbar](documentation/testing/bugs/admin-searchbar.jpg)
 ![admin-searchbar-complete](documentation/testing/bugs/admin-searchbar-complete.jpg)
