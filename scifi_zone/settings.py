@@ -73,9 +73,15 @@ CSP_FONT_SRC = (
 
 CSP_SCRIPT_SRC = (
     "'self'",
+    "'unsafe-inline'",
     "https://*.stripe.com",
-    "https://ms4-scifi-zone.s3.amazonaws.com"
+    "https://ms4-scifi-zone.s3.amazonaws.com",
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/js/base.js",
+    # breaking PEP8 for a reason:
+    # https://www.python.org/dev/peps/pep-0008/#a-foolish-consistency-is-the-hobgoblin-of-little-minds
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/checkout/js/stripe_elements.js",
     "https://*.fontawesome.com",
+    "https://kit.fontawesome.com/93ceedf6fa.js",
     "https://ms4-scif-zone.herokuapp.com",
     "https://*.jsdelivr.net",
     "https://*.jquery.com"
@@ -84,8 +90,11 @@ CSP_SCRIPT_SRC = (
 CSP_SCRIPT_SRC_ELEM = (
     "'self'",
     "https://ms4-scifi-zone.s3.amazonaws.com",
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/js/base.js",
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/checkout/js/stripe_elements.js",
     "https://*.stripe.com",
     "https://*.fontawesome.com",
+    "https://kit.fontawesome.com/93ceedf6fa.js",
     "https://ms4-scifi-zone.herokuapp.com",
     "https://*.jsdelivr.net",
     "https://*.jquery.com"
