@@ -52,55 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'csp.middleware.CSPMiddleware',
     'watson.middleware.SearchContextMiddleware',
 ]
-
-CSP_DEFAULT_SRC = (
-    "'self'",
-    "https://ms4-scifi-zone.s3.amazonaws.com",
-    "https://*.stripe.com",
-    "https://*.fontawesome.com",
-    "https://ms4-scifi-zone.herokuapp.com",
-    "https://*.jsdelivr.net",
-    "https://*.jquery.com"
-)
-
-CSP_FONT_SRC = (
-    "'self'",
-    "https://ms4-scifi-zone.s3.amazonaws.com",
-)
-
-CSP_SCRIPT_SRC = (
-    "'self'",
-    "'unsafe-inline'",
-    "https://*.stripe.com",
-    "https://ms4-scifi-zone.s3.amazonaws.com",
-    "https://ms4-scifi-zone.s3.amazonaws.com/static/js/base.js",
-    # breaking PEP8 for a reason:
-    # https://www.python.org/dev/peps/pep-0008/#a-foolish-consistency-is-the-hobgoblin-of-little-minds
-    "https://ms4-scifi-zone.s3.amazonaws.com/static/checkout/js/stripe_elements.js",
-    "https://*.fontawesome.com",
-    "https://kit.fontawesome.com/93ceedf6fa.js",
-    "https://ms4-scif-zone.herokuapp.com",
-    "https://*.jsdelivr.net",
-    "https://*.jquery.com"
-)
-
-CSP_SCRIPT_SRC_ELEM = (
-    "'self'",
-    "https://ms4-scifi-zone.s3.amazonaws.com",
-    "https://ms4-scifi-zone.s3.amazonaws.com/static/js/base.js",
-    "https://ms4-scifi-zone.s3.amazonaws.com/static/checkout/js/stripe_elements.js",
-    "https://*.stripe.com",
-    "https://*.fontawesome.com",
-    "https://kit.fontawesome.com/93ceedf6fa.js",
-    "https://ms4-scifi-zone.herokuapp.com",
-    "https://*.jsdelivr.net",
-    "https://*.jquery.com"
-)
-
-CSP_STYLE_SRC = ("'unsafe-inline'", "https:")
 
 CORS_ALLOWED_ORIGINS = [
     "https://herokuapp.com",
@@ -121,26 +74,26 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
 
 # settings from "Django for Professionals" by William S. Vincent
 # prevent data sniffing
-SECURE_SSL_REDIRECT = os.environ.get(
-    "DJANGO_SECURE_SSL_REDIRECT", default=True)
+# SECURE_SSL_REDIRECT = os.environ.get(
+#     "DJANGO_SECURE_SSL_REDIRECT", default=True)
 
-# add Strict-Transport-Security header:
-SECURE_HSTS_SECONDS = 300  # change to much greater value later
+# # add Strict-Transport-Security header:
+# SECURE_HSTS_SECONDS = 300  # change to much greater value later
 
-# force subdomains to use SSL
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# # force subdomains to use SSL
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
-# because SECURE_HSTS_SECONDS has non-zero value
-SECURE_HSTS_PRELOAD = True
+# # because SECURE_HSTS_SECONDS has non-zero value
+# SECURE_HSTS_PRELOAD = True
 
-# force cookies over HTTPS
-SESSION_COOKIE_SECURE = os.environ.get(
-    "DJANGO_SESSION_COOKIE_SECURE", default=True)
+# # force cookies over HTTPS
+# SESSION_COOKIE_SECURE = os.environ.get(
+#     "DJANGO_SESSION_COOKIE_SECURE", default=True)
 
-# send only cookies marked as secure with an HTTPS connection
-CSRF_COOKIE_SECURE = os.environ.get(
-    "DJANGO_CSRF_COOKIE_SECURE", default=True
-)
+# # send only cookies marked as secure with an HTTPS connection
+# CSRF_COOKIE_SECURE = os.environ.get(
+#     "DJANGO_CSRF_COOKIE_SECURE", default=True
+# )
 
 CRISPY_TEMPLATE_PACK = 'uni_form'
 
