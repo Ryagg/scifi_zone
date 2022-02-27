@@ -29,10 +29,10 @@ class ActorForm(forms.ModelForm):
             {"placeholder": "Name *"},
         )
         self.fields["star_autograph_category"].widget.attrs.update(
-            {"placeholder": "Star Autograph Category (A-C, case-sensitve) *"}
+            {"placeholder": "Star Autograph Category (A-C, case-sensitive) *"}
         )
         self.fields["star_photoshoot_category"].widget.attrs.update(
-            {"placeholder": "Star Photoshoot Category (A-C, case-sensitve) *"}
+            {"placeholder": "Star Photoshoot Category (A-C, case-sensitive) *"}
         )
         self.fields["star_info_1"].widget.attrs.update(
             {"placeholder": "SciFi related info *"}
@@ -44,7 +44,7 @@ class ActorForm(forms.ModelForm):
             {"placeholder": "Link to IMDb entry for guest"}
         )
         self.fields["star_wiki"].widget.attrs.update(
-            {"placeholder": "Link to Wikipedia entry for gues"}
+            {"placeholder": "Link to Wikipedia entry for guest"}
         )
         self.fields["star_official"].widget.attrs.update(
             {"placeholder": "Link to official homepage for guest"}
