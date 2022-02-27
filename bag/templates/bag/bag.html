@@ -102,12 +102,12 @@
 {% block postloadjs %}
 {{ block.super }}
 
-<script type="text/javascript">
+<script>
+    /* jshint esversion: 8, jquery: true */
     // Remove addon-ticket on click
     $('.remove-addon').click(function(e) {
         let csrfToken = "{{ csrf_token }}";
         let itemId = $(this).attr('id').split('remove_selection_')[1];
-        console.log(itemId)
         let choice = $(this).data('chosen_actor');
         let url = `/bag/remove/${itemId}/`;
         let data = {
@@ -119,6 +119,6 @@
         .done(function() {
             location.reload();
         });
-    })
+    });
 </script>
 {% endblock %}
