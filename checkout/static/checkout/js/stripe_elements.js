@@ -11,33 +11,10 @@ let stripe = Stripe(stripePublicKey);
 // Set up Stripe.js and Elements to use in checkout form
 let elements = stripe.elements();
 
-let card = elements.create("card", {
-    iconstyle: "solid",
-    style: {
-        base: {
-            iconColor: "#c4f0ff",
-            color: "#fff",
-            fontWeight: 500,
-            fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
-            fontSize: "16px",
-            fontSmoothing: "antialiased",
+let paymentElement = elements.create("payment");
+paymentElement.mount("#payment-element");
 
-            ":-webkit-autofill": {
-                color: "#fce883",
-            },
-            "::placeholder": {
-                color: "#87BBFD",
-            },
-        },
-        invalid: {
-            iconColor: "#FFC7EE",
-            color: "#FFC7EE",
-        },
-    },
-});
-card.mount("#card-element");
-
-card.on("change", function (event) {
+paymentElement.on("change", function (event) {
     var displayError = document.getElementById("card-errors");
     if (event.error) {
         displayError.textContent = event.error.message;
@@ -50,7 +27,7 @@ let form = document.getElementById("payment-form");
 
 form.addEventListener("submit", function (ev) {
     ev.preventDefault();
-    card.update({ disabled: true });
+    paymentElement.update({ disabled: true });
     $("#submit-button").attr("disabled", true);
 
     let saveInfo = Boolean($("#id-save-info").attr("checked"));
@@ -92,7 +69,7 @@ form.addEventListener("submit", function (ev) {
                 <span>${result.error.message}</span>`;
                         $(errorDiv).html(html);
 
-                        card.update({ disabled: false });
+                        paymentElement.update({ disabled: false });
                         $("#submit-button").attr("disabled", false);
                     } else {
                         if (result.paymentIntent.status === "succeeded") {

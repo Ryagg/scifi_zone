@@ -137,7 +137,7 @@ def checkout(request):
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
-            payment_method_types=["card"],
+            automatic_payment_methods={"enabled": True},
         )
 
         # Attempt to prefill the from with info from the user's profile
@@ -159,7 +159,7 @@ def checkout(request):
         else:
             order_form = OrderForm
 
-    template = "checkout/checkout.html"
+    template = "checkout/checkout.html.jinja"
     context = {
         "order_form": order_form,
         'stripe_public_key': stripe_public_key,
