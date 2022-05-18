@@ -41,7 +41,7 @@
                             <form action="{% url 'add_to_bag' ticket.id %}" method="POST">
                                 {% csrf_token %}
                                     {% if "Standard" not in ticket.name %}
-                                        {% include "includes/actor_dropdown.html" %}
+                                        {% include "includes/actor_dropdown.html.jinja" %}
                                         <p class="is-size-5 mb-2 disclaimer__border--red">Ticket only valid in combination with a standard ticket or package for the same day.</p>
                                     {% endif %}
                                     <fieldset class="field">

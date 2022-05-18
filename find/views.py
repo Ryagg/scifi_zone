@@ -13,4 +13,4 @@ def find(request):
         "search_results": search_results,
     }
 
-    return render(request, "find/search_results.html", context)
+    return render(request, "find/search_results.html.jinja", context)

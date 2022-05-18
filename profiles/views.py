@@ -13,30 +13,29 @@ def profile(request):
     try:
         profile = get_object_or_404(UserProfile, user=request.user)
 
-        if request.method == 'POST':
+        if request.method == "POST":
             form = UserProfileForm(request.POST, instance=profile)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Profile updated successfully')
+                messages.success(request, "Profile updated successfully")
             else:
-                messages.error(request, 'Profile could not be  updated. \
-                    Please check the form input is valid.')
+                messages.error(
+                    request,
+                    "Profile could not be  updated. \
+                    Please check the form input is valid.",
+                )
         else:
             form = UserProfileForm(instance=profile)
 
         orders = profile.orders.all()
 
-        template = 'profiles/profile.html'
-        context = {
-            'form': form,
-            'orders': orders,
-            'on_profile_page': True
-        }
+        template = "profiles/profile.html.jinja"
+        context = {"form": form, "orders": orders, "on_profile_page": True}
 
         return render(request, template, context)
     except Http404:
         messages.error(request, "Sorry! You don't have permission to do that!")
-        return redirect('home')
+        return redirect("home")
 
 
 @login_required
@@ -44,16 +43,19 @@ def order_history(request, order_number):
     """Display the user's order history"""
     order = get_object_or_404(Order, order_number=order_number)
 
-    messages.info(request, (
-        f'This is a past confirmation for order number {order_number}.'
-        f'A confirmation email was sent on {order.date}.'
-    ))
+    messages.info(
+        request,
+        (
+            f"This is a past confirmation for order number {order_number}."
+            f"A confirmation email was sent on {order.date}."
+        ),
+    )
 
     # re-using the template because it already has the needed layout
-    template = 'checkout/checkout_success.html'
+    template = "checkout/checkout_success.html.jinja"
     context = {
-        'order': order,
-        'from_profile': True,
+        "order": order,
+        "from_profile": True,
     }
 
     return render(request, template, context)
