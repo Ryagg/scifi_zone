@@ -32,6 +32,7 @@ freezegun = "*"
 pytest-cov = "*"
 pytest-factoryboy = "*"
 django-watson = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
