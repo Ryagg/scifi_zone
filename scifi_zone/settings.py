@@ -52,14 +52,46 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "csp.middleware.CSPMiddleware",
     "watson.middleware.SearchContextMiddleware",
 ]
+
+CSP_DEFAULT_SRC = ["'none'"]
+
+CSP_SCRIPT_SRC = [
+    "'self'",
+    "https://*.stripe.com",
+    "https://*.fontawesome.com",
+    "https://*herokuapp.com",
+    "https://*.jsdelivr.net",
+    "https://*.jquery.com",
+]
+
+CSP_SCRIPT_SRC_ELEM = [
+    "'self'",
+    "https://*.stripe.com",
+    "https://*.fontawesome.com",
+    "https://*herokuapp.com",
+    "https://*.jsdelivr.net",
+    "https://*.jquery.com",
+]
+
+CSP_STYLE_SRC = [
+    "'unsafe-inline'",
+    "https://cdn.jsdelivr.net",
+]
+
+CSP_INCLUDE_NONCE_IN = ["script-src"]
 
 CORS_ALLOWED_ORIGINS = [
     "https://herokuapp.com",
     "https://stripe.com",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
+]
+
+CSP_IMG_SRC = [
+    "'self'",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -115,6 +147,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.media",
                 "bag.contexts.bag_contents",
+                "csp.context_processors.nonce",
             ],
             "builtins": [
                 "crispy_forms.templatetags.crispy_forms_tags",
