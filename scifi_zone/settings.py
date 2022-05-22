@@ -60,28 +60,66 @@ CSP_DEFAULT_SRC = ["'none'"]
 
 CSP_SCRIPT_SRC = [
     "'self'",
+    "https://js.stripe.com",
+    "https://checkout.stripe.com",
     "https://*.stripe.com",
     "https://*.fontawesome.com",
-    "https://*herokuapp.com",
+    "https://ms4-scifi-zone.herokuapp.com/",
     "https://*.jsdelivr.net",
     "https://*.jquery.com",
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/js/base.js",
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/checkout/js/stripe_elements.js",
 ]
 
 CSP_SCRIPT_SRC_ELEM = [
     "'self'",
+    "https://js.stripe.com",
+    "https://checkout.stripe.com",
     "https://*.stripe.com",
     "https://*.fontawesome.com",
-    "https://*herokuapp.com",
+    "https://ms4-scifi-zone.herokuapp.com/",
     "https://*.jsdelivr.net",
     "https://*.jquery.com",
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/js/base.js",
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/checkout/js/stripe_elements.js",
 ]
 
 CSP_STYLE_SRC = [
     "'unsafe-inline'",
     "https://cdn.jsdelivr.net",
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/css/base.css",
+    "http://127.0.0.1:8000/static/css/base.css",  # needed for development
+]
+
+CSP_FONT_SRC = [
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/fonts/",
+    "https://ka-p.fontawesome.com/releases/v6.1.1/webfonts/",
+    "http://127.0.0.1:8000/static/fonts/",
+]  # needed for development
+
+CSP_FRAME_SRC = [
+    "https://js.stripe.com/",
+    "https://hooks.stripe.com",
+    "https://checkout.stripe.com",
+    "https://*.stripe.network",
+]
+
+CSP_CONNECT_SRC = [
+    "https://ka-p.fontawesome.com/releases/v6.1.1/",
+    "https://api.stripe.com",
+    "https://checkout.stripe.com",
+    "https://*.stripe.com",
+    "https://*.jquery.com",
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/checkout/js/stripe_elements.js",
 ]
 
 CSP_INCLUDE_NONCE_IN = ["script-src"]
+
+CSP_IMG_SRC = [
+    "'self'",
+    "https://ms4-scifi-zone.s3.amazonaws.com/media/",
+    "https://*.stripe.com",
+]
 
 CORS_ALLOWED_ORIGINS = [
     "https://herokuapp.com",
@@ -146,6 +184,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.media",
+                "csp.context_processors.nonce",
                 "bag.contexts.bag_contents",
                 "csp.context_processors.nonce",
             ],

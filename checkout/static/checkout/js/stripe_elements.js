@@ -12,7 +12,7 @@ let stripe = Stripe(stripePublicKey);
 let elements = stripe.elements();
 
 let card = elements.create("card", {
-    iconstyle: "solid",
+    // iconstyle: "solid",
     style: {
         base: {
             iconColor: "#c4f0ff",
