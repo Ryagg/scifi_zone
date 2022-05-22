@@ -68,6 +68,7 @@ CSP_SCRIPT_SRC = [
     "https://*.jsdelivr.net",
     "https://*.jquery.com",
     "https://ms4-scifi-zone.s3.amazonaws.com/static/js/base.js",
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/checkout/js/stripe_elements.js",
 ]
 
 CSP_SCRIPT_SRC_ELEM = [
@@ -80,6 +81,7 @@ CSP_SCRIPT_SRC_ELEM = [
     "https://*.jsdelivr.net",
     "https://*.jquery.com",
     "https://ms4-scifi-zone.s3.amazonaws.com/static/js/base.js",
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/checkout/js/stripe_elements.js",
 ]
 
 CSP_STYLE_SRC = [
@@ -108,6 +110,7 @@ CSP_CONNECT_SRC = [
     "https://checkout.stripe.com",
     "https://*.stripe.com",
     "https://*.jquery.com",
+    "https://ms4-scifi-zone.s3.amazonaws.com/static/checkout/js/stripe_elements.js",
 ]
 
 CSP_INCLUDE_NONCE_IN = ["script-src"]
