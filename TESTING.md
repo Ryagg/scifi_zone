@@ -959,7 +959,10 @@ Family, friends and colleagues were asked to test the site on their computers an
 
 My CSP caused multiple console errors in Edge, Firefox, and Opera. Adjusting the CSP settings did not fully resolve this issue. Unfortunately, I had no other choice but to remove my CSP completely. But user experience and no console errors are more important than stroking my ego with the implementation of a feature.
 
-Opera and Edge do not load the specified fonts and use fall-back system fonts. I did not use the usual font import to comply with a German Court ruling regarding to embedding Google Fonts and GDPR. Instead, I host the fonts in my AWS S3 bucket. Interestingly, when I had my CSP still in place, I could see in the console that attempted font downloads from Google static were prevented. Currently, I see notifications in the console at all. While Opera and Edge users can't see the intended fonts, they profit from an improved critical rendering path due to the fonts not being downloaded. I don't know why Firefox picks up the fonts, and Edge and Opera don't.
+Opera and Edge do not load the specified fonts and use fall-back system fonts. I did not use the usual font import to comply with a German Court ruling regarding to embedding Google Fonts and GDPR. Instead, I host the fonts in my AWS S3 bucket. Interestingly, when I had my CSP still in place, I could see in the console that attempted font downloads from Google static were prevented. Currently, I don't see any notifications in the console at all. While Opera and Edge users can't see the intended fonts, they profit from an improved critical rendering path due to the fonts not being downloaded. I don't know why Firefox picks up the fonts, and Edge and Opera don't.
+
+**Update May, 22nd, 2022:**
+After adding additional CSP settings (CSP_FONT_SRC, CSP_FRAME_SRC, CSP_CONNECT_SRC, CSP_IMAGE_SRC, and CSP_INCLUDE_NONCE_IN) as well as adding several entries, e.g. checkout subpages, to the relevant categories the console errors in Edge, Firefox, and Opera have been fixed. All fonts are loaded correctly and the application can be used in Chrome, Edge, Firefox, and Opera without limitations. Some of the mentioned changes were found at https://www.laac.dev/blog/content-security-policy-using-django/.
 
 All screenshots so far have been created in Chrome. Therefore, only screenshots from Edge, Firefox, and Opera are included below.
 
@@ -1067,7 +1070,6 @@ Lesson learned: **always** check functionality after adding new features!
 
 ### **Remaining bugs**
 
--   When removing an autograph or photoshoot ticket from the bag, no confirmation message is displayed.
 -   When logged in as an admin, the search bar input field causes overflow for some viewports, and the navbar items are not centred for viewports from 1024px to 1215px.
 
 ![admin-searchbar](documentation/testing/bugs/admin-searchbar.jpg)

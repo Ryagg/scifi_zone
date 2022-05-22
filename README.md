@@ -171,6 +171,10 @@ The available navigation menu items depend on whether a user is logged in, and f
 | Copyright          | &#9989;       | &#9989;           | &#9989;            |
 | Contact            | &#9989;       | &#9989;           | &#9989;            |
 
+#### **Security features**
+
+CORS and CSP were configured to further improve the application's security.
+
 #### **Features on all pages: footer**
 
 The footer is located at the bottom of each page and includes links to reach the website author on social media, the site notice, and the privacy policy. The links open in a new browser tab.
@@ -308,6 +312,9 @@ The site features both a site notice and a privacy policy. Both pages can be rea
 -   [Django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/install.html#installing-django-crispy-forms)
 
     Used to render forms
+
+-   [Django-cors-headers](https://pypi.org/project/django-cors-headers/)
+    Used to add and configure CORS settings
 
 -   [Django-CSP](https://django-csp.readthedocs.io/en/latest/installation.html)
 
