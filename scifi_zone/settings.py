@@ -132,10 +132,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
 ]
 
-CSP_IMG_SRC = [
-    "'self'",
-]
-
 CSRF_TRUSTED_ORIGINS = [
     "http://stripe.com",
     "http://r.stripe.com",
