@@ -69,6 +69,7 @@ CSP_SCRIPT_SRC = [
     "https://*.jquery.com",
     "https://ms4-scifi-zone.s3.amazonaws.com/static/js/base.js",
     "https://ms4-scifi-zone.s3.amazonaws.com/static/checkout/js/stripe_elements.js",
+    "https://ms4-scifi-zone.herokuapp.com/checkout/cache_checkout_data/",
 ]
 
 CSP_SCRIPT_SRC_ELEM = [
@@ -82,6 +83,7 @@ CSP_SCRIPT_SRC_ELEM = [
     "https://*.jquery.com",
     "https://ms4-scifi-zone.s3.amazonaws.com/static/js/base.js",
     "https://ms4-scifi-zone.s3.amazonaws.com/static/checkout/js/stripe_elements.js",
+    "https://ms4-scifi-zone.herokuapp.com/checkout/cache_checkout_data/",
 ]
 
 CSP_STYLE_SRC = [
@@ -111,6 +113,8 @@ CSP_CONNECT_SRC = [
     "https://*.stripe.com",
     "https://*.jquery.com",
     "https://ms4-scifi-zone.s3.amazonaws.com/static/checkout/js/stripe_elements.js",
+    "https://ms4-scifi-zone.herokuapp.com/checkout/cache_checkout_data/",
+    "https://ms4-scifi-zone.herokuapp.com/checkout/checkout_success/",
 ]
 
 CSP_INCLUDE_NONCE_IN = ["script-src"]
