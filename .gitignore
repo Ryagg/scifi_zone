@@ -8,3 +8,5 @@ compare.py
 bugs.txt
 questions_for_call.txt
 compare.html
+cert.pem
+key.pem
