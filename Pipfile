@@ -33,6 +33,9 @@ pytest-cov = "*"
 pytest-factoryboy = "*"
 django-watson = "*"
 django-cors-headers = "*"
+werkzeug = "*"
+django-extensions = "*"
+pyopenssl = "*"
 
 [dev-packages]
 
