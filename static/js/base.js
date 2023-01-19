@@ -7,6 +7,14 @@ $(document).ready(function () {
         $(".navbar-burger").toggleClass("is-active");
         $(".navbar-menu").toggleClass("is-active");
     });
+    // get current year for Copyright info
+    let getYear = new Date().getFullYear();
+    let yearID = document.getElementById("year");
+    if (getYear == 2022) {
+        yearID.innerHTML = `\u00A0${getYear}\u00A0`;
+    } else {
+        yearID.innerHTML = `\u00A0 2022 - ${getYear}\u00A0`;
+    }
 });
 
 // code copied from the bulma documentation
