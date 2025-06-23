@@ -10,3 +10,7 @@ questions_for_call.txt
 compare.html
 cert.pem
 key.pem
+127.0.0.1-key.pem
+127.0.0.1.pem
+localhost-key.pem
+localhost.pem
